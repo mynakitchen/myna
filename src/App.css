@@ -1,0 +1,101 @@
+.App {
+  text-align: center;
+}
+
+/* Section title styling */
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.section-title p {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+/* Button styling */
+.btn {
+  display: inline-block;
+  padding: 12px 25px;
+  background-color: #e67e22;
+  color: white;
+  font-weight: 500;
+  border-radius: 30px;
+  transition: all 0.3s ease;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  font-size: 16px;
+}
+
+.btn:hover {
+  background-color: #d35400;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border: 2px solid #e67e22;
+  color: #e67e22;
+}
+
+.btn-secondary:hover {
+  background-color: #e67e22;
+  color: white;
+}
+
+/* Scroll button styling */
+.scroll-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+}
+
+.scroll-button:hover {
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.scroll-button.left {
+  left: 10px;
+}
+
+.scroll-button.right {
+  right: 10px;
+}
+
+@media (max-width: 768px) {
+  .section-title h2 {
+    font-size: 2rem;
+  }
+  
+  .section-title p {
+    font-size: 1rem;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+} 

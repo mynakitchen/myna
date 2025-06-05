@@ -1,0 +1,181 @@
+.daily-meals-delivered-section {
+  padding: 100px 0 120px;
+  background: linear-gradient(135deg, #f6f4f2 0%, #eae5e1 50%, #d5ccc4 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Add background decoration elements */
+.daily-meals-delivered-section::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -20%;
+  width: 140%;
+  height: 200%;
+  background: radial-gradient(ellipse at center, rgba(130, 95, 69, 0.08) 0%, transparent 70%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+.daily-meals-delivered-section::after {
+  content: '';
+  position: absolute;
+  bottom: -30%;
+  right: -15%;
+  width: 100%;
+  height: 150%;
+  background: radial-gradient(ellipse at center, rgba(153, 123, 102, 0.05) 0%, transparent 60%);
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Ensure content is above background decorations */
+.daily-meals-delivered-section > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* Enhanced solution feature card styles */
+.solution-feature-card {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  position: relative;
+  overflow: hidden;
+}
+
+.solution-feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 147, 13, 0.1), transparent);
+  transition: left 0.6s ease;
+  z-index: 0;
+}
+
+.solution-feature-card:hover::before {
+  left: 100%;
+}
+
+.solution-feature-card:hover {
+  transform: translateY(-12px) scale(1.02);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.12),
+    0 10px 20px rgba(212, 147, 13, 0.15);
+  border-color: rgba(212, 147, 13, 0.2);
+}
+
+/* Enhanced title animations */
+.animated-title {
+  overflow: hidden;
+  padding-bottom: 0.2em;
+}
+
+.animated-letter {
+  display: inline-block;
+  transform-origin: bottom center;
+  transition: all 0.3s ease;
+}
+
+.animated-letter:hover {
+  transform: scale(1.1) rotate(-2deg);
+}
+
+/* Gradient text effect for mobile fallback */
+@supports not (-webkit-background-clip: text) {
+  .gradient-text {
+    color: #D4930D !important;
+  }
+}
+
+/* Enhanced responsive design */
+@media (max-width: 1024px) {
+  .daily-meals-delivered-section {
+    padding: 80px 0 100px;
+  }
+
+  .solution-feature-card {
+    padding: 1.5rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .daily-meals-delivered-section {
+    padding: 60px 0 80px;
+  }
+
+  /* Ensure text remains readable on mobile */
+  .animated-title {
+    font-size: clamp(2.5rem, 8vw, 4rem) !important;
+    line-height: 1.1;
+  }
+
+  /* Adjust spacing for mobile */
+  .solution-feature-card {
+    padding: 1.25rem !important;
+    margin-bottom: 1rem;
+  }
+
+  /* Mobile-optimized hover effects */
+  .solution-feature-card:hover {
+    transform: translateY(-6px) scale(1.01);
+  }
+
+  /* Reduce motion for mobile if preferred */
+  @media (prefers-reduced-motion: reduce) {
+    .solution-feature-card {
+      transition: none;
+    }
+    
+    .solution-feature-card:hover {
+      transform: none;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .daily-meals-delivered-section {
+    padding: 40px 0 60px;
+  }
+
+  /* Ultra-compact design for small screens */
+  .animated-title {
+    font-size: clamp(2rem, 10vw, 3rem) !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .solution-feature-card {
+    padding: 1rem !important;
+    border-radius: 1rem !important;
+  }
+
+  /* Simplified effects for very small screens */
+  .solution-feature-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+}
+
+/* Performance optimizations */
+.solution-feature-card,
+.animated-letter {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* Accessibility improvements */
+@media (prefers-reduced-motion: reduce) {
+  .solution-feature-card,
+  .animated-letter {
+    transition: none;
+    animation: none;
+  }
+  
+  .solution-feature-card:hover {
+    transform: none;
+  }
+} 

@@ -1,0 +1,162 @@
+.preorder-card-section {
+  padding: 80px 0;
+  background-color: #fff;
+}
+
+.preorder-card {
+  display: flex;
+  background-color: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card-image {
+  flex: 1;
+  min-width: 40%;
+  max-width: 50%;
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card-image img:hover {
+  transform: scale(1.05);
+}
+
+.card-content {
+  flex: 1;
+  padding: 40px;
+}
+
+.preorder-meal-options {
+  display: flex;
+  gap: 20px;
+  margin: 30px 0;
+}
+
+.meal-option {
+  flex: 1;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.meal-option:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.meal-option h4 {
+  font-size: 1.2rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.meal-option .price {
+  display: block;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #e67e22;
+  margin-bottom: 10px;
+}
+
+.meal-option p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.preorder-details {
+  margin-top: 30px;
+  text-align: left;
+}
+
+.preorder-details h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.preorder-details p {
+  margin-bottom: 20px;
+  color: #555;
+}
+
+.preorder-details ol {
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.preorder-details li {
+  margin-bottom: 8px;
+  color: #555;
+}
+
+.timings {
+  margin-left: 20px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+  color: #777;
+}
+
+.service-area {
+  margin-bottom: 25px;
+}
+
+.trial-btn {
+  display: inline-block;
+  margin-top: 20px;
+  text-align: center;
+  background-color: #25d366; /* WhatsApp green */
+  color: white;
+}
+
+.trial-btn:hover {
+  background-color: #128c7e; /* Darker WhatsApp green */
+}
+
+@media (max-width: 991px) {
+  .preorder-card {
+    flex-direction: column;
+  }
+  
+  .card-image {
+    max-width: 100%;
+    height: 300px;
+  }
+  
+  .card-content {
+    padding: 30px;
+  }
+}
+
+@media (max-width: 768px) {
+  .preorder-card-section {
+    padding: 60px 0;
+  }
+  
+  .preorder-meal-options {
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .card-content {
+    padding: 25px 20px;
+  }
+  
+  .preorder-details ol {
+    padding-left: 15px;
+  }
+  
+  .trial-btn {
+    width: 100%;
+  }
+} 

@@ -1,0 +1,567 @@
+/* Hero section styles */
+.hero-section {
+  width: 100%;
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+  padding: 50px 0 0 0; /* Minimal padding to test */
+  margin: 0;
+  background-color: #f9f5f0;
+  display: flex;
+  align-items: center;
+  color: black;
+}
+
+/* Small mobile screens */
+@media (max-width: 480px) {
+  .hero-section {
+    padding: 50px 0 0 0;
+  }
+}
+
+/* Tablet screens */
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-section {
+    min-height: 100svh;
+    padding: 55px 0 0 0;
+  }
+}
+
+/* Desktop screens */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .hero-section {
+    padding: 60px 0 0 0;
+  }
+}
+
+/* Large desktop screens */
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .hero-section {
+    padding: 65px 0 0 0;
+  }
+}
+
+/* Extra large screens */
+@media (min-width: 1280px) {
+  .hero-section {
+    padding: 70px 0 0 0;
+  }
+}
+
+.container {
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  margin: 0;
+}
+
+.hero-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .hero-content-wrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+  }
+}
+
+/* Text content styles */
+.hero-text {
+  width: 100%;
+  max-width: 800px;
+  text-align: center;
+  color: #000000;
+  z-index: 10;
+  padding: 2rem 1rem 6rem;
+}
+
+@media (max-width: 480px) {
+  .hero-text {
+    padding: 1.5rem 0.75rem 4rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-text {
+    padding: 1.75rem 1rem 5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-text {
+    text-align: center;
+    padding: 0 0 4rem 0;
+  }
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2.25rem;
+    margin-bottom: 0.75rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-title {
+    font-size: 2.75rem;
+    margin-bottom: 0.875rem;
+  }
+}
+
+.hero-subtitle {
+  display: block;
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin-top: 0;
+}
+
+@media (max-width: 480px) {
+  .hero-subtitle {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-subtitle {
+    font-size: 2.25rem;
+  }
+}
+
+.hero-description {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  color: #000000;
+}
+
+@media (max-width: 480px) {
+  .hero-description {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    padding: 0 0.5rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-description {
+    font-size: 1.125rem;
+    margin-bottom: 1.75rem;
+  }
+}
+
+.hero-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+}
+
+@media (max-width: 480px) {
+  .hero-buttons {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .hero-buttons {
+    gap: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .hero-buttons {
+    justify-content: center;
+  }
+}
+
+.hero-button-primary {
+  background-color: #bc2f2b;
+  color: #ffffff;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: none;
+  min-height: 48px;
+  min-width: 140px;
+}
+
+@media (max-width: 480px) {
+  .hero-button-primary {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    min-width: 200px;
+  }
+}
+
+.hero-button-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(188, 47, 43, 0.2);
+  background-color: #d33631;
+}
+
+.hero-button-secondary {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: #222;
+  padding: 0.875rem 2rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  border: none;
+  min-height: 48px;
+  min-width: 140px;
+}
+
+@media (max-width: 480px) {
+  .hero-button-secondary {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    min-width: 200px;
+  }
+}
+
+.hero-button-secondary:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Gallery styles */
+.hero-gallery {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  padding: 0;
+  margin: 0;
+  z-index: 5;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.image-grid {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  position: relative;
+  gap: 0;
+  background-color: #f9f5f0;
+  padding: 0;
+  margin: 0;
+}
+
+.grid-row {
+  display: flex;
+  width: 100vw;
+  position: relative;
+  margin: 0;
+  gap: 0;
+  background-color: #f9f5f0;
+  height: 25vh; /* Height based on viewport height */
+}
+
+@media (max-width: 480px) {
+  .grid-row {
+    height: 20vh; /* Smaller height on very small screens */
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .grid-row {
+    height: 22vh; /* Medium height on tablets */
+  }
+}
+
+/* Reset the row offsets to keep tiles more aligned */
+.grid-row:nth-child(1),
+.grid-row:nth-child(2),
+.grid-row:nth-child(3),
+.grid-row:nth-child(4) {
+  margin-left: 0;
+  width: 100vw;
+}
+
+.image-item {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 0;
+  border: none;
+  height: 100%; /* Make all items take full height of the row */
+  width: auto;
+}
+
+/* Add a specific class for image-only tiles to make them wider */
+.image-item:not(.text-tile) {
+  flex: 1.5; /* Make image tiles wider but more balanced */
+}
+
+/* Keep text tiles more square-ish */
+.image-item.text-tile {
+  flex: 1.2; /* Slightly wider text tiles for better balance */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.image-item:hover img {
+  transform: scale(1.05);
+}
+
+/* Overlapping text styles */
+.gallery-text-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.gallery-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
+  position: absolute;
+  z-index: 15;
+}
+
+.text-give,
+.text-food,
+.text-get,
+.text-love {
+  font-weight: 800;
+  color: #ffffff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+  line-height: 0.9;
+  letter-spacing: 0.05em;
+  transform: translateZ(0);
+  width: 100%;
+  text-align: center;
+  position: relative;
+}
+
+.text-give,
+.text-get {
+  font-size: 8.5rem;
+}
+
+.text-food,
+.text-love {
+  font-size: 7rem;
+  margin: 0 0 1.5rem;
+}
+
+/* Text tile styles */
+.text-tile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f5f0;
+  color: #222;
+  font-weight: 900;
+  font-size: 3.5rem;
+  text-transform: none;
+  letter-spacing: -0.02em;
+  position: relative;
+  overflow: visible;
+  border-radius: 0;
+  box-shadow: none;
+  transition: all 0.3s ease;
+  margin: 0;
+}
+
+.text-tile .text-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  padding: 12px 16px;
+  box-sizing: border-box;
+}
+
+.text-tile span {
+  display: block;
+  font-weight: 900;
+  color: #222;
+  text-shadow: none;
+  line-height: 0.9;
+  font-family: 'Inter', sans-serif;
+}
+
+.food-tile, .sorted-tile, .life-tile {
+  background-color: #f9f5f0;
+  min-width: 200px;
+  flex: 1.2; /* Match the text-tile flex value for consistency */
+}
+
+/* Removed - using unified text-tile .text-content styling */
+
+.sorted-tile {
+  /* Inherits min-width and flex from .food-tile, .sorted-tile, .life-tile rule above */
+}
+
+.sorted-tile .text-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.sorted-tile span,
+.food-tile span,
+.life-tile span {
+  white-space: nowrap;
+  font-size: 3.5rem;
+  letter-spacing: -0.03em;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #222;
+}
+
+@media (max-width: 1200px) {
+  .text-tile {
+    font-size: 3.8rem;
+  }
+  .sorted-tile span {
+    font-size: 3.5rem;
+  }
+  .grid-row {
+    height: 25vh;
+  }
+}
+
+@media (max-width: 768px) {
+  .image-grid {
+    gap: 0;
+    padding: 0;
+  }
+  
+  .grid-row {
+    gap: 0;
+    height: 25vh;
+  }
+  
+  .image-item, .text-tile {
+    border-radius: 0;
+  }
+  
+  .text-tile {
+    font-size: 2.5rem;
+    margin: 0;
+  }
+  
+  .text-tile .text-content {
+    padding: 8px 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .image-grid {
+    gap: 0;
+    padding: 0;
+  }
+  
+  .grid-row {
+    gap: 0;
+    height: 25vh;
+  }
+  
+  .image-item, .text-tile {
+    border-radius: 0;
+  }
+  
+  .text-tile {
+    font-size: 1.8rem;
+    margin: 0;
+  }
+  
+  .text-tile .text-content {
+    padding: 6px 8px;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .text-give,
+  .text-get {
+    font-size: 6rem;
+  }
+  
+  .text-food,
+  .text-love {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: 1.25rem;
+  }
+  
+  .text-give,
+  .text-get {
+    font-size: 4.5rem;
+  }
+  
+  .text-food,
+  .text-love {
+    font-size: 3.5rem;
+  }
+}
+
+ 

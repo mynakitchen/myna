@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    
+    <!-- Security Headers -->
+    <meta http-equiv="Content-Security-Policy" content="
+      default-src 'self';
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+      style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+      font-src 'self' https://fonts.gstatic.com;
+      img-src 'self' data: https: blob:;
+      connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://mynakitchen.in;
+      frame-src 'none';
+      object-src 'none';
+      base-uri 'self';
+      form-action 'self' https://mynakitchen.in;
+      upgrade-insecure-requests;
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-XSS-Protection" content="1; mode=block">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <meta
+      name="description"
+      content="Myna Kitchen - Delicious Meals. Zero Hassle."
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <!-- Secure Google Fonts preconnection -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" crossorigin="anonymous">
+    
+    <title>Myna Kitchen</title>
+    
+    <!-- Secure Google Analytics with error handling -->
+    <script>
+      (function() {
+        try {
+          // Initialize dataLayer
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-4NPEG3WVTP', {
+            'send_page_view': false, // Disable automatic page view for better control
+            'anonymize_ip': true,    // Enhanced privacy
+            'allow_google_signals': false, // Disable advertising features
+            'cookie_flags': 'secure;samesite=strict' // Secure cookie settings
+          });
+          
+          // Load GA script with error handling
+          var script = document.createElement('script');
+          script.async = true;
+          script.src = 'https://www.googletagmanager.com/gtag/js?id=G-4NPEG3WVTP';
+          script.onerror = function() {
+            console.warn('Google Analytics failed to load');
+          };
+          document.head.appendChild(script);
+          
+          // Send initial page view
+          setTimeout(function() {
+            gtag('event', 'page_view', {
+              'page_title': document.title,
+              'page_location': window.location.href
+            });
+          }, 100);
+          
+        } catch (error) {
+          console.warn('Google Analytics initialization error:', error);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html> 

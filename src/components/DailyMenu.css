@@ -1,0 +1,569 @@
+.daily-combos {
+  padding: 80px 0;
+  background-color: #f5f5f5;
+}
+
+.subsection-title {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.subsection-title h3 {
+  margin-bottom: 10px;
+}
+
+.combo-categories-wrapper {
+  position: relative;
+  overflow: hidden;
+  margin: 0 -10px;
+  padding: 0 10px 20px;
+}
+
+.combo-categories {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 15px 5px;
+  gap: 15px;
+  scrollbar-width: none; /* For Firefox */
+  -ms-overflow-style: none; /* For IE and Edge */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.combo-categories::-webkit-scrollbar {
+  display: none;
+}
+
+.combo-category {
+  flex: 0 0 280px;
+  min-width: 280px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 15px;
+  background-color: #f9f9f9;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.combo-category:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.combo-category.special {
+  border: 2px solid #e67e22;
+}
+
+.combo-category h3 {
+  margin-bottom: 15px;
+  color: #333;
+  font-weight: 600;
+}
+
+.combo-meal {
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  cursor: default;
+}
+
+.combo-meal h4 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.combo-meal p {
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Touch-friendly interaction */
+@media (hover: hover) {
+  .combo-meal:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  /* Adjust header text sizes for the larger "Explore Menu" heading */
+  .text-4xl.md\:text-5xl {
+    font-size: 2.5rem !important; /* Larger than previous for "Explore Menu" */
+  }
+  
+  .text-lg {
+    font-size: 1rem !important; /* Reduce from lg to base */
+    line-height: 1.5 !important;
+  }
+  
+  /* Reduce spacing around header */
+  .mb-12 {
+    margin-bottom: 2.5rem !important;
+  }
+
+  .daily-combos {
+    padding: 60px 0;
+  }
+  
+  .combo-categories-wrapper {
+    margin: 0 -5px;
+    padding: 0 5px 15px;
+  }
+  
+  .combo-categories {
+    padding: 10px 5px;
+    gap: 10px;
+  }
+  
+  .combo-category {
+    flex: 0 0 250px;
+    min-width: 250px;
+    padding: 12px;
+  }
+  
+  .combo-meal {
+    padding: 12px;
+    margin-bottom: 8px;
+  }
+  
+  /* Fix menu card image aspect ratio for mobile */
+  .menu-card .relative {
+    aspect-ratio: 1.2 / 1 !important;
+    min-height: 220px !important;
+  }
+  
+  /* Keep category buttons horizontal - smaller size to fit */
+  .bg-gray-100.p-1.rounded-full {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0.25rem !important;
+    padding: 0.5rem !important;
+    max-width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  
+  .bg-gray-100.p-1.rounded-full::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .bg-gray-100.p-1.rounded-full button {
+    padding: 0.5rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    min-height: 36px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  /* Enhanced overlay arrow visibility and FIXED alignment */
+  .fixed-mobile-arrow {
+    background: rgba(255, 255, 255, 0.98) !important;
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    position: absolute !important;
+    z-index: 15 !important;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .fixed-mobile-arrow:hover {
+    background: rgba(255, 255, 255, 1) !important;
+    transform: scale(1.08) translateX(0) translateY(-50%) !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  }
+  
+  .fixed-mobile-arrow-left:hover {
+    transform: scale(1.08) translateX(-2px) translateY(-50%) !important;
+  }
+  
+  .fixed-mobile-arrow-right:hover {
+    transform: scale(1.08) translateX(2px) translateY(-50%) !important;
+  }
+  
+  /* Ensure arrows are positioned relative to the grid container */
+  .relative.mb-8 {
+    isolation: isolate;
+  }
+  
+  /* Add subtle gradient hints for scrollability */
+  .relative.mb-8::before,
+  .relative.mb-8::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 20px;
+    z-index: 5;
+    pointer-events: none;
+    opacity: 0.3;
+    transition: opacity 0.3s ease;
+  }
+  
+  .relative.mb-8::before {
+    left: 0;
+    background: linear-gradient(to right, rgba(255,255,255,0.8), transparent);
+  }
+  
+  .relative.mb-8::after {
+    right: 0;
+    background: linear-gradient(to left, rgba(255,255,255,0.8), transparent);
+  }
+  
+  /* Show gradient hints only when there are multiple pages */
+  .relative.mb-8[data-has-multiple-pages="true"]::before,
+  .relative.mb-8[data-has-multiple-pages="true"]::after {
+    opacity: 0.6;
+  }
+}
+
+@media (max-width: 640px) {
+  /* Further reduce text sizes for small mobile */
+  .text-3xl.md\:text-4xl {
+    font-size: 1.5rem !important; /* Even smaller for mobile */
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .text-lg {
+    font-size: 0.875rem !important; /* Reduce to sm size */
+    line-height: 1.4 !important;
+  }
+  
+  /* Tighter spacing */
+  .mb-12 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mb-8 {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .daily-menu {
+    padding: 50px 0;
+  }
+  
+  .menu-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .expanded-menu-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .tab-navigation {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .tab-navigation button {
+    width: 100%;
+    max-width: 200px;
+    justify-content: center;
+  }
+  
+  /* More square aspect ratio for small mobile */
+  .menu-card .relative {
+    aspect-ratio: 1.1 / 1 !important;
+    min-height: 200px !important;
+  }
+  
+  /* Ensure single column layout */
+  .grid.grid-cols-1.sm\:grid-cols-2.lg\:grid-cols-3 {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+  
+  /* Even smaller buttons for very small screens but keep horizontal */
+  .bg-gray-100.p-1.rounded-full button {
+    padding: 0.375rem 0.5rem !important;
+    font-size: 0.7rem !important;
+    min-height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Ultra-compact text for very small screens */
+  .text-3xl.md\:text-4xl {
+    font-size: 1.25rem !important; /* xl size */
+    margin-bottom: 0.5rem !important;
+  }
+  
+  .text-lg {
+    font-size: 0.8rem !important; /* Between sm and xs */
+    line-height: 1.3 !important;
+  }
+  
+  /* Very tight spacing for ultra-mobile */
+  .mb-12 {
+    margin-bottom: 1rem !important;
+  }
+
+  .combo-category {
+    flex: 0 0 230px;
+    min-width: 230px;
+    padding: 10px;
+  }
+  
+  .combo-meal {
+    padding: 10px;
+  }
+  
+  /* Keep horizontal layout even on very small screens */
+  .bg-gray-100.p-1.rounded-full {
+    display: flex !important;
+    flex-wrap: nowrap !important;
+    gap: 0.125rem !important;
+    padding: 0.375rem !important;
+    max-width: 100%;
+    overflow-x: auto;
+  }
+  
+  .bg-gray-100.p-1.rounded-full button {
+    padding: 0.375rem 0.375rem !important;
+    font-size: 0.65rem !important;
+    min-height: 30px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  
+  /* Square images for very small screens */
+  .menu-card .relative {
+    aspect-ratio: 1 / 1 !important;
+    min-height: 180px !important;
+  }
+}
+
+/* Menu section styling */
+.daily-menu {
+  position: relative;
+  z-index: 1;
+}
+
+/* Modern pricing card styles */
+.pricing-card {
+  transition: all 0.25s ease;
+}
+
+.pricing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+/* Menu card styling */
+.menu-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Global menu card styling */
+.menu-card img {
+  object-fit: cover;
+  object-position: center;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.4s ease-out;
+}
+
+.menu-card:hover img {
+  transform: scale(1.05);
+}
+
+/* Modern tab navigation */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.tab-navigation button {
+  transition: all 0.2s ease;
+}
+
+.tab-navigation button:hover {
+  transform: translateY(-2px);
+}
+
+/* Pagination dots */
+.pagination-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin: 0 4px;
+  transition: all 0.3s ease;
+}
+
+.pagination-dot.active {
+  transform: scale(1.2);
+}
+
+/* Animation styles */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
+}
+
+/* Gradient accents */
+.gradient-accent {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.1;
+  background: var(--primary-color, #0ea5e9);
+  z-index: -1;
+}
+
+.accent-1 {
+  top: -50px;
+  right: 10%;
+  width: 300px;
+  height: 300px;
+}
+
+.accent-2 {
+  bottom: 10%;
+  left: -50px;
+  width: 250px;
+  height: 250px;
+  background: var(--accent-color, #f59e0b);
+}
+
+/* Image Carousel Styles */
+.image-carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-carousel-container:hover .carousel-control {
+  opacity: 1;
+}
+
+.carousel-control {
+  opacity: 0;
+  transition: all 0.2s ease;
+  z-index: 20;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+}
+
+.carousel-control:hover {
+  background: rgba(0, 0, 0, 0.7);
+  transform: scale(1.1);
+}
+
+/* Image indicators styling */
+.image-indicators {
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 4px;
+  z-index: 20;
+}
+
+.image-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.image-indicator.active {
+  background: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.image-indicator:hover {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+/* Multiple images counter */
+.image-counter {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: rgba(0, 0, 0, 0.6);
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Ensure menu cards work well with carousel */
+.menu-card {
+  group: true;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.menu-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Mobile specific carousel adjustments */
+@media (max-width: 768px) {
+  .carousel-control {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .image-indicator {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .image-counter {
+    font-size: 10px;
+    padding: 2px 6px;
+  }
+}
+
+/* Touch-friendly mobile carousel controls */
+@media (max-width: 640px) {
+  .image-carousel-container .carousel-control {
+    opacity: 1 !important; /* Always show on mobile for touch */
+    background: rgba(0, 0, 0, 0.4);
+  }
+  
+  .carousel-control {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .image-indicators {
+    bottom: 6px;
+    gap: 3px;
+  }
+  
+  .image-indicator {
+    width: 5px;
+    height: 5px;
+  }
+}
+
+/* Mobile-specific fixes for menu images and layout */ 
