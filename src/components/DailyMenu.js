@@ -16,8 +16,17 @@ import './DailyMenu.css';
 const getImagePath = (imagePath) => {
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  
+  // Split path into segments and encode each segment properly
+  const pathSegments = cleanPath.split('/');
+  const encodedSegments = pathSegments.map(segment => {
+    // Only encode the filename part, not the path separators
+    return encodeURIComponent(segment);
+  });
+  const encodedPath = encodedSegments.join('/');
+  
   // Use PUBLIC_URL environment variable for GitHub Pages deployment
-  return `${process.env.PUBLIC_URL}/${cleanPath}`;
+  return `${process.env.PUBLIC_URL}/${encodedPath}`;
 };
 
 // Dynamic menu items based on actual folder structure - UPDATED with multiple images
