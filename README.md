@@ -22,8 +22,8 @@ This is a React implementation of the Myna Kitchen website. It's a responsive, m
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/myna-kitchen/myna-kitchen-react.git
-   cd myna-kitchen-react
+   git clone https://github.com/cardisaran/myna.git
+   cd myna
    ```
 
 2. Install dependencies
@@ -48,6 +48,16 @@ npm run build
 
 This builds the app for production to the `build` folder, optimizing the build for the best performance.
 
+## Deploying to GitHub Pages
+
+To deploy the website to GitHub Pages, run:
+
+```bash
+npm run deploy
+```
+
+The website will be available at: https://cardisaran.github.io/myna
+
 ## Project Structure
 
 - `/src/components`: React components for different sections of the website
@@ -67,4 +77,4 @@ This project is proprietary and owned by Myna Kitchen.
 
 ## Contact
 
-For any inquiries, contact Myna Kitchen at [kitchenmyna@gmail.com](mailto:kitchenmyna@gmail.com). 
+For any inquiries, contact Myna Kitchen at [kitchenmyna@gmail.com](mailto:kitchenmyna@gmail.com).
