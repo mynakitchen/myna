@@ -79,7 +79,7 @@ const Header = () => {
             aria-label="Go to home section"
           >
             <img 
-              src="/images/myna-logo.jpg" 
+              src={`${process.env.PUBLIC_URL}/images/myna-logo.jpg`} 
               alt="Myna Kitchen Logo" 
               className="h-10 w-auto sm:h-12 md:h-14 lg:h-16 xl:h-18 object-contain transition-all duration-200"
               style={{ maxWidth: '250px' }}

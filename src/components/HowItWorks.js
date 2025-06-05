@@ -5,15 +5,7 @@ import './HowItWorks.css';
 
 export default function HowItWorks() {
   const handleWhatsAppContact = () => {
-    // Updated WhatsApp link with correct phone number and pre-filled message
-    const whatsappUrl = 'https://api.whatsapp.com/send/?phone=%2B917418688269&text=I+want+to+try+your+meal+service.&type=phone_number&app_absent=0';
-    
-    openSecureLink(whatsappUrl, {
-      onError: (error) => {
-        console.error('Failed to open WhatsApp link:', error);
-        // Could show user notification here
-      }
-    });
+    window.open('https://wa.me/918754467770?text=Hi%20there!%20I%20am%20interested%20in%20your%20meal%20plans.%20Could%20you%20please%20provide%20more%20details%3F', '_blank');
   };
 
   const handleSignUpClick = () => {
@@ -25,6 +17,14 @@ export default function HowItWorks() {
     });
   };
   
+  // Helper function to get correct image path for deployment
+  const getImagePath = (imagePath) => {
+    // Remove leading slash if present
+    const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+    // Use PUBLIC_URL environment variable for GitHub Pages deployment
+    return `${process.env.PUBLIC_URL}/${cleanPath}`;
+  };
+
   const steps = [
     {
       number: "01",
@@ -32,7 +32,7 @@ export default function HowItWorks() {
       description: "Explore our delicious meal plans and find the perfect fit for your lifestyle and dietary needs.",
       accent: "#825F45", // Primary brown
       bgGradient: "bg-gradient-to-br from-gold-50 to-white",
-      image: "/images/how-it-works/1.png",
+      image: getImagePath("images/how-it-works/1.png"),
       imageAlt: "Browse meal plans interface showing various food options"
     },
     {
@@ -41,7 +41,7 @@ export default function HowItWorks() {
       description: "Get in touch with our team to discuss your requirements and get personalized meal recommendations.",
       accent: "#D08C60", // Warm orange
       bgGradient: "bg-gradient-to-br from-warmOrange-50 to-white",
-      image: "/images/how-it-works/2.png",
+      image: getImagePath("images/how-it-works/2.png"),
       imageAlt: "WhatsApp chat interface for customer support",
       hasButton: true
     },
@@ -51,7 +51,7 @@ export default function HowItWorks() {
       description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign up takes just a few minutes and you'll get instant access to your account.",
       accent: "#797D62", // Sage green
       bgGradient: "bg-gradient-to-br from-sage-50 to-white",
-      image: "/images/how-it-works/3.png",
+      image: getImagePath("images/how-it-works/3.png"),
       imageAlt: "User registration form and dashboard preview"
     },
     {
@@ -60,7 +60,7 @@ export default function HowItWorks() {
       description: "Use your personalized dashboard to manage everything - add or cancel subscriptions, change delivery addresses, order delicious add-ons, and customize your meal preferences all in one place.",
       accent: "#997B66", // Muted brown
       bgGradient: "bg-gradient-to-br from-mutedBrown-50 to-white",
-      image: "/images/how-it-works/4.png",
+      image: getImagePath("images/how-it-works/4.png"),
       imageAlt: "User dashboard showing subscription management features"
     }
   ];

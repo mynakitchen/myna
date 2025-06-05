@@ -193,7 +193,7 @@ export const safeQuerySelectorAll = (selector, context = document) => {
  * @param {string} src - Image source
  * @param {string} fallbackSrc - Fallback image source
  */
-export const loadImageSafely = (img, src, fallbackSrc = '/images/placeholder.jpg') => {
+export const loadImageSafely = (img, src, fallbackSrc = `${process.env.PUBLIC_URL}/images/placeholder.jpg`) => {
   if (!img || !src) return;
   
   // Set up error handler before changing src
