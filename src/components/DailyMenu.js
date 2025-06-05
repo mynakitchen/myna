@@ -12,6 +12,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './DailyMenu.css';
 
+// Helper function to get correct image path for deployment
+const getImagePath = (imagePath) => {
+  // Remove leading slash if present
+  const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
+  // Use PUBLIC_URL environment variable for GitHub Pages deployment
+  return `${process.env.PUBLIC_URL}/${cleanPath}`;
+};
+
 // Dynamic menu items based on actual folder structure - UPDATED with multiple images
 const MENU_ITEMS = [
   // Add-ons (meals with images)
@@ -20,9 +28,9 @@ const MENU_ITEMS = [
     name: "Cold Coffee",
     description: "Refreshing cold coffee perfect for any time",
     images: [
-      "/menu/Add-ons/Cold Coffee/cold coffee ad.jpg",
-      "/menu/Add-ons/Cold Coffee/coldcoffee.jpg",
-      "/menu/Add-ons/Cold Coffee/coldocffee top.jpg"
+      getImagePath("menu/Add-ons/Cold Coffee/cold coffee ad.jpg"),
+      getImagePath("menu/Add-ons/Cold Coffee/coldcoffee.jpg"),
+      getImagePath("menu/Add-ons/Cold Coffee/coldocffee top.jpg")
     ],
     price: 45,
     category: "Add-ons"
@@ -32,8 +40,8 @@ const MENU_ITEMS = [
     name: "Mango Milkshake",
     description: "Creamy mango milkshake made with fresh mangoes",
     images: [
-      "/menu/Add-ons/Mango Milkshake/Mango Milkshake.jpg",
-      "/menu/Add-ons/Mango Milkshake/Akka mangoshake.jpg"
+      getImagePath("menu/Add-ons/Mango Milkshake/Mango Milkshake.jpg"),
+      getImagePath("menu/Add-ons/Mango Milkshake/Akka mangoshake.jpg")
     ],
     price: 70,
     category: "Add-ons"
@@ -44,7 +52,7 @@ const MENU_ITEMS = [
     id: "super-1",
     name: "Sambhar Rice, Avial and Fish 65",
     description: "Traditional South Indian comfort meal with authentic flavors",
-    images: ["/menu/Super Meals/1. Sambhar Rice, Avial and Fish 65/samabar rice + avial+ fish fry.jpg"],
+    images: [getImagePath("menu/Super Meals/1. Sambhar Rice, Avial and Fish 65/samabar rice + avial+ fish fry.jpg")],
     price: 150,
     category: "Super Meals"
   },
@@ -52,7 +60,7 @@ const MENU_ITEMS = [
     id: "super-2",
     name: "Idiyappam and Chicken Stew",
     description: "Kerala-style string hoppers with aromatic chicken stew",
-    images: ["/menu/Super Meals/2. Idiyappam and Chicken Stew/idiyappam stew.jpg"],
+    images: [getImagePath("menu/Super Meals/2. Idiyappam and Chicken Stew/idiyappam stew.jpg")],
     price: 150,
     category: "Super Meals"
   },
@@ -61,8 +69,8 @@ const MENU_ITEMS = [
     name: "Rice, Keerai, Fish Fry and Fish Curry",
     description: "Complete meal with rice, greens, fish fry and curry",
     images: [
-      "/menu/Super Meals/3. Rice, Keerai, Fish Fry and Fish Curry/rice+fishcurry+keeraiporiyal+fishfry.jpg",
-      "/menu/Super Meals/3. Rice, Keerai, Fish Fry and Fish Curry/Mangomeenkulambu&Fishfry(1).JPG"
+      getImagePath("menu/Super Meals/3. Rice, Keerai, Fish Fry and Fish Curry/rice+fishcurry+keeraiporiyal+fishfry.jpg"),
+      getImagePath("menu/Super Meals/3. Rice, Keerai, Fish Fry and Fish Curry/Mangomeenkulambu&Fishfry(1).JPG")
     ],
     price: 150,
     category: "Super Meals"
@@ -71,7 +79,7 @@ const MENU_ITEMS = [
     id: "super-4",
     name: "Jackfruit Briyani with Chicken Varuthakari",
     description: "Unique jackfruit briyani served with spicy chicken varuthakari",
-    images: ["/menu/Super Meals/4. Jackfruit Briyani with Chicken Varuthakari/jackfruit biriyani+chicken varuthakari+adaprathaman.jpg"],
+    images: [getImagePath("menu/Super Meals/4. Jackfruit Briyani with Chicken Varuthakari/jackfruit biriyani+chicken varuthakari+adaprathaman.jpg")],
     price: 150,
     category: "Super Meals"
   },
@@ -80,8 +88,8 @@ const MENU_ITEMS = [
     name: "Chicken Kothu Parotta",
     description: "Popular street food with shredded parotta and chicken",
     images: [
-      "/menu/Super Meals/5. Chicken Kothu Parotta/Parota.jpg",
-      "/menu/Super Meals/5. Chicken Kothu Parotta/ChickenKothu&Salna.JPG"
+      getImagePath("menu/Super Meals/5. Chicken Kothu Parotta/Parota.jpg"),
+      getImagePath("menu/Super Meals/5. Chicken Kothu Parotta/ChickenKothu&Salna.JPG")
     ],
     price: 150,
     category: "Super Meals"
@@ -90,7 +98,7 @@ const MENU_ITEMS = [
     id: "super-6",
     name: "Ghee Rice, Chettinad Chicken and Omelette",
     description: "Aromatic ghee rice with spicy Chettinad chicken and fluffy omelette",
-    images: ["/menu/Super Meals/6. Ghee Rice, Chettinad Chicken and Omelette/Gheerice&PepperChicken&Omellete.JPG"],
+    images: [getImagePath("menu/Super Meals/6. Ghee Rice, Chettinad Chicken and Omelette/Gheerice&PepperChicken&Omellete.JPG")],
     price: 150,
     category: "Super Meals"
   },
@@ -98,7 +106,7 @@ const MENU_ITEMS = [
     id: "super-7",
     name: "Rice, Dal Fry and Nethili Fry",
     description: "Comfort meal with steamed rice, dal fry and crispy anchovies",
-    images: ["/menu/Super Meals/7. Rice, Dal Fry and Nethili Fry/Rice&Dalfry&nethilifry.JPG"],
+    images: [getImagePath("menu/Super Meals/7. Rice, Dal Fry and Nethili Fry/Rice&Dalfry&nethilifry.JPG")],
     price: 150,
     category: "Super Meals"
   },
@@ -107,8 +115,8 @@ const MENU_ITEMS = [
     name: "Chicken Rice Bowls",
     description: "Protein-packed chicken rice bowls with aromatic spices",
     images: [
-      "/menu/Super Meals/8. Chicken Rice Bowls/aPeriperichickenRicebowl.JPG",
-      "/menu/Super Meals/8. Chicken Rice Bowls/Bloodchicken&jeera ricebowl.JPG"
+      getImagePath("menu/Super Meals/8. Chicken Rice Bowls/aPeriperichickenRicebowl.JPG"),
+      getImagePath("menu/Super Meals/8. Chicken Rice Bowls/Bloodchicken&jeera ricebowl.JPG")
     ],
     price: 150,
     category: "Super Meals"
@@ -118,9 +126,9 @@ const MENU_ITEMS = [
     name: "Chicken Briyani, Bread Halwa and Raita",
     description: "Classic chicken briyani with sweet bread halwa and cooling raita",
     images: [
-      "/menu/Super Meals/9. Chicken Briyani, Bread Halwa and Raita/MushroomBriyani&Bindi(1).jpg",
-      "/menu/Super Meals/9. Chicken Briyani, Bread Halwa and Raita/BhaiVeeduChickenBriyani&BreadAlwa.JPG",
-      "/menu/Super Meals/9. Chicken Briyani, Bread Halwa and Raita/DonnechickenBriyani&chickenroast.JPG"
+      getImagePath("menu/Super Meals/9. Chicken Briyani, Bread Halwa and Raita/MushroomBriyani&Bindi(1).jpg"),
+      getImagePath("menu/Super Meals/9. Chicken Briyani, Bread Halwa and Raita/BhaiVeeduChickenBriyani&BreadAlwa.JPG"),
+      getImagePath("menu/Super Meals/9. Chicken Briyani, Bread Halwa and Raita/DonnechickenBriyani&chickenroast.JPG")
     ],
     price: 150,
     category: "Super Meals"
@@ -129,7 +137,7 @@ const MENU_ITEMS = [
     id: "super-10",
     name: "Rice, Malabar Chicken, Gobi 65 and Rasam",
     description: "Traditional South Indian meal with spicy Malabar chicken and tangy rasam",
-    images: ["/menu/Super Meals/10. Rice, Malabar Chicken, Gobi 65 and Rasam/ChinthamaniChickenkolambu&chickenfry&MilaguRasam.JPG"],
+    images: [getImagePath("menu/Super Meals/10. Rice, Malabar Chicken, Gobi 65 and Rasam/ChinthamaniChickenkolambu&chickenfry&MilaguRasam.JPG")],
     price: 150,
     category: "Super Meals"
   },
@@ -139,7 +147,7 @@ const MENU_ITEMS = [
     id: "comfort-1",
     name: "Spinach Rice, Stuffed Kathirikai, Peanut Ladies Finger Fry",
     description: "Nutritious spinach rice with stuffed brinjal and crispy ladies finger",
-    images: ["/menu/Comfort Meals/1. Spinach Rice, Stuffed Kathirikai, Peanut Ladies Finger Fry/spinachrice stuffed kathirika fry ladies finger.jpg"],
+    images: [getImagePath("menu/Comfort Meals/1. Spinach Rice, Stuffed Kathirikai, Peanut Ladies Finger Fry/spinachrice stuffed kathirika fry ladies finger.jpg")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -147,7 +155,7 @@ const MENU_ITEMS = [
     id: "comfort-2",
     name: "Vegetarian Rice Bowl and Mango Milkshake",
     description: "Healthy vegetarian rice bowl served with refreshing mango milkshake",
-    images: ["/menu/Comfort Meals/1. Vegetarian Rice Bowl and Mango Milkshake/vegetarian rice bowl and mangoshake.jpg"],
+    images: [getImagePath("menu/Comfort Meals/1. Vegetarian Rice Bowl and Mango Milkshake/vegetarian rice bowl and mangoshake.jpg")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -156,8 +164,8 @@ const MENU_ITEMS = [
     name: "Chole Bhature",
     description: "North Indian favorite - spiced chickpeas with fluffy bhature",
     images: [
-      "/menu/Comfort Meals/2. Chole Bhature/chole batura.jpg",
-      "/menu/Comfort Meals/2. Chole Bhature/chole.jpg"
+      getImagePath("menu/Comfort Meals/2. Chole Bhature/chole batura.jpg"),
+      getImagePath("menu/Comfort Meals/2. Chole Bhature/chole.jpg")
     ],
     price: 130,
     category: "Comfort Meals"
@@ -166,7 +174,7 @@ const MENU_ITEMS = [
     id: "comfort-4",
     name: "Jackfruit Briyani, Chilli Babycorn and Adaprathaman",
     description: "Aromatic jackfruit briyani with spicy baby corn and traditional dessert",
-    images: ["/menu/Comfort Meals/3. Jackfruit Briyani, Chilli Babycorn and Adaprathaman/jackfruit biriyani+babychillicorn+adaprathaman.jpg"],
+    images: [getImagePath("menu/Comfort Meals/3. Jackfruit Briyani, Chilli Babycorn and Adaprathaman/jackfruit biriyani+babychillicorn+adaprathaman.jpg")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -174,7 +182,7 @@ const MENU_ITEMS = [
     id: "comfort-5",
     name: "Rice, Ennai Kathirikai Pulikolambu, Keerai and Double Egg Omelette",
     description: "Traditional Tamil meal with brinjal curry, greens and double omelette",
-    images: ["/menu/Comfort Meals/4. Rice, Ennai Kathirikai Pulikolambu, Keerai and Double Egg Omelette/rice+ennai kathirikapulikolambu+keeraiporiyal+double omelette.jpg"],
+    images: [getImagePath("menu/Comfort Meals/4. Rice, Ennai Kathirikai Pulikolambu, Keerai and Double Egg Omelette/rice+ennai kathirikapulikolambu+keeraiporiyal+double omelette.jpg")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -183,8 +191,8 @@ const MENU_ITEMS = [
     name: "Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam",
     description: "Garlic curry rice with mixed vegetable stir-fry and crispy papadam",
     images: [
-      "/menu/Comfort Meals/5. Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam/garliccurry rice+beanspodimas+papadam.jpg",
-      "/menu/Comfort Meals/5. Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam/garliccurryrice+beanspodimas+papadam.jpg"
+      getImagePath("menu/Comfort Meals/5. Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam/garliccurry rice+beanspodimas+papadam.jpg"),
+      getImagePath("menu/Comfort Meals/5. Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam/garliccurryrice+beanspodimas+papadam.jpg")
     ],
     price: 130,
     category: "Comfort Meals"
@@ -193,7 +201,7 @@ const MENU_ITEMS = [
     id: "comfort-7",
     name: "Sphagetti Napoli",
     description: "Classic Italian spaghetti with fresh tomato and basil sauce",
-    images: ["/menu/Comfort Meals/6. Sphagetti Napoli/pasta.jpg"],
+    images: [getImagePath("menu/Comfort Meals/6. Sphagetti Napoli/pasta.jpg")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -202,8 +210,8 @@ const MENU_ITEMS = [
     name: "Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice",
     description: "Healthy combination of rice, dal spinach, potato curry and fresh juice",
     images: [
-      "/menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeye'sspinach&aloocurry&watermelon.JPG",
-      "/menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeye'sspinach&aloocurry&watermelon.(1).JPG"
+      getImagePath("menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeye'sspinach&aloocurry&watermelon.JPG"),
+      getImagePath("menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeye'sspinach&aloocurry&watermelon.(1).JPG")
     ],
     price: 130,
     category: "Comfort Meals"
@@ -212,7 +220,7 @@ const MENU_ITEMS = [
     id: "comfort-9",
     name: "Brocolli White Sauce Pasta",
     description: "Creamy white sauce pasta with fresh broccoli",
-    images: ["/menu/Comfort Meals/8. Brocolli White Sauce Pasta/CreamywhiteSaucepasta.JPG"],
+    images: [getImagePath("menu/Comfort Meals/8. Brocolli White Sauce Pasta/CreamywhiteSaucepasta.JPG")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -221,8 +229,8 @@ const MENU_ITEMS = [
     name: "Lemon Rice, Tamarind Rice and Ladies Finger Fry",
     description: "Tangy variety rice with crispy ladies finger fry",
     images: [
-      "/menu/Comfort Meals/8. Lemon Rice, Tamarind Rice and Ladies Finger Fry/Varietyrice&Ladiesfinger(2).JPG",
-      "/menu/Comfort Meals/8. Lemon Rice, Tamarind Rice and Ladies Finger Fry/Varietyrice&Ladiesfinger(3).JPG"
+      getImagePath("menu/Comfort Meals/8. Lemon Rice, Tamarind Rice and Ladies Finger Fry/Varietyrice&Ladiesfinger(2).JPG"),
+      getImagePath("menu/Comfort Meals/8. Lemon Rice, Tamarind Rice and Ladies Finger Fry/Varietyrice&Ladiesfinger(3).JPG")
     ],
     price: 130,
     category: "Comfort Meals"
@@ -232,8 +240,8 @@ const MENU_ITEMS = [
     name: "Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice",
     description: "Healthy wheat parotta with creamy paneer, okra fry and cooling curd rice",
     images: [
-      "/menu/Comfort Meals/9. Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice/Wheatparota&Bindi&Kadaipaneer(1).JPG",
-      "/menu/Comfort Meals/9. Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice/Wheatparota&Bindi&Kadaipaneer(4).JPG"
+      getImagePath("menu/Comfort Meals/9. Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice/Wheatparota&Bindi&Kadaipaneer(1).JPG"),
+      getImagePath("menu/Comfort Meals/9. Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice/Wheatparota&Bindi&Kadaipaneer(4).JPG")
     ],
     price: 130,
     category: "Comfort Meals"
@@ -242,7 +250,7 @@ const MENU_ITEMS = [
     id: "comfort-12",
     name: "Aloo Paratha and Dal Makhani",
     description: "North Indian stuffed potato paratha with rich dal makhani",
-    images: ["/menu/Comfort Meals/10. Aloo Paratha and Dal Makhani/AlooParatha&Dalmakhani.JPG"],
+    images: [getImagePath("menu/Comfort Meals/10. Aloo Paratha and Dal Makhani/AlooParatha&Dalmakhani.JPG")],
     price: 130,
     category: "Comfort Meals"
   },
@@ -251,8 +259,8 @@ const MENU_ITEMS = [
     name: "Chapathi and Channa Masala",
     description: "Soft chapathi with spicy chickpea curry",
     images: [
-      "/menu/Comfort Meals/11. Chapathi and Channa Masala/Chapati&channamasala.JPEG",
-      "/menu/Comfort Meals/11. Chapathi and Channa Masala/Chapati&channamasala(1).JPEG"
+      getImagePath("menu/Comfort Meals/11. Chapathi and Channa Masala/Chapati&channamasala.JPEG"),
+      getImagePath("menu/Comfort Meals/11. Chapathi and Channa Masala/Chapati&channamasala(1).JPEG")
     ],
     price: 130,
     category: "Comfort Meals"
@@ -264,8 +272,8 @@ const MENU_ITEMS = [
     name: "Bread Toast, Omelette and Sundal",
     description: "Perfect morning combination with toasted bread, fluffy omelette and nutritious sundal",
     images: [
-      "/menu/Day Starters/Bread Toast, Omelette and Sundal/Roastedbread&sundal&omellete.JPG",
-      "/menu/Day Starters/Bread Toast, Omelette and Sundal/ClubSandwich&Sundal(1).JPG"
+      getImagePath("menu/Day Starters/Bread Toast, Omelette and Sundal/Roastedbread&sundal&omellete.JPG"),
+      getImagePath("menu/Day Starters/Bread Toast, Omelette and Sundal/ClubSandwich&Sundal(1).JPG")
     ],
     price: 80,
     category: "Day Starters"
@@ -274,7 +282,7 @@ const MENU_ITEMS = [
     id: "starter-2",
     name: "Idiyappam and Kadala Curry",
     description: "Traditional Kerala breakfast with soft string hoppers and spicy black chickpea curry",
-    images: ["/menu/Day Starters/Idiyappam and Kadala Curry/Idiyapam&KadalaCurry.JPG"],
+    images: [getImagePath("menu/Day Starters/Idiyappam and Kadala Curry/Idiyapam&KadalaCurry.JPG")],
     price: 80,
     category: "Day Starters"
   },
@@ -283,8 +291,8 @@ const MENU_ITEMS = [
     name: "Uthapam, Peanut Chutney and Sakkarai Pongal",
     description: "South Indian breakfast special with thick pancake, crunchy chutney and sweet pongal",
     images: [
-      "/menu/Day Starters/Uthapam, Peanut Chutney and Sakkarai Pongal/Uthapam&sakaraipongal&peanutchutnney.JPG",
-      "/menu/Day Starters/Uthapam, Peanut Chutney and Sakkarai Pongal/Uthappam&chutney.JPEG"
+      getImagePath("menu/Day Starters/Uthapam, Peanut Chutney and Sakkarai Pongal/Uthapam&sakaraipongal&peanutchutnney.JPG"),
+      getImagePath("menu/Day Starters/Uthapam, Peanut Chutney and Sakkarai Pongal/Uthappam&chutney.JPEG")
     ],
     price: 80,
     category: "Day Starters"
