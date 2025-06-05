@@ -1,9 +1,10 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './HeroSection.css';
 
 const HeroSection = () => {
   const heroRef = useRef(null);
+  const [imageErrors, setImageErrors] = useState({});
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
@@ -13,8 +14,15 @@ const HeroSection = () => {
   const leftSlide = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const rightSlide = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
-  // Food images for the grid (7x4 = 28 images)
-  const foodImages = [
+  // Local food images for the grid (28 images)
+  // You can add your own images to public/images/hero/ folder
+  // Name them as hero-1.jpg, hero-2.jpg, etc.
+  const localFoodImages = Array.from({ length: 28 }, (_, i) => 
+    `/images/hero/hero-${i + 1}.jpg`
+  );
+
+  // Fallback Unsplash images (original ones)
+  const fallbackImages = [
     "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
     "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
     "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
@@ -44,6 +52,19 @@ const HeroSection = () => {
     "https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80",
     "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
   ];
+
+  // Function to get the appropriate image source
+  const getImageSource = (index) => {
+    if (imageErrors[index]) {
+      return fallbackImages[index];
+    }
+    return localFoodImages[index];
+  };
+
+  // Handle image load errors
+  const handleImageError = (index) => {
+    setImageErrors(prev => ({ ...prev, [index]: true }));
+  };
 
   // Function to determine if a tile should slide left, right, or stay fixed
   const getTileTransform = (rowIndex, columnIndex) => {
@@ -183,7 +204,11 @@ const HeroSection = () => {
           }}
           style={{ x: slideTransform }}
         >
-          <img src={image} alt={`Food ${imageIndex + 1}`} />
+          <img 
+            src={getImageSource(imageIndex)} 
+            alt={`Food ${imageIndex + 1}`}
+            onError={() => handleImageError(imageIndex)}
+          />
         </motion.div>
       );
     }
@@ -204,28 +229,28 @@ const HeroSection = () => {
             <div className="image-grid">
               {/* First row */}
               <div className="grid-row">
-                {foodImages.slice(0, 7).map((image, index) => (
+                {localFoodImages.slice(0, 7).map((image, index) => (
                   renderTile(0, index, image, index)
                 ))}
               </div>
               
               {/* Second row */}
               <div className="grid-row">
-                {foodImages.slice(7, 14).map((image, index) => (
+                {localFoodImages.slice(7, 14).map((image, index) => (
                   renderTile(1, index, image, index + 7)
                 ))}
               </div>
               
               {/* Third row */}
               <div className="grid-row">
-                {foodImages.slice(14, 21).map((image, index) => (
+                {localFoodImages.slice(14, 21).map((image, index) => (
                   renderTile(2, index, image, index + 14)
                 ))}
               </div>
               
               {/* Fourth row */}
               <div className="grid-row">
-                {foodImages.slice(21, 28).map((image, index) => (
+                {localFoodImages.slice(21, 28).map((image, index) => (
                   renderTile(3, index, image, index + 21)
                 ))}
               </div>

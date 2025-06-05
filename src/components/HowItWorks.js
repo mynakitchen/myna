@@ -31,7 +31,6 @@ export default function HowItWorks() {
       title: "Browse Plans",
       description: "Explore our delicious meal plans and find the perfect fit for your lifestyle and dietary needs.",
       accent: "#825F45", // Primary brown
-      bgGradient: "bg-gradient-to-br from-gold-50 to-white",
       image: getImagePath("images/how-it-works/1.png"),
       imageAlt: "Browse meal plans interface showing various food options"
     },
@@ -40,7 +39,6 @@ export default function HowItWorks() {
       title: "Connect on WhatsApp",
       description: "Get in touch with our team to discuss your requirements and get personalized meal recommendations.",
       accent: "#D08C60", // Warm orange
-      bgGradient: "bg-gradient-to-br from-warmOrange-50 to-white",
       image: getImagePath("images/how-it-works/2.png"),
       imageAlt: "WhatsApp chat interface for customer support",
       hasButton: true
@@ -50,7 +48,6 @@ export default function HowItWorks() {
       title: "Easy Registration",
       description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign up takes just a few minutes and you'll get instant access to your account.",
       accent: "#797D62", // Sage green
-      bgGradient: "bg-gradient-to-br from-sage-50 to-white",
       image: getImagePath("images/how-it-works/3.png"),
       imageAlt: "User registration form and dashboard preview"
     },
@@ -59,232 +56,207 @@ export default function HowItWorks() {
       title: "Manage Everything",
       description: "Use your personalized dashboard to manage everything - add or cancel subscriptions, change delivery addresses, order delicious add-ons, and customize your meal preferences all in one place.",
       accent: "#997B66", // Muted brown
-      bgGradient: "bg-gradient-to-br from-mutedBrown-50 to-white",
       image: getImagePath("images/how-it-works/4.png"),
       imageAlt: "User dashboard showing subscription management features"
     }
   ];
 
-  // Simple, clean card component without complex stacking
-  const StepCard = ({ step, index }) => {
+  // Individual step component
+  const StepItem = ({ step, index, isLast }) => {
     return (
-      <motion.div 
-        className="w-full max-w-5xl mx-auto how-it-works-card"
-        initial={{ 
-          opacity: 0, 
-          y: 60
-        }}
-        whileInView={{ 
-          opacity: 1, 
-          y: 0
-        }}
-        viewport={{ 
-          once: true,
-          amount: 0.2
-        }}
-        transition={{ 
-          duration: 0.5, 
-          delay: index * 0.08,
-          ease: [0.21, 0.47, 0.32, 0.98]
-        }}
-      >
-        <div 
-          className={`${step.bgGradient} border-2 border-black shadow-lg md:shadow-xl rounded-xl md:rounded-2xl overflow-hidden hover:shadow-xl md:hover:shadow-2xl transition-shadow duration-300`}
+      <div className="relative flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+        {/* Step Number Circle - Reduced size */}
+        <motion.div 
+          className="relative flex-shrink-0 z-10"
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ 
+            duration: 0.6, 
+            delay: index * 0.2,
+            ease: "easeOut"
+          }}
         >
-          {/* Card Header with Step Number */}
-          <div className="px-6 md:px-8 pt-6 md:pt-8 pb-4">
-            <div className="flex items-center justify-between mb-4">
-              <motion.div 
-                className="flex items-center justify-center w-12 h-12 md:w-16 md:h-16 rounded-full border-2 md:border-3 border-black bg-white shadow-lg"
-                style={{ backgroundColor: step.accent }}
-                initial={{ scale: 0.8, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: 0.2 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                <span className="text-white font-black text-sm md:text-lg lg:text-2xl">{step.number}</span>
-              </motion.div>
-              <div className="flex-1 ml-4 lg:ml-6">
-                <motion.h3 
-                  className="text-lg md:text-2xl lg:text-3xl font-black text-black mb-1 md:mb-2 tracking-tight leading-tight"
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.4, 
-                    delay: 0.3 + index * 0.08,
-                    ease: "easeOut"
-                  }}
-                >
-                  {step.title}
-                </motion.h3>
-              </div>
-            </div>
-          </div>
-
-          {/* Main Content Area */}
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 px-6 md:px-8 pb-6 md:pb-8">
-            {/* Image Section */}
-            <motion.div 
-              className="order-2 lg:order-1 flex items-center justify-center p-2 md:p-4"
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ 
-                duration: 0.4, 
-                delay: 0.4 + index * 0.08,
-                ease: "easeOut"
-              }}
+          <div className="relative">
+            <div 
+              className="w-16 h-16 md:w-18 md:h-18 border-3 border-white bg-white shadow-xl flex items-center justify-center relative z-20 transition-all duration-300 hover:scale-105"
+              style={{ backgroundColor: step.accent }}
             >
-              <div className="relative w-full max-w-sm lg:max-w-md mx-auto">
-                {/* Fixed aspect ratio container for consistent display */}
-                <div className="how-it-works-image-container">
-                  <div className="absolute inset-0 bg-gradient-to-br from-black/5 to-black/10" />
-                  <img
-                    src={step.image}
-                    alt={step.imageAlt}
-                    className="how-it-works-image"
-                    loading="lazy"
-                    onError={(e) => {
-                      console.error(`Failed to load image: ${step.image}`);
-                      e.target.style.backgroundColor = '#f3f4f6';
-                      e.target.style.display = 'flex';
-                      e.target.style.alignItems = 'center';
-                      e.target.style.justifyContent = 'center';
-                      e.target.innerHTML = '📷 Image Loading...';
-                    }}
-                    onLoad={(e) => {
-                      console.log(`Successfully loaded image: ${step.image}`);
-                      e.target.style.opacity = '1';
-                    }}
-                  />
-                  {/* Decorative overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent" />
-                </div>
-              </div>
-            </motion.div>
+              <span className="text-white font-black text-xl md:text-2xl tracking-tight">{step.number}</span>
+            </div>
+            
+            {/* Modern glow effect */}
+            <div 
+              className="absolute inset-0 blur-lg opacity-15 -z-10"
+              style={{ backgroundColor: step.accent }}
+            />
+          </div>
+        </motion.div>
 
-            {/* Text Content Section */}
-            <div className="order-1 lg:order-2 flex flex-col justify-center space-y-4 md:space-y-6">
-              <motion.p 
-                className="text-black text-sm md:text-base lg:text-lg leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: 0.5 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                {step.description}
-              </motion.p>
-              
-              {/* WhatsApp Button */}
-              {step.hasButton && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ 
-                    duration: 0.4, 
-                    delay: 0.6 + index * 0.08,
-                    ease: "easeOut"
+        {/* Content Area - Reduced spacing */}
+        <motion.div 
+          className="flex-1 grid md:grid-cols-2 gap-6 md:gap-8 items-center w-full"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ 
+            duration: 0.6, 
+            delay: index * 0.2 + 0.1,
+            ease: "easeOut"
+          }}
+        >
+          {/* Image - Reduced size */}
+          <div className="flex justify-center order-2 md:order-1">
+            <div className="relative w-full max-w-xs">
+              <div className="relative bg-white shadow-lg border border-gray-200 overflow-hidden group">
+                {/* Modern corner accent */}
+                <div 
+                  className="absolute top-0 right-0 w-8 h-8 z-10 transition-all duration-300 group-hover:w-10 group-hover:h-10"
+                  style={{ backgroundColor: step.accent }}
+                />
+                
+                <img
+                  src={step.image}
+                  alt={step.imageAlt}
+                  className="w-full h-48 md:h-56 object-cover transition-transform duration-500 group-hover:scale-105"
+                  loading="lazy"
+                  onError={(e) => {
+                    console.error(`Failed to load image: ${step.image}`);
+                    e.target.style.backgroundColor = '#f3f4f6';
+                    e.target.style.display = 'flex';
+                    e.target.style.alignItems = 'center';
+                    e.target.style.justifyContent = 'center';
+                    e.target.innerHTML = '📷 Image Loading...';
                   }}
-                >
-                  <motion.button
-                    onClick={handleWhatsAppContact}
-                    className="w-full lg:w-auto px-4 md:px-6 lg:px-8 py-3 md:py-4 bg-accent hover:bg-warmOrange-600 text-white font-bold text-sm md:text-base border-2 border-accent hover:border-warmOrange-600 transition-all duration-200 flex items-center justify-center gap-2 md:gap-3 rounded-lg md:rounded-xl shadow-lg hover:shadow-xl"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <span className="text-sm md:text-base lg:text-lg">💬</span>
-                    <span>Contact on WhatsApp</span>
-                  </motion.button>
-                </motion.div>
-              )}
-              
-              {/* Feature highlight */}
-              <motion.div 
-                className="border-t border-tertiary/30 pt-3 md:pt-4"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ 
-                  duration: 0.4, 
-                  delay: 0.7 + index * 0.08,
-                  ease: "easeOut"
-                }}
-              >
-                <div className="flex items-center">
-                  <div 
-                    className="w-2 h-2 md:w-3 md:h-3 rounded-full mr-2 md:mr-3 shadow-sm" 
-                    style={{backgroundColor: step.accent}}
-                  />
-                  <span className="text-xs md:text-sm lg:text-base text-tertiary uppercase tracking-wider font-bold">
-                    {index === 0 && "Multiple Plans Available"}
-                    {index === 1 && "Instant Support Available"}
-                    {index === 2 && "Quick & Easy Process"}
-                    {index === 3 && "Complete Control & Flexibility"}
-                  </span>
-                </div>
-              </motion.div>
+                />
+                
+                {/* Modern overlay gradient */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              </div>
             </div>
           </div>
-        </div>
-      </motion.div>
+
+          {/* Text Content - Reduced typography */}
+          <div className="order-1 md:order-2 text-center md:text-left">
+            <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-4 tracking-tight leading-tight">
+              {step.title}
+            </h3>
+            <p className="text-base md:text-lg text-gray-600 leading-relaxed mb-6 font-light">
+              {step.description}
+            </p>
+            
+            {/* WhatsApp Button - Reduced size */}
+            {step.hasButton && (
+              <motion.button
+                onClick={handleWhatsAppContact}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-orange-600 text-white font-bold text-base border-2 border-gray-900 hover:border-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 uppercase tracking-wide mb-6"
+                whileHover={{ scale: 1.03, y: -1 }}
+                whileTap={{ scale: 0.97 }}
+                transition={{ duration: 0.2 }}
+              >
+                <span className="text-lg">💬</span>
+                <span>Contact on WhatsApp</span>
+              </motion.button>
+            )}
+            
+            {/* Feature highlight - Reduced size */}
+            <div className="flex items-center justify-center md:justify-start">
+              <div 
+                className="w-3 h-3 rotate-45 mr-3 shadow-sm" 
+                style={{backgroundColor: step.accent}}
+              />
+              <span className="text-xs md:text-sm text-gray-500 uppercase tracking-wide font-bold">
+                {index === 0 && "Multiple Plans Available"}
+                {index === 1 && "Instant Support Available"}
+                {index === 2 && "Quick & Easy Process"}
+                {index === 3 && "Complete Control & Flexibility"}
+              </span>
+            </div>
+          </div>
+        </motion.div>
+      </div>
     );
   };
 
   return (
-    <section id="how-it-works" className="relative bg-gradient-to-b from-white via-mutedBrown-50 via-mutedBrown-100 via-mutedBrown-200 to-mutedBrown-300">
-      {/* Gradient overlay for smooth transition */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-sage-50/30 via-mutedBrown-100/50 via-mutedBrown-200/70 to-mutedBrown-300/90" />
-      
-      {/* Simplified background decoration */}
-      <div className="absolute inset-0 opacity-[0.08]">
-        <div className="absolute top-20 left-10 w-32 h-32 bg-gold-200 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 right-10 w-40 h-40 bg-warmOrange-200 rounded-full blur-3xl" />
+    <section id="how-it-works" className="relative bg-gray-50 overflow-hidden py-16">
+      {/* Food emoji background elements */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute top-32 left-16 text-4xl animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}>🍛</div>
+        <div className="absolute bottom-32 right-16 text-5xl animate-bounce" style={{animationDelay: '1s', animationDuration: '4s'}}>🍲</div>
+        <div className="absolute top-1/2 left-1/3 text-3xl animate-bounce" style={{animationDelay: '2s', animationDuration: '3.5s'}}>🥘</div>
+        <div className="absolute top-20 right-1/4 text-3xl animate-bounce" style={{animationDelay: '0.5s', animationDuration: '3.2s'}}>🍚</div>
+        <div className="absolute bottom-20 left-1/4 text-4xl animate-bounce" style={{animationDelay: '1.5s', animationDuration: '3.8s'}}>🥗</div>
+        <div className="absolute top-3/4 right-1/3 text-3xl animate-bounce" style={{animationDelay: '2.5s', animationDuration: '3.3s'}}>🍜</div>
       </div>
       
       {/* Header Section */}
       <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
         <motion.div 
-          className="text-center flex flex-col justify-center py-8 md:py-12 lg:py-16"
+          className="text-center mb-12"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-black text-brown-800 mb-3 md:mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight leading-none">
             How It Works
           </h2>
-          <p className="text-sm md:text-base lg:text-lg text-brown-700 max-w-2xl mx-auto leading-relaxed">
-            From browsing to enjoying delicious meals at your doorstep - we've made it incredibly simple in just 4 easy steps.
+          <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
+            From browsing to enjoying delicious meals at your doorstep — we've made it incredibly simple in just 4 easy steps.
           </p>
         </motion.div>
       </div>
 
-      {/* Steps Container - Simple layout */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-6 pb-12 md:pb-16 lg:pb-20 relative z-10">
-        <div className="max-w-5xl mx-auto space-y-8 md:space-y-12 px-4 sm:px-6 md:px-0">
-          {steps.map((step, index) => (
-            <StepCard 
-              key={index}
-              step={step} 
-              index={index}
-            />
-          ))}
-        </div>
+      {/* Main Steps Container with modern square design */}
+      <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
+        <motion.div 
+          className="relative"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          {/* Modern square background with artistic elements */}
+          <div className="relative bg-white shadow-2xl border border-gray-200 overflow-hidden">
+            {/* Artistic corner accents */}
+            <div className="absolute top-0 left-0 w-24 h-24 bg-gradient-to-br from-orange-400 to-orange-500 opacity-10"></div>
+            <div className="absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl from-brown-400 to-brown-500 opacity-10"></div>
+            <div className="absolute top-1/4 right-0 w-16 h-48 bg-gradient-to-l from-yellow-300 to-yellow-400 opacity-5"></div>
+            
+            {/* Tokyo-style geometric pattern overlay */}
+            <div className="absolute inset-0 opacity-[0.02]">
+              <div className="grid grid-cols-12 h-full">
+                {Array.from({ length: 12 }).map((_, i) => (
+                  <div key={i} className="border-r border-gray-900 last:border-r-0"></div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Modern accent bar */}
+            <div className="h-1 w-full bg-gradient-to-r from-gray-900 via-orange-500 to-brown-600"></div>
+            
+            <div className="p-6 md:p-8 lg:p-10">
+              <div className="space-y-16 md:space-y-20">
+                {steps.map((step, index) => (
+                  <StepItem 
+                    key={index}
+                    step={step} 
+                    index={index}
+                    isLast={index === steps.length - 1}
+                  />
+                ))}
+              </div>
+            </div>
+            
+            {/* Bottom accent */}
+            <div className="h-1 w-full bg-gradient-to-r from-brown-600 via-orange-500 to-gray-900"></div>
+          </div>
+        </motion.div>
       </div>
 
       {/* Call to Action */}
-      <div id="start-food-journey" className="container mx-auto px-4 sm:px-6 md:px-6 pb-12 md:pb-16 lg:pb-24 pt-24 md:pt-32 lg:pt-40 relative z-10">
+      <div id="start-food-journey" className="container mx-auto px-4 sm:px-6 md:px-6 pt-16 relative z-10">
         <motion.div 
           className="text-center"
           initial={{ opacity: 0, y: 30 }}
@@ -292,87 +264,70 @@ export default function HowItWorks() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-white border-2 border-black shadow-xl max-w-2xl mx-auto overflow-hidden relative">
-            {/* Accent line */}
-            <div className="h-2 w-full bg-gradient-to-r from-primary via-secondary to-accent"></div>
+          <div className="bg-white shadow-2xl max-w-3xl mx-auto overflow-hidden relative border border-gray-200">
+            {/* Modern accent design */}
+            <div className="h-2 w-full bg-gradient-to-r from-gray-900 via-orange-500 to-brown-600"></div>
             
-            {/* Background decorative pattern */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="absolute top-8 left-8 w-16 h-16 bg-primary rounded-full"></div>
-              <div className="absolute bottom-8 right-8 w-20 h-20 bg-secondary rounded-full"></div>
-              <div className="absolute top-1/2 left-1/4 w-12 h-12 bg-accent rounded-full"></div>
+            {/* Tokyo-style artistic background elements */}
+            <div className="absolute inset-0 opacity-15">
+              {/* Origami-inspired triangular shapes */}
+              <div className="absolute top-8 left-8 w-0 h-0 border-l-[16px] border-r-[16px] border-b-[28px] border-l-transparent border-r-transparent border-b-orange-500 rotate-12"></div>
+              <div className="absolute bottom-8 right-8 w-0 h-0 border-l-[20px] border-r-[20px] border-t-[35px] border-l-transparent border-r-transparent border-t-brown-500 -rotate-12"></div>
+              
+              {/* Tokyo geometric patterns */}
+              <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2">
+                <div className="relative w-12 h-12">
+                  <div className="absolute w-full h-full bg-gray-900 rotate-45"></div>
+                  <div className="absolute w-6 h-6 bg-orange-400 rotate-45 top-3 left-3"></div>
+                </div>
+              </div>
+              
+              {/* Artistic line patterns */}
+              <div className="absolute top-6 right-1/3 w-16 h-1 bg-brown-400 rotate-45"></div>
+              <div className="absolute top-8 right-1/3 w-12 h-1 bg-orange-400 rotate-45"></div>
+              <div className="absolute bottom-6 left-1/3 w-20 h-1 bg-gray-900 -rotate-45"></div>
+              
+              {/* Dot matrix pattern */}
+              <div className="absolute bottom-1/4 right-1/4 grid grid-cols-3 gap-1">
+                <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-brown-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
+                <div className="w-2 h-2 bg-brown-400 rounded-full"></div>
+                <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
+                <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
+              </div>
             </div>
             
-            {/* Curved Arrow Indicator */}
-            <motion.div 
-              className="absolute -top-8 -right-8 md:-top-12 md:-right-12 z-30"
-              initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-              whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              animate={{ 
-                y: [0, -5, 0],
-                rotate: [0, 5, 0],
-                transition: { 
-                  duration: 2, 
-                  repeat: Infinity,
-                  ease: "easeInOut" 
-                }
-              }}
-            >
-              <svg 
-                width="60" 
-                height="60" 
-                viewBox="0 0 60 60" 
-                fill="none" 
-                className="text-accent"
-                style={{ color: '#D08C60' }}
-              >
-                <path 
-                  d="M15 10 C 25 5, 35 5, 45 15 C 50 20, 50 30, 45 35 L 40 30 M 45 35 L 50 40" 
-                  stroke="currentColor" 
-                  strokeWidth="3" 
-                  strokeLinecap="round" 
-                  fill="none"
-                />
-                <circle cx="48" cy="38" r="2" fill="currentColor" />
-              </svg>
-              <div className="absolute -bottom-6 -right-2 text-xs font-bold text-accent rotate-12 whitespace-nowrap" style={{ color: '#D08C60' }}>
-                Try it!
-              </div>
-            </motion.div>
-            
-            <div className="relative z-10 p-4 md:p-6 lg:p-8">
-              <h3 className="text-xl md:text-2xl lg:text-3xl font-black text-black mb-4 md:mb-6 tracking-tight">
+            <div className="relative z-10 p-6 md:p-8 lg:p-10">
+              <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 mb-6 tracking-tight leading-none">
                 Start Your Food Journey
               </h3>
-              <p className="text-sm md:text-base text-gray-700 mb-4 md:mb-6 leading-relaxed font-medium">
-                Take a <span className="text-primary font-bold">3-day trial</span> and let your taste buds decide. 
+              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
+                Take a <span className="font-black text-orange-600 bg-orange-100 px-2 py-1 rounded">3-day trial</span> and let your taste buds decide. 
                 <br className="hidden md:block" />
                 No longterm commitment, just Amma's food delivered to your doorstep.
               </p>
               <motion.button 
                 onClick={handleSignUpClick}
-                className="bg-primary hover:bg-secondary text-white font-bold text-base md:text-lg px-6 md:px-10 py-3 md:py-4 border-2 border-black shadow-lg hover:shadow-xl transition-all duration-300 hover:bg-gray-900"
-                style={{ backgroundColor: '#825F45' }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
+                className="bg-gray-900 hover:bg-orange-600 text-white font-black text-lg md:text-xl px-8 py-4 shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 uppercase tracking-wider"
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95 }}
                 transition={{ duration: 0.2 }}
                 aria-label="Sign up for Myna Kitchen"
               >
-                Sign up
+                Sign Up Now
               </motion.button>
-              <div className="mt-4 flex flex-wrap justify-center gap-3 md:gap-6 text-xs md:text-sm text-gray-600 font-medium">
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-accent rounded-full" style={{ backgroundColor: '#D08C60' }}></div>
+              <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-gray-500 font-bold uppercase tracking-wider">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-orange-500 rotate-45"></div>
                   <span>Cancel anytime</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-secondary rounded-full" style={{ backgroundColor: '#797D62' }}></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-green-500 rotate-45"></div>
                   <span>Free delivery</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <div className="w-1.5 h-1.5 bg-primary rounded-full" style={{ backgroundColor: '#825F45' }}></div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-blue-500 rotate-45"></div>
                   <span>Satisfaction guaranteed</span>
                 </div>
               </div>

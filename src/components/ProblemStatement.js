@@ -1,6 +1,46 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import './ProblemStatement.css';
+
+// Parallax Image Section Component
+const ParallaxImageSection = () => {
+  const { scrollYProgress } = useScroll();
+  const y = useTransform(scrollYProgress, [0, 1], [0, -50]);
+
+  return (
+    <motion.div 
+      className="parallax-image-container"
+      style={{ y }}
+      initial={{ opacity: 0, scale: 0.95 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, ease: "easeOut" }}
+    >
+      <div className="parallax-image-wrapper">
+        <img 
+          src={`${process.env.PUBLIC_URL}/images/myna-kitchen-meals.jpg`}
+          alt="Myna Kitchen meal containers showcasing various South Indian dishes"
+          className="parallax-image"
+          onError={(e) => {
+            // Fallback to a placeholder if image not found
+            e.target.style.display = 'none';
+            e.target.nextSibling.style.display = 'flex';
+          }}
+        />
+        <div 
+          className="image-placeholder" 
+          style={{ display: 'none' }}
+        >
+          <div className="placeholder-content">
+            <div className="placeholder-icon">🍱</div>
+            <h3>Myna Kitchen Meals</h3>
+            <p>Delicious meal containers delivered fresh to your doorstep</p>
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  );
+};
 
 const ProblemStatement = () => {
   const problems = [
@@ -178,9 +218,12 @@ const ProblemStatement = () => {
                 With us you no longer have to run a kitchen, manage groceries or worry about your daily food.
               </motion.p>
               
+              {/* Parallax Image Section */}
+              <ParallaxImageSection />
+              
               {/* New text addition */}
               <motion.p 
-                className="hero-description-sub mt-4 text-lg md:text-xl text-gray-700 font-medium"
+                className="hero-description-sub mt-8 text-lg md:text-xl text-gray-700 font-medium"
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
