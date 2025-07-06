@@ -260,59 +260,48 @@
 }
 
 .problem-title-large {
-  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-size: 2rem;
   font-weight: 700;
   color: #222;
   margin-bottom: 1rem;
   line-height: 1.2;
-  letter-spacing: -0.01em;
 }
 
 .problem-description-text {
-  font-size: clamp(1rem, 2vw, 1.125rem);
+  font-size: 1.1rem;
+  color: #666;
+  margin-bottom: 1rem;
   line-height: 1.6;
-  color: #444;
-  margin-bottom: 1.5rem;
-  opacity: 0.9;
 }
 
 .problem-fact {
-  font-size: 0.9rem;
+  font-size: 1rem;
+  color: #825F45;
   font-weight: 600;
-  color: #bc2f2b;
-  background: rgba(188, 47, 43, 0.1);
-  padding: 0.75rem 1.25rem;
-  border-radius: 25px;
+  padding: 0.5rem 1rem;
+  background: rgba(130, 95, 69, 0.1);
+  border-radius: 4px;
   display: inline-block;
-  border: 2px solid rgba(188, 47, 43, 0.2);
-  letter-spacing: 0.3px;
-  transform: translateZ(0); /* Hardware acceleration */
-  will-change: transform;
 }
 
 .problem-cta {
   text-align: center;
-  margin-top: 5rem;
-  padding: 2.5rem 2rem;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-top: 4rem;
 }
 
 .cta-title {
-  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-size: 2rem;
   font-weight: 700;
   color: #222;
   margin-bottom: 1rem;
-  line-height: 1.2;
 }
 
 .cta-description {
   font-size: 1.1rem;
   color: #666;
-  margin-bottom: 2rem;
+  max-width: 600px;
+  margin: 0 auto;
   line-height: 1.6;
-  opacity: 0.9;
 }
 
 .cta-button {
@@ -337,45 +326,41 @@
 
 /* Solution Section - Unified Tokyo Design */
 .solution-section {
+  padding: 80px 0;
+  background-color: #fff;
   position: relative;
-  background: #ffffff; /* Changed to white for visual separation */
-  padding: 60px 0 100px;
-  margin-top: -20px; /* Closer alignment with problem section */
+  overflow: hidden;
 }
 
 /* Unified Hero Section */
 .unified-hero-section {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
-  text-align: center;
-  padding: 0 20px;
+  padding: 0 1rem;
 }
 
 /* Hero Typography */
 .hero-title {
-  font-size: clamp(3rem, 6vw, 4.5rem);
-  font-weight: 800;
-  color: #1a1a1a;
-  margin-bottom: 0.5rem;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 1rem;
   line-height: 1.1;
-  letter-spacing: -0.03em;
 }
 
 .hero-subtitle {
-  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  font-size: clamp(1.5rem, 3vw, 2rem);
   font-weight: 600;
-  color: #4a5568;
-  margin-bottom: 1rem;
-  letter-spacing: -0.01em;
+  color: #666;
+  margin-bottom: 1.5rem;
 }
 
 .hero-description {
-  font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
   color: #666;
-  max-width: 650px;
-  margin: 0 auto 3rem;
+  max-width: 800px;
+  margin: 0 auto 2rem;
   line-height: 1.6;
-  opacity: 0.9;
 }
 
 /* Pricing Hero Card - Compact Tokyo Style */
@@ -461,25 +446,22 @@
 }
 
 .pricing-cta-button {
-  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
-  color: white;
+  display: inline-block;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  font-size: 0.9rem;
-  padding: 0.875rem 2rem;
-  border-radius: 50px;
+  color: #fff;
+  background-color: #D08C60;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
   border: none;
   cursor: pointer;
-  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 6px 20px rgba(249, 115, 22, 0.25);
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  transform: translateZ(0);
-  will-change: transform, box-shadow;
 }
 
 .pricing-cta-button:hover {
-  box-shadow: 0 8px 24px rgba(249, 115, 22, 0.3);
-  transform: translateY(-1px) translateZ(0);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(208, 140, 96, 0.2);
+  background-color: #c27b4d;
 }
 
 .pricing-cta-button:active {
@@ -702,7 +684,7 @@
 /* Mobile Responsiveness - Enhanced for better icon visibility */
 @media (max-width: 768px) {
   .problem-section {
-    padding: 60px 0 80px;
+    padding: 60px 0;
   }
 
   .problems-list {
@@ -710,20 +692,31 @@
   }
 
   .problem-item {
-    flex-direction: column !important;
+    flex-direction: column;
     text-align: center;
-    gap: 2rem;
-    padding: 0 1rem;
+    gap: 1.5rem;
   }
 
-  .problem-content-text {
-    text-align: center !important;
+  .problem-item:nth-child(even) {
+    flex-direction: column;
   }
 
   .problem-icon-large {
     width: 100px;
     height: 100px;
-    font-size: 5rem;
+    font-size: 4rem;
+  }
+
+  .problem-title-large {
+    font-size: 1.75rem;
+  }
+
+  .parallax-image-container {
+    margin: 1.5rem auto;
+  }
+
+  .parallax-image-wrapper {
+    border-radius: 12px;
   }
 
   /* Enhanced mobile icons */
@@ -797,26 +790,12 @@
     padding: 2rem 1rem;
   }
 
-  /* Solution Section Mobile - Performance Optimized */
-  .solution-section {
-    padding: 40px 0 80px;
-  }
-
-  .unified-hero-section {
-    padding: 0 15px;
-  }
-
-  .hero-title {
+  .cta-title {
     margin-bottom: 1rem;
     font-size: clamp(2.5rem, 8vw, 3.5rem);
   }
 
-  .hero-subtitle {
-    margin-bottom: 1.5rem;
-    font-size: clamp(1.25rem, 5vw, 1.75rem);
-  }
-
-  .hero-description {
+  .cta-description {
     margin-bottom: 2.5rem;
     font-size: clamp(1rem, 4vw, 1.2rem);
   }
@@ -935,22 +914,41 @@
 
 @media (max-width: 480px) {
   .problem-section {
-    padding: 50px 0 70px;
+    padding: 40px 0;
   }
 
   .problems-list {
-    gap: 2.5rem;
+    gap: 2rem;
   }
 
   .problem-item {
-    gap: 1.5rem;
-    padding: 0 0.5rem;
+    padding: 0 1rem;
   }
 
   .problem-icon-large {
     width: 80px;
     height: 80px;
-    font-size: 4rem;
+    font-size: 3rem;
+  }
+
+  .problem-title-large {
+    font-size: 1.5rem;
+  }
+
+  .problem-description-text {
+    font-size: 1rem;
+  }
+
+  .problem-fact {
+    font-size: 0.9rem;
+  }
+
+  .parallax-image-container {
+    margin: 1rem auto;
+  }
+
+  .parallax-image-wrapper {
+    border-radius: 8px;
   }
 
   /* Extra small mobile icons */
@@ -1018,36 +1016,17 @@
     box-shadow: inset 4px 0 0 #D08C60;
   }
 
-  .problem-fact {
-    font-size: 0.8rem;
-    padding: 0.5rem 1rem;
-  }
-
   .problem-cta {
     margin-top: 3rem;
     padding: 1.5rem 0.5rem;
   }
 
-  /* Solution Section Small Mobile - Ultra Performance */
-  .solution-section {
-    padding: 30px 0 60px;
-  }
-
-  .unified-hero-section {
-    padding: 0 10px;
-  }
-
-  .hero-title {
+  .cta-title {
     font-size: clamp(2rem, 10vw, 3rem);
     margin-bottom: 0.75rem;
   }
 
-  .hero-subtitle {
-    font-size: clamp(1.1rem, 6vw, 1.5rem);
-    margin-bottom: 1rem;
-  }
-
-  .hero-description {
+  .cta-description {
     font-size: clamp(0.9rem, 4vw, 1.1rem);
     margin-bottom: 2rem;
   }
@@ -1115,37 +1094,29 @@
 
 /* Parallax Image Section Styles */
 .parallax-image-container {
-  margin: 3rem 0;
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
   padding: 0 1rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  perspective: 1000px;
 }
 
 .parallax-image-wrapper {
   position: relative;
-  max-width: 600px;
   width: 100%;
-  border-radius: 20px;
+  border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-  background: #fff;
-  transform-style: preserve-3d;
-  transition: all 0.3s ease;
-  min-height: 400px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
 }
 
 .parallax-image-wrapper:hover {
-  transform: translateY(-10px) rotateX(5deg);
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.2);
+  transform: translateY(-8px);
 }
 
 .parallax-image {
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
   transition: transform 0.3s ease;
 }
 
@@ -1159,11 +1130,10 @@
   left: 0;
   width: 100%;
   height: 100%;
-  display: flex;
+  background: #f9f5f0;
+  display: none;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, #f9f5f0 0%, #fff 100%);
-  color: #666;
   text-align: center;
 }
 
@@ -1174,12 +1144,6 @@
 .placeholder-icon {
   font-size: 4rem;
   margin-bottom: 1rem;
-  animation: float 3s ease-in-out infinite;
-}
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
 }
 
 .placeholder-content h3 {
@@ -1200,18 +1164,11 @@
 /* Responsive adjustments for parallax image */
 @media (max-width: 768px) {
   .parallax-image-container {
-    margin: 2rem 0;
-    padding: 0 0.5rem;
+    margin: 1.5rem auto;
   }
   
   .parallax-image-wrapper {
-    max-width: 100%;
-    border-radius: 15px;
-    min-height: 300px;
-  }
-  
-  .parallax-image-wrapper:hover {
-    transform: translateY(-5px) rotateX(2deg);
+    border-radius: 12px;
   }
   
   .placeholder-icon {
@@ -1229,18 +1186,11 @@
 
 @media (max-width: 480px) {
   .parallax-image-container {
-    margin: 1.5rem 0;
+    margin: 1rem auto;
   }
   
   .parallax-image-wrapper {
-    border-radius: 12px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    min-height: 250px;
-  }
-  
-  .parallax-image-wrapper:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
   }
   
   .placeholder-content {

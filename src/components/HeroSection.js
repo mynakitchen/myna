@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './HeroSection.css';
 
@@ -99,20 +99,12 @@ const HeroSection = () => {
         <motion.div 
           key={`row${rowIndex+1}-text-food`}
           className="image-item text-tile food-tile"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: columnIndex * 0.07 }}
           whileHover={{ scale: 1.05 }}
           style={{ x: 0 }} // Text tiles stay horizontally fixed
         >
-          <motion.div 
-            className="text-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.3 + columnIndex * 0.07 }}
-          >
+          <div className="text-content">
             <span>Food</span>
-          </motion.div>
+          </div>
         </motion.div>
       );
     }
@@ -122,20 +114,12 @@ const HeroSection = () => {
         <motion.div 
           key={`row${rowIndex+1}-text-sorted1`}
           className="image-item text-tile sorted-tile"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.5 + (columnIndex * 0.07) }}
           whileHover={{ scale: 1.05 }}
           style={{ x: 0 }} // Text tiles stay horizontally fixed
         >
-          <motion.div 
-            className="text-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 0.8 + columnIndex * 0.07 }}
-          >
+          <div className="text-content">
             <span>Sorted</span>
-          </motion.div>
+          </div>
         </motion.div>
       );
     }
@@ -145,20 +129,12 @@ const HeroSection = () => {
         <motion.div 
           key={`row${rowIndex+1}-text-life`}
           className="image-item text-tile life-tile"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.0 + (columnIndex * 0.07) }}
           whileHover={{ scale: 1.05 }}
           style={{ x: 0 }} // Text tiles stay horizontally fixed
         >
-          <motion.div 
-            className="text-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.3 + columnIndex * 0.07 }}
-          >
+          <div className="text-content">
             <span>Life</span>
-          </motion.div>
+          </div>
         </motion.div>
       );
     }
@@ -168,20 +144,12 @@ const HeroSection = () => {
         <motion.div 
           key={`row${rowIndex+1}-text-sorted2`}
           className="image-item text-tile sorted-tile"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 1.5 + (columnIndex * 0.07) }}
           whileHover={{ scale: 1.05 }}
           style={{ x: 0 }} // Text tiles stay horizontally fixed
         >
-          <motion.div 
-            className="text-content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8, delay: 1.8 + columnIndex * 0.07 }}
-          >
+          <div className="text-content">
             <span>Sorted</span>
-          </motion.div>
+          </div>
         </motion.div>
       );
     }
@@ -194,14 +162,6 @@ const HeroSection = () => {
         <motion.div 
           key={`row${rowIndex+1}-${columnIndex}`}
           className="image-item"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ 
-            duration: 0.4, 
-            delay: (rowIndex === 0 ? 0 : 
-                    rowIndex === 1 ? 0.5 : 
-                    rowIndex === 2 ? 1.0 : 1.5) + (columnIndex * 0.07) 
-          }}
           style={{ x: slideTransform }}
         >
           <img 
@@ -219,12 +179,7 @@ const HeroSection = () => {
       <div className="container mx-auto">
         <div className="hero-content-wrapper">
           {/* Image Carousel at the top */}
-          <motion.div 
-            className="hero-gallery"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
+          <div className="hero-gallery">
             {/* Image grid */}
             <div className="image-grid">
               {/* First row */}
@@ -255,7 +210,7 @@ const HeroSection = () => {
                 ))}
               </div>
             </div>
-          </motion.div>
+          </div>
           
           {/* Text content below the carousel - REMOVED */}
         </div>

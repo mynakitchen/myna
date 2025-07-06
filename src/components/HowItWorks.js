@@ -1,5 +1,4 @@
-import React, { useRef } from "react";
-import { motion } from "framer-motion";
+import React from "react";
 import { openSecureLink } from '../lib/utils';
 import './HowItWorks.css';
 
@@ -8,14 +7,7 @@ export default function HowItWorks() {
     window.open('https://wa.me/918754467770?text=Hi%20there!%20I%20am%20interested%20in%20your%20meal%20plans.%20Could%20you%20please%20provide%20more%20details%3F', '_blank');
   };
 
-  const handleSignUpClick = () => {
-    openSecureLink('https://mynakitchen.in/SignUp', {
-      onError: (error) => {
-        console.error('Failed to open signup link:', error);
-        // Could show user notification here
-      }
-    });
-  };
+
   
   // Helper function to get correct image path for deployment
   const getImagePath = (imagePath) => {
@@ -66,17 +58,7 @@ export default function HowItWorks() {
     return (
       <div className="relative flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
         {/* Step Number Circle - Reduced size */}
-        <motion.div 
-          className="relative flex-shrink-0 z-10"
-          initial={{ scale: 0, opacity: 0 }}
-          whileInView={{ scale: 1, opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ 
-            duration: 0.6, 
-            delay: index * 0.2,
-            ease: "easeOut"
-          }}
-        >
+        <div className="relative flex-shrink-0 z-10">
           <div className="relative">
             <div 
               className="w-16 h-16 md:w-18 md:h-18 border-3 border-white bg-white shadow-xl flex items-center justify-center relative z-20 transition-all duration-300 hover:scale-105"
@@ -91,20 +73,10 @@ export default function HowItWorks() {
               style={{ backgroundColor: step.accent }}
             />
           </div>
-        </motion.div>
+        </div>
 
         {/* Content Area - Reduced spacing */}
-        <motion.div 
-          className="flex-1 grid md:grid-cols-2 gap-6 md:gap-8 items-center w-full"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ 
-            duration: 0.6, 
-            delay: index * 0.2 + 0.1,
-            ease: "easeOut"
-          }}
-        >
+        <div className="flex-1 grid md:grid-cols-2 gap-6 md:gap-8 items-center w-full">
           {/* Image - Reduced size */}
           <div className="flex justify-center order-2 md:order-1">
             <div className="relative w-full max-w-xs">
@@ -147,16 +119,13 @@ export default function HowItWorks() {
             
             {/* WhatsApp Button - Reduced size */}
             {step.hasButton && (
-              <motion.button
+              <button
                 onClick={handleWhatsAppContact}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-orange-600 text-white font-bold text-base border-2 border-gray-900 hover:border-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 uppercase tracking-wide mb-6"
-                whileHover={{ scale: 1.03, y: -1 }}
-                whileTap={{ scale: 0.97 }}
-                transition={{ duration: 0.2 }}
+                className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-orange-600 text-white font-bold text-base border-2 border-gray-900 hover:border-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 uppercase tracking-wide mb-6 hover:scale-103 active:scale-97"
               >
                 <span className="text-lg">💬</span>
                 <span>Contact on WhatsApp</span>
-              </motion.button>
+              </button>
             )}
             
             {/* Feature highlight - Reduced size */}
@@ -173,7 +142,7 @@ export default function HowItWorks() {
               </span>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     );
   };
@@ -182,41 +151,29 @@ export default function HowItWorks() {
     <section id="how-it-works" className="relative bg-gray-50 overflow-hidden py-16">
       {/* Food emoji background elements */}
       <div className="absolute inset-0 opacity-20">
-        <div className="absolute top-32 left-16 text-4xl animate-bounce" style={{animationDelay: '0s', animationDuration: '3s'}}>🍛</div>
-        <div className="absolute bottom-32 right-16 text-5xl animate-bounce" style={{animationDelay: '1s', animationDuration: '4s'}}>🍲</div>
-        <div className="absolute top-1/2 left-1/3 text-3xl animate-bounce" style={{animationDelay: '2s', animationDuration: '3.5s'}}>🥘</div>
-        <div className="absolute top-20 right-1/4 text-3xl animate-bounce" style={{animationDelay: '0.5s', animationDuration: '3.2s'}}>🍚</div>
-        <div className="absolute bottom-20 left-1/4 text-4xl animate-bounce" style={{animationDelay: '1.5s', animationDuration: '3.8s'}}>🥗</div>
-        <div className="absolute top-3/4 right-1/3 text-3xl animate-bounce" style={{animationDelay: '2.5s', animationDuration: '3.3s'}}>🍜</div>
+        <div className="absolute top-32 left-16 text-4xl">🍛</div>
+        <div className="absolute bottom-32 right-16 text-5xl">🍲</div>
+        <div className="absolute top-1/2 left-1/3 text-3xl">🥘</div>
+        <div className="absolute top-20 right-1/4 text-3xl">🍚</div>
+        <div className="absolute bottom-20 left-1/4 text-4xl">🥗</div>
+        <div className="absolute top-3/4 right-1/3 text-3xl">🍜</div>
       </div>
       
       {/* Header Section */}
       <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-        >
+        <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight leading-none">
             How It Works
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">
             From browsing to enjoying delicious meals at your doorstep — we've made it incredibly simple in just 4 easy steps.
           </p>
-        </motion.div>
+        </div>
       </div>
 
       {/* Main Steps Container with modern square design */}
       <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
-        <motion.div 
-          className="relative"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-        >
+        <div className="relative">
           {/* Modern square background with artistic elements */}
           <div className="relative bg-white shadow-2xl border border-gray-200 overflow-hidden">
             {/* Artistic corner accents */}
@@ -252,18 +209,12 @@ export default function HowItWorks() {
             {/* Bottom accent */}
             <div className="h-1 w-full bg-gradient-to-r from-brown-600 via-orange-500 to-gray-900"></div>
           </div>
-        </motion.div>
+        </div>
       </div>
 
       {/* Call to Action */}
       <div id="start-food-journey" className="container mx-auto px-4 sm:px-6 md:px-6 pt-16 relative z-10">
-        <motion.div 
-          className="text-center"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-        >
+        <div className="text-center">
           <div className="bg-white shadow-2xl max-w-3xl mx-auto overflow-hidden relative border border-gray-200">
             {/* Modern accent design */}
             <div className="h-2 w-full bg-gradient-to-r from-gray-900 via-orange-500 to-brown-600"></div>
@@ -298,42 +249,30 @@ export default function HowItWorks() {
               </div>
             </div>
             
-            <div className="relative z-10 p-6 md:p-8 lg:p-10">
-              <h3 className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-900 mb-6 tracking-tight leading-none">
-                Start Your Food Journey
-              </h3>
-              <p className="text-lg md:text-xl text-gray-600 mb-8 leading-relaxed font-light max-w-2xl mx-auto">
-                Take a <span className="font-black text-orange-600 bg-orange-100 px-2 py-1 rounded">3-day trial</span> and let your taste buds decide. 
-                <br className="hidden md:block" />
-                No longterm commitment, just Amma's food delivered to your doorstep.
-              </p>
-              <motion.button 
-                onClick={handleSignUpClick}
-                className="bg-gray-900 hover:bg-orange-600 text-white font-black text-lg md:text-xl px-8 py-4 shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 uppercase tracking-wider"
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.95 }}
-                transition={{ duration: 0.2 }}
-                aria-label="Sign up for Myna Kitchen"
-              >
-                Sign Up Now
-              </motion.button>
-              <div className="mt-6 flex flex-wrap justify-center gap-6 text-sm text-gray-500 font-bold uppercase tracking-wider">
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-orange-500 rotate-45"></div>
-                  <span>Cancel anytime</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-green-500 rotate-45"></div>
-                  <span>Free delivery</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <div className="w-2 h-2 bg-blue-500 rotate-45"></div>
-                  <span>Satisfaction guaranteed</span>
-                </div>
+            {/* Content */}
+            <div className="relative z-10 p-8 md:p-12">
+              <div className="flex items-center justify-center gap-3 mb-6">
+                <span className="text-2xl">🎉</span>
+                <span className="text-sm font-medium bg-primary/20 text-primary px-4 py-1.5 rounded-full">
+                  Start your food journey today
+                </span>
               </div>
+              
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Experience Better Meals?</h3>
+              <p className="text-gray-600 mb-8">
+                Join thousands of satisfied customers who have transformed their daily meals with Myna Kitchen.
+              </p>
+              
+              <button
+                onClick={handleWhatsAppContact}
+                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 hover:scale-103 active:scale-97"
+              >
+                <span className="text-xl">💬</span>
+                <span>Get Started Now</span>
+              </button>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

@@ -339,8 +339,8 @@
 
 /* Menu section styling */
 .daily-menu {
-  position: relative;
-  z-index: 1;
+  background-color: #fff;
+  padding: 80px 0;
 }
 
 /* Modern pricing card styles */
@@ -355,21 +355,24 @@
 
 /* Menu card styling */
 .menu-card {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  transition: all 0.3s ease;
   position: relative;
+  border-radius: 12px;
   overflow: hidden;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Global menu card styling */
+.menu-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
 .menu-card img {
-  object-fit: cover;
-  object-position: center;
   width: 100%;
   height: 100%;
-  transition: transform 0.4s ease-out;
+  object-fit: cover;
+  transition: transform 0.3s ease;
 }
 
 .menu-card:hover img {
@@ -395,9 +398,15 @@
 .pagination-dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
-  margin: 0 4px;
-  transition: all 0.3s ease;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.pagination-dot:hover {
+  transform: scale(1.2);
 }
 
 .pagination-dot.active {
@@ -456,27 +465,34 @@
 }
 
 .carousel-control {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
   opacity: 0;
-  transition: all 0.2s ease;
-  z-index: 20;
-  background: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 10;
 }
 
 .carousel-control:hover {
-  background: rgba(0, 0, 0, 0.7);
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
-/* Image indicators styling */
 .image-indicators {
   position: absolute;
-  bottom: 8px;
+  bottom: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 4px;
-  z-index: 20;
+  gap: 8px;
+  z-index: 10;
 }
 
 .image-indicator {
@@ -484,50 +500,35 @@
   height: 8px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.5);
-  border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .image-indicator.active {
-  background: white;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  background: #fff;
+  transform: scale(1.2);
 }
 
 .image-indicator:hover {
-  background: rgba(255, 255, 255, 0.8);
+  transform: scale(1.2);
 }
 
-/* Multiple images counter */
 .image-counter {
   position: absolute;
-  top: 8px;
-  left: 8px;
+  top: 10px;
+  right: 10px;
   background: rgba(0, 0, 0, 0.6);
   color: white;
-  font-size: 12px;
   padding: 4px 8px;
   border-radius: 12px;
-  backdrop-filter: blur(4px);
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-/* Ensure menu cards work well with carousel */
-.menu-card {
-  group: true;
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.menu-card:hover {
-  transform: translateY(-4px);
+  font-size: 12px;
+  z-index: 10;
 }
 
 /* Mobile specific carousel adjustments */
 @media (max-width: 768px) {
   .carousel-control {
+    opacity: 1;
     width: 32px;
     height: 32px;
   }
@@ -539,7 +540,7 @@
   
   .image-counter {
     font-size: 10px;
-    padding: 2px 6px;
+    padding: 3px 6px;
   }
 }
 
@@ -556,8 +557,8 @@
   }
   
   .image-indicators {
-    bottom: 6px;
-    gap: 3px;
+    bottom: 8px;
+    gap: 6px;
   }
   
   .image-indicator {

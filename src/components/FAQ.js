@@ -1,5 +1,4 @@
 import React, { useState, useRef } from "react";
-import { motion, useInView } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faClock, faTruck, faMapMarkerAlt, faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 
@@ -78,29 +77,20 @@ const FAQ_ITEMS = [
 
 const FAQ = () => {
   const sectionRef = useRef(null);
-  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   return (
     <section 
-      className="py-14 md:py-20 overflow-hidden section-fade" 
+      className="py-14 md:py-20 overflow-hidden" 
       style={{ 
         backgroundColor: '#F5F1EB'
       }}
     >
       <div ref={sectionRef} className="container mx-auto px-4 md:px-6">
         {/* Header */}
-        <motion.div
-          className="text-center max-w-4xl mx-auto mb-10 md:mb-14 relative"
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-          transition={{ duration: 0.8 }}
-        >
+        <div className="text-center max-w-4xl mx-auto mb-10 md:mb-14 relative">
           {/* Background Eyes - Large Decorative Element */}
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center pointer-events-none"
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={isInView ? { scale: 1, opacity: 0.3 } : { scale: 0.8, opacity: 0 }}
-            transition={{ duration: 1, delay: 0.5 }}
+          <div
+            className="absolute inset-0 flex items-center justify-center pointer-events-none opacity-30"
             style={{ zIndex: 0 }}
           >
             <div className="w-48 h-32 md:w-80 md:h-52 lg:w-96 lg:h-60 relative">
@@ -112,45 +102,16 @@ const FAQ = () => {
               >
                 {/* Left Eye */}
                 <ellipse cx="25" cy="30" rx="20" ry="25" fill="white" stroke="black" strokeWidth="2"/>
-                <motion.circle 
-                  cx="25" 
-                  cy="30" 
-                  r="8" 
-                  fill="black"
-                  animate={{ 
-                    cx: [25, 28, 25, 22, 25],
-                    cy: [30, 32, 30, 28, 30]
-                  }}
-                  transition={{ 
-                    duration: 4, 
-                    repeat: Infinity,
-                    ease: "easeInOut"
-                  }}
-                />
+                <circle cx="25" cy="30" r="8" fill="black"/>
                 <circle cx="27" cy="28" r="2" fill="white"/>
                 
                 {/* Right Eye */}
                 <ellipse cx="95" cy="30" rx="20" ry="25" fill="white" stroke="black" strokeWidth="2"/>
-                <motion.circle 
-                  cx="95" 
-                  cy="30" 
-                  r="8" 
-                  fill="black"
-                  animate={{ 
-                    cx: [95, 98, 95, 92, 95],
-                    cy: [30, 32, 30, 28, 30]
-                  }}
-                  transition={{ 
-                    duration: 4, 
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: 0.2
-                  }}
-                />
+                <circle cx="95" cy="30" r="8" fill="black"/>
                 <circle cx="97" cy="28" r="2" fill="white"/>
               </svg>
             </div>
-          </motion.div>
+          </div>
 
           {/* Mobile Layout - Stacked */}
           <div className="block md:hidden relative" style={{ zIndex: 1 }}>
@@ -177,40 +138,30 @@ const FAQ = () => {
           <p className="text-sm md:text-base lg:text-lg text-gray-600 font-medium max-w-2xl mx-auto relative" style={{ zIndex: 1 }}>
             Everything you need to know about our meal delivery service, clearly explained
           </p>
-        </motion.div>
+        </div>
         
         {/* FAQ Items - Single Column */}
         <div className="max-w-4xl mx-auto space-y-3">
           {FAQ_ITEMS.map((item, index) => (
-            <motion.div
-              key={item.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-              transition={{ duration: 0.6, delay: index * 0.05 }}
-            >
+            <div key={item.id}>
               <FAQItem 
                 question={item.question} 
                 answer={item.answer}
                 icon={item.icon}
                 accent={item.accent}
               />
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Bottom decorative element */}
-        <motion.div 
-          className="text-center mt-10 md:mt-14"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 1, delay: 0.8 }}
-        >
+        <div className="text-center mt-10 md:mt-14">
           <div className="inline-flex items-center space-x-4 text-gray-500">
             <div className="w-10 md:w-14 h-px bg-gray-300"></div>
             <span className="text-xs md:text-sm uppercase tracking-widest font-bold">Myna Kitchen</span>
             <div className="w-10 md:w-14 h-px bg-gray-300"></div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
@@ -224,10 +175,7 @@ function FAQItem({ question, answer, icon, accent }) {
   return (
     <div className="relative group">
       {/* Main Card */}
-      <motion.div 
-        className="bg-white/95 border-2 border-black shadow-sm overflow-hidden relative"
-        whileHover={{ y: -0.5, transition: { duration: 0.15 } }}
-      >
+      <div className="bg-white/95 border-2 border-black shadow-sm overflow-hidden relative hover:-translate-y-0.5 transition-transform duration-150">
         {/* Ultra-thin accent line */}
         <div 
           className="h-px w-full" 
@@ -268,10 +216,8 @@ function FAQItem({ question, answer, icon, accent }) {
             </div>
             
             {/* Tiny Chevron */}
-            <motion.div
-              animate={{ rotate: isOpen ? 180 : 0 }}
-              transition={{ duration: 0.15 }}
-              className="flex-shrink-0 ml-2"
+            <div
+              className={`flex-shrink-0 ml-2 transition-transform duration-150 ${isOpen ? 'rotate-180' : ''}`}
             >
               <div 
                 className="w-5 h-5 md:w-6 md:h-6 rounded-full border border-black flex items-center justify-center group-hover:bg-black group-hover:text-white transition-all duration-150"
@@ -283,50 +229,31 @@ function FAQItem({ question, answer, icon, accent }) {
                   style={{color: isOpen ? 'white' : 'black'}}
                 />
               </div>
-            </motion.div>
+            </div>
           </button>
           
           {/* Answer Section */}
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ 
-              height: isOpen ? "auto" : 0,
-              opacity: isOpen ? 1 : 0
-            }}
-            transition={{ duration: 0.2, ease: "easeInOut" }}
-            className="overflow-hidden"
+          <div
+            className={`overflow-hidden transition-all duration-200 ease-in-out ${
+              isOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
+            }`}
           >
             <div className="px-3 md:px-4 pb-2.5 md:pb-3">
               <div className="pl-8.5 md:pl-10 border-l border-gray-200 ml-3 md:ml-3.5">
-                <motion.p 
-                  className="text-gray-800 leading-snug text-xs md:text-sm pl-2.5 md:pl-3"
-                  initial={{ y: -5 }}
-                  animate={{ y: isOpen ? 0 : -5 }}
-                  transition={{ duration: 0.2, delay: isOpen ? 0.05 : 0 }}
-                >
+                <p className="text-gray-800 leading-snug text-xs md:text-sm pl-2.5 md:pl-3">
                   {answer}
-                </motion.p>
+                </p>
               </div>
             </div>
-          </motion.div>
+          </div>
         </div>
-      </motion.div>
+      </div>
       
       {/* Minimal floating shadow */}
-      <motion.div 
+      <div 
         className="absolute -bottom-0.5 -right-0.5 w-full h-full border border-gray-300 -z-10"
         style={{backgroundColor: `${accent}005`}}
-        animate={{ 
-          x: [0, 0.25, 0, -0.25, 0],
-          y: [0, -0.25, 0, 0.25, 0]
-        }}
-        transition={{ 
-          duration: 4, 
-          repeat: Infinity,
-          ease: "easeInOut",
-          delay: Math.random() * 2
-        }}
-      ></motion.div>
+      ></div>
     </div>
   );
 } 

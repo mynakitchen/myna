@@ -225,7 +225,7 @@ export const sanitizeText = (text, maxLength = 1000) => {
   return text
     .trim()
     .slice(0, maxLength)
-    .replace(/[<>\"'&]/g, (match) => {
+    .replace(/[<>"'&]/g, (match) => {
       const map = {
         '<': '&lt;',
         '>': '&gt;',

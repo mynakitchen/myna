@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
 
 const SubscriptionPlans = () => {
   // State to track selected meal combinations for each plan
@@ -145,13 +144,11 @@ const SubscriptionPlans = () => {
     const { meals } = config;
     
     return (
-      <motion.button
+      <button
         onClick={() => setSelectedMeals(prev => ({ ...prev, [planId]: mealKey }))}
-        className={`relative p-1.5 md:p-2 border-2 transition-all ${
+        className={`relative p-1.5 md:p-2 border-2 transition-all hover:scale-105 active:scale-95 ${
           isSelected ? 'border-gray-800 bg-gray-50' : 'border-gray-300 hover:border-gray-500'
         }`}
-        whileHover={{ scale: 1.05 }}
-        whileTap={{ scale: 0.95 }}
       >
         {/* Meal grid (3 rows x 1 column) - Increased size for mobile */}
         <div className="w-14 md:w-12 h-16 md:h-16 grid grid-rows-3 gap-1">
@@ -176,7 +173,7 @@ const SubscriptionPlans = () => {
             <div className="text-sm md:text-xs text-center leading-4 md:leading-4 text-gray-700">🌙</div>
           </div>
         </div>
-      </motion.button>
+      </button>
     );
   };
 
@@ -237,46 +234,22 @@ const SubscriptionPlans = () => {
   };
 
   return (
-    <section id="subscription-plans" className="pt-6 md:pt-8 pb-16 md:pb-20 lg:pb-28 overflow-hidden section-fade" style={{backgroundColor: '#F5F1EB'}}>
+    <section id="subscription-plans" className="pt-6 md:pt-8 pb-16 md:pb-20 lg:pb-28 overflow-hidden" style={{backgroundColor: '#F5F1EB'}}>
       <div className="container mx-auto px-4 sm:px-6 md:px-6">
         {/* Section Header */}
-        <motion.div 
-          className="text-center mb-12 md:mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-        >
-          <motion.h2 
-            className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 md:mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
+        <div className="text-center mb-12 md:mb-16">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
             Built for your budget
-          </motion.h2>
-          <motion.p 
-            className="text-sm md:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto mb-6 md:mb-8"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          >
+          </h2>
+          <p className="text-sm md:text-base lg:text-lg text-gray-600 max-w-2xl mx-auto mb-6 md:mb-8">
             Choose the perfect plan that fits your lifestyle and budget. All plans include free delivery and premium quality meals.
-          </motion.p>
+          </p>
           
           {/* Desktop Pricing Toggle */}
-          <motion.div
-            className="hidden md:block"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.6 }}
-          >
+          <div className="hidden md:block">
             {renderPricingToggle()}
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 px-4 sm:px-6 md:px-0">
           {pricingPlans.map((plan, index) => {
@@ -285,29 +258,19 @@ const SubscriptionPlans = () => {
             const mobileDisplayPrice = getPrice(currentConfig.price, pricingPeriod, plan.id, true); // Mobile uses individual period
             
             return (
-              <motion.div
+              <div
                 key={plan.id}
-                className={`relative transition-transform duration-200 ${
+                className={`relative transition-transform duration-200 hover:-translate-y-2 ${
                   plan.popular ? "md:mt-0 md:mb-8" : ""
                 }`}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.4, delay: index * 0.1, ease: "easeOut" }}
               >
                 {/* Popular badge - Fixed positioning */}
                 {plan.popular && (
-                  <motion.div 
-                    className="absolute -top-2 md:-top-3 left-1/2 transform -translate-x-1/2 z-20"
-                    initial={{ opacity: 0, y: -10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
-                  >
+                  <div className="absolute -top-2 md:-top-3 left-1/2 transform -translate-x-1/2 z-20">
                     <div className="text-white text-xs font-bold px-3 md:px-4 py-1.5 md:py-2 tracking-wider rounded-sm" style={{backgroundColor: '#D08C60'}}>
                       POPULAR
                     </div>
-                  </motion.div>
+                  </div>
                 )}
                 
                 {/* Main card */}
@@ -366,7 +329,7 @@ const SubscriptionPlans = () => {
                     </div>
                     
                     {/* CTA Button */}
-                    <motion.button
+                    <button
                       onClick={(e) => {
                         e.preventDefault();
                         e.stopPropagation();
@@ -377,14 +340,12 @@ const SubscriptionPlans = () => {
                         backgroundColor: plan.popular ? plan.accent : 'white',
                         color: plan.popular ? 'white' : '#1F2937'
                       }}
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
                     >
                       Choose Plan
-                    </motion.button>
+                    </button>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             );
           })}
         </div>

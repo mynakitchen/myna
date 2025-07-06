@@ -16,7 +16,7 @@ export const useThrottledScroll = (callback, delay = 16, deps = []) => {
   // Remember the latest callback
   useEffect(() => {
     savedCallback.current = callback;
-  }, [callback, ...deps]);
+  }, [callback, deps]);
 
   // Throttled scroll handler
   const throttledScrollHandler = useCallback(() => {

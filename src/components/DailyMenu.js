@@ -1,13 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faChevronLeft, 
   faChevronRight, 
-  faChevronDown, 
-  faChevronUp,
-  faStar,
-  faUsers,
   faCircle
 } from '@fortawesome/free-solid-svg-icons';
 import './DailyMenu.css';
@@ -309,16 +304,12 @@ const MENU_ITEMS = [
 ];
 
 const DailyMenu = () => {
-  const [activeCategory, setActiveCategory] = useState("Super Meals");
-  const scrollRef = useRef(null);
-  const containerRef = useRef(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(3); // Default for desktop
-  
-  // Updated categories order as requested: Super Meals, Comfort Meals, Day Starters, Add-ons
-  const categories = ["Super Meals", "Comfort Meals", "Day Starters", "Add-ons"];
-  
-  const filteredItems = MENU_ITEMS.filter(item => item.category === activeCategory);
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [itemsPerPage, setItemsPerPage] = useState(6);
+  const menuRef = useRef(null);
+
+  const filteredItems = MENU_ITEMS.filter(item => item.category === selectedCategory || selectedCategory === 'All');
   const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
   
   // Calculate visible items for current page
@@ -347,7 +338,7 @@ const DailyMenu = () => {
   // Reset current page when category changes
   useEffect(() => {
     setCurrentPage(0);
-  }, [activeCategory]);
+  }, [selectedCategory]);
   
   // Smooth scroll to next/previous page
   const navigatePage = (direction) => {
@@ -358,225 +349,84 @@ const DailyMenu = () => {
     }
   };
   
-  const getCategoryPrice = () => {
-    const firstItem = filteredItems[0];
-    return firstItem ? `₹${firstItem.price}` : '';
-  };
+
 
   return (
-    <section id="daily-menu" className="py-16 md:py-20 bg-gradient-to-br from-gray-50 to-white">
-      <div className="container mx-auto px-4 md:px-6">
-        <motion.div 
-          className="text-center mb-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.6 }}
-        >
-          <motion.h2 
-            className="text-4xl md:text-5xl font-black text-gray-900 mb-4"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Explore Menu
-          </motion.h2>
-          <motion.p 
-            className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed mb-6"
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-          >
-            Fresh meals prepared daily by our expert chefs using the finest ingredients
-          </motion.p>
-        </motion.div>
+    <div className="daily-menu bg-white">
+      <div className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Explore Menu</h2>
+          <p className="text-lg text-gray-600">Discover our delicious daily menu options</p>
+        </div>
 
-        {/* Category Navigation */}
-        <motion.div 
-          className="mb-8 flex justify-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className="bg-gray-100 p-1 rounded-full shadow-inner">
-            {categories.map((category, index) => (
+        <div className="bg-gray-100 p-1 rounded-full inline-flex mb-8">
+          {['All', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
+            <button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                selectedCategory === category
+                  ? 'bg-white shadow-md text-gray-900'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              {category}
+            </button>
+          ))}
+        </div>
+
+        <div className="relative mb-8" ref={menuRef}>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {visibleItems.map((item) => (
+              <MenuItemCard key={item.id} item={item} />
+            ))}
+          </div>
+
+          {/* Navigation arrows */}
+          {filteredItems.length > itemsPerPage && (
+            <>
               <button
-                key={category}
-                className={`px-4 py-2 md:px-6 rounded-full text-sm md:text-base font-medium transition-all ${
-                  activeCategory === category
-                    ? 'bg-white text-primary shadow-md'
-                    : 'text-gray-600 hover:text-primary'
+                onClick={() => navigatePage('prev')}
+                className={`fixed-mobile-arrow fixed-mobile-arrow-left absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg ${
+                  currentPage === 0 ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
-                onClick={() => setActiveCategory(category)}
+                disabled={currentPage === 0}
               >
-                {category}
+                <FontAwesomeIcon icon={faChevronLeft} className="text-gray-600" />
+              </button>
+              <button
+                onClick={() => navigatePage('next')}
+                className={`fixed-mobile-arrow fixed-mobile-arrow-right absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg ${
+                  currentPage >= pageCount - 1 ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                disabled={currentPage >= pageCount - 1}
+              >
+                <FontAwesomeIcon icon={faChevronRight} className="text-gray-600" />
+              </button>
+            </>
+          )}
+        </div>
+
+        {/* Page dots */}
+        {filteredItems.length > itemsPerPage && (
+          <div className="flex justify-center gap-2 mt-4">
+            {Array.from({ length: pageCount }, (_, i) => (
+              <button
+                key={i}
+                onClick={() => setCurrentPage(i)}
+                className={`pagination-dot ${currentPage === i ? 'active' : ''}`}
+                aria-label={`Go to page ${i + 1}`}
+              >
+                <FontAwesomeIcon 
+                  icon={faCircle} 
+                  className={`text-xs ${currentPage === i ? 'text-gray-800' : 'text-gray-300'}`} 
+                />
               </button>
             ))}
           </div>
-        </motion.div>
-
-        {/* Category Info */}
-        <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center bg-primary/10 rounded-full px-4 py-2 text-primary font-medium">
-            {activeCategory === "Add-ons" && "Special additions to enhance your meal"}
-            {activeCategory === "Super Meals" && "Nutrient-packed meals for optimal health"}
-            {activeCategory === "Comfort Meals" && "Simple, satisfying comfort food"}
-            {activeCategory === "Day Starters" && "Perfect morning combinations"}
-          </div>
-        </div>
-        
-        {/* Menu Grid with improved layout and proper arrow alignment for mobile */}
-        <div 
-          ref={containerRef} 
-          className="relative mb-8"
-          data-has-multiple-pages={pageCount > 1}
-        >
-          {/* Mobile overlay arrows - FIXED alignment */}
-          {filteredItems.length > itemsPerPage && (
-            <>
-              {/* Left arrow overlay */}
-              {currentPage > 0 && (
-                <motion.button
-                  type="button"
-                  onClick={() => navigatePage("prev")}
-                  className="fixed-mobile-arrow fixed-mobile-arrow-left absolute left-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/95 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center shadow-lg border border-gray-200 md:hidden"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <FontAwesomeIcon icon={faChevronLeft} className="w-4 h-4 text-gray-700" />
-                </motion.button>
-              )}
-              
-              {/* Right arrow overlay */}
-              {currentPage < pageCount - 1 && (
-                <motion.button
-                  type="button"
-                  onClick={() => navigatePage("next")}
-                  className="fixed-mobile-arrow fixed-mobile-arrow-right absolute right-2 top-1/2 transform -translate-y-1/2 z-10 bg-white/95 backdrop-blur-sm rounded-full w-10 h-10 flex items-center justify-center shadow-lg border border-gray-200 md:hidden"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4 text-gray-700" />
-                </motion.button>
-              )}
-            </>
-          )}
-          
-          <motion.div
-            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-          >
-            {visibleItems.map((item, index) => (
-              <motion.div
-                key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.05 }}
-              >
-                <MenuItemCard item={item} />
-              </motion.div>
-            ))}
-          </motion.div>
-        </div>
-        
-        {/* Navigation controls - only show on desktop */}
-        <div className="hidden md:flex justify-center items-center mb-6">
-          <div className="flex items-center space-x-4">
-            <motion.button
-              type="button"
-              onClick={() => navigatePage("prev")}
-              className={`rounded-full w-10 h-10 flex items-center justify-center ${
-                currentPage === 0 
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-              }`}
-              whileHover={currentPage > 0 ? { scale: 1.05 } : {}}
-              whileTap={currentPage > 0 ? { scale: 0.95 } : {}}
-            >
-              <FontAwesomeIcon icon={faChevronLeft} className="w-4 h-4" />
-            </motion.button>
-            
-            <div className="flex space-x-2">
-              {Array.from({ length: pageCount }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentPage(index)}
-                  className={`w-2.5 h-2.5 rounded-full transition-colors ${
-                    currentPage === index ? 'bg-primary' : 'bg-gray-300'
-                  }`}
-                  aria-label={`Go to page ${index + 1}`}
-                />
-              ))}
-            </div>
-            
-            <motion.button
-              type="button"
-              onClick={() => navigatePage("next")}
-              className={`rounded-full w-10 h-10 flex items-center justify-center ${
-                currentPage >= pageCount - 1 
-                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed' 
-                  : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-              }`}
-              whileHover={currentPage < pageCount - 1 ? { scale: 1.05 } : {}}
-              whileTap={currentPage < pageCount - 1 ? { scale: 0.95 } : {}}
-            >
-              <FontAwesomeIcon icon={faChevronRight} className="w-4 h-4" />
-            </motion.button>
-          </div>
-        </div>
-
-        {/* WhatsApp Group Link - Moved below meal tiles */}
-        <motion.div
-          className="mb-8 flex justify-center"
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <div className="bg-white border-2 border-black shadow-lg max-w-lg w-full mx-4 md:mx-0">
-            {/* Top accent line */}
-            <div className="h-1 bg-gradient-to-r from-primary via-accent to-secondary"></div>
-            
-            <div className="px-4 py-3 md:px-6 md:py-4 text-center">
-              <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-3">
-                <div className="flex items-center text-black font-medium text-sm md:text-base">
-                  <span className="text-lg mr-2">💬</span>
-                  <span>Get daily menu updates:</span>
-                </div>
-                
-                <motion.a
-                  href="https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center bg-black text-white px-3 py-1.5 md:px-4 md:py-2 text-sm md:text-base font-bold uppercase tracking-wider border-2 border-black hover:bg-white hover:text-black transition-all duration-200 shadow-md hover:shadow-lg"
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <span className="mr-2">📱</span>
-                  Join Group
-                </motion.a>
-              </div>
-              
-              {/* Subtle helper text */}
-              <div className="mt-2 text-xs text-gray-600 font-medium">
-                Daily menus • Order updates • No spam
-              </div>
-            </div>
-          </div>
-        </motion.div>
+        )}
       </div>
-    </section>
+    </div>
   );
 };
 
@@ -634,27 +484,19 @@ function MenuItemCard({ item }) {
   const currentImageSrc = images[safeCurrentIndex];
   
   return (
-    <motion.div 
-      className="menu-card bg-white rounded-xl overflow-hidden h-full shadow-sm border border-gray-100"
-      whileHover={{ 
-        y: -5,
-        boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-        transition: { duration: 0.2 }
-      }}
+    <div 
+      className="menu-card bg-white rounded-xl overflow-hidden h-full shadow-sm border border-gray-100 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className="relative overflow-hidden image-carousel-container" style={{ aspectRatio: '4/3', minHeight: '200px' }}>
         {currentImageSrc && !imageError ? (
-          <motion.img 
+          <img 
             key={`${safeCurrentIndex}-${currentImageSrc}`}
             src={currentImageSrc} 
-            alt={`${item.name} - Image ${safeCurrentIndex + 1}`}
-            className="w-full h-full object-cover"
+            alt={`${item.name} - ${safeCurrentIndex + 1}`}
+            className="w-full h-full object-cover transition-opacity duration-300"
             style={{ objectPosition: 'center' }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.3 }}
             onError={handleImageError}
             onLoad={handleImageLoad}
             loading="lazy"
@@ -725,7 +567,7 @@ function MenuItemCard({ item }) {
         <h3 className="font-semibold text-lg mb-1 line-clamp-1">{item.name}</h3>
         <p className="text-gray-500 text-sm line-clamp-2">{item.description}</p>
       </div>
-    </motion.div>
+    </div>
   );
 }
 
