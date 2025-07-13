@@ -392,32 +392,76 @@ const DailyMenu = () => {
 
   return (
     <div className="daily-menu bg-white">
-      <div className="container mx-auto px-4 py-16">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Explore Menu</h2>
-          <p className="text-lg text-gray-600 mb-6">
-            Discover a curated selection from our menu of over 175 unique dishes. The options below are just a glimpse of what we offer. To explore our complete menu and stay updated with daily specials, join our WhatsApp group!
+      <div className="container mx-auto px-4 py-12 md:py-16">
+        {/* Header Section */}
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">Explore Menu</h2>
+          
+          {/* Main description */}
+          <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
+            Discover a curated selection from our menu of over 175 unique dishes crafted with fresh ingredients and authentic flavors.
           </p>
-          <button
-            onClick={() => window.open('https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE', '_blank')}
-            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
-          >
-            <span className="text-lg">💬</span>
-            <span>Join WhatsApp Group</span>
-          </button>
+
+          {/* Key meal information cards */}
+          <div className="max-w-4xl mx-auto mb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+              {/* Daily Meal Card */}
+              <div className="bg-gradient-to-br from-orange-50 to-orange-100 p-5 md:p-6 border border-orange-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-3">
+                  <div className="w-10 h-10 bg-orange-200 flex items-center justify-center">
+                    <span className="text-xl">🍽️</span>
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2 text-center">Complete Daily Meal</h3>
+                <p className="text-gray-600 text-sm leading-relaxed text-center">
+                  A day's meal includes<br />
+                  <span className="font-semibold text-orange-700">1 Super Meal + 1 Comfort Meal<br />+ Day Starter</span><br />
+                  providing you with a well-balanced and<br />satisfying food experience throughout the day.
+                </p>
+              </div>
+
+              {/* Meat Enthusiasts Card */}
+              <div className="bg-gradient-to-br from-red-50 to-red-100 p-5 md:p-6 border border-red-200 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1">
+                <div className="flex items-center justify-center mb-3">
+                  <div className="w-10 h-10 bg-red-200 flex items-center justify-center">
+                    <span className="text-xl">🍖</span>
+                  </div>
+                </div>
+                <h3 className="text-lg font-bold text-gray-800 mb-2 text-center">Meat Enthusiasts</h3>
+                <p className="text-gray-600 text-sm leading-relaxed text-center">
+                  Our <span className="font-semibold text-red-700">Meat Enthusiasts plan includes<br />4 days of non-vegetarian options</span><br />
+                  per week, perfectly balanced with<br />vegetarian meals for variety and nutrition.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Call to action section */}
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 md:p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
+            <p className="text-gray-700 mb-6 text-base md:text-lg">
+              The options below are just a glimpse of what we offer. To explore our complete menu and stay updated with daily specials:
+            </p>
+            <button
+              onClick={() => window.open('https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE', '_blank')}
+              className="inline-flex items-center gap-3 px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-xl"
+            >
+              <span className="text-xl">💬</span>
+              <span className="text-base">Join WhatsApp Group</span>
+            </button>
+          </div>
         </div>
 
         {/* Centered category toolbar */}
-        <div className="flex justify-center mb-8">
-          <div className="bg-gray-100 p-1 rounded-full inline-flex">
+        <div className="flex justify-center mb-12">
+          <div className="bg-gray-100 p-1.5 rounded-full inline-flex shadow-sm">
             {['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                className={`px-4 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
                   selectedCategory === category
-                    ? 'bg-white shadow-md text-gray-900'
-                    : 'text-gray-600 hover:text-gray-900'
+                    ? 'bg-white shadow-md text-gray-900 transform scale-105'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                 }`}
               >
                 {category}

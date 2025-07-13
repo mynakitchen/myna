@@ -93,6 +93,13 @@ const Header = () => {
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center space-x-3">
             <button 
+              onClick={() => handleExternalLink('https://mynakitchen.in/signin')}
+              className="text-black hover:text-primary font-medium transition-colors text-sm"
+              aria-label="Sign in to Myna Kitchen"
+            >
+              Sign In
+            </button>
+            <button 
               onClick={() => handleExternalLink('https://mynakitchen.in/SignUp')}
               className="bg-accent text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-sm hover:bg-warmOrange-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Sign up for Myna Kitchen"
@@ -148,6 +155,13 @@ const Header = () => {
               Delivery Areas
             </button>
             <button 
+              onClick={() => handleExternalLink('https://mynakitchen.in/signin')}
+              className="text-black hover:text-primary font-medium transition-colors"
+              aria-label="Sign in to Myna Kitchen"
+            >
+              Sign In
+            </button>
+            <button 
               onClick={() => handleExternalLink('https://mynakitchen.in/SignUp')}
               className="bg-accent text-white px-6 py-2.5 rounded-full font-medium shadow-sm hover:bg-warmOrange-600 transition-colors"
               aria-label="Sign up for Myna Kitchen"
@@ -189,6 +203,13 @@ const Header = () => {
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
               Delivery Areas
+            </button>
+            <button 
+              onClick={() => handleExternalLink('https://mynakitchen.in/signin')}
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
+              aria-label="Sign in to Myna Kitchen"
+            >
+              Sign In
             </button>
           </div>
         </div>
