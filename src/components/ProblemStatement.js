@@ -145,7 +145,7 @@ const ProblemStatement = () => {
                   style={{
                     fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
                   }}>
-                  Starting at just ₹149 per meal
+                  Starting at just ₹80 per day
                 </p>
                 <button className="pricing-cta-button">
                   View Our Plans

@@ -58,8 +58,6 @@ const DeliveryMap = () => {
     }
 
     try {
-      console.log('Initializing map...');
-      
       // Clear any existing map
       const mapElement = document.getElementById('map');
       if (mapElement && mapElement._leaflet_id) {
@@ -106,14 +104,13 @@ const DeliveryMap = () => {
 
       // Wait for tiles to load
       setTimeout(() => {
-        console.log('Map tiles should be loaded, setting mapLoaded to true');
         setMapLoaded(true);
       }, 1000);
 
       try {
         // Add OMR route as a polyline
         if (omrCoordinates && omrCoordinates.length > 1) {
-          const polyline = L.polyline(omrCoordinates, {
+          L.polyline(omrCoordinates, {
             color: '#D08C60',
             weight: 6,
             opacity: 0.8,
@@ -128,7 +125,7 @@ const DeliveryMap = () => {
             smoothFactor: 1
           }).addTo(map);
 
-          console.log('OMR route polyline added successfully');
+          // OMR route polyline added successfully
         }
 
         // Add tech park markers
@@ -155,7 +152,7 @@ const DeliveryMap = () => {
           return { id: park.id, marker, park };
         });
 
-        console.log('Tech park markers added successfully');
+        // Tech park markers added successfully
 
         // Add pulsing animation to markers
         const pulseInterval = setInterval(() => {
@@ -193,7 +190,7 @@ const DeliveryMap = () => {
           }
         };
 
-        console.log('Map initialization completed successfully');
+        // Map initialization completed successfully
 
       } catch (routeError) {
         console.error('Error adding route/polygon:', routeError);
@@ -203,24 +200,21 @@ const DeliveryMap = () => {
       console.error('Error initializing map:', error);
       setMapLoaded(false);
     }
-  }, [activeLocationId, omrCoordinates]); // Added back the dependencies to fix the warning
+  }, [omrCoordinates]); // Only include dependencies actually used in the function
 
   useEffect(() => {
-    let leafletLoaded = false;
-    
     const checkLeaflet = () => {
       if (window.L) {
-        leafletLoaded = true;
         initMap();
       } else {
-        console.log('Leaflet not yet available, checking again...');
+        // Leaflet not yet available, checking again...
         setTimeout(checkLeaflet, 100);
       }
     };
 
     // Load Leaflet if not already loaded
     if (!window.L) {
-      console.log('Loading Leaflet...');
+      // Loading Leaflet...
       
       // Load CSS
       const cssLink = document.createElement('link');
@@ -236,8 +230,7 @@ const DeliveryMap = () => {
       script.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=';
       script.crossOrigin = '';
       script.onload = () => {
-        console.log('Leaflet loaded successfully');
-        leafletLoaded = true;
+        // Leaflet loaded successfully
         checkLeaflet();
       };
       script.onerror = () => {
@@ -258,7 +251,7 @@ const DeliveryMap = () => {
         mapInstanceRef.current = null;
       }
     };
-  }, []); // Removed dependencies to avoid re-initializing
+  }, [initMap]); // Include initMap as dependency since checkLeaflet calls it
 
   useEffect(() => {
     if (mapLoaded && mapInstanceRef.current && activeLocationId !== null) {

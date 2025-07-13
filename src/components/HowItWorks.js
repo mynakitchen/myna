@@ -1,10 +1,18 @@
 import React from "react";
-import { openSecureLink } from '../lib/utils';
 import './HowItWorks.css';
 
 export default function HowItWorks() {
   const handleWhatsAppContact = () => {
     window.open('https://wa.me/918754467770?text=Hi%20there!%20I%20am%20interested%20in%20your%20meal%20plans.%20Could%20you%20please%20provide%20more%20details%3F', '_blank');
+  };
+
+  const handleButtonClick = (step) => {
+    if (step.buttonLink) {
+      window.open(step.buttonLink, '_blank');
+    } else {
+      // Fallback to WhatsApp contact for backward compatibility
+      handleWhatsAppContact();
+    }
   };
 
 
@@ -27,29 +35,34 @@ export default function HowItWorks() {
       imageAlt: "Browse meal plans interface showing various food options"
     },
     {
-      number: "02", 
-      title: "Connect on WhatsApp",
-      description: "Get in touch with our team to discuss your requirements and get personalized meal recommendations.",
+      number: "02",
+      title: "Easy Registration",
+      description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign up takes just a few minutes and you'll get instant access to your account.",
       accent: "#D08C60", // Warm orange
-      image: getImagePath("images/how-it-works/2.png"),
-      imageAlt: "WhatsApp chat interface for customer support",
-      hasButton: true
+      image: getImagePath("images/how-it-works/3.png"),
+      imageAlt: "User registration form and dashboard preview",
+      hasButton: true,
+      buttonText: "Sign Up Now",
+      buttonLink: "https://mynakitchen.in/SignUp"
     },
     {
       number: "03",
-      title: "Easy Registration",
-      description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign up takes just a few minutes and you'll get instant access to your account.",
+      title: "Manage Everything",
+      description: "Use your personalized dashboard to manage everything - add or cancel subscriptions, change delivery addresses, order delicious add-ons, and customize your meal preferences all in one place.",
       accent: "#797D62", // Sage green
-      image: getImagePath("images/how-it-works/3.png"),
-      imageAlt: "User registration form and dashboard preview"
+      image: getImagePath("images/how-it-works/4.png"),
+      imageAlt: "User dashboard showing subscription management features"
     },
     {
       number: "04",
-      title: "Manage Everything",
-      description: "Use your personalized dashboard to manage everything - add or cancel subscriptions, change delivery addresses, order delicious add-ons, and customize your meal preferences all in one place.",
+      title: "Stay Up to Date",
+      description: "Stay up to date with our daily menu by joining the WhatsApp group. See fresh meal options every day and never miss out on your favorites.",
       accent: "#997B66", // Muted brown
-      image: getImagePath("images/how-it-works/4.png"),
-      imageAlt: "User dashboard showing subscription management features"
+      image: getImagePath("images/how-it-works/2.png"),
+      imageAlt: "WhatsApp group interface showing daily menu updates",
+      hasButton: true,
+      buttonText: "Join WhatsApp Group",
+      buttonLink: "https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE"
     }
   ];
 
@@ -117,14 +130,16 @@ export default function HowItWorks() {
               {step.description}
             </p>
             
-            {/* WhatsApp Button - Reduced size */}
+            {/* Action Button - Reduced size */}
             {step.hasButton && (
               <button
-                onClick={handleWhatsAppContact}
+                onClick={() => handleButtonClick(step)}
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-orange-600 text-white font-bold text-base border-2 border-gray-900 hover:border-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 uppercase tracking-wide mb-6 hover:scale-103 active:scale-97"
               >
-                <span className="text-lg">💬</span>
-                <span>Contact on WhatsApp</span>
+                <span className="text-lg">
+                  {step.buttonText === 'Sign Up Now' ? '📝' : '💬'}
+                </span>
+                <span>{step.buttonText || 'Contact on WhatsApp'}</span>
               </button>
             )}
             
@@ -252,15 +267,15 @@ export default function HowItWorks() {
             {/* Content */}
             <div className="relative z-10 p-8 md:p-12">
               <div className="flex items-center justify-center gap-3 mb-6">
-                <span className="text-2xl">🎉</span>
+                <span className="text-2xl">🎧</span>
                 <span className="text-sm font-medium bg-primary/20 text-primary px-4 py-1.5 rounded-full">
-                  Start your food journey today
+                  Customer Care Support
                 </span>
               </div>
               
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Ready to Experience Better Meals?</h3>
+              <h3 className="text-2xl md:text-3xl font-bold mb-4">Need Help or Have Queries?</h3>
               <p className="text-gray-600 mb-8">
-                Join thousands of satisfied customers who have transformed their daily meals with Myna Kitchen.
+                Connect with us on WhatsApp for any queries, personalized requirements, and enquiries. Our team is here to help you with all your meal planning needs.
               </p>
               
               <button
@@ -268,7 +283,7 @@ export default function HowItWorks() {
                 className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 hover:scale-103 active:scale-97"
               >
                 <span className="text-xl">💬</span>
-                <span>Get Started Now</span>
+                <span>Contact Support</span>
               </button>
             </div>
           </div>

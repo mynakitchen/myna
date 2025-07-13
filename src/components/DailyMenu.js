@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faChevronLeft, 
@@ -21,7 +21,9 @@ const getImagePath = (imagePath) => {
   const encodedPath = encodedSegments.join('/');
   
   // Use PUBLIC_URL environment variable for GitHub Pages deployment
-  return `${process.env.PUBLIC_URL}/${encodedPath}`;
+  const finalPath = `${process.env.PUBLIC_URL}/${encodedPath}`;
+  
+  return finalPath;
 };
 
 // Dynamic menu items based on actual folder structure - UPDATED with multiple images
@@ -305,11 +307,13 @@ const MENU_ITEMS = [
 
 const DailyMenu = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('Day Starters');
   const [itemsPerPage, setItemsPerPage] = useState(6);
-  const menuRef = useRef(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const containerRef = useRef(null);
 
-  const filteredItems = MENU_ITEMS.filter(item => item.category === selectedCategory || selectedCategory === 'All');
+  const filteredItems = MENU_ITEMS.filter(item => item.category === selectedCategory);
   const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
   
   // Calculate visible items for current page
@@ -349,46 +353,105 @@ const DailyMenu = () => {
     }
   };
   
-
+  // Touch/swipe handlers for mobile
+  const handleTouchStart = (e) => {
+    if (window.innerWidth > 768) return; // Only on mobile/tablet
+    
+    const touch = e.touches[0];
+    setStartX(touch.clientX);
+    setIsDragging(true);
+  };
+  
+  const handleTouchMove = (e) => {
+    if (!isDragging || window.innerWidth > 768) return;
+    e.preventDefault();
+  };
+  
+  const handleTouchEnd = (e) => {
+    if (!isDragging || window.innerWidth > 768) return;
+    
+    const touch = e.changedTouches[0];
+    const endX = touch.clientX;
+    const diffX = startX - endX;
+    
+    // Minimum swipe distance
+    const minSwipeDistance = 50;
+    
+    if (Math.abs(diffX) > minSwipeDistance) {
+      if (diffX > 0) {
+        // Swipe left - go to next page
+        navigatePage("next");
+      } else {
+        // Swipe right - go to previous page
+        navigatePage("prev");
+      }
+    }
+    
+    setIsDragging(false);
+  };
 
   return (
     <div className="daily-menu bg-white">
       <div className="container mx-auto px-4 py-16">
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold mb-4">Explore Menu</h2>
-          <p className="text-lg text-gray-600">Discover our delicious daily menu options</p>
+          <p className="text-lg text-gray-600 mb-6">
+            Discover a curated selection from our menu of over 175 unique dishes. The options below are just a glimpse of what we offer. To explore our complete menu and stay updated with daily specials, join our WhatsApp group!
+          </p>
+          <button
+            onClick={() => window.open('https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE', '_blank')}
+            className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full shadow-lg transition-all duration-300 hover:scale-105 active:scale-95"
+          >
+            <span className="text-lg">💬</span>
+            <span>Join WhatsApp Group</span>
+          </button>
         </div>
 
-        <div className="bg-gray-100 p-1 rounded-full inline-flex mb-8">
-          {['All', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
-            <button
-              key={category}
-              onClick={() => setSelectedCategory(category)}
-              className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
-                selectedCategory === category
-                  ? 'bg-white shadow-md text-gray-900'
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
-        </div>
-
-        <div className="relative mb-8" ref={menuRef}>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {visibleItems.map((item) => (
-              <MenuItemCard key={item.id} item={item} />
+        {/* Centered category toolbar */}
+        <div className="flex justify-center mb-8">
+          <div className="bg-gray-100 p-1 rounded-full inline-flex">
+            {['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-200 ${
+                  selectedCategory === category
+                    ? 'bg-white shadow-md text-gray-900'
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                {category}
+              </button>
             ))}
           </div>
+        </div>
+
+        <div 
+          className="relative mb-8" 
+          ref={containerRef}
+          onTouchStart={handleTouchStart}
+          onTouchMove={handleTouchMove}
+          onTouchEnd={handleTouchEnd}
+        >
+          {visibleItems.length > 0 ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+              {visibleItems.map((item) => (
+                <MenuItemCard key={item.id} item={item} />
+              ))}
+            </div>
+          ) : (
+            <div className="text-center py-8">
+              <p className="text-gray-500">No menu items found for this category.</p>
+            </div>
+          )}
 
           {/* Navigation arrows */}
           {filteredItems.length > itemsPerPage && (
             <>
               <button
                 onClick={() => navigatePage('prev')}
-                className={`fixed-mobile-arrow fixed-mobile-arrow-left absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg ${
-                  currentPage === 0 ? 'opacity-50 cursor-not-allowed' : ''
+                className={`absolute left-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg transition-all duration-200 z-10 ${
+                  currentPage === 0 ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl'
                 }`}
                 disabled={currentPage === 0}
               >
@@ -396,8 +459,8 @@ const DailyMenu = () => {
               </button>
               <button
                 onClick={() => navigatePage('next')}
-                className={`fixed-mobile-arrow fixed-mobile-arrow-right absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-2 shadow-lg ${
-                  currentPage >= pageCount - 1 ? 'opacity-50 cursor-not-allowed' : ''
+                className={`absolute right-0 top-1/2 -translate-y-1/2 bg-white rounded-full p-3 shadow-lg transition-all duration-200 z-10 ${
+                  currentPage >= pageCount - 1 ? 'opacity-50 cursor-not-allowed' : 'hover:shadow-xl'
                 }`}
                 disabled={currentPage >= pageCount - 1}
               >
@@ -408,18 +471,21 @@ const DailyMenu = () => {
         </div>
 
         {/* Page dots */}
-        {filteredItems.length > itemsPerPage && (
-          <div className="flex justify-center gap-2 mt-4">
-            {Array.from({ length: pageCount }, (_, i) => (
+        {pageCount > 1 && (
+          <div className="flex justify-center items-center space-x-2">
+            {Array.from({ length: pageCount }, (_, index) => (
               <button
-                key={i}
-                onClick={() => setCurrentPage(i)}
-                className={`pagination-dot ${currentPage === i ? 'active' : ''}`}
-                aria-label={`Go to page ${i + 1}`}
+                key={index}
+                onClick={() => setCurrentPage(index)}
+                className={`pagination-dot ${
+                  index === currentPage ? 'active' : ''
+                }`}
               >
                 <FontAwesomeIcon 
                   icon={faCircle} 
-                  className={`text-xs ${currentPage === i ? 'text-gray-800' : 'text-gray-300'}`} 
+                  className={`w-2 h-2 ${
+                    index === currentPage ? 'text-gray-800' : 'text-gray-400'
+                  }`} 
                 />
               </button>
             ))}
@@ -434,8 +500,19 @@ function MenuItemCard({ item }) {
   const [isHovered, setIsHovered] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageError, setImageError] = useState(false);
-  const images = item.images || [item.image]; // Support both formats
+  const [imageLoading, setImageLoading] = useState(true);
+  const [isDragging, setIsDragging] = useState(false);
+  const [startX, setStartX] = useState(0);
+  
+  // Memoize images to prevent unnecessary re-renders
+  const images = useMemo(() => item.images || [item.image], [item.images, item.image]);
   const hasMultipleImages = images.length > 1;
+  
+  // Reset image loading state when images change
+  useEffect(() => {
+    setImageLoading(true);
+    setImageError(false);
+  }, [images, currentImageIndex]);
   
   // Safe image navigation with bounds checking
   const nextImage = () => {
@@ -469,14 +546,50 @@ function MenuItemCard({ item }) {
   const handleImageError = (e) => {
     console.error('Failed to load image:', images[currentImageIndex]);
     setImageError(true);
-    
-    // Try to fallback to a default image or hide the image
-    e.target.style.display = 'none';
+    setImageLoading(false);
   };
 
-  // Reset image error when switching images
+  // Reset image error when switching images and handle load success
   const handleImageLoad = () => {
     setImageError(false);
+    setImageLoading(false);
+  };
+
+  // Touch/swipe handlers for image carousel
+  const handleTouchStart = (e) => {
+    if (!hasMultipleImages) return;
+    
+    const touch = e.touches[0];
+    setStartX(touch.clientX);
+    setIsDragging(true);
+  };
+  
+  const handleTouchMove = (e) => {
+    if (!isDragging || !hasMultipleImages) return;
+    e.preventDefault();
+  };
+  
+  const handleTouchEnd = (e) => {
+    if (!isDragging || !hasMultipleImages) return;
+    
+    const touch = e.changedTouches[0];
+    const endX = touch.clientX;
+    const diffX = startX - endX;
+    
+    // Minimum swipe distance
+    const minSwipeDistance = 30;
+    
+    if (Math.abs(diffX) > minSwipeDistance) {
+      if (diffX > 0) {
+        // Swipe left - go to next image
+        nextImage();
+      } else {
+        // Swipe right - go to previous image
+        prevImage();
+      }
+    }
+    
+    setIsDragging(false);
   };
 
   // Ensure currentImageIndex is within bounds
@@ -485,21 +598,33 @@ function MenuItemCard({ item }) {
   
   return (
     <div 
-      className="menu-card bg-white rounded-xl overflow-hidden h-full shadow-sm border border-gray-100 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg"
+      className="menu-card bg-white rounded-xl overflow-hidden h-full shadow-sm border border-gray-100 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg group"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      <div className="relative overflow-hidden image-carousel-container" style={{ aspectRatio: '4/3', minHeight: '200px' }}>
+      <div 
+        className="relative overflow-hidden image-carousel-container" 
+        style={{ aspectRatio: '4/3', minHeight: '200px' }}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
+        {/* Loading state */}
+        {imageLoading && (
+          <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gray-400"></div>
+          </div>
+        )}
+        
         {currentImageSrc && !imageError ? (
           <img 
-            key={`${safeCurrentIndex}-${currentImageSrc}`}
+            key={`${item.id}-${safeCurrentIndex}`}
             src={currentImageSrc} 
             alt={`${item.name} - ${safeCurrentIndex + 1}`}
-            className="w-full h-full object-cover transition-opacity duration-300"
+            className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             style={{ objectPosition: 'center' }}
             onError={handleImageError}
             onLoad={handleImageLoad}
-            loading="lazy"
           />
         ) : (
           // Fallback when image fails to load
@@ -519,8 +644,9 @@ function MenuItemCard({ item }) {
             {/* Carousel navigation arrows */}
             <button
               onClick={prevImage}
-              className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 z-20"
-              style={{ opacity: isHovered ? 1 : 0 }}
+              className={`absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all duration-200 z-20 ${
+                isHovered || window.innerWidth <= 768 ? 'opacity-100' : 'opacity-0'
+              }`}
               aria-label="Previous image"
             >
               <FontAwesomeIcon icon={faChevronLeft} className="w-3 h-3" />
@@ -528,8 +654,9 @@ function MenuItemCard({ item }) {
             
             <button
               onClick={nextImage}
-              className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-200 z-20"
-              style={{ opacity: isHovered ? 1 : 0 }}
+              className={`absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/50 hover:bg-black/70 text-white rounded-full w-8 h-8 flex items-center justify-center transition-all duration-200 z-20 ${
+                isHovered || window.innerWidth <= 768 ? 'opacity-100' : 'opacity-0'
+              }`}
               aria-label="Next image"
             >
               <FontAwesomeIcon icon={faChevronRight} className="w-3 h-3" />
