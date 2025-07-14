@@ -74,7 +74,7 @@ const Testimonials = () => {
   // Counter animation
   useEffect(() => {
     if (isVisible) {
-      const targetCount = 1200;
+      const targetCount = 15000;
       const duration = 2000;
       const increment = targetCount / (duration / 16);
       let currentCount = 0;
@@ -122,7 +122,7 @@ const Testimonials = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8">
             <div className="flex flex-col justify-center items-start">
               <h2 className="text-4xl lg:text-5xl font-bold text-brown-900 mb-6 leading-tight">
-                <span ref={countRef} className="text-5xl lg:text-6xl text-primary">{count.toLocaleString()}</span>
+                <span ref={countRef} className="text-5xl lg:text-6xl text-primary">{count.toLocaleString()}+</span>
                 <span className="block">Meals Delivered</span>
                 <span className="block text-xl lg:text-2xl font-medium text-brown-700 mt-2">and counting...</span>
               </h2>

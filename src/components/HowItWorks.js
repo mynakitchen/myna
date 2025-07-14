@@ -3,7 +3,7 @@ import './HowItWorks.css';
 
 export default function HowItWorks() {
   const handleWhatsAppContact = () => {
-    window.open('https://wa.me/918754467770?text=Hi%20there!%20I%20am%20interested%20in%20your%20meal%20plans.%20Could%20you%20please%20provide%20more%20details%3F', '_blank');
+    window.open('https://wa.me/917418688269?text=Hi%20there!%20I%20am%20interested%20in%20your%20meal%20plans.%20Could%20you%20please%20provide%20more%20details%3F', '_blank');
   };
 
   const handleButtonClick = (step) => {

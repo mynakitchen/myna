@@ -31,6 +31,16 @@ const ParallaxImageSection = () => {
   );
 };
 
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      window.scrollTo({
+        top: section.offsetTop - 80,
+        behavior: 'smooth'
+      });
+    }
+  };
+
 const ProblemStatement = () => {
   const problems = [
     {
@@ -147,7 +157,9 @@ const ProblemStatement = () => {
                   }}>
                   Starting at just ₹80 per day
                 </p>
-                <button className="pricing-cta-button">
+                <button 
+                onClick={() => scrollToSection('subscription-plans')}
+                className="pricing-cta-button">
                   View Our Plans
                 </button>
               </div>
