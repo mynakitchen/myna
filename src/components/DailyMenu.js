@@ -442,11 +442,11 @@ const DailyMenu = () => {
               The options below are just a glimpse of what we offer. To explore our complete menu and stay updated with daily specials:
             </p>
             <button
-              onClick={() => window.open('https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE', '_blank')}
+              onClick={() => window.open('https://whatsapp.com/channel/0029VbBVOYh7YSd0VYzNiB3Y', '_blank')}
               className="inline-flex items-center gap-3 px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition-all duration-300 hover:scale-105 active:scale-95 hover:shadow-xl"
             >
               <span className="text-xl">💬</span>
-              <span className="text-base">Join WhatsApp Group</span>
+              <span className="text-base">Join WhatsApp Channel</span>
             </button>
           </div>
         </div>

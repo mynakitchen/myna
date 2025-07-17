@@ -27,6 +27,7 @@ export default function HowItWorks() {
 
   const steps = [
     {
+      id: "browse-plans",
       number: "01",
       title: "Browse Plans",
       description: "Explore our delicious meal plans and find the perfect fit for your lifestyle and dietary needs.",
@@ -35,6 +36,7 @@ export default function HowItWorks() {
       imageAlt: "Browse meal plans interface showing various food options"
     },
     {
+      id: "easy-registration",
       number: "02",
       title: "Easy Registration",
       description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign up takes just a few minutes and you'll get instant access to your account.",
@@ -46,6 +48,7 @@ export default function HowItWorks() {
       buttonLink: "https://mynakitchen.in/SignUp"
     },
     {
+      id: "manage-everything",
       number: "03",
       title: "Manage Everything",
       description: "Use your personalized dashboard to manage everything - add or cancel subscriptions, change delivery addresses, order delicious add-ons, and customize your meal preferences all in one place.",
@@ -54,22 +57,23 @@ export default function HowItWorks() {
       imageAlt: "User dashboard showing subscription management features"
     },
     {
+      id: "stay-up-to-date",
       number: "04",
       title: "Stay Up to Date",
-      description: "Stay up to date with our daily menu by joining the WhatsApp group. See fresh meal options every day and never miss out on your favorites.",
+      description: "Stay up to date with our daily menu by joining the WhatsApp channel. See fresh meal options every day and never miss out on your favorites.",
       accent: "#997B66", // Muted brown
       image: getImagePath("images/how-it-works/2.png"),
-      imageAlt: "WhatsApp group interface showing daily menu updates",
+      imageAlt: "WhatsApp channel interface showing daily menu updates",
       hasButton: true,
-      buttonText: "Join WhatsApp Group",
-      buttonLink: "https://chat.whatsapp.com/HURHax6vtqm0yuCno9ktOE"
+      buttonText: "Join WhatsApp Channel",
+      buttonLink: "https://whatsapp.com/channel/0029VbBVOYh7YSd0VYzNiB3Y"
     }
   ];
 
   // Individual step component
   const StepItem = ({ step, index, isLast }) => {
     return (
-      <div className="relative flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
+      <div id={step.id || `step-${index}`} className="relative flex flex-col lg:flex-row items-center gap-6 lg:gap-8">
         {/* Step Number Circle - Reduced size */}
         <div className="relative flex-shrink-0 z-10">
           <div className="relative">

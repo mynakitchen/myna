@@ -27,7 +27,7 @@ const FAQ_ITEMS = [
   {
     id: "faq-4",
     question: "How do I place a preorder?",
-    answer: "Follow our daily menu through our WhatsApp group to stay updated on available meals. Once you see the menu, simply place your order through your personalized user link for hassle-free ordering.",
+    answer: "Follow our daily menu through our WhatsApp channel to stay updated on available meals. Once you see the menu, simply place your order through your personalized user link for hassle-free ordering.",
     icon: faMapMarkerAlt,
     accent: '#997B66'
   },
