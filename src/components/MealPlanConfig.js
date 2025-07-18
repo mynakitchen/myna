@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { 
   dietOptions, 
   mealOptions, 
-  days, 
   calculatePrice, 
   calculateDeliveryCharges, 
   isPincodeServicable,
