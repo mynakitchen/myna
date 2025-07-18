@@ -98,8 +98,18 @@ const MealPlanConfig = () => {
 
   const nextStep = () => {
     if (validateStep() && currentStep < totalSteps) {
-      setCurrentStep(currentStep + 1);
+      // Special handling for step 6 (location) - if pincode is not serviceable, skip to step 8 (summary)
+      if (currentStep === 6 && planData.homePincode && !isPincodeServicable(planData.homePincode)) {
+        setCurrentStep(8);
+      } else {
+        setCurrentStep(currentStep + 1);
+      }
     }
+  };
+
+  const nextStepForNonServiceable = () => {
+    // Direct jump to summary page for non-serviceable areas
+    setCurrentStep(8);
   };
 
   const prevStep = () => {
@@ -157,22 +167,20 @@ const MealPlanConfig = () => {
             <h2>What's Your Diet Preference?</h2>
             <p>Choose your preferred diet type to get meals that suit your lifestyle</p>
             
-            <div className="diet-options">
+            <div className="diet-options-simplified">
               {dietOptions.map(option => (
                 <div 
                   key={option.id}
-                  className={`diet-card ${planData.diet === option.id ? 'selected' : ''}`}
+                  className={`diet-card-simplified ${planData.diet === option.id ? 'selected' : ''}`}
                   onClick={() => updatePlanData({ diet: option.id })}
                 >
-                  <div className="diet-image" style={{ backgroundImage: `url(${option.image})` }}>
-                    <div className="diet-overlay">
-                      <div className="diet-icon">
-                        <IconRenderer iconType={option.icon} size={60} />
-                      </div>
-                    </div>
+                  <div className="diet-icon-simplified">
+                    <IconRenderer iconType={option.icon} size={40} />
                   </div>
-                  <h3>{option.name}</h3>
-                  <p>{option.description}</p>
+                  <div className="diet-content-simplified">
+                    <h3>{option.name}</h3>
+                    <p>{option.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -185,11 +193,11 @@ const MealPlanConfig = () => {
             <h2>How Many Meals Per Day?</h2>
             <p>Select the meals you want delivered daily</p>
             
-            <div className="meal-options">
+            <div className="meal-options-simplified">
               {mealOptions.map(option => (
                 <div 
                   key={option.id}
-                  className={`meal-card ${option.type === 'super' ? 'super-meal' : 'regular-meal'} ${planData.meals.includes(option.id) ? 'selected' : ''}`}
+                  className={`meal-card-simplified ${option.type === 'super' ? 'super-meal-simplified' : 'regular-meal-simplified'} ${planData.meals.includes(option.id) ? 'selected' : ''}`}
                   onClick={() => {
                     const newMeals = planData.meals.includes(option.id)
                       ? planData.meals.filter(m => m !== option.id)
@@ -197,29 +205,22 @@ const MealPlanConfig = () => {
                     updatePlanData({ meals: newMeals });
                   }}
                 >
-                  <div className="meal-image" style={{ backgroundImage: `url(${option.image})` }}>
-                    <div className="meal-overlay">
-                      <div className="meal-icon">
-                        <IconRenderer iconType={option.icon} size={50} />
+                  <div className="meal-icon-simplified">
+                    <IconRenderer iconType={option.icon} size={32} />
+                    {option.type === 'super' && (
+                      <div className="super-badge-simplified">
+                        <svg width="12" height="12" viewBox="0 0 20 20" fill="none">
+                          <path d="M10 1L12.09 6.26L18 7L13 11.74L14.18 17.48L10 15.16L5.82 17.48L7 11.74L2 7L7.91 6.26L10 1Z" fill="#FFD700"/>
+                        </svg>
+                        SUPER
                       </div>
-                      {option.type === 'super' && (
-                        <div className="super-badge">
-                          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M10 1L12.09 6.26L18 7L13 11.74L14.18 17.48L10 15.16L5.82 17.48L7 11.74L2 7L7.91 6.26L10 1Z" fill="#FFD700"/>
-                          </svg>
-                          SUPER
-                        </div>
-                      )}
-                    </div>
+                    )}
                   </div>
-                  <h3>{option.name}</h3>
-                  <p className="meal-time">{option.time}</p>
-                  <p>{option.description}</p>
-                  {option.type === 'super' && (
-                    <div className="meal-type-indicator">
-                      <span className="premium-indicator">Premium Super Meal</span>
-                    </div>
-                  )}
+                  <div className="meal-content-simplified">
+                    <h3>{option.name}</h3>
+                    <p className="meal-time">{option.time}</p>
+                    <p className="meal-description">{option.description}</p>
+                  </div>
                 </div>
               ))}
             </div>
@@ -677,13 +678,26 @@ const MealPlanConfig = () => {
           )}
           
           {currentStep < totalSteps && (
-            <button 
-              className={`btn-primary ${!validateStep() ? 'disabled' : ''}`} 
-              onClick={nextStep}
-              disabled={!validateStep()}
-            >
-              Next →
-            </button>
+            <>
+              {/* Special handling for step 6 with non-serviceable pincode */}
+              {currentStep === 6 && planData.homePincode && !isPincodeServicable(planData.homePincode) ? (
+                <button 
+                  className={`btn-primary ${!validateStep() ? 'disabled' : ''}`} 
+                  onClick={nextStepForNonServiceable}
+                  disabled={!validateStep()}
+                >
+                  View My Summary →
+                </button>
+              ) : (
+                <button 
+                  className={`btn-primary ${!validateStep() ? 'disabled' : ''}`} 
+                  onClick={nextStep}
+                  disabled={!validateStep()}
+                >
+                  Next →
+                </button>
+              )}
+            </>
           )}
         </div>
       </div>
