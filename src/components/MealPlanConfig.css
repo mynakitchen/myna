@@ -1776,4 +1776,88 @@
 .location-charges p {
   margin: 0.25rem 0;
   font-size: 0.9rem;
+}
+
+/* Location Search Integration */
+.location-search-home,
+.location-search-office {
+  margin-bottom: 1rem;
+}
+
+.location-search-container {
+  margin-bottom: 0;
+}
+
+/* Manual Pincode Input Styles */
+.manual-pincode-section {
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(30, 41, 59, 0.3);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.pincode-note {
+  margin: 0 0 0.75rem 0;
+  color: var(--muted-foreground);
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.manual-pincode-input {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: var(--foreground);
+  transition: border-color 0.3s ease;
+}
+
+.manual-pincode-input::placeholder {
+  color: var(--muted-foreground);
+}
+
+.manual-pincode-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(255, 117, 46, 0.2);
+}
+
+.manual-pincode-input.complete {
+  border-color: #10b981;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.pincode-hint {
+  margin: 0.5rem 0 0 0;
+  color: var(--muted-foreground);
+  font-size: 0.85rem;
+  font-style: italic;
+}
+
+/* Mobile responsive for location form */
+@media (max-width: 768px) {
+  .location-form {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .address-section {
+    padding: 1rem;
+  }
+  
+  .address-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  
+  .manual-pincode-section {
+    padding: 0.75rem;
+  }
+  
+  .pincode-note {
+    font-size: 0.85rem;
+  }
 } 

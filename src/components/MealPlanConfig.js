@@ -10,6 +10,7 @@ import {
   formatCurrency
 } from '../lib/mealPlanData';
 import './MealPlanConfig.css';
+import LocationSearch from './LocationSearch';
 
 // Icon components for better design
 const IconRenderer = ({ iconType, size = 40, className = "" }) => {
@@ -401,101 +402,141 @@ const MealPlanConfig = () => {
         );
 
       case 6:
-        const homePincodeInfo = planData.homePincode ? getPincodeInfo(planData.homePincode) : null;
-        const officePincodeInfo = planData.officePincode ? getPincodeInfo(planData.officePincode) : null;
+        // Only validate pincodes that are exactly 6 digits
+        const homePincodeInfo = planData.homePincode && planData.homePincode.length === 6 ? getPincodeInfo(planData.homePincode) : null;
+        const officePincodeInfo = planData.officePincode && planData.officePincode.length === 6 ? getPincodeInfo(planData.officePincode) : null;
+        
+        const handleHomeLocationSelect = (locationData) => {
+          if (locationData) {
+            const updates = {
+              homeAddress: locationData.formattedAddress,
+              homeArea: locationData.description,
+              homePincode: locationData.pincode || ''
+            };
+            updatePlanData(updates);
+          } else {
+            updatePlanData({
+              homeAddress: '',
+              homeArea: '',
+              homePincode: ''
+            });
+          }
+        };
+
+        const handleOfficeLocationSelect = (locationData) => {
+          if (locationData) {
+            updatePlanData({
+              officeAddress: locationData.formattedAddress,
+              officeArea: locationData.description,
+              officePincode: locationData.pincode || ''
+            });
+          } else {
+            updatePlanData({
+              officeAddress: '',
+              officeArea: '',
+              officePincode: ''
+            });
+          }
+        };
+
         return (
           <div className="step-content">
             <h2>Enter Your Location</h2>
-            <p>We need your address to check delivery availability</p>
+            <p>Search for your locality to check delivery availability</p>
+            
+
             
             <div className="location-form">
               <div className="address-section">
-                <h3>🏠 Home Address</h3>
-                <input
-                  type="text"
-                  placeholder="Enter your home address"
-                  value={planData.homeAddress}
-                  onChange={(e) => updatePlanData({ homeAddress: e.target.value })}
-                  className="address-input"
+                <h3>🏠 Home Location</h3>
+                <LocationSearch
+                  onLocationSelect={handleHomeLocationSelect}
+                  placeholder="Search for your home locality..."
+                  className="location-search-home"
+                  initialValue={planData.homeArea}
+                  id="home-location-search"
                 />
-                <input
-                  type="text"
-                  placeholder="Area/Locality"
-                  value={planData.homeArea}
-                  onChange={(e) => updatePlanData({ homeArea: e.target.value })}
-                  className="address-input"
-                />
-                <div className="pincode-section">
-                  <input
-                    type="text"
-                    placeholder="Enter 6-digit pincode *"
-                    value={planData.homePincode}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                      updatePlanData({ homePincode: value });
-                    }}
-                    className={`address-input pincode-input ${homePincodeInfo ? (homePincodeInfo.isServiceable ? 'valid' : 'invalid') : ''}`}
-                    maxLength="6"
-                    required
-                  />
-                  {homePincodeInfo && (
-                    <div className={`pincode-feedback ${homePincodeInfo.isServiceable ? 'success' : 'error'}`}>
-                      <div className="feedback-message">
-                        {homePincodeInfo.message}
-                      </div>
-                      {homePincodeInfo.isServiceable && (
-                        <div className="delivery-info">
-                          <span className={`zone-badge zone-${homePincodeInfo.zone.toLowerCase().replace(/\s+/g, '-')}`}>{homePincodeInfo.zone}</span>
-                          <span className="charge-info">Delivery: {homePincodeInfo.deliveryCharge === 0 ? 'FREE' : `₹${homePincodeInfo.deliveryCharge}/meal`}</span>
-                        </div>
-                      )}
+                
+                {/* Manual pincode input if no pincode detected */}
+                {planData.homeArea && (!planData.homePincode || planData.homePincode.length < 6) && (
+                  <div className="manual-pincode-section">
+                    <p className="pincode-note">📍 Pincode not detected automatically. Please enter your 6-digit pincode:</p>
+                    <input
+                      type="text"
+                      placeholder="Enter 6-digit pincode"
+                      value={planData.homePincode || ''}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                        updatePlanData({ homePincode: value });
+                      }}
+                      className={`manual-pincode-input ${planData.homePincode && planData.homePincode.length === 6 ? 'complete' : ''}`}
+                      maxLength="6"
+                    />
+                    {planData.homePincode && planData.homePincode.length < 6 && (
+                      <p className="pincode-hint">Please enter all 6 digits to check delivery availability</p>
+                    )}
+                  </div>
+                )}
+                
+                {homePincodeInfo && (
+                  <div className={`pincode-feedback ${homePincodeInfo.isServiceable ? 'success' : 'error'}`}>
+                    <div className="feedback-message">
+                      {homePincodeInfo.message}
                     </div>
-                  )}
-                </div>
+                    {homePincodeInfo.isServiceable && (
+                      <div className="delivery-info">
+                        <span className={`zone-badge zone-${homePincodeInfo.zone.toLowerCase().replace(/\s+/g, '-')}`}>{homePincodeInfo.zone}</span>
+                        <span className="charge-info">Delivery: {homePincodeInfo.deliveryCharge === 0 ? 'FREE' : `₹${homePincodeInfo.deliveryCharge}/meal`}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
               
               <div className="address-section">
-                <h3>🏢 Office Address (Optional)</h3>
-                <input
-                  type="text"
-                  placeholder="Enter your office address"
-                  value={planData.officeAddress}
-                  onChange={(e) => updatePlanData({ officeAddress: e.target.value })}
-                  className="address-input"
+                <h3>🏢 Office Location (Optional)</h3>
+                <LocationSearch
+                  onLocationSelect={handleOfficeLocationSelect}
+                  placeholder="Search for your office locality..."
+                  className="location-search-office"
+                  initialValue={planData.officeArea}
+                  id="office-location-search"
                 />
-                <input
-                  type="text"
-                  placeholder="Area/Locality"
-                  value={planData.officeArea}
-                  onChange={(e) => updatePlanData({ officeArea: e.target.value })}
-                  className="address-input"
-                />
-                <div className="pincode-section">
-                  <input
-                    type="text"
-                    placeholder="Enter 6-digit pincode (Optional)"
-                    value={planData.officePincode}
-                    onChange={(e) => {
-                      const value = e.target.value.replace(/\D/g, '').slice(0, 6);
-                      updatePlanData({ officePincode: value });
-                    }}
-                    className={`address-input pincode-input ${officePincodeInfo ? (officePincodeInfo.isServiceable ? 'valid' : 'invalid') : ''}`}
-                    maxLength="6"
-                  />
-                  {officePincodeInfo && (
-                    <div className={`pincode-feedback ${officePincodeInfo.isServiceable ? 'success' : 'error'}`}>
-                      <div className="feedback-message">
-                        {officePincodeInfo.message}
-                      </div>
-                      {officePincodeInfo.isServiceable && (
-                        <div className="delivery-info">
-                          <span className={`zone-badge zone-${officePincodeInfo.zone.toLowerCase().replace(/\s+/g, '-')}`}>{officePincodeInfo.zone}</span>
-                          <span className="charge-info">Delivery: {officePincodeInfo.deliveryCharge === 0 ? 'FREE' : `₹${officePincodeInfo.deliveryCharge}/meal`}</span>
-                        </div>
-                      )}
+                
+                {/* Manual pincode input if no pincode detected */}
+                {planData.officeArea && (!planData.officePincode || planData.officePincode.length < 6) && (
+                  <div className="manual-pincode-section">
+                    <p className="pincode-note">📍 Pincode not detected automatically. Please enter your 6-digit pincode:</p>
+                    <input
+                      type="text"
+                      placeholder="Enter 6-digit pincode (Optional)"
+                      value={planData.officePincode || ''}
+                      onChange={(e) => {
+                        const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                        updatePlanData({ officePincode: value });
+                      }}
+                      className={`manual-pincode-input ${planData.officePincode && planData.officePincode.length === 6 ? 'complete' : ''}`}
+                      maxLength="6"
+                    />
+                    {planData.officePincode && planData.officePincode.length < 6 && (
+                      <p className="pincode-hint">Please enter all 6 digits to check delivery availability</p>
+                    )}
+                  </div>
+                )}
+                
+                {officePincodeInfo && (
+                  <div className={`pincode-feedback ${officePincodeInfo.isServiceable ? 'success' : 'error'}`}>
+                    <div className="feedback-message">
+                      {officePincodeInfo.message}
                     </div>
-                  )}
-                </div>
+                    {officePincodeInfo.isServiceable && (
+                      <div className="delivery-info">
+                        <span className={`zone-badge zone-${officePincodeInfo.zone.toLowerCase().replace(/\s+/g, '-')}`}>{officePincodeInfo.zone}</span>
+                        <span className="charge-info">Delivery: {officePincodeInfo.deliveryCharge === 0 ? 'FREE' : `₹${officePincodeInfo.deliveryCharge}/meal`}</span>
+                      </div>
+                    )}
+                  </div>
+                )}
               </div>
             </div>
           </div>
