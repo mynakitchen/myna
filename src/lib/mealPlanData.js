@@ -170,8 +170,8 @@ export const getPincodeInfo = (pincode) => {
       zone: pincodeData.zone,
       deliveryCharge: pincodeData.charge,
       message: pincodeData.charge === 0 
-        ? `✅ Great! We deliver to ${pincodeData.area} with FREE delivery` 
-        : `✅ We deliver to ${pincodeData.area} for ₹${pincodeData.charge} per meal`
+        ? `✅ Great! We deliver to this location with FREE delivery` 
+        : `✅ We deliver to this location for ₹${pincodeData.charge} per meal`
     };
   }
   return {
