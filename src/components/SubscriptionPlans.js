@@ -676,7 +676,7 @@ const SubscriptionPlans = () => {
                     
                     {/* CTA Button */}
                     <button
-                      onClick={() => scrollToSection('easy-registration')}
+                      onClick={() => scrollToSection('how-it-works')}
                       className="w-full py-3 lg:py-4 font-bold text-sm transition-all duration-200 border-2 border-gray-900 hover:bg-gray-900 hover:text-white mt-auto rounded-md"
                       style={{
                         backgroundColor: plan.popular ? plan.accent : 'white',

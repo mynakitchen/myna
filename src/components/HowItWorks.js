@@ -7,7 +7,11 @@ export default function HowItWorks() {
   };
 
   const handleButtonClick = (step) => {
-    if (step.buttonLink) {
+    if (step.buttonAction === 'browse-plans') {
+      // Navigate to browse plans page
+      window.history.pushState({}, '', '/browse-plans');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    } else if (step.buttonLink) {
       window.open(step.buttonLink, '_blank');
     } else {
       // Fallback to WhatsApp contact for backward compatibility
@@ -33,7 +37,10 @@ export default function HowItWorks() {
       description: "Explore our delicious meal plans and find the perfect fit for your lifestyle and dietary needs.",
       accent: "#825F45", // Primary brown
       image: getImagePath("images/how-it-works/1.png"),
-      imageAlt: "Browse meal plans interface showing various food options"
+      imageAlt: "Browse meal plans interface showing various food options",
+      hasButton: true,
+      buttonText: "Browse Plans",
+      buttonAction: "browse-plans"
     },
     {
       id: "easy-registration",

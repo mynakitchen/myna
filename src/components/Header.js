@@ -70,7 +70,10 @@ const Header = () => {
       <div className="container mx-auto px-4 md:px-6 py-2 md:py-3">
         <div className="flex items-center justify-between min-h-[50px]">
           <button 
-            onClick={() => scrollToSection('hero')} 
+            onClick={() => {
+              window.history.pushState({}, '', '/');
+              window.dispatchEvent(new PopStateEvent('popstate'));
+            }} 
             className="flex items-center flex-shrink-0"
             aria-label="Go to home section"
           >
@@ -121,10 +124,22 @@ const Header = () => {
           {/* Desktop navigation */}
           <nav className="hidden md:flex items-center space-x-6 lg:space-x-8">
             <button 
-              onClick={() => scrollToSection('hero')}
+              onClick={() => {
+                window.history.pushState({}, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
               Home
+            </button>
+            <button 
+              onClick={() => {
+                window.history.pushState({}, '', '/browse-plans');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              className="text-black hover:text-primary font-medium transition-colors"
+            >
+              Browse Plans
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}
@@ -171,10 +186,24 @@ const Header = () => {
         <div className={`pt-4 pb-3 border-t border-tertiary/20 md:hidden transition-all duration-300 ${isMenuOpen ? 'block opacity-100' : 'hidden opacity-0'}`}>
           <div className="space-y-1">
             <button 
-              onClick={() => scrollToSection('hero')}
+              onClick={() => {
+                window.history.pushState({}, '', '/');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
               Home
+            </button>
+            <button 
+              onClick={() => {
+                window.history.pushState({}, '', '/browse-plans');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
+            >
+              Browse Plans
             </button>
             <button 
               onClick={() => scrollToSection('how-it-works')}

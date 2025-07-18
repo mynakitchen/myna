@@ -38,6 +38,50 @@ const DeliveryMap = () => {
   const [isListExpanded, setIsListExpanded] = useState(false);
   const mapRef = useRef(null);
   const mapInstanceRef = useRef(null);
+  const isMountedRef = useRef(true);
+
+  // Add error handler for leaflet-related errors
+  useEffect(() => {
+    const handleError = (event) => {
+      // Suppress leaflet-related errors during navigation
+      if (event.error && event.error.message && 
+          (event.error.message.includes('_leaflet_pos') || 
+           event.error.message.includes('leaflet') ||
+           event.error.message.includes('Cannot read properties of undefined') ||
+           event.error.message.includes('Cannot read property') ||
+           event.error.message.includes('getMapPanePos') ||
+           event.error.message.includes('getNewPixelOrigin') ||
+           event.error.message.includes('_move') ||
+           event.error.message.includes('onZoomTransitionEnd'))) {
+        event.preventDefault();
+        event.stopPropagation();
+        console.warn('Suppressed leaflet navigation error:', event.error.message);
+        return false;
+      }
+    };
+
+    const handleUnhandledRejection = (event) => {
+      if (event.reason && event.reason.message &&
+          (event.reason.message.includes('leaflet') ||
+           event.reason.message.includes('_leaflet_pos'))) {
+        event.preventDefault();
+        console.warn('Suppressed leaflet promise rejection:', event.reason.message);
+        return false;
+      }
+    };
+
+    // Add multiple event listeners for different error types
+    window.addEventListener('error', handleError, true);
+    window.addEventListener('unhandledrejection', handleUnhandledRejection, true);
+    document.addEventListener('error', handleError, true);
+
+    return () => {
+      isMountedRef.current = false;
+      window.removeEventListener('error', handleError, true);
+      window.removeEventListener('unhandledrejection', handleUnhandledRejection, true);
+      document.removeEventListener('error', handleError, true);
+    };
+  }, []);
 
   // Create an updated list of OMR coordinates including all tech parks for a more accurate route
   const omrCoordinates = [...TECH_PARKS].map(park => park.coordinates).sort((a, b) => {
@@ -58,10 +102,27 @@ const DeliveryMap = () => {
     }
 
     try {
-      // Clear any existing map
+      // Clear any existing map more thoroughly
       const mapElement = document.getElementById('map');
-      if (mapElement && mapElement._leaflet_id) {
-        mapElement._leaflet_id = null;
+      if (mapElement) {
+        // If there's an existing leaflet instance, remove it first
+        if (mapElement._leaflet_id) {
+          // Try to remove the existing map instance
+          try {
+            if (mapInstanceRef.current) {
+              // Stop all animations and transitions first
+              mapInstanceRef.current.stop();
+              // Remove all event listeners
+              mapInstanceRef.current.off();
+              // Remove the map instance
+              mapInstanceRef.current.remove();
+              mapInstanceRef.current = null;
+            }
+          } catch (e) {
+            console.warn('Error removing existing map:', e);
+          }
+          mapElement._leaflet_id = null;
+        }
         mapElement.innerHTML = '';
       }
 
@@ -77,7 +138,10 @@ const DeliveryMap = () => {
         dragging: true,
         tap: true,
         boxZoom: true,
-        keyboard: true
+        keyboard: true,
+        fadeAnimation: false, // Disable fade animations
+        zoomAnimation: false, // Disable zoom animations
+        markerZoomAnimation: false // Disable marker animations
       }).setView([12.9400, 80.2300], 12);
 
       // Store map instance
@@ -104,7 +168,9 @@ const DeliveryMap = () => {
 
       // Wait for tiles to load
       setTimeout(() => {
-        setMapLoaded(true);
+        if (mapInstanceRef.current && isMountedRef.current) { // Check if map still exists and component is mounted
+          setMapLoaded(true);
+        }
       }, 1000);
 
       try {
@@ -243,12 +309,53 @@ const DeliveryMap = () => {
 
     // Cleanup function
     return () => {
-      if (mapRef.current && mapRef.current.cleanup) {
-        mapRef.current.cleanup();
-      }
-      if (mapInstanceRef.current) {
-        mapInstanceRef.current.remove();
-        mapInstanceRef.current = null;
+      try {
+        // Mark component as unmounted
+        isMountedRef.current = false;
+        
+        // Clean up map reference functions
+        if (mapRef.current && mapRef.current.cleanup) {
+          mapRef.current.cleanup();
+        }
+        
+        // Clean up map instance more aggressively
+        if (mapInstanceRef.current) {
+          // Stop all animations and clear all timeouts
+          try {
+            mapInstanceRef.current.stop();
+            mapInstanceRef.current.off();
+            mapInstanceRef.current.closePopup();
+            mapInstanceRef.current.remove();
+          } catch (e) {
+            console.warn('Error during aggressive map cleanup:', e);
+          }
+          mapInstanceRef.current = null;
+        }
+        
+        // Clear the map element completely
+        const mapElement = document.getElementById('map');
+        if (mapElement) {
+          try {
+            mapElement._leaflet_id = null;
+            mapElement.innerHTML = '';
+            // Remove any remaining leaflet classes
+            mapElement.className = mapElement.className.replace(/leaflet-[^\s]*/g, '');
+          } catch (e) {
+            console.warn('Error clearing map element:', e);
+          }
+        }
+        
+        // Reset state only if component is unmounting
+        if (!isMountedRef.current) {
+          try {
+            setMapLoaded(false);
+            setActiveLocationId(null);
+          } catch (e) {
+            // State setting after unmount, ignore
+          }
+        }
+      } catch (error) {
+        console.warn('Error during map cleanup:', error);
       }
     };
   }, [initMap]); // Include initMap as dependency since checkLeaflet calls it

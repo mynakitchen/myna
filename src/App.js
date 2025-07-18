@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Header from './components/Header';
 import HeroSection from './components/HeroSection';
@@ -13,8 +13,11 @@ import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import { createScrollObserver } from './lib/utils';
+import MealPlanConfig from './components/MealPlanConfig';
 
 function App() {
+  const [currentPage, setCurrentPage] = useState('home');
+
   useEffect(() => {
     // Mark document as JS-enabled for CSS transitions
     document.body.classList.add('js-enabled');
@@ -98,6 +101,26 @@ function App() {
     // Setup mutation observer after initial render
     setTimeout(setupMutationObserver, 0);
 
+    // Simple client-side routing
+    const path = window.location.pathname;
+    if (path === '/browse-plans') {
+      setCurrentPage('browse-plans');
+    } else {
+      setCurrentPage('home');
+    }
+
+    // Handle browser back/forward buttons
+    const handlePopState = () => {
+      const path = window.location.pathname;
+      if (path === '/browse-plans') {
+        setCurrentPage('browse-plans');
+      } else {
+        setCurrentPage('home');
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
     // Cleanup function
     return () => {
       if (intersectionObserver) {
@@ -106,54 +129,68 @@ function App() {
       if (mutationObserver) {
         mutationObserver.disconnect();
       }
+      window.removeEventListener('popstate', handlePopState);
     };
   }, []);
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
-      <ErrorBoundary>
-        <Header />
-      </ErrorBoundary>
+      {currentPage !== 'browse-plans' && (
+        <ErrorBoundary>
+          <Header />
+        </ErrorBoundary>
+      )}
       
       <main className="relative">
-        <ErrorBoundary>
-          <HeroSection />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <ProblemStatement />
-        </ErrorBoundary>
-        
-        {/* <Features /> */}
-        
-        <ErrorBoundary>
-          <DailyMenu />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <SubscriptionPlans />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <HowItWorks />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <Testimonials />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <DeliveryMap />
-        </ErrorBoundary>
-        
-        <ErrorBoundary>
-          <FAQ />
-        </ErrorBoundary>
+        {currentPage === 'home' && (
+          <>
+            <ErrorBoundary>
+              <HeroSection />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <ProblemStatement />
+            </ErrorBoundary>
+            
+            {/* <Features /> */}
+            
+            <ErrorBoundary>
+              <DailyMenu />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <SubscriptionPlans />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <HowItWorks />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <Testimonials />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <DeliveryMap />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <FAQ />
+            </ErrorBoundary>
+          </>
+        )}
+        {currentPage === 'browse-plans' && (
+          <ErrorBoundary>
+            <MealPlanConfig />
+          </ErrorBoundary>
+        )}
       </main>
       
-      <ErrorBoundary>
-        <Footer />
-      </ErrorBoundary>
+      {currentPage !== 'browse-plans' && (
+        <ErrorBoundary>
+          <Footer />
+        </ErrorBoundary>
+      )}
     </div>
   );
 }
