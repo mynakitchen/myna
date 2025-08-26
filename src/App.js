@@ -8,12 +8,14 @@ import HowItWorks from './components/HowItWorks';
 import SubscriptionPlans from './components/SubscriptionPlans';
 import DailyMenu from './components/DailyMenu';
 import Testimonials from './components/Testimonials';
+import CorporateOrders from './components/CorporateOrders';
 import DeliveryMap from './components/DeliveryMap';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import ErrorBoundary from './components/ErrorBoundary';
 import { createScrollObserver } from './lib/utils';
 import MealPlanConfig from './components/MealPlanConfig';
+import CorporateOrderForm from './components/CorporateOrderForm';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -105,6 +107,8 @@ function App() {
     const path = window.location.pathname;
     if (path === '/browse-plans') {
       setCurrentPage('browse-plans');
+    } else if (path === '/corporate-orders') {
+      setCurrentPage('corporate-orders');
     } else {
       setCurrentPage('home');
     }
@@ -114,6 +118,8 @@ function App() {
       const path = window.location.pathname;
       if (path === '/browse-plans') {
         setCurrentPage('browse-plans');
+      } else if (path === '/corporate-orders') {
+        setCurrentPage('corporate-orders');
       } else {
         setCurrentPage('home');
       }
@@ -135,7 +141,7 @@ function App() {
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
-      {currentPage !== 'browse-plans' && (
+      {(currentPage === 'home' || currentPage === 'corporate-orders') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -171,6 +177,10 @@ function App() {
             </ErrorBoundary>
             
             <ErrorBoundary>
+              <CorporateOrders />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
               <DeliveryMap />
             </ErrorBoundary>
             
@@ -184,9 +194,14 @@ function App() {
             <MealPlanConfig />
           </ErrorBoundary>
         )}
+        {currentPage === 'corporate-orders' && (
+          <ErrorBoundary>
+            <CorporateOrderForm />
+          </ErrorBoundary>
+        )}
       </main>
       
-      {currentPage !== 'browse-plans' && (
+      {(currentPage === 'home') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>

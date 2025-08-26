@@ -1,0 +1,263 @@
+.corporate-orders-section {
+  padding: 80px 0;
+  background: #F5F1EB;
+  position: relative;
+  overflow: hidden;
+}
+
+.corporate-orders-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 300px;
+  height: 300px;
+  background: linear-gradient(45deg, #ff6b35, #f7931e);
+  border-radius: 50%;
+  opacity: 0.1;
+  transform: translate(150px, -150px);
+}
+
+.corporate-orders-section .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.content-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+.text-content .section-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.text-content .section-subtitle {
+  font-size: 1.25rem;
+  color: #ff6b35;
+  font-weight: 600;
+  margin-bottom: 32px;
+}
+
+.description p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #4a5568;
+  margin-bottom: 32px;
+}
+
+.features-content {
+  position: relative;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 18px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.feature-icon {
+  font-size: 1.2rem;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  border-radius: 8px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.feature-item h3 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 4px;
+  line-height: 1.3;
+}
+
+.feature-item p {
+  font-size: 0.8rem;
+  color: #6b7280;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.cta-text {
+  font-size: 1rem;
+  color: #4a5568;
+  font-style: italic;
+  margin-bottom: 32px !important;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(135deg, #ff6b35, #f7931e);
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 16px 32px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+}
+
+.cta-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+}
+
+.cta-button .arrow {
+  font-size: 1.2rem;
+  transition: transform 0.3s ease;
+}
+
+.cta-button:hover .arrow {
+  transform: translateX(4px);
+}
+
+/* Hide mobile features grid on desktop */
+.mobile-features-grid {
+  display: none;
+}
+
+/* Features content styling for desktop right side */
+.features-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Desktop features grid styling */
+@media (min-width: 769px) {
+  .mobile-features-grid {
+    display: none;
+  }
+  
+  .features-content .features-grid {
+    display: grid;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .corporate-orders-section {
+    padding: 60px 0;
+  }
+
+  .content-wrapper {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .text-content .section-title {
+    font-size: 2rem;
+  }
+
+  /* Hide desktop features grid on mobile */
+  .features-content .features-grid {
+    display: none;
+  }
+  
+  /* Show mobile features grid */
+  .mobile-features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 32px 0;
+  }
+
+  .mobile-features-grid .feature-item {
+    padding: 20px;
+    gap: 16px;
+  }
+  
+  .mobile-features-grid .feature-icon {
+    width: 48px;
+    height: 48px;
+    font-size: 1.5rem;
+  }
+  
+  .mobile-features-grid .feature-item h3 {
+    font-size: 1rem;
+  }
+
+  .mobile-features-grid .feature-item p {
+    font-size: 0.9rem;
+  }
+}
+
+/* Tablet adjustments */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .features-grid {
+    gap: 16px;
+  }
+  
+  .feature-item {
+    padding: 16px;
+    gap: 14px;
+  }
+  
+  .feature-icon {
+    width: 36px;
+    height: 36px;
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .corporate-orders-section .container {
+    padding: 0 16px;
+  }
+
+  .text-content .section-title {
+    font-size: 1.8rem;
+  }
+
+  .text-content .section-subtitle {
+    font-size: 1.1rem;
+  }
+
+  .description p {
+    font-size: 1rem;
+  }
+
+  .cta-button {
+    font-size: 1rem;
+    padding: 14px 24px;
+  }
+  
+  .mobile-features-grid {
+    margin: 24px 0;
+  }
+}
