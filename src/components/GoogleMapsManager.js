@@ -51,7 +51,7 @@ class GoogleMapsManager {
 
       // Load Google Maps API if not already loaded
       if (!window.google) {
-        const apiKey = 'AIzaSyAhG1wLZNpjxIit6_NAygigNJRqJFRCQK8';
+        const apiKey = 'AIzaSyAzqN5cLrBUwMgE7rDyLeGifhkc-T4-MQU';
         if (apiKey && apiKey !== 'your_google_maps_api_key_here') {
           const script = document.createElement('script');
           script.src = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&libraries=places`;
