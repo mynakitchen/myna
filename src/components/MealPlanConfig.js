@@ -122,8 +122,8 @@ const MealPlanConfig = () => {
     // Save plan data to localStorage for future reference
     localStorage.setItem('mealPlanData', JSON.stringify(planData));
     
-    // Redirect to signup page
-    window.location.href = 'https://mynakitchen.in/SignUp';
+    // Redirect to app.mynakitchen.in
+    window.location.href = 'https://app.mynakitchen.in';
   };
 
   const handleDecline = () => {
@@ -670,10 +670,10 @@ const MealPlanConfig = () => {
               {isServicableFinal ? (
                 <div className="contact-message happy-message">
                   <div className="contact-icon">🎉</div>
-                  <h3>Want to take a 3 day trial?? Sign up.</h3>
+                  <h3>Want to take a 3 day trial?? Sign in.</h3>
                   <div className="final-actions">
                     <button className="btn-primary" onClick={handleComplete}>
-                      I'm happy, Sign Up!
+                      I'm happy, Sign In!
                     </button>
                   </div>
                 </div>
@@ -686,7 +686,7 @@ const MealPlanConfig = () => {
                   </div>
                   <div className="final-actions">
                     <button className="btn-primary" onClick={handleComplete}>
-                      Sign Up for Updates
+                      Sign In for Updates
                     </button>
                     <button className="btn-secondary" onClick={handleDecline}>
                       Maybe Later

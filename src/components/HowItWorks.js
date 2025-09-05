@@ -46,13 +46,13 @@ export default function HowItWorks() {
       id: "easy-registration",
       number: "02",
       title: "Easy Registration",
-      description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign up takes just a few minutes and you'll get instant access to your account.",
+      description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign in takes just a few minutes and you'll get instant access to your account.",
       accent: "#D08C60", // Warm orange
       image: getImagePath("images/how-it-works/3.png"),
       imageAlt: "User registration form and dashboard preview",
       hasButton: true,
-      buttonText: "Sign Up Now",
-      buttonLink: "https://mynakitchen.in/SignUp"
+      buttonText: "Sign In Now",
+      buttonLink: "https://app.mynakitchen.in"
     },
     {
       id: "manage-everything",
@@ -148,7 +148,7 @@ export default function HowItWorks() {
                 className="inline-flex items-center gap-2 px-6 py-3 bg-gray-900 hover:bg-orange-600 text-white font-bold text-base border-2 border-gray-900 hover:border-orange-600 transition-all duration-300 shadow-lg hover:shadow-orange-500/25 uppercase tracking-wide mb-6 hover:scale-103 active:scale-97"
               >
                 <span className="text-lg">
-                  {step.buttonText === 'Sign Up Now' ? '📝' : '💬'}
+                  {step.buttonText === 'Sign In Now' ? '📝' : '💬'}
                 </span>
                 <span>{step.buttonText || 'Contact on WhatsApp'}</span>
               </button>
