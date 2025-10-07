@@ -178,6 +178,26 @@ const HeroSection = () => {
     <section id="hero" className="hero-section" ref={heroRef}>
       <div className="container mx-auto">
         <div className="hero-content-wrapper">
+          {/* Hero Banner */}
+          <div className="hero-banner">
+            <div className="hero-banner-content">
+              <h1 className="hero-banner-title">Fresh, home-cooked meals delivered daily</h1>
+              <p className="hero-banner-subtitle">Flexible plans. Skip or cancel anytime.</p>
+              <div className="hero-banner-actions">
+                <button
+                  onClick={() => {
+                    window.history.pushState({}, '', '/browse-plans');
+                    window.dispatchEvent(new PopStateEvent('popstate'));
+                  }}
+                  className="hero-banner-cta"
+                  aria-label="Browse plans and pricing"
+                >
+                  Browse Plans
+                </button>
+              </div>
+            </div>
+          </div>
+
           {/* Image Carousel at the top */}
           <div className="hero-gallery">
             {/* Image grid */}
@@ -212,19 +232,6 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* CTA below the carousel */}
-          <div className="mt-6 md:mt-8 flex justify-center">
-            <button
-              onClick={() => {
-                window.history.pushState({}, '', '/browse-plans');
-                window.dispatchEvent(new PopStateEvent('popstate'));
-              }}
-              className="px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-md bg-accent text-white hover:bg-warmOrange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warmOrange-600"
-              aria-label="Subscribe now and browse plans"
-            >
-              Subscribe Now
-            </button>
-          </div>
         </div>
       </div>
     </section>
