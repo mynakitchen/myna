@@ -1,20 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-/* Modern Dark Theme Variables */
-:root {
-  --background: hsl(222, 84%, 4.9%);
-  --foreground: hsl(210, 40%, 98%);
-  --muted: hsl(217, 32%, 17%);
-  --muted-foreground: hsl(215, 20%, 65%);
-  --card: hsl(222, 84%, 4.9%);
-  --card-foreground: hsl(210, 40%, 98%);
-  --border: hsl(217, 32%, 17%);
-  --primary: hsl(20, 100%, 58%);
-  --primary-foreground: hsl(0, 0%, 100%);
-  --secondary: hsl(217, 32%, 17%);
-  --myna-orange: hsl(20, 100%, 58%);
-  --myna-light: hsl(28, 100%, 64%);
-  --myna-dark: hsl(20, 88%, 50%);
+/* Light theme mapped to main page palette */
+.browse-plans {
+  --background: var(--color-secondary);
+  --foreground: var(--color-text);
+  --muted: #F3F4F6;
+  --muted-foreground: var(--color-gray-600);
+  --card: #FFFFFF;
+  --card-foreground: var(--color-text);
+  --border: #E5E7EB;
+  --primary: var(--color-primary);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--color-secondary);
+  --myna-orange: var(--color-primary);
+  --myna-light: #F5C76A;
+  --myna-dark: #B37F0A;
 }
 
 /* Main Container */
@@ -243,7 +243,7 @@
 }
 
 .step-content {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 1.5rem;
@@ -300,7 +300,7 @@
 }
 
 .diet-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 1.5rem;
@@ -371,7 +371,7 @@
 
 /* Simplified Diet Cards */
 .diet-card-simplified {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 0.75rem;
@@ -479,7 +479,7 @@
 }
 
 .meal-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 1rem;
@@ -608,7 +608,7 @@
 
 /* Simplified Meal Cards */
 .meal-card-simplified {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 0.75rem;
@@ -752,7 +752,7 @@
 
 /* Selection Summary */
 .selection-summary {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
@@ -832,7 +832,7 @@
 }
 
 .day-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 1rem;
@@ -881,7 +881,7 @@
 }
 
 .day-preview {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1rem;
@@ -933,7 +933,7 @@
 }
 
 .meal-preview-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   padding: 0.75rem;
@@ -1085,7 +1085,7 @@
 }
 
 .plan-option {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 1.5rem;
@@ -1193,7 +1193,7 @@
 
 /* Plan Cards for Step 5 */
 .plan-card {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--card);
   backdrop-filter: blur(8px);
   border: 2px solid var(--border);
   border-radius: 1.5rem;
@@ -1316,7 +1316,7 @@
 }
 
 .price-summary {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
@@ -1331,7 +1331,7 @@
 }
 
 .address-section {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
@@ -1347,7 +1347,7 @@
 .address-input {
   width: 100%;
   padding: 0.75rem;
-  background: rgba(30, 41, 59, 0.5);
+  background: #FFFFFF;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   margin-bottom: 1rem;
@@ -1396,7 +1396,7 @@
 }
 
 .delivery-charges {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
@@ -1419,7 +1419,7 @@
 }
 
 .summary-section {
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 1rem;
   padding: 1.5rem;
@@ -1437,7 +1437,7 @@
 }
 
 .pricing-summary {
-  background: rgba(30, 41, 59, 0.4);
+  background: var(--card);
   border: 2px solid var(--primary);
 }
 
@@ -1512,7 +1512,7 @@
 }
 
 .btn-secondary:hover {
-  background: rgba(30, 41, 59, 0.5);
+  background: var(--color-primary-light);
   border-color: var(--primary);
   transform: translateY(-2px);
 }
@@ -1663,7 +1663,7 @@
   padding: 1rem;
   border-radius: 0.75rem;
   border: 1px solid;
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   backdrop-filter: blur(8px);
 }
 
@@ -1757,7 +1757,7 @@
 
 .location-charges {
   padding: 1rem;
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
   backdrop-filter: blur(8px);
@@ -1792,7 +1792,7 @@
 .manual-pincode-section {
   margin-top: 1rem;
   padding: 1rem;
-  background: rgba(30, 41, 59, 0.3);
+  background: var(--card);
   border: 1px solid var(--border);
   border-radius: 0.75rem;
 }
@@ -1807,7 +1807,7 @@
 .manual-pincode-input {
   width: 100%;
   padding: 0.75rem;
-  background: rgba(30, 41, 59, 0.5);
+  background: #FFFFFF;
   border: 1px solid var(--border);
   border-radius: 0.5rem;
   font-size: 1rem;
