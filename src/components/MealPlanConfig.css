@@ -102,10 +102,11 @@
 .steps-row {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 1rem;
   overflow-x: auto;
   gap: 0.5rem;
-  padding: 0 1rem;
+  padding: 0.25rem 1rem 0 1rem; /* add top padding to avoid circle cropping */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
@@ -131,6 +132,7 @@
   min-width: 80px;
   opacity: 0.5;
   transition: all 0.3s ease;
+  padding-top: 2px; /* headroom for the circle */
 }
 
 .step-item.active {
@@ -154,6 +156,7 @@
   margin-bottom: 0.5rem;
   transition: all 0.3s ease;
   color: var(--muted-foreground);
+  box-sizing: border-box;
 }
 
 .step-item.active .step-number {
