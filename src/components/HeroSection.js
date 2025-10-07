@@ -291,7 +291,19 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Text content below the carousel - REMOVED */}
+          {/* CTA below the carousel */}
+          <div className="mt-6 md:mt-8 flex justify-center">
+            <button
+              onClick={() => {
+                window.history.pushState({}, '', '/browse-plans');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              className="px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold shadow-md bg-accent text-white hover:bg-warmOrange-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-warmOrange-600"
+              aria-label="Subscribe now and browse plans"
+            >
+              Subscribe Now
+            </button>
+          </div>
         </div>
       </div>
     </section>
