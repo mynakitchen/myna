@@ -3,6 +3,14 @@ import './CorporateOrders.css';
 
 const CorporateOrders = () => {
   const handleCorporateOrderClick = () => {
+    if (window.location.pathname === '/corporate-orders') {
+      const formEl = document.getElementById('corpForm');
+      if (formEl) {
+        const y = formEl.getBoundingClientRect().top + window.scrollY - 80;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+        return;
+      }
+    }
     window.history.pushState(null, '', '/corporate-orders');
     window.dispatchEvent(new PopStateEvent('popstate'));
   };

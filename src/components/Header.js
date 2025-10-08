@@ -153,7 +153,10 @@ const Header = () => {
               Pricing
             </button>
             <button 
-              onClick={() => scrollToSection('corporate-orders')}
+              onClick={() => {
+                window.history.pushState({}, '', '/corporate-orders');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
               Corporate Orders
@@ -198,7 +201,11 @@ const Header = () => {
               Browse Plans
             </button>
             <button 
-              onClick={() => scrollToSection('corporate-orders')}
+              onClick={() => {
+                window.history.pushState({}, '', '/corporate-orders');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
               Corporate Orders
