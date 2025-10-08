@@ -88,7 +88,7 @@ const Header = () => {
             aria-label="Go to home section"
           >
             <img 
-              src={`${process.env.PUBLIC_URL}/images/branding/myna-logo.webp`} 
+              src={`${process.env.PUBLIC_URL}/images/branding/myna-logo.webp`}
               alt="Myna Kitchen Logo" 
               className="h-10 w-auto sm:h-12 md:h-14 lg:h-16 xl:h-18 object-contain transition-all duration-200"
               style={{ maxWidth: '250px' }}
@@ -237,7 +237,7 @@ const Header = () => {
             >
               Why Us
             </button>
-            <button 
+            <button
               onClick={() => {
                 window.history.pushState({}, '', '/browse-plans');
                 window.dispatchEvent(new PopStateEvent('popstate'));
@@ -287,7 +287,7 @@ const Header = () => {
             >
               Blog
             </button>
-            <button 
+            <button
               onClick={() => {
                 window.history.pushState({}, '', '/corporate');
                 window.dispatchEvent(new PopStateEvent('popstate'));
