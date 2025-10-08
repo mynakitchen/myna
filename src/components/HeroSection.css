@@ -85,6 +85,8 @@
   width: 100%;
   max-width: 1100px;
   text-align: center;
+  position: relative;
+  padding-bottom: 4rem; /* space for absolutely positioned button */
 }
 
 .hero-banner-title {
@@ -104,8 +106,11 @@
 }
 
 .hero-banner-actions {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
 }
 
 .hero-banner-cta {
@@ -150,6 +155,26 @@
   }
   .hero-banner-subtitle {
     font-size: 0.95rem;
+  }
+}
+
+/* Tablet and up: left-align text */
+@media (min-width: 481px) {
+  .hero-banner-content {
+    text-align: left;
+  }
+}
+
+/* Mobile: center button at bottom */
+@media (max-width: 480px) {
+  .hero-banner-content {
+    padding-bottom: 4.5rem;
+  }
+  .hero-banner-actions {
+    left: 0;
+    right: 0;
+    bottom: 0.75rem;
+    justify-content: center;
   }
 }
 
@@ -367,13 +392,19 @@
 
 @media (max-width: 480px) {
   .grid-row {
-    height: 20vh;
+    height: 32vh;
+  }
+  .image-item img {
+    object-position: center 40%;
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
   .grid-row {
-    height: 22vh;
+    height: 28vh;
+  }
+  .image-item img {
+    object-position: center 45%;
   }
 }
 
