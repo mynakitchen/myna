@@ -9,6 +9,7 @@ import SubscriptionPlans from './components/SubscriptionPlans';
 import DailyMenu from './components/DailyMenu';
 import Testimonials from './components/Testimonials';
 import CorporateOrders from './components/CorporateOrders';
+import CorporateOrderHeader from './components/CorporateOrderHeader';
 import DeliveryMap from './components/DeliveryMap';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
@@ -176,9 +177,7 @@ function App() {
               <Testimonials />
             </ErrorBoundary>
             
-            <ErrorBoundary>
-              <CorporateOrders />
-            </ErrorBoundary>
+            {/* Corporate orders teaser removed from home; moved to dedicated page */}
             
             <ErrorBoundary>
               <DeliveryMap />
@@ -195,9 +194,17 @@ function App() {
           </ErrorBoundary>
         )}
         {currentPage === 'corporate-orders' && (
-          <ErrorBoundary>
-            <CorporateOrderForm />
-          </ErrorBoundary>
+          <>
+            <ErrorBoundary>
+              <CorporateOrderHeader />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <CorporateOrders />
+            </ErrorBoundary>
+            <ErrorBoundary>
+              <CorporateOrderForm showHeader={false} />
+            </ErrorBoundary>
+          </>
         )}
       </main>
       
