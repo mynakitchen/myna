@@ -12,6 +12,7 @@ import TrialCallToAction from './components/TrialCallToAction';
 import DailyMenu from './components/DailyMenu';
 import Testimonials from './components/Testimonials';
 import CorporateOrders from './components/CorporateOrders';
+import CorporateOrderHeader from './components/CorporateOrderHeader';
 import DeliveryMap from './components/DeliveryMap';
 import InstagramFeed from './components/InstagramFeed';
 import FAQ from './components/FAQ';
@@ -272,14 +273,22 @@ function App() {
           </ErrorBoundary>
         )}
         {currentPage === 'corporate-orders' && (
+        <>
           <ErrorBoundary>
-            <SEO
-              title="Corporate Catering Services"
-              description="Bulk food delivery and corporate catering services in Chennai by Myna Kitchen. Healthy, homely meals for your team."
-              canonical="/corporate-orders"
-            />
-            <CorporateOrderForm />
+            <CorporateOrderHeader />
           </ErrorBoundary>
+          <ErrorBoundary>
+            <CorporateOrders />
+          </ErrorBoundary>
+          <ErrorBoundary>
+          <SEO
+            title="Corporate Catering Services"
+            description="Bulk food delivery and corporate catering services in Chennai by Myna Kitchen. Healthy, homely meals for your team."
+            canonical="/corporate-orders"
+          />
+            <CorporateOrderForm showHeader={false} />
+          </ErrorBoundary>
+        </>
         )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>

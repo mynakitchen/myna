@@ -8,7 +8,7 @@ const supabase = createClient(
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxeW1kc21oeHNpamxtcnZsY3pvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzE4MzksImV4cCI6MjA2NjQ0NzgzOX0.5fHhlKLhOVdjPgmXYxTTz7PbyqpXsD1SGDsH-ZkSF6k"
 );
 
-const CorporateOrderForm = () => {
+const CorporateOrderForm = ({ showHeader = true }) => {
   const [formData, setFormData] = useState({
     name: '',
     phone_number: '',
@@ -72,17 +72,19 @@ const CorporateOrderForm = () => {
 
   return (
     <div className="corporate-form-page">
-      <div className="form-header">
-        <div className="container">
-          <button className="back-button" onClick={handleBackToHome}>
-            ← Back to Home
-          </button>
-          <h1 className="form-title">Corporate & Bulk Orders</h1>
-          <p className="form-subtitle">
-            Let us know your requirements and we'll create a customized meal solution for your team
-          </p>
+      {showHeader && (
+        <div className="form-header">
+          <div className="container">
+            <button className="back-button" onClick={handleBackToHome}>
+              ← Back to Home
+            </button>
+            <h1 className="form-title">Corporate & Bulk Orders</h1>
+            <p className="form-subtitle">
+              Let us know your requirements and we'll create a customized meal solution for your team
+            </p>
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="form-container">
         <div className="container">

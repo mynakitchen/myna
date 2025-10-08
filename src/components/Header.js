@@ -135,7 +135,7 @@ const Header = () => {
             >
               Home
             </button>
-            <button 
+            <button
               onClick={() => {
                 window.history.pushState({}, '', '/why-us');
                 window.dispatchEvent(new PopStateEvent('popstate'));
