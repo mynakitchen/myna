@@ -192,7 +192,7 @@ const HeroSection = () => {
                   className="hero-banner-cta"
                   aria-label="Browse plans and pricing"
                 >
-                  Browse Plans
+                  See Pricing & Plans
                 </button>
               </div>
             </div>
