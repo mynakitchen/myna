@@ -11,30 +11,47 @@ const SubscriptionPlans = () => {
   // Mobile-specific state for dynamic meal selection
   const [mobileSelectedMeals, setMobileSelectedMeals] = useState(['lunch', 'dinner']); // Default: 2 meals for mobile
 
-  // State to track pricing period (monthly vs weekly)
-  const [pricingPeriod, setPricingPeriod] = useState('monthly');
+  // State to track pricing period (bimonthly vs monthly vs weekly)
+  const [pricingPeriod, setPricingPeriod] = useState('bimonthly');
   
   // Individual pricing period state for mobile view
   const [mobilePricingPeriod, setMobilePricingPeriod] = useState({
-    'one-meal': 'monthly',
-    'two-meals': 'monthly', 
-    'three-meals': 'monthly'
+    'one-meal': 'bimonthly',
+    'two-meals': 'bimonthly', 
+    'three-meals': 'bimonthly'
   });
 
-  // Price mapping for weekly conversion
-  const weeklyPriceMapping = {
-    80: 90,
-    120: 140,
-    200: 230,
-    220: 250,
-    250: 280
+  // Price mapping for each billing cadence
+  const pricingMatrix = {
+    bimonthly: {
+      80: 80,
+      120: 120,
+      200: 200,
+      220: 220,
+      250: 250
+    },
+    monthly: {
+      80: 100,
+      120: 140,
+      200: 230,
+      220: 250,
+      250: 280
+    },
+    weekly: {
+      80: 110,
+      120: 160,
+      200: 250,
+      220: 270,
+      250: 300
+    }
   };
 
   // Function to get price based on period
   const getPrice = (basePrice, globalPeriod, planId = null, isMobile = false) => {
     // For mobile, use individual plan pricing period, for desktop use global period
     const currentPeriod = isMobile && planId ? mobilePricingPeriod[planId] : globalPeriod;
-    return currentPeriod === 'weekly' ? weeklyPriceMapping[basePrice] : basePrice;
+    const matrix = pricingMatrix[currentPeriod] || {};
+    return matrix[basePrice] ?? basePrice;
   };
 
   // Individual meal prices
@@ -446,28 +463,27 @@ const SubscriptionPlans = () => {
       }
     };
 
+    const options = [
+      { label: 'Bimonthly', value: 'bimonthly' },
+      { label: 'Monthly', value: 'monthly' },
+      { label: 'Weekly', value: 'weekly' }
+    ];
+
     return (
-      <div className={`inline-flex rounded-lg p-1 ${isMobile ? 'w-auto max-w-[160px] mx-auto mb-4' : 'mb-8'}`} style={{backgroundColor: '#f8f9fa'}}>
-        <button
-          onClick={() => handleToggle('monthly')}
-          className={`font-semibold transition-all duration-300 ease-in-out rounded-md ${
-            currentPeriod === 'monthly'
-              ? 'bg-gray-900 text-white shadow-sm'
-              : 'bg-transparent text-gray-600 hover:text-gray-900'
-          } ${isMobile ? 'px-3 py-1.5 text-xs' : 'px-6 py-2.5 text-sm'}`}
-        >
-          Monthly
-        </button>
-        <button
-          onClick={() => handleToggle('weekly')}
-          className={`font-semibold transition-all duration-300 ease-in-out rounded-md ${
-            currentPeriod === 'weekly'
-              ? 'bg-gray-900 text-white shadow-sm'
-              : 'bg-transparent text-gray-600 hover:text-gray-900'
-          } ${isMobile ? 'px-3 py-1.5 text-xs' : 'px-6 py-2.5 text-sm'}`}
-        >
-          Weekly
-        </button>
+      <div className={`inline-flex rounded-lg p-1 ${isMobile ? 'w-auto max-w-[220px] mx-auto mb-4' : 'mb-8'}`} style={{backgroundColor: '#f8f9fa'}}>
+        {options.map(option => (
+          <button
+            key={option.value}
+            onClick={() => handleToggle(option.value)}
+            className={`font-semibold transition-all duration-300 ease-in-out rounded-md ${
+              currentPeriod === option.value
+                ? 'bg-gray-900 text-white shadow-sm'
+                : 'bg-transparent text-gray-600 hover:text-gray-900'
+            } ${isMobile ? 'px-3 py-1.5 text-xs' : 'px-6 py-2.5 text-sm'}`}
+          >
+            {option.label}
+          </button>
+        ))}
       </div>
     );
   };
