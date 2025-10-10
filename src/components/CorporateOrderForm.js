@@ -254,21 +254,21 @@ const CorporateOrderForm = ({ showHeader = true }) => {
                   <h3>Need Help?</h3>
                 <div className="contact-item">
                   <span className="contact-icon">📞</span>
-                  <div>
+                  <div className="contact-item-content">
                     <strong>Call us</strong>
                     <p>+91 7418688269</p>
                   </div>
                 </div>
                 <div className="contact-item">
                   <span className="contact-icon">📧</span>
-                  <div>
+                  <div className="contact-item-content">
                     <strong>Email us</strong>
                     <p>admin@mynakitchen.in</p>
                   </div>
                 </div>
                 <div className="contact-item">
                   <span className="contact-icon">⏰</span>
-                  <div>
+                  <div className="contact-item-content">
                     <strong>Response time</strong>
                     <p>Within 24 hours</p>
                   </div>
