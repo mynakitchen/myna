@@ -1,7 +1,7 @@
 // Meal Plan Data and Utilities for Myna Kitchen
 
 export const pricingData = {
-  monthly: {
+  bimonthly: {
     breakfast: 80,
     lunch: 120,
     dinner: 120,
@@ -10,14 +10,23 @@ export const pricingData = {
     lunchDinner: 220,
     allMeals: 250
   },
-  weekly: {
-    breakfast: 90,
+  monthly: {
+    breakfast: 100,
     lunch: 140,
     dinner: 140,
     breakfastLunch: 230,
     breakfastDinner: 230,
     lunchDinner: 250,
     allMeals: 280
+  },
+  weekly: {
+    breakfast: 110,
+    lunch: 160,
+    dinner: 160,
+    breakfastLunch: 250,
+    breakfastDinner: 250,
+    lunchDinner: 270,
+    allMeals: 300
   }
 };
 
@@ -133,9 +142,10 @@ export const getMealsKey = (meals) => {
   return 'lunch'; // default
 };
 
-export const calculatePrice = (meals, planType = 'monthly') => {
+export const calculatePrice = (meals, planType = 'bimonthly') => {
   const mealsKey = getMealsKey(meals);
-  return pricingData[planType][mealsKey] || 0;
+  const planPricing = pricingData[planType] || pricingData.bimonthly;
+  return planPricing[mealsKey] || 0;
 };
 
 export const calculateDeliveryCharges = (pincode) => {

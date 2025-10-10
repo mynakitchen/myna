@@ -60,13 +60,19 @@ const IconRenderer = ({ iconType, size = 40, className = "" }) => {
   return icons[iconType] || null;
 };
 
+const planTypeLabels = {
+  bimonthly: 'Bimonthly',
+  monthly: 'Monthly',
+  weekly: 'Weekly'
+};
+
 const MealPlanConfig = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [planData, setPlanData] = useState({
     diet: '',
     meals: [],
     days: [],
-    planType: '',
+    planType: 'bimonthly',
     homeAddress: '',
     homeArea: '',
     homePincode: '',
@@ -236,6 +242,7 @@ const MealPlanConfig = () => {
               {planData.meals.length > 0 && (
                 <div className="pricing-preview">
                   <div className="price-info">
+                    <span>Bimonthly: <strong>{formatCurrency(calculatePrice(planData.meals, 'bimonthly'))}/day</strong></span>
                     <span>Monthly: <strong>{formatCurrency(calculatePrice(planData.meals, 'monthly'))}/day</strong></span>
                     <span>Weekly: <strong>{formatCurrency(calculatePrice(planData.meals, 'weekly'))}/day</strong></span>
                   </div>
@@ -357,13 +364,27 @@ const MealPlanConfig = () => {
         );
 
       case 5:
-        const dailyPrice = calculatePrice(planData.meals, planData.planType || 'monthly');
+        const selectedPlanType = planData.planType || 'bimonthly';
+        const dailyPrice = calculatePrice(planData.meals, selectedPlanType);
         return (
           <div className="step-content">
             <h2>Choose Your Plan Type</h2>
-            <p>Select between weekly or monthly pricing</p>
+            <p>Select between bimonthly, monthly or weekly pricing</p>
             
             <div className="plan-options">
+              <div 
+                className={`plan-card ${planData.planType === 'bimonthly' ? 'selected' : ''}`}
+                onClick={() => updatePlanData({ planType: 'bimonthly' })}
+              >
+                <h3>Bimonthly Plan</h3>
+                <div className="plan-price">{formatCurrency(calculatePrice(planData.meals, 'bimonthly'))}<span>/day</span></div>
+                <ul>
+                  <li>Best value</li>
+                  <li>Consistent service</li>
+                  <li>60-day commitment</li>
+                </ul>
+              </div>
+
               <div 
                 className={`plan-card ${planData.planType === 'monthly' ? 'selected' : ''}`}
                 onClick={() => updatePlanData({ planType: 'monthly' })}
@@ -371,9 +392,9 @@ const MealPlanConfig = () => {
                 <h3>Monthly Plan</h3>
                 <div className="plan-price">{formatCurrency(calculatePrice(planData.meals, 'monthly'))}<span>/day</span></div>
                 <ul>
-                  <li>Better value for money</li>
-                  <li>Consistent daily pricing</li>
-                  <li>Monthly commitment</li>
+                  <li>Balanced value</li>
+                  <li>Regular billing cycle</li>
+                  <li>30-day commitment</li>
                 </ul>
               </div>
               
@@ -394,7 +415,7 @@ const MealPlanConfig = () => {
             {planData.planType && (
               <div className="price-summary">
                 <h4>Your Plan Summary:</h4>
-                <p>Daily Price: {formatCurrency(dailyPrice)}</p>
+                <p>Daily Price ({planTypeLabels[selectedPlanType]}): {formatCurrency(dailyPrice)}</p>
                 <p>Weekly Cost: {formatCurrency(dailyPrice * planData.days.length)}</p>
               </div>
             )}
@@ -578,7 +599,8 @@ const MealPlanConfig = () => {
         );
 
       case 8:
-        const finalPrice = calculatePrice(planData.meals, planData.planType);
+        const finalPlanType = planData.planType || 'bimonthly';
+        const finalPrice = calculatePrice(planData.meals, finalPlanType);
         const weeklyTotal = finalPrice * planData.days.length;
         const deliveryCharges = calculateDeliveryCharges(planData.homePincode);
         const officeDeliveryCharges = planData.officePincode ? calculateDeliveryCharges(planData.officePincode) : null;
@@ -596,7 +618,7 @@ const MealPlanConfig = () => {
                 <p><strong>Diet:</strong> {dietOptions.find(d => d.id === planData.diet)?.name}</p>
                 <p><strong>Meals:</strong> {planData.meals.join(', ')}</p>
                 <p><strong>Plan Type:</strong> {planData.days.length === 5 ? 'Executive Plan (Mon-Fri)' : 'Daily Plan (Mon-Sun)'}</p>
-                <p><strong>Billing:</strong> {planData.planType} Plan</p>
+                <p><strong>Billing:</strong> {planTypeLabels[finalPlanType]} Plan</p>
               </div>
               
               <div className="summary-section">
