@@ -469,8 +469,12 @@ const SubscriptionPlans = () => {
       { label: 'Weekly', value: 'weekly' }
     ];
 
+    const containerClasses = isMobile
+      ? 'flex w-full max-w-sm mx-auto mb-4 gap-1'
+      : 'inline-flex mb-8 gap-2';
+
     return (
-      <div className={`inline-flex rounded-lg p-1 ${isMobile ? 'w-auto max-w-[220px] mx-auto mb-4' : 'mb-8'}`} style={{backgroundColor: '#f8f9fa'}}>
+      <div className={`${containerClasses} rounded-lg p-1`} style={{backgroundColor: '#f8f9fa'}}>
         {options.map(option => (
           <button
             key={option.value}
@@ -479,7 +483,7 @@ const SubscriptionPlans = () => {
               currentPeriod === option.value
                 ? 'bg-gray-900 text-white shadow-sm'
                 : 'bg-transparent text-gray-600 hover:text-gray-900'
-            } ${isMobile ? 'px-3 py-1.5 text-xs' : 'px-6 py-2.5 text-sm'}`}
+            } ${isMobile ? 'flex-1 min-w-0 px-3 py-1.5 text-xs whitespace-nowrap' : 'px-6 py-2.5 text-sm'}`}
           >
             {option.label}
           </button>
