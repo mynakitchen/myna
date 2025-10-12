@@ -32,6 +32,9 @@ import DailyMealsIntro from './components/DailyMealsIntro';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const navigateToSignUp = () => {
+    window.location.href = 'https://app.mynakitchen.in/signup';
+  };
 
   useEffect(() => {
     // Mark document as JS-enabled for CSS transitions
@@ -182,9 +185,9 @@ function App() {
 
   // Scroll to top when visiting policy pages and new pages
   useEffect(() => {
-    if (currentPage === 'privacy-policy' || currentPage === 'terms' || 
-        currentPage === 'why-us' || currentPage === 'menu' || 
-        currentPage === 'how-it-works' || currentPage === 'corporate' || 
+    if (currentPage === 'privacy-policy' || currentPage === 'terms' ||
+        currentPage === 'why-us' || currentPage === 'menu' ||
+        currentPage === 'how-it-works' || currentPage === 'corporate' ||
         currentPage === 'faq') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -192,8 +195,8 @@ function App() {
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
-      {(currentPage === 'home' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' || 
-        currentPage === 'terms' || currentPage === 'why-us' || currentPage === 'menu' || 
+      {(currentPage === 'home' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' ||
+        currentPage === 'terms' || currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq') && (
         <ErrorBoundary>
           <Header />
@@ -203,8 +206,8 @@ function App() {
       <main className="relative">
         {currentPage === 'home' && (
           <>
-            <SEO 
-              title="Home - Fresh Homely Meals Delivered Daily" 
+            <SEO
+              title="Home - Fresh Homely Meals Delivered Daily"
               description="Myna Kitchen delivers fresh, home-cooked meals (South & North Indian) to your doorstep in Chennai. Daily meal plans starting at ₹80."
               canonical="/"
               schema={{
@@ -222,7 +225,7 @@ function App() {
                 "geo": {
                   "@type": "GeoCoordinates",
                   "latitude": "13.0827",
-                  "longitude": "80.2707" 
+                  "longitude": "80.2707"
                 },
                 "telephone": "+91-7418688269",
                 "priceRange": "₹80 - ₹200",
@@ -260,8 +263,8 @@ function App() {
         )}
         {currentPage === 'browse-plans' && (
           <ErrorBoundary>
-            <SEO 
-              title="Meal Subscription Plans" 
+            <SEO
+              title="Meal Subscription Plans"
               description="Customize your daily meal plan. Choose from South Indian, North Indian, and specialized diet options. Flexible subscriptions."
               canonical="/browse-plans"
             />
@@ -270,8 +273,8 @@ function App() {
         )}
         {currentPage === 'corporate-orders' && (
           <ErrorBoundary>
-            <SEO 
-              title="Corporate Catering Services" 
+            <SEO
+              title="Corporate Catering Services"
               description="Bulk food delivery and corporate catering services in Chennai by Myna Kitchen. Healthy, homely meals for your team."
               canonical="/corporate-orders"
             />
@@ -280,8 +283,8 @@ function App() {
         )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>
-            <SEO 
-              title="Privacy Policy" 
+            <SEO
+              title="Privacy Policy"
               description="Privacy Policy for Myna Kitchen. How we handle your data and privacy."
               canonical="/privacy-policy"
             />
@@ -290,8 +293,8 @@ function App() {
         )}
         {currentPage === 'terms' && (
           <ErrorBoundary>
-            <SEO 
-              title="Terms and Conditions" 
+            <SEO
+              title="Terms and Conditions"
               description="Terms and Conditions for Myna Kitchen services and subscriptions."
               canonical="/terms-and-conditions"
             />
@@ -300,8 +303,8 @@ function App() {
         )}
         {currentPage === 'why-us' && (
           <ErrorBoundary>
-            <SEO 
-              title="Why Choose Us - Healthy Daily Meals" 
+            <SEO
+              title="Why Choose Us - Healthy Daily Meals"
               description="Why Myna Kitchen? We solve your daily food struggle with healthy, affordable, and timely home-cooked meals."
               canonical="/why-us"
             />
@@ -310,8 +313,8 @@ function App() {
         )}
         {currentPage === 'menu' && (
           <ErrorBoundary>
-            <SEO 
-              title="Our Daily Menu - South & North Indian Meals" 
+            <SEO
+              title="Our Daily Menu - South & North Indian Meals"
               description="Explore our daily rotating menu of South Indian and North Indian home-style meals. Over 175 dishes including diverse comfort foods."
               canonical="/menu"
             />
@@ -320,8 +323,8 @@ function App() {
         )}
         {currentPage === 'how-it-works' && (
           <ErrorBoundary>
-            <SEO 
-              title="How It Works - Meal Subscription" 
+            <SEO
+              title="How It Works - Meal Subscription"
               description="Simple 3-step process to get fresh home-cooked meals delivered to your door. Select your plan, customize your menu, and enjoy."
               canonical="/how-it-works"
             />
@@ -330,8 +333,8 @@ function App() {
         )}
         {currentPage === 'corporate' && (
           <ErrorBoundary>
-            <SEO 
-              title="Corporate Food Solutions" 
+            <SEO
+              title="Corporate Food Solutions"
               description="Employee meal programs and corporate food solutions in Chennai. Boost productivity with healthy team lunches."
               canonical="/corporate"
             />
@@ -340,8 +343,8 @@ function App() {
         )}
         {currentPage === 'faq' && (
           <ErrorBoundary>
-            <SEO 
-              title="Frequently Asked Questions" 
+            <SEO
+              title="Frequently Asked Questions"
               description="Common questions about Myna Kitchen's delivery, pricing, subscription plans, and cancellation policies."
               canonical="/faq"
             />
@@ -350,14 +353,14 @@ function App() {
         )}
       </main>
       
-      {(currentPage === 'home' || currentPage === 'privacy-policy' || currentPage === 'terms' || 
-        currentPage === 'corporate-orders' || currentPage === 'why-us' || currentPage === 'menu' || 
+      {(currentPage === 'home' || currentPage === 'privacy-policy' || currentPage === 'terms' ||
+        currentPage === 'corporate-orders' || currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>
       )}
-      
+
       {/* WhatsApp Floating Widget - Available on all pages */}
       <ErrorBoundary>
         <WhatsAppWidget />
