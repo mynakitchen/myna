@@ -391,7 +391,7 @@ const DailyMenu = () => {
   };
 
   return (
-    <div className="daily-menu bg-white">
+    <section id="daily-menu" className="daily-menu bg-white">
       <div className="container mx-auto px-4 py-12 md:py-16">
         {/* Header Section */}
         <div className="text-center mb-16">
@@ -536,7 +536,7 @@ const DailyMenu = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
