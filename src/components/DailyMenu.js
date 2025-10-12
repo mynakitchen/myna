@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect, useMemo } from "react";
-import { Helmet } from 'react-helmet-async';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { 
   faChevronLeft, 
@@ -314,49 +313,6 @@ const DailyMenu = () => {
   const [startX, setStartX] = useState(0);
   const containerRef = useRef(null);
 
-  // Generate Structured Data (Schema.org)
-  const categories = useMemo(() => [...new Set(MENU_ITEMS.map(item => item.category))], []);
-  
-  const menuSchema = {
-    "@context": "https://schema.org",
-    "@type": "Menu",
-    "name": "Myna Kitchen Daily Menu",
-    "description": "Fresh home-cooked meals including South Indian, North Indian, and Variety Rice options.",
-    "hasMenuSection": categories.map(category => ({
-      "@type": "MenuSection",
-      "name": category,
-      "hasMenuItem": MENU_ITEMS.filter(i => i.category === category).map(item => {
-        // Construct absolute image URL
-        let imageUrl = undefined;
-        if (item.images && item.images.length > 0) {
-           const imgPath = item.images[0];
-           // Remove leading slash if present to avoid double slashes
-           const cleanPath = imgPath.startsWith('/') ? imgPath.slice(1) : imgPath;
-           // If path already contains http, use as is, else append to domain
-           if (cleanPath.startsWith('http')) {
-             imageUrl = cleanPath;
-           } else {
-             // Handle potential double prefixing if PUBLIC_URL is involved
-             // We assume mynakitchen.in is the domain
-             imageUrl = `https://mynakitchen.in/${cleanPath}`;
-           }
-        }
-
-        return {
-          "@type": "MenuItem",
-          "name": item.name,
-          "description": item.description,
-          "offers": {
-            "@type": "Offer",
-            "price": item.price,
-            "priceCurrency": "INR"
-          },
-          "image": imageUrl
-        };
-      })
-    }))
-  };
-
   const filteredItems = MENU_ITEMS.filter(item => item.category === selectedCategory);
   const pageCount = Math.ceil(filteredItems.length / itemsPerPage);
   
@@ -435,16 +391,11 @@ const DailyMenu = () => {
   };
 
   return (
-    <div id="daily-menu" className="daily-menu bg-white">
-      <Helmet>
-        <script type="application/ld+json">
-          {JSON.stringify(menuSchema)}
-        </script>
-      </Helmet>
-      <div className="container mx-auto px-6 py-12 md:py-16">
+    <section id="daily-menu" className="daily-menu bg-white">
+      <div className="container mx-auto px-4 py-12 md:py-16">
         {/* Header Section */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-brown-900 mb-6">Explore Menu</h2>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-gray-900">Explore Menu</h2>
           
           {/* Main description */}
           <p className="text-lg md:text-xl text-gray-600 mb-12 max-w-3xl mx-auto leading-relaxed">
@@ -486,7 +437,7 @@ const DailyMenu = () => {
           </div>
 
           {/* Call to action section */}
-          <div className="bg-white p-6 md:p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
+          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 md:p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
             <p className="text-gray-700 mb-6 text-base md:text-lg">
               The options below are just a glimpse of what we offer. To explore our complete menu and stay updated with daily specials:
             </p>
@@ -585,7 +536,7 @@ const DailyMenu = () => {
           </div>
         )}
       </div>
-    </div>
+    </section>
   );
 };
 
@@ -606,25 +557,6 @@ function MenuItemCard({ item }) {
     setImageLoading(true);
     setImageError(false);
   }, [images, currentImageIndex]);
-  
-  // Preload adjacent images for smoother carousel transitions
-  useEffect(() => {
-    if (!images || images.length <= 1) return;
-    
-    const preloadImage = (index) => {
-      if (index >= 0 && index < images.length) {
-        const img = new Image();
-        img.src = images[index]; // Already processed by getImagePath in MENU_ITEMS
-      }
-    };
-    
-    // Preload next and previous images
-    const nextIndex = (currentImageIndex + 1) % images.length;
-    const prevIndex = currentImageIndex - 1 < 0 ? images.length - 1 : currentImageIndex - 1;
-    
-    preloadImage(nextIndex);
-    preloadImage(prevIndex);
-  }, [currentImageIndex, images]);
   
   // Safe image navigation with bounds checking
   const nextImage = () => {
@@ -657,15 +589,12 @@ function MenuItemCard({ item }) {
   // Handle image load errors
   const handleImageError = (e) => {
     console.error('Failed to load image:', images[currentImageIndex]);
-    console.error('Current image src:', e.target?.src);
-    console.error('Item name:', item.name);
     setImageError(true);
     setImageLoading(false);
   };
 
   // Reset image error when switching images and handle load success
   const handleImageLoad = () => {
-    console.log('Image loaded successfully:', images[currentImageIndex]);
     setImageError(false);
     setImageLoading(false);
   };
@@ -719,6 +648,7 @@ function MenuItemCard({ item }) {
     >
       <div 
         className="relative overflow-hidden image-carousel-container" 
+        style={{ aspectRatio: '4/3', minHeight: '200px' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -736,8 +666,7 @@ function MenuItemCard({ item }) {
             src={currentImageSrc} 
             alt={`${item.name} - ${safeCurrentIndex + 1}`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            loading="eager"
-            decoding="async"
+            style={{ objectPosition: 'center' }}
             onError={handleImageError}
             onLoad={handleImageLoad}
           />
