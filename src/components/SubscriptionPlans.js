@@ -192,6 +192,13 @@ const SubscriptionPlans = () => {
     }
   };
 
+  const navigateToBrowsePlans = () => {
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '/browse-plans');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
   const formatPrice = (amount) => {
     return `₹${amount}`;
   };
