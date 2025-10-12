@@ -156,12 +156,18 @@ function App() {
             <div className="try-now-wrapper">
               <button
                 type="button"
-                className="btn try-now-button"
+                className="try-now-button"
                 onClick={navigateToSignUp}
                 aria-label="Try Myna now"
               >
                 Try Now
               </button>
+              <p className="try-now-subtitle">
+                Grab a 3-day Myna taste test and decide if we belong in your daily routine.
+              </p>
+              <p className="try-now-stat">
+                9 out of 10 folks who take the trial stick around — the other 1 is clearly lying.
+              </p>
             </div>
             <ErrorBoundary>
               <HeroSection />
