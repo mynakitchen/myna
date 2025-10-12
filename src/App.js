@@ -12,7 +12,6 @@ import TrialCallToAction from './components/TrialCallToAction';
 import DailyMenu from './components/DailyMenu';
 import Testimonials from './components/Testimonials';
 import CorporateOrders from './components/CorporateOrders';
-import CorporateOrderHeader from './components/CorporateOrderHeader';
 import DeliveryMap from './components/DeliveryMap';
 import InstagramFeed from './components/InstagramFeed';
 import FAQ from './components/FAQ';
@@ -252,7 +251,7 @@ function App() {
             <ErrorBoundary>
               <Testimonials />
             </ErrorBoundary>
-            
+
             <ErrorBoundary>
               <InstagramFeed />
             </ErrorBoundary>

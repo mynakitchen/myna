@@ -212,6 +212,13 @@ const SubscriptionPlans = () => {
     }
   };
 
+  const navigateToBrowsePlans = () => {
+    if (typeof window !== 'undefined') {
+      window.history.pushState({}, '', '/browse-plans');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+    }
+  };
+
   const formatPrice = (amount) => {
     return `₹${amount}`;
   };
@@ -578,14 +585,14 @@ const SubscriptionPlans = () => {
             
             {/* CTA Button */}
             <button
-              onClick={() => scrollToSection('easy-registration')}
+              onClick={navigateToBrowsePlans}
               className="w-full py-3 font-bold text-sm transition-all duration-200 border-2 border-gray-900 hover:bg-gray-900 hover:text-white mt-auto rounded-md"
               style={{
                 backgroundColor: isPopular ? accentColor : 'white',
                 color: isPopular ? 'white' : '#1F2937'
               }}
             >
-              Choose Plan
+              Create Your Plan
             </button>
           </div>
         </div>
@@ -696,14 +703,14 @@ const SubscriptionPlans = () => {
                     
                     {/* CTA Button */}
                     <button
-                      onClick={() => scrollToSection('how-it-works')}
+                      onClick={navigateToBrowsePlans}
                       className="w-full py-3 lg:py-4 font-bold text-sm transition-all duration-200 border-2 border-gray-900 hover:bg-gray-900 hover:text-white mt-auto rounded-md"
                       style={{
                         backgroundColor: plan.popular ? plan.accent : 'white',
                         color: plan.popular ? 'white' : '#1F2937'
                       }}
                     >
-                      Choose Plan
+                      Create Your Plan
                     </button>
                   </div>
                 </div>
