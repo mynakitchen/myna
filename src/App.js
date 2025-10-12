@@ -19,6 +19,9 @@ import CorporateOrderForm from './components/CorporateOrderForm';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const navigateToSignUp = () => {
+    window.location.href = 'https://app.mynakitchen.in/signup';
+  };
 
   useEffect(() => {
     // Mark document as JS-enabled for CSS transitions
@@ -150,6 +153,16 @@ function App() {
       <main className="relative">
         {currentPage === 'home' && (
           <>
+            <div className="try-now-wrapper">
+              <button
+                type="button"
+                className="btn try-now-button"
+                onClick={navigateToSignUp}
+                aria-label="Try Myna now"
+              >
+                Try Now
+              </button>
+            </div>
             <ErrorBoundary>
               <HeroSection />
             </ErrorBoundary>

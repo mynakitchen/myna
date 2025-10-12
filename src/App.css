@@ -99,3 +99,61 @@
     font-size: 14px;
   }
 } 
+
+.try-now-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 40px;
+  padding: 28px 16px 32px;
+  box-sizing: border-box;
+  background-color: #f9f5f0;
+}
+
+.try-now-button {
+  margin: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 220px;
+  max-width: 320px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.try-now-button:focus {
+  outline: 3px solid rgba(230, 126, 34, 0.35);
+  outline-offset: 4px;
+}
+
+.try-now-button:active {
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.18);
+}
+
+@media (max-width: 768px) {
+  .try-now-wrapper {
+    margin-top: 50px;
+    padding: 24px 16px 20px;
+  }
+
+  .try-now-button {
+    width: 100%;
+    max-width: 280px;
+    font-size: 0.95rem;
+    padding: 14px 24px;
+  }
+}
+
+@media (max-width: 480px) {
+  .try-now-wrapper {
+    margin-top: 45px;
+    padding: 20px 16px 18px;
+  }
+
+  .try-now-button {
+    max-width: 260px;
+    padding: 12px 20px;
+  }
+}
