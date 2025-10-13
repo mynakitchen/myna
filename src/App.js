@@ -153,22 +153,35 @@ function App() {
       <main className="relative">
         {currentPage === 'home' && (
           <>
-            <div className="try-now-wrapper">
-              <button
-                type="button"
-                className="try-now-button"
-                onClick={navigateToSignUp}
-                aria-label="Try Myna now"
-              >
-                Try Now
-              </button>
-              <p className="try-now-subtitle">
-                Grab a 3-day Myna taste test and decide if we belong in your daily routine.
-              </p>
-              <p className="try-now-stat">
-                9 out of 10 folks who take the trial stick around — the other 1 is clearly lying.
-              </p>
-            </div>
+            <section className="try-now-section section-fade" aria-labelledby="try-now-heading">
+              <div className="container mx-auto">
+                <div className="hero-content-wrapper try-now-content">
+                  <div className="hero-text try-now-text">
+                    <span className="try-now-pill">Taste the routine</span>
+                    <h2 id="try-now-heading" className="hero-title try-now-heading">
+                      Try Myna for 3 days
+                    </h2>
+                    <span className="hero-subtitle try-now-subtitle">Food sorted, without the fuss</span>
+                    <p className="hero-description try-now-description">
+                      Grab a 3-day Myna taste test and decide if we belong in your daily routine.
+                    </p>
+                    <div className="hero-buttons try-now-buttons">
+                      <button
+                        type="button"
+                        className="try-now-button"
+                        onClick={navigateToSignUp}
+                        aria-label="Try Myna now"
+                      >
+                        Try Now
+                      </button>
+                    </div>
+                    <p className="hero-description try-now-stat">
+                      9 out of 10 folks who take the trial stick around, the other 1 is clearly lying.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </section>
             <ErrorBoundary>
               <HeroSection />
             </ErrorBoundary>
