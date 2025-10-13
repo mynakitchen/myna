@@ -32,9 +32,6 @@ import DailyMealsIntro from './components/DailyMealsIntro';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
-  const navigateToSignUp = () => {
-    window.location.href = 'https://app.mynakitchen.in/signup';
-  };
 
   useEffect(() => {
     // Mark document as JS-enabled for CSS transitions
