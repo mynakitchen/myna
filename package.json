@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "/myna/",
   "dependencies": {
+    "@supabase/supabase-js": "^2.45.4",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
