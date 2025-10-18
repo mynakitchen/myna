@@ -131,6 +131,8 @@ const Footer = () => {
                 e.preventDefault();
                 window.history.pushState({}, '', '/privacy-policy');
                 window.dispatchEvent(new PopStateEvent('popstate'));
+                // Force scroll-to-top for reliable behavior on deployment
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className="footer-link"
               style={{ display: 'inline', padding: 0, margin: 0, cursor: 'pointer' }}
@@ -144,6 +146,8 @@ const Footer = () => {
                 e.preventDefault();
                 window.history.pushState({}, '', '/terms-and-conditions');
                 window.dispatchEvent(new PopStateEvent('popstate'));
+                // Ensure consistent scroll-to-top behavior
+                window.scrollTo({ top: 0, behavior: 'smooth' });
               }}
               className="footer-link"
               style={{ display: 'inline', padding: 0, margin: 0, cursor: 'pointer' }}
