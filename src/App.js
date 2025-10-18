@@ -12,6 +12,8 @@ import CorporateOrders from './components/CorporateOrders';
 import DeliveryMap from './components/DeliveryMap';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
+import PrivacyPolicy from './components/PrivacyPolicy';
+import TermsAndConditions from './components/TermsAndConditions';
 import ErrorBoundary from './components/ErrorBoundary';
 import { createScrollObserver } from './lib/utils';
 import MealPlanConfig from './components/MealPlanConfig';
@@ -109,6 +111,10 @@ function App() {
       setCurrentPage('browse-plans');
     } else if (path === '/corporate-orders') {
       setCurrentPage('corporate-orders');
+    } else if (path === '/privacy-policy') {
+      setCurrentPage('privacy-policy');
+    } else if (path === '/terms-and-conditions') {
+      setCurrentPage('terms');
     } else {
       setCurrentPage('home');
     }
@@ -120,6 +126,10 @@ function App() {
         setCurrentPage('browse-plans');
       } else if (path === '/corporate-orders') {
         setCurrentPage('corporate-orders');
+      } else if (path === '/privacy-policy') {
+        setCurrentPage('privacy-policy');
+      } else if (path === '/terms-and-conditions') {
+        setCurrentPage('terms');
       } else {
         setCurrentPage('home');
       }
@@ -139,9 +149,16 @@ function App() {
     };
   }, []);
 
+  // Scroll to top when visiting policy pages
+  useEffect(() => {
+    if (currentPage === 'privacy-policy' || currentPage === 'terms') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, [currentPage]);
+
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
-      {(currentPage === 'home' || currentPage === 'corporate-orders') && (
+      {(currentPage === 'home' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' || currentPage === 'terms') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -199,9 +216,19 @@ function App() {
             <CorporateOrderForm />
           </ErrorBoundary>
         )}
+        {currentPage === 'privacy-policy' && (
+          <ErrorBoundary>
+            <PrivacyPolicy />
+          </ErrorBoundary>
+        )}
+        {currentPage === 'terms' && (
+          <ErrorBoundary>
+            <TermsAndConditions />
+          </ErrorBoundary>
+        )}
       </main>
       
-      {(currentPage === 'home') && (
+      {(currentPage === 'home' || currentPage === 'privacy-policy' || currentPage === 'terms' || currentPage === 'corporate-orders') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>

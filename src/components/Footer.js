@@ -5,12 +5,22 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   const scrollToSection = (sectionId) => {
-    const section = document.getElementById(sectionId);
-    if (section) {
-      window.scrollTo({
-        top: section.offsetTop - 80,
-        behavior: 'smooth'
-      });
+    const performScroll = () => {
+      const section = document.getElementById(sectionId);
+      if (section) {
+        window.scrollTo({
+          top: section.offsetTop - 80,
+          behavior: 'smooth'
+        });
+      }
+    };
+
+    if (window.location.pathname !== '/') {
+      window.history.pushState({}, '', '/');
+      window.dispatchEvent(new PopStateEvent('popstate'));
+      setTimeout(performScroll, 120);
+    } else {
+      performScroll();
     }
   };
   
@@ -113,7 +123,34 @@ const Footer = () => {
         {/* Bottom Copyright */}
         <div className="footer-bottom-credits">
           <p>Made with ❤️ by Myna Team</p>
-          <p>© {currentYear} • Privacy Policy • Terms</p>
+          <p>
+            © {currentYear} •{' '}
+            <a
+              href="/privacy-policy"
+              onClick={(e) => {
+                e.preventDefault();
+                window.history.pushState({}, '', '/privacy-policy');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              className="footer-link"
+              style={{ display: 'inline', padding: 0, margin: 0, cursor: 'pointer' }}
+            >
+              Privacy Policy
+            </a>
+            {' '}•{' '}
+            <a
+              href="/terms-and-conditions"
+              onClick={(e) => {
+                e.preventDefault();
+                window.history.pushState({}, '', '/terms-and-conditions');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              className="footer-link"
+              style={{ display: 'inline', padding: 0, margin: 0, cursor: 'pointer' }}
+            >
+              Terms and Conditions
+            </a>
+          </p>
         </div>
       </div>
     </footer>
