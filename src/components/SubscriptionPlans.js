@@ -178,40 +178,6 @@ const SubscriptionPlans = () => {
     }
   ];
 
-  const scrollToSection = (sectionId) => {
-    // Try multiple methods to find the element
-    let section = document.getElementById(sectionId);
-    
-    if (!section) {
-      // Fallback: try querySelector
-      section = document.querySelector(`#${sectionId}`);
-    }
-    
-    if (!section) {
-      // Fallback: try finding by attribute
-      section = document.querySelector(`[id="${sectionId}"]`);
-    }
-    
-    if (section) {
-      const rect = section.getBoundingClientRect();
-      
-      // Check if element is already visible
-      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-      
-      if (!isVisible) {
-        const offset = 80; // Account for any fixed headers
-        const elementPosition = rect.top + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
-    } else {
-      console.warn('Element not found:', sectionId);
-    }
-  };
-
   const navigateToBrowsePlans = () => {
     if (typeof window !== 'undefined') {
       window.history.pushState({}, '', '/browse-plans');
