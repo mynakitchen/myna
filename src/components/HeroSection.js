@@ -1,25 +1,33 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useMemo } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import './HeroSection.css';
+import imageMapping from '../image-mapping.json';
 
 const HeroSection = () => {
   const heroRef = useRef(null);
   const [imageErrors, setImageErrors] = useState({});
+  const [loadedImages, setLoadedImages] = useState(new Set());
   const { scrollYProgress } = useScroll({
     target: heroRef,
     offset: ["start start", "end start"]
   });
 
-  // Create transform values for sliding tiles
+  // Create transform values for sliding tiles with GPU acceleration
   const leftSlide = useTransform(scrollYProgress, [0, 1], [0, -200]);
   const rightSlide = useTransform(scrollYProgress, [0, 1], [0, 200]);
 
-  // Local food images for the grid (28 images)
-  // You can add your own images to public/images/hero/ folder
-  // Name them as hero-1.jpg, hero-2.jpg, etc.
-  const localFoodImages = Array.from({ length: 28 }, (_, i) => 
-    `/images/hero/hero-${i + 1}.jpg`
-  );
+  // Generate responsive image sources from optimized images
+  const optimizedImages = useMemo(() => {
+    return imageMapping.map((img, index) => ({
+      index,
+      baseName: img.baseName,
+      lqip: img.lqip,
+      mobile: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-mobile.webp`,
+      tablet: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-tablet.webp`,
+      desktop: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-desktop.webp`,
+      original: img.original
+    }));
+  }, []);
 
   // Fallback Unsplash images (original ones)
   const fallbackImages = [
@@ -53,16 +61,15 @@ const HeroSection = () => {
     "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?ixlib=rb-1.2.1&auto=format&fit=crop&w=1170&q=80"
   ];
 
-  // Function to get the appropriate image source
-  const getImageSource = (index) => {
-    if (imageErrors[index]) {
-      return fallbackImages[index];
-    }
-    return localFoodImages[index];
+  // Handle image load success
+  const handleImageLoad = (index) => {
+    console.log('Hero image loaded:', index);
+    setLoadedImages(prev => new Set([...prev, index]));
   };
 
-  // Handle image load errors
+  // Handle image load errors - fallback to Unsplash
   const handleImageError = (index) => {
+    console.error('Hero image failed to load:', index, optimizedImages[index]?.baseName);
     setImageErrors(prev => ({ ...prev, [index]: true }));
   };
 
@@ -158,17 +165,64 @@ const HeroSection = () => {
       const slideTransform = tileTransform === 'left' ? leftSlide : 
                            tileTransform === 'right' ? rightSlide : 0;
       
+      const imageData = optimizedImages[imageIndex];
+      const isFirstRow = rowIndex === 0;
+      const isLoaded = loadedImages.has(imageIndex);
+      const hasError = imageErrors[imageIndex];
+      
       return (
         <motion.div 
           key={`row${rowIndex+1}-${columnIndex}`}
-          className="image-item"
+          className={`image-item ${isLoaded ? 'loaded' : 'loading'}`}
           style={{ x: slideTransform }}
         >
-          <img 
-            src={getImageSource(imageIndex)} 
-            alt={`Food ${imageIndex + 1}`}
-            onError={() => handleImageError(imageIndex)}
-          />
+          {/* Low quality placeholder */}
+          {!isLoaded && imageData && (
+            <img 
+              src={imageData.lqip}
+              alt=""
+              className="image-placeholder"
+              aria-hidden="true"
+            />
+          )}
+          
+          {/* Main responsive image */}
+          {!hasError && imageData ? (
+            <picture>
+              <source 
+                media="(max-width: 480px)" 
+                srcSet={imageData.mobile}
+                type="image/webp"
+              />
+              <source 
+                media="(max-width: 768px)" 
+                srcSet={imageData.tablet}
+                type="image/webp"
+              />
+              <source 
+                media="(min-width: 769px)" 
+                srcSet={imageData.desktop}
+                type="image/webp"
+              />
+              <img 
+                src={imageData.desktop}
+                alt={`${imageData.baseName}`}
+                loading="eager"
+                decoding="async"
+                onLoad={() => handleImageLoad(imageIndex)}
+                onError={() => handleImageError(imageIndex)}
+                className="image-main"
+              />
+            </picture>
+          ) : (
+            <img 
+              src={fallbackImages[imageIndex]} 
+              alt={`Food ${imageIndex + 1}`}
+              loading={isFirstRow ? "eager" : "lazy"}
+              decoding="async"
+              className="image-main"
+            />
+          )}
         </motion.div>
       );
     }
@@ -182,30 +236,30 @@ const HeroSection = () => {
           <div className="hero-gallery">
             {/* Image grid */}
             <div className="image-grid">
-              {/* First row */}
+              {/* First row - Eager loading for above-the-fold content */}
               <div className="grid-row">
-                {localFoodImages.slice(0, 7).map((image, index) => (
+                {optimizedImages.slice(0, 7).map((image, index) => (
                   renderTile(0, index, image, index)
                 ))}
               </div>
               
-              {/* Second row */}
+              {/* Second row - Lazy loading */}
               <div className="grid-row">
-                {localFoodImages.slice(7, 14).map((image, index) => (
+                {optimizedImages.slice(7, 14).map((image, index) => (
                   renderTile(1, index, image, index + 7)
                 ))}
               </div>
               
-              {/* Third row */}
+              {/* Third row - Lazy loading */}
               <div className="grid-row">
-                {localFoodImages.slice(14, 21).map((image, index) => (
+                {optimizedImages.slice(14, 21).map((image, index) => (
                   renderTile(2, index, image, index + 14)
                 ))}
               </div>
               
-              {/* Fourth row */}
+              {/* Fourth row - Lazy loading */}
               <div className="grid-row">
-                {localFoodImages.slice(21, 28).map((image, index) => (
+                {optimizedImages.slice(21, 28).map((image, index) => (
                   renderTile(3, index, image, index + 21)
                 ))}
               </div>

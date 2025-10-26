@@ -10,6 +10,7 @@ import DailyMenu from './components/DailyMenu';
 import Testimonials from './components/Testimonials';
 import CorporateOrders from './components/CorporateOrders';
 import DeliveryMap from './components/DeliveryMap';
+import InstagramFeed from './components/InstagramFeed';
 import FAQ from './components/FAQ';
 import Footer from './components/Footer';
 import PrivacyPolicy from './components/PrivacyPolicy';
@@ -18,6 +19,7 @@ import ErrorBoundary from './components/ErrorBoundary';
 import { createScrollObserver } from './lib/utils';
 import MealPlanConfig from './components/MealPlanConfig';
 import CorporateOrderForm from './components/CorporateOrderForm';
+import WhatsAppWidget from './components/WhatsAppWidget';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -194,6 +196,10 @@ function App() {
             </ErrorBoundary>
             
             <ErrorBoundary>
+              <InstagramFeed />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
               <CorporateOrders />
             </ErrorBoundary>
             
@@ -233,6 +239,11 @@ function App() {
           <Footer />
         </ErrorBoundary>
       )}
+      
+      {/* WhatsApp Floating Widget - Available on all pages */}
+      <ErrorBoundary>
+        <WhatsAppWidget />
+      </ErrorBoundary>
     </div>
   );
 }

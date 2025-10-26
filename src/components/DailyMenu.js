@@ -437,7 +437,7 @@ const DailyMenu = () => {
           </div>
 
           {/* Call to action section */}
-          <div className="bg-gradient-to-r from-gray-50 to-gray-100 p-6 md:p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
+          <div className="bg-white p-6 md:p-8 border border-gray-200 shadow-sm max-w-2xl mx-auto">
             <p className="text-gray-700 mb-6 text-base md:text-lg">
               The options below are just a glimpse of what we offer. To explore our complete menu and stay updated with daily specials:
             </p>
@@ -558,6 +558,25 @@ function MenuItemCard({ item }) {
     setImageError(false);
   }, [images, currentImageIndex]);
   
+  // Preload adjacent images for smoother carousel transitions
+  useEffect(() => {
+    if (!images || images.length <= 1) return;
+    
+    const preloadImage = (index) => {
+      if (index >= 0 && index < images.length) {
+        const img = new Image();
+        img.src = images[index]; // Already processed by getImagePath in MENU_ITEMS
+      }
+    };
+    
+    // Preload next and previous images
+    const nextIndex = (currentImageIndex + 1) % images.length;
+    const prevIndex = currentImageIndex - 1 < 0 ? images.length - 1 : currentImageIndex - 1;
+    
+    preloadImage(nextIndex);
+    preloadImage(prevIndex);
+  }, [currentImageIndex, images]);
+  
   // Safe image navigation with bounds checking
   const nextImage = () => {
     if (!images || images.length === 0) return;
@@ -589,12 +608,15 @@ function MenuItemCard({ item }) {
   // Handle image load errors
   const handleImageError = (e) => {
     console.error('Failed to load image:', images[currentImageIndex]);
+    console.error('Current image src:', e.target?.src);
+    console.error('Item name:', item.name);
     setImageError(true);
     setImageLoading(false);
   };
 
   // Reset image error when switching images and handle load success
   const handleImageLoad = () => {
+    console.log('Image loaded successfully:', images[currentImageIndex]);
     setImageError(false);
     setImageLoading(false);
   };
@@ -648,7 +670,6 @@ function MenuItemCard({ item }) {
     >
       <div 
         className="relative overflow-hidden image-carousel-container" 
-        style={{ aspectRatio: '4/3', minHeight: '200px' }}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -666,7 +687,8 @@ function MenuItemCard({ item }) {
             src={currentImageSrc} 
             alt={`${item.name} - ${safeCurrentIndex + 1}`}
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
-            style={{ objectPosition: 'center' }}
+            loading="eager"
+            decoding="async"
             onError={handleImageError}
             onLoad={handleImageLoad}
           />

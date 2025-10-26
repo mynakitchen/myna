@@ -278,6 +278,9 @@
   gap: 0;
   background-color: #f9f5f0;
   height: 25vh;
+  /* Performance optimization for off-screen rows */
+  content-visibility: auto;
+  contain: layout style paint;
 }
 
 @media (max-width: 480px) {
@@ -310,6 +313,13 @@
   border: none;
   height: 100%;
   width: auto;
+  min-width: 0; /* Prevent flex shrinking issues */
+  /* GPU acceleration */
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  /* Prevent layout shift */
+  background-color: #f0f0f0;
 }
 
 .image-item:not(.text-tile) {
@@ -323,15 +333,85 @@
   align-items: center;
 }
 
+/* Image placeholder styles (LQIP - blur-up effect) */
+.image-item .image-placeholder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(10px);
+  transform: scale(1.1);
+  z-index: 1;
+  pointer-events: none;
+}
+
+/* Main image styles */
+.image-item .image-main {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 2;
+  opacity: 1; /* Changed from 0 to 1 for immediate visibility */
+  transition: opacity 0.4s ease-in-out, transform 0.3s ease;
+  /* GPU acceleration */
+  transform: translateZ(0);
+  will-change: opacity, transform;
+  display: block; /* Ensure proper rendering */
+  max-width: 100%;
+}
+
+/* Loaded state - fade in main image */
+.image-item.loaded .image-main {
+  opacity: 1;
+}
+
+/* Hide placeholder when image is loaded */
+.image-item.loaded .image-placeholder {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+}
+
+/* Loading state shimmer effect */
+.image-item.loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  animation: shimmer 2s infinite;
+  z-index: 3;
+  pointer-events: none;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+/* Hover effect (only when loaded) */
+.image-item.loaded:hover .image-main {
+  transform: translateZ(0) scale(1.05);
+}
+
+/* Fallback for non-webp images */
 .image-item img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.image-item:hover img {
-  transform: scale(1.05);
 }
 
 .text-tile {
@@ -426,6 +506,13 @@
     border-radius: 0;
   }
   
+  .image-item .image-main {
+    opacity: 1 !important; /* Force visibility on tablet */
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
   .text-tile {
     font-size: 2.5rem;
     margin: 0;
@@ -451,6 +538,13 @@
     border-radius: 0;
   }
   
+  .image-item .image-main {
+    opacity: 1 !important; /* Force visibility on mobile */
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  
   .text-tile {
     font-size: 1.8rem;
     margin: 0;
@@ -458,6 +552,21 @@
   
   .text-tile .text-content {
     padding: 6px 8px;
+  }
+  
+  /* Reduce animations on mobile for better performance */
+  .image-item {
+    will-change: auto;
+  }
+  
+  /* Disable hover effects on mobile */
+  .image-item:hover .image-main {
+    transform: translateZ(0) scale(1);
+  }
+  
+  /* Faster transitions on mobile */
+  .image-item .image-main {
+    transition: opacity 0.3s ease-in-out;
   }
 }
 

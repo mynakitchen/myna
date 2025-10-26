@@ -4,11 +4,11 @@
   "private": true,
   "homepage": "/myna/",
   "dependencies": {
-    "@supabase/supabase-js": "^2.45.4",
     "@fortawesome/fontawesome-svg-core": "^6.4.0",
     "@fortawesome/free-brands-svg-icons": "^6.4.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "@supabase/supabase-js": "^2.76.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "framer-motion": "^11.18.2",
@@ -29,7 +29,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d build",
+    "optimize-images": "node scripts/optimize-images.js && cp public/images/hero-optimized/image-mapping.json src/"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +54,7 @@
     "autoprefixer": "^10.4.20",
     "gh-pages": "^5.0.0",
     "postcss": "^8.4.47",
+    "sharp": "^0.34.4",
     "tailwindcss": "^3.4.17"
   }
 }

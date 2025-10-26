@@ -74,7 +74,7 @@ const Testimonials = () => {
   // Counter animation
   useEffect(() => {
     if (isVisible) {
-      const targetCount = 15000;
+      const targetCount = 35000;
       const duration = 2000;
       const increment = targetCount / (duration / 16);
       let currentCount = 0;

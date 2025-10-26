@@ -104,9 +104,9 @@ const Header = () => {
             <button 
               onClick={() => window.open('https://app.mynakitchen.in','_blank')}
               className="bg-accent text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-sm hover:bg-warmOrange-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
-              aria-label="Sign in to Myna Kitchen"
+              aria-label="Try a meal from Myna Kitchen"
             >
-              Sign In
+              Try a Meal
             </button>
             <button 
               type="button" 
@@ -177,9 +177,9 @@ const Header = () => {
             <button 
               onClick={() => handleExternalLink('https://app.mynakitchen.in')}
               className="bg-accent text-white px-6 py-2.5 rounded-full font-medium shadow-sm hover:bg-warmOrange-600 transition-colors"
-              aria-label="Sign in to Myna Kitchen"
+              aria-label="Try a meal from Myna Kitchen"
             >
-              Sign In
+              Try a Meal
             </button>
           </nav>
         </div>

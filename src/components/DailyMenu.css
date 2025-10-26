@@ -178,6 +178,8 @@
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
+  display: block; /* Remove any inline spacing */
+  max-width: 100%;
 }
 
 .menu-card:hover img {
@@ -267,6 +269,10 @@
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
+  aspect-ratio: 4 / 3;
+  min-height: 200px;
+  width: 100%;
+  background-color: #f0f0f0; /* Show container even if image fails */
 }
 
 .image-carousel-container:hover .carousel-control {
