@@ -43,11 +43,8 @@ const HeroSection = () => {
     setImageError(true);
   };
 
-  const navigateToBrowsePlans = () => {
-    if (typeof window !== 'undefined') {
-      window.history.pushState({}, '', '/browse-plans');
-      window.dispatchEvent(new PopStateEvent('popstate'));
-    }
+  const navigateToSubscribeNow = () => {
+    window.open('https://app.mynakitchen.in/signup', '_blank');
   };
 
       return (
@@ -69,7 +66,7 @@ const HeroSection = () => {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <span className="hero-badge__label">NEW</span>
-              <span className="hero-badge__content">✓ 2x Healthier Recipes</span>
+              <span className="hero-badge__content">✓ Bimonthly plans</span>
         </motion.div>
 
             <motion.h1
@@ -99,9 +96,9 @@ const HeroSection = () => {
                 <button
                 type="button"
                 className="hero-cta"
-                onClick={navigateToBrowsePlans}
+                onClick={navigateToSubscribeNow}
                 >
-                  See Pricing & Plans
+                  Subscribe Now
                 </button>
               <span className="hero-guarantee">No hidden fees • Pause anytime</span>
             </motion.div>
