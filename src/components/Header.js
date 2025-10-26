@@ -40,17 +40,27 @@ const Header = () => {
 
   const scrollToSection = (sectionId) => {
     try {
-      const section = document.getElementById(sectionId);
-      if (section) {
-        window.scrollTo({
-          top: section.offsetTop - 60,
-          behavior: 'smooth'
-        });
-        setIsMenuOpen(false);
+      const performScroll = () => {
+        const section = document.getElementById(sectionId);
+        if (section) {
+          window.scrollTo({
+            top: section.offsetTop - 60,
+            behavior: 'smooth'
+          });
+        }
+      };
+
+      if (window.location.pathname !== '/') {
+        window.history.pushState({}, '', '/');
+        window.dispatchEvent(new PopStateEvent('popstate'));
+        setTimeout(performScroll, 150);
+      } else {
+        performScroll();
       }
+
+      setIsMenuOpen(false);
     } catch (error) {
       console.error('Error scrolling to section:', error);
-      // Fallback: try simple scroll
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };

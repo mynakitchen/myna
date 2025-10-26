@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
 import './CorporateOrderForm.css';
+import { createClient } from '@supabase/supabase-js';
+
+// Initialize Supabase client once
+const supabase = createClient(
+  "https://yqymdsmhxsijlmrvlczo.supabase.co",
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxeW1kc21oeHNpamxtcnZsY3pvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzE4MzksImV4cCI6MjA2NjQ0NzgzOX0.5fHhlKLhOVdjPgmXYxTTz7PbyqpXsD1SGDsH-ZkSF6k"
+);
 
 const CorporateOrderForm = ({ showHeader = true }) => {
   const [formData, setFormData] = useState({
@@ -30,15 +37,6 @@ const CorporateOrderForm = ({ showHeader = true }) => {
     setSubmitStatus(null);
 
     try {
-      // Import Supabase client dynamically
-      const { createClient } = await import("https://esm.sh/@supabase/supabase-js");
-      
-      // Replace with your actual Supabase credentials
-      const supabase = createClient(
-        "https://yqymdsmhxsijlmrvlczo.supabase.co", 
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlxeW1kc21oeHNpamxtcnZsY3pvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTA4NzE4MzksImV4cCI6MjA2NjQ0NzgzOX0.5fHhlKLhOVdjPgmXYxTTz7PbyqpXsD1SGDsH-ZkSF6k"
-      );
-
       const { error } = await supabase.schema("myna")
         .from("bulk_order_enquries")
         .insert([formData]);
