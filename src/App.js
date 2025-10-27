@@ -180,11 +180,15 @@ function App() {
             {/* <Features /> */}
             
             <ErrorBoundary>
+              <SubscriptionPlans />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
               <DailyMenu />
             </ErrorBoundary>
             
             <ErrorBoundary>
-              <SubscriptionPlans />
+              <InstagramFeed />
             </ErrorBoundary>
             
             <ErrorBoundary>
@@ -193,10 +197,6 @@ function App() {
             
             <ErrorBoundary>
               <Testimonials />
-            </ErrorBoundary>
-            
-            <ErrorBoundary>
-              <InstagramFeed />
             </ErrorBoundary>
             
             <ErrorBoundary>

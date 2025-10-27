@@ -186,7 +186,7 @@ export default function HowItWorks() {
       </div>
       
       {/* Header Section */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight leading-none">
             How It Works
@@ -198,7 +198,7 @@ export default function HowItWorks() {
       </div>
 
       {/* Main Steps Container with modern square design */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="relative">
           {/* Modern square background with artistic elements */}
           <div className="relative bg-white shadow-2xl border border-gray-200 overflow-hidden">

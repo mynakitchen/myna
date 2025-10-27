@@ -62,20 +62,14 @@ const InstagramFeed = () => {
   }, []);
 
   return (
-    <section id="instagram-feed" className="section-fade py-12 sm:py-16 md:py-20 lg:py-32 bg-white overflow-hidden">
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+    <section id="instagram-feed" className="section-fade py-8 sm:py-12 md:py-16 lg:py-20 bg-white overflow-hidden">
+      <div className="container mx-auto px-6">
         {/* Section Header */}
-        <div className="text-center mb-8 sm:mb-12 md:mb-16">
-          <div className="inline-flex items-center justify-center mb-4 sm:mb-6">
-            <FontAwesomeIcon 
-              icon={faInstagram} 
-              className="text-4xl sm:text-5xl md:text-6xl text-transparent bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 bg-clip-text"
-            />
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 md:mb-6 text-gray-900 tracking-tight leading-tight">
-            Check us out on Instagram!
+        <div className="text-center mb-6 sm:mb-8 md:mb-10">
+          <h2 className="instagram-main-heading">
+            Check us out on Instagram
           </h2>
-          <p className="text-sm sm:text-base md:text-lg lg:text-xl text-gray-600 max-w-xs sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto mb-6 sm:mb-8">
+          <p className="instagram-description">
             Follow us for daily meal inspiration, behind-the-scenes kitchen stories, and special offers!
           </p>
           
@@ -84,10 +78,10 @@ const InstagramFeed = () => {
             href="https://www.instagram.com/mynakitchn/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-6 py-3 sm:px-8 sm:py-4 bg-gradient-to-r from-purple-600 via-pink-500 to-orange-400 text-white font-semibold rounded-full hover:shadow-lg transform hover:scale-105 transition-all duration-300"
+            className="instagram-follow-button"
           >
-            <FontAwesomeIcon icon={faInstagram} className="text-lg sm:text-xl" />
-            <span className="text-sm sm:text-base">Follow @mynakitchn</span>
+            <FontAwesomeIcon icon={faInstagram} className="instagram-button-icon" />
+            <span>Follow @mynakitchn</span>
           </a>
         </div>
 

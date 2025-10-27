@@ -85,7 +85,7 @@ const FAQ = () => {
         backgroundColor: '#F5F1EB'
       }}
     >
-      <div ref={sectionRef} className="container mx-auto px-4 md:px-6">
+      <div ref={sectionRef} className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-14 relative">
           {/* Background Eyes - Large Decorative Element */}

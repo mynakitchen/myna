@@ -111,7 +111,7 @@ const Testimonials = () => {
 
   return (
     <section id="testimonials" className="py-16 md:py-24 bg-gradient-to-b from-mutedBrown-300 via-mutedBrown-200 via-mutedBrown-100 to-white overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="container mx-auto px-6">
         {/* Customer Success Stats */}
         <div className="relative mb-24">
           <div 
