@@ -1,0 +1,398 @@
+/* Instagram Feed Section Styles */
+#instagram-feed {
+  position: relative;
+}
+
+/* Modern Instagram Heading Styles */
+.instagram-main-heading {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.instagram-description {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: clamp(0.95rem, 2vw, 1.1rem);
+  color: #666;
+  max-width: 700px;
+  margin: 0 auto 1.5rem;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* Instagram Follow Button */
+.instagram-follow-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 2rem;
+  background: linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  color: white;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  border-radius: 9999px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(131, 58, 180, 0.3);
+}
+
+.instagram-follow-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(131, 58, 180, 0.4);
+  background: linear-gradient(90deg, #9b4ac4 0%, #ff3d3d 50%, #fcc065 100%);
+}
+
+.instagram-button-icon {
+  font-size: 1.125rem;
+}
+
+/* Instagram Carousel Container */
+.instagram-carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* Instagram Horizontal Carousel */
+.instagram-carousel {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px 0;
+  margin: 0 -20px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* Hide scrollbar but keep functionality */
+.instagram-carousel::-webkit-scrollbar {
+  display: none;
+}
+
+.instagram-carousel {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Instagram Card Styling */
+.instagram-card {
+  flex: 0 0 auto;
+  width: 350px;
+  max-width: 350px;
+  scroll-snap-align: start;
+  position: relative;
+  overflow: hidden;
+  border-radius: 16px;
+  background: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.instagram-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+}
+
+.instagram-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Instagram Media Embed Styling */
+.instagram-media {
+  border: none !important;
+  box-shadow: none !important;
+  max-width: 100% !important;
+  min-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Loading Spinner */
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  margin: 0 auto;
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #e67e22;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Instagram Icon Gradient */
+.bg-gradient-to-br.from-purple-600 {
+  background: linear-gradient(135deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Follow Button Gradient */
+.bg-gradient-to-r {
+  background: linear-gradient(90deg, #833ab4 0%, #fd1d1d 50%, #fcb045 100%);
+}
+
+.bg-gradient-to-r:hover {
+  background: linear-gradient(90deg, #9b4ac4 0%, #ff3d3d 50%, #fcc065 100%);
+}
+
+/* Tablet Responsive */
+@media (max-width: 1024px) {
+  .instagram-carousel-container {
+    padding: 0 16px;
+  }
+
+  .instagram-carousel {
+    gap: 20px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .instagram-card {
+    width: 320px;
+    max-width: 320px;
+  }
+
+  .instagram-main-heading {
+    font-size: clamp(1.75rem, 4.5vw, 2.5rem);
+    margin-bottom: 0.875rem;
+  }
+
+  .instagram-description {
+    font-size: clamp(0.9rem, 2vw, 1rem);
+    margin-bottom: 1.25rem;
+    padding: 0 1rem;
+  }
+
+  .instagram-follow-button {
+    padding: 0.75rem 1.75rem;
+    font-size: 0.95rem;
+  }
+
+  .instagram-card {
+    border-radius: 12px;
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .instagram-carousel-container {
+    padding: 0 12px;
+  }
+
+  .instagram-carousel {
+    gap: 16px;
+    padding-left: 12px;
+    padding-right: 12px;
+    margin: 0 -12px;
+  }
+
+  .instagram-card {
+    width: 280px;
+    max-width: 280px;
+  }
+
+  .instagram-main-heading {
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    margin-bottom: 0.75rem;
+    padding: 0 0.5rem;
+  }
+
+  .instagram-description {
+    font-size: 0.875rem;
+    padding: 0 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .instagram-follow-button {
+    padding: 0.625rem 1.5rem;
+    font-size: 0.875rem;
+  }
+
+  .instagram-button-icon {
+    font-size: 1rem;
+  }
+
+  .instagram-card {
+    border-radius: 12px;
+  }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+  .instagram-carousel {
+    gap: 12px;
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .instagram-card {
+    width: 260px;
+    max-width: 260px;
+  }
+
+  .instagram-main-heading {
+    font-size: 1.5rem;
+    margin-bottom: 0.625rem;
+  }
+
+  .instagram-description {
+    font-size: 0.8rem;
+    margin-bottom: 0.875rem;
+  }
+
+  .instagram-follow-button {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.8rem;
+  }
+
+  .instagram-button-icon {
+    font-size: 0.9rem;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Hover effects for desktop only */
+@media (min-width: 1025px) {
+  .instagram-card {
+    cursor: pointer;
+  }
+  
+  .instagram-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(131, 58, 180, 0.05), rgba(253, 29, 29, 0.05), rgba(252, 176, 69, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    border-radius: 16px;
+    z-index: 1;
+  }
+  
+  .instagram-card:hover::before {
+    opacity: 1;
+  }
+}
+
+/* Ensure Instagram embeds are responsive */
+.instagram-media iframe {
+  max-width: 100% !important;
+}
+
+/* Loading state improvements */
+.instagram-card-inner > div {
+  width: 100%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fade-in animation support */
+#instagram-feed.section-fade {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+#instagram-feed.section-fade.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Card stagger animation */
+.instagram-card {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+.instagram-card:nth-child(1) { animation-delay: 0.1s; }
+.instagram-card:nth-child(2) { animation-delay: 0.2s; }
+.instagram-card:nth-child(3) { animation-delay: 0.3s; }
+.instagram-card:nth-child(4) { animation-delay: 0.4s; }
+.instagram-card:nth-child(5) { animation-delay: 0.5s; }
+.instagram-card:nth-child(6) { animation-delay: 0.6s; }
+.instagram-card:nth-child(7) { animation-delay: 0.7s; }
+.instagram-card:nth-child(8) { animation-delay: 0.8s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Ensure animations only play once section is visible */
+#instagram-feed:not(.active) .instagram-card {
+  animation: none;
+  opacity: 0;
+}
+
+/* Touch-friendly scrolling for mobile */
+@media (hover: none) and (pointer: coarse) {
+  .instagram-carousel {
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .instagram-card:hover {
+    transform: none;
+  }
+}
+
+/* Scroll hint indicator - optional */
+.instagram-carousel-container::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 20px;
+  bottom: 20px;
+  width: 60px;
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.9), transparent);
+  pointer-events: none;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+@media (max-width: 768px) {
+  .instagram-carousel-container::after {
+    width: 40px;
+  }
+}
+
+/* Hide scroll hint when at the end */
+.instagram-carousel-container.scrolled-end::after {
+  opacity: 0;
+}

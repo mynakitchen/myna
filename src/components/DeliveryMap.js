@@ -15,25 +15,46 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import './DeliveryMap.css';
 
-// Tech parks data
+// Tech parks data (display only - for sidebar reference)
 const TECH_PARKS = [
-  { id: 1, name: "Tidel Park", address: "4th Main Rd, TIDEL Park, Taramani", coordinates: [12.9950, 80.2450] },
-  { id: 2, name: "DLF IT Park", address: "IT Expressway, Ramapuram", coordinates: [12.9850, 80.2200] },
-  { id: 3, name: "Ascendas IT Park", address: "Rajiv Gandhi Salai, Taramani", coordinates: [12.9900, 80.2400] },
-  { id: 4, name: "Elcot IT Park", address: "Rajiv Gandhi Salai, Sholinganallur", coordinates: [12.9000, 80.2300] },
-  { id: 5, name: "SIPCOT IT Park", address: "Siruseri, Chennai", coordinates: [12.8200, 80.2100] },
-  { id: 6, name: "Mahindra World City", address: "Natham Sub Post, Chengalpattu", coordinates: [12.7800, 80.0450] },
-  { id: 7, name: "RMZ Millenia", address: "OMR, Perungudi", coordinates: [12.9600, 80.2500] },
-  { id: 8, name: "SP Infocity", address: "Perungudi, Chennai", coordinates: [12.9650, 80.2550] },
-  { id: 9, name: "Olympia Tech Park", address: "Guindy, Chennai", coordinates: [13.0100, 80.2200] },
-  { id: 10, name: "Prestige Palladium", address: "Perungudi, Chennai", coordinates: [12.9700, 80.2600] },
-  { id: 11, name: "L&T Tech Park", address: "Sholinganallur, Chennai", coordinates: [12.9100, 80.2200] },
-  { id: 12, name: "Cognizant Mahindra", address: "Sholinganallur, Chennai", coordinates: [12.9050, 80.2250] }
+  { id: 1, name: "Tidel Park", address: "4th Main Rd, TIDEL Park, Taramani" },
+  { id: 2, name: "DLF IT Park", address: "IT Expressway, Ramapuram" },
+  { id: 3, name: "Ascendas IT Park", address: "Rajiv Gandhi Salai, Taramani" },
+  { id: 4, name: "Elcot IT Park", address: "Rajiv Gandhi Salai, Sholinganallur" },
+  { id: 5, name: "SIPCOT IT Park", address: "Siruseri, Chennai" },
+  { id: 6, name: "Mahindra World City", address: "Natham Sub Post, Chengalpattu" },
+  { id: 7, name: "RMZ Millenia", address: "OMR, Perungudi" },
+  { id: 8, name: "SP Infocity", address: "Perungudi, Chennai" },
+  { id: 9, name: "Olympia Tech Park", address: "Guindy, Chennai" },
+  { id: 10, name: "Prestige Palladium", address: "Perungudi, Chennai" },
+  { id: 11, name: "L&T Tech Park", address: "Sholinganallur, Chennai" },
+  { id: 12, name: "Cognizant Mahindra", address: "Sholinganallur, Chennai" }
+];
+
+// Delivery boundary coordinates (actual map markers and polygon)
+const DELIVERY_BOUNDARY_COORDS = [
+  [12.866132855348999, 80.2359558361328],
+  [12.873913937006602, 80.23966910380574],
+  [12.892976990946948, 80.23867216462351],
+  [12.885936041723635, 80.25339143405348],
+  [13.003472960518499, 80.27353001023496],
+  [13.010822706313029, 80.25772232699096],
+  [13.014057205844791, 80.24394725437509],
+  [12.992341632114112, 80.21977350268165],
+  [12.994821265592599, 80.20252855504579],
+  [12.983097328993358, 80.1969043895086],
+  [12.94886527316704, 80.18498363957346],
+  [12.948254062224029, 80.20283561742502],
+  [12.941089197543388, 80.20561947339051],
+  [12.948306922782157, 80.21592125821894],
+  [12.929882407794363, 80.22520957939398],
+  [12.914192096854388, 80.20922956928968],
+  [12.888900328284134, 80.21164268438798],
+  [12.864973630870498, 80.21330150253483]
 ];
 
 const DeliveryMap = () => {
   const [mapLoaded, setMapLoaded] = useState(false);
-  const [activeLocationId, setActiveLocationId] = useState(null);
   const [searchQuery, setSearchQuery] = useState("");
   const [isListExpanded, setIsListExpanded] = useState(false);
   const mapRef = useRef(null);
@@ -82,12 +103,6 @@ const DeliveryMap = () => {
       document.removeEventListener('error', handleError, true);
     };
   }, []);
-
-  // Create an updated list of OMR coordinates including all tech parks for a more accurate route
-  const omrCoordinates = [...TECH_PARKS].map(park => park.coordinates).sort((a, b) => {
-    // Sort from north to south roughly (higher to lower latitude values)
-    return b[0] - a[0];
-  });
 
   // Filter locations based on search query
   const filteredLocations = TECH_PARKS.filter(park => 
@@ -174,29 +189,21 @@ const DeliveryMap = () => {
       }, 1000);
 
       try {
-        // Add OMR route as a polyline
-        if (omrCoordinates && omrCoordinates.length > 1) {
-          L.polyline(omrCoordinates, {
+        // Add delivery boundary polygon
+        if (DELIVERY_BOUNDARY_COORDS && DELIVERY_BOUNDARY_COORDS.length > 2) {
+          L.polygon(DELIVERY_BOUNDARY_COORDS, {
             color: '#D08C60',
-            weight: 6,
+            weight: 3,
             opacity: 0.8,
+            fillColor: '#D08C60',
+            fillOpacity: 0.2,
             smoothFactor: 1
           }).addTo(map);
-
-          // Add a wider background line for better visibility
-          L.polyline(omrCoordinates, {
-            color: '#ffffff',
-            weight: 10,
-            opacity: 0.5,
-            smoothFactor: 1
-          }).addTo(map);
-
-          // OMR route polyline added successfully
         }
 
-        // Add tech park markers
-        const markers = TECH_PARKS.map(park => {
-          const marker = L.marker(park.coordinates, {
+        // Add delivery location markers
+        const markers = DELIVERY_BOUNDARY_COORDS.map((coords, index) => {
+          const marker = L.marker(coords, {
             icon: L.divIcon({
               className: 'custom-marker',
               html: `<div class="marker-pin" style="background-color: #D08C60; width: 20px; height: 20px; border-radius: 50%; border: 3px solid white; box-shadow: 0 2px 4px rgba(0,0,0,0.3);"></div>`,
@@ -207,18 +214,15 @@ const DeliveryMap = () => {
 
           marker.bindPopup(`
             <div style="min-width: 200px;">
-              <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1f2937;">${park.name}</h3>
-              <p style="margin: 0 0 8px 0; color: #6b7280; font-size: 14px;">${park.address}</p>
+              <h3 style="margin: 0 0 8px 0; font-weight: bold; color: #1f2937;">Delivery Point ${index + 1}</h3>
               <div style="padding: 8px; background-color: #f3f4f6; border-radius: 4px; margin-top: 8px;">
                 <p style="margin: 0; font-size: 12px; color: #374151; font-weight: 500;">✅ Delivery Available</p>
               </div>
             </div>
           `);
 
-          return { id: park.id, marker, park };
+          return { id: index + 1, marker, coords };
         });
-
-        // Tech park markers added successfully
 
         // Add pulsing animation to markers
         const pulseInterval = setInterval(() => {
@@ -236,21 +240,14 @@ const DeliveryMap = () => {
           });
         }, 3000);
 
-        // Fit map to show all markers
-        if (markers.length > 0) {
-          const group = new L.featureGroup(markers.map(m => m.marker));
-          map.fitBounds(group.getBounds().pad(0.1));
+        // Fit map to show all markers using the polygon boundary
+        if (DELIVERY_BOUNDARY_COORDS.length > 0) {
+          const bounds = L.latLngBounds(DELIVERY_BOUNDARY_COORDS);
+          map.fitBounds(bounds.pad(0.1));
         }
 
         // Store cleanup function for when component unmounts
         mapRef.current = {
-          centerOnLocation: (locationId) => {
-            const marker = markers.find(m => m.id === locationId)?.marker;
-            if (marker) {
-              map.setView(marker.getLatLng(), 14);
-              marker.openPopup();
-            }
-          },
           cleanup: () => {
             clearInterval(pulseInterval);
           }
@@ -266,7 +263,7 @@ const DeliveryMap = () => {
       console.error('Error initializing map:', error);
       setMapLoaded(false);
     }
-  }, [omrCoordinates]); // Only include dependencies actually used in the function
+  }, []); // No dependencies needed as we use constants
 
   useEffect(() => {
     const checkLeaflet = () => {
@@ -349,7 +346,6 @@ const DeliveryMap = () => {
         if (!isMountedRef.current) {
           try {
             setMapLoaded(false);
-            setActiveLocationId(null);
           } catch (e) {
             // State setting after unmount, ignore
           }
@@ -360,43 +356,11 @@ const DeliveryMap = () => {
     };
   }, [initMap]); // Include initMap as dependency since checkLeaflet calls it
 
-  useEffect(() => {
-    if (mapLoaded && mapInstanceRef.current && activeLocationId !== null) {
-      // Find the tech park by ID
-      const park = TECH_PARKS.find(p => p.id === activeLocationId);
-      if (park && window.L) {
-        // Fly to the selected location with animation
-        mapInstanceRef.current.flyTo(park.coordinates, 14, {
-          animate: true,
-          duration: 1.5
-        });
-
-        // Open popup for the location
-        const L = window.L;
-        const marker = L.marker(park.coordinates).addTo(mapInstanceRef.current);
-        marker.bindPopup(`<b>${park.name}</b><br>${park.address}`).openPopup();
-
-        // Add cleanup to remove the marker when selection changes
-        return () => {
-          if (mapInstanceRef.current) {
-            mapInstanceRef.current.removeLayer(marker);
-          }
-        };
-      }
-    }
-  }, [activeLocationId, mapLoaded]);
-
-  // Function to handle clicking on a tech park in the list
-  const handleParkClick = (parkId) => {
-    setActiveLocationId(parkId);
-    if (mapRef.current && mapRef.current.centerOnLocation) {
-      mapRef.current.centerOnLocation(parkId);
-    }
-  };
+  // Tech parks in sidebar are display-only (no coordinates)
 
   return (
     <section id="delivery-map" className="py-12 sm:py-16 md:py-20 lg:py-32 bg-white overflow-hidden relative">
-      <div className="container mx-auto px-3 sm:px-4 md:px-6 lg:px-8">
+      <div className="container mx-auto px-6">
         <div className="text-center mb-8 sm:mb-12 md:mb-16 lg:mb-20">
           <div>
             <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold mb-4 sm:mb-5 md:mb-6 text-gray-900 tracking-tight leading-tight px-2">
@@ -483,8 +447,13 @@ const DeliveryMap = () => {
                     </button>
                     <button 
                       className="p-1 sm:p-1.5 md:p-2 hover:bg-slate-100 transition-colors focus:outline-none text-slate-700 border border-transparent hover:border-slate-300" 
-                      title="Show all locations"
-                      onClick={() => setActiveLocationId(null)}
+                      title="Reset map view"
+                      onClick={() => {
+                        if (mapInstanceRef.current && DELIVERY_BOUNDARY_COORDS.length > 0) {
+                          const bounds = window.L.latLngBounds(DELIVERY_BOUNDARY_COORDS);
+                          mapInstanceRef.current.fitBounds(bounds.pad(0.1));
+                        }
+                      }}
                     >
                       <FontAwesomeIcon icon={faBuildingUser} className="w-3 h-3 sm:w-3.5 sm:h-3.5 md:w-4 md:h-4" />
                     </button>
@@ -576,14 +545,9 @@ const DeliveryMap = () => {
                   {/* Location list with scroll */}
                   <div className="flex-1 overflow-y-auto space-y-2 sm:space-y-3">
                     {filteredLocations.length > 0 ? filteredLocations.map((park) => (
-                      <button
+                      <div
                         key={park.id}
-                        onClick={() => handleParkClick(park.id)}
-                        className={`w-full p-3 sm:p-4 text-left border-2 transition-all duration-200 font-medium hover:border-slate-700 hover:bg-slate-50 ${
-                          activeLocationId === park.id 
-                            ? 'border-slate-700 bg-slate-100 shadow-md' 
-                            : 'border-slate-300 bg-white'
-                        }`}
+                        className="w-full p-3 sm:p-4 text-left border-2 border-slate-300 bg-white"
                       >
                         <div className="flex items-start justify-between">
                           <div className="flex-1 min-w-0">
@@ -594,7 +558,7 @@ const DeliveryMap = () => {
                             <div className="w-2 h-2 sm:w-3 sm:h-3 bg-slate-700 rounded-full"></div>
                           </div>
                         </div>
-                      </button>
+                      </div>
                     )) : (
                       <div className="text-center py-6 sm:py-8 md:py-10 text-gray-500">
                         <FontAwesomeIcon icon={faSearch} className="w-8 h-8 sm:w-10 sm:h-10 md:w-12 md:h-12 mb-2 sm:mb-3 opacity-20" />

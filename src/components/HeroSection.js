@@ -53,13 +53,13 @@ const HeroSection = () => {
       <div className="hero-bg hero-bg--accent" />
       <div className="hero-container">
         <div className="hero-grid">
-        <motion.div 
+        <motion.div
             className="hero-column hero-column--content"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut' }}
           >
-        <motion.div 
+        <motion.div
               className="hero-badge"
               initial={{ opacity: 0, y: -10 }}
               animate={{ opacity: 1, y: 0 }}
@@ -84,7 +84,7 @@ const HeroSection = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.45, duration: 0.7 }}
             >
-              Flexible plans. Free Home and Office Delivery. 
+              Flexible plans. Free Home and Office Delivery.
             </motion.p>
 
         <motion.div 

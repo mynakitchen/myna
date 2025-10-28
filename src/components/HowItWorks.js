@@ -186,7 +186,7 @@ export default function HowItWorks() {
       </div>
       
       {/* Header Section */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight leading-none">
             How It Works
@@ -198,7 +198,7 @@ export default function HowItWorks() {
       </div>
 
       {/* Main Steps Container with modern square design */}
-      <div className="container mx-auto px-4 sm:px-6 md:px-6 relative z-10">
+      <div className="container mx-auto px-6 relative z-10">
         <div className="relative">
           {/* Modern square background with artistic elements */}
           <div className="relative bg-white shadow-2xl border border-gray-200 overflow-hidden">
@@ -234,69 +234,6 @@ export default function HowItWorks() {
             
             {/* Bottom accent */}
             <div className="h-1 w-full bg-gradient-to-r from-brown-600 via-orange-500 to-gray-900"></div>
-          </div>
-        </div>
-      </div>
-
-      {/* Call to Action */}
-      <div id="start-food-journey" className="container mx-auto px-4 sm:px-6 md:px-6 pt-16 relative z-10">
-        <div className="text-center">
-          <div className="bg-white shadow-2xl max-w-3xl mx-auto overflow-hidden relative border border-gray-200">
-            {/* Modern accent design */}
-            <div className="h-2 w-full bg-gradient-to-r from-gray-900 via-orange-500 to-brown-600"></div>
-            
-            {/* Tokyo-style artistic background elements */}
-            <div className="absolute inset-0 opacity-15">
-              {/* Origami-inspired triangular shapes */}
-              <div className="absolute top-8 left-8 w-0 h-0 border-l-[16px] border-r-[16px] border-b-[28px] border-l-transparent border-r-transparent border-b-orange-500 rotate-12"></div>
-              <div className="absolute bottom-8 right-8 w-0 h-0 border-l-[20px] border-r-[20px] border-t-[35px] border-l-transparent border-r-transparent border-t-brown-500 -rotate-12"></div>
-              
-              {/* Tokyo geometric patterns */}
-              <div className="absolute top-1/2 left-1/4 transform -translate-y-1/2">
-                <div className="relative w-12 h-12">
-                  <div className="absolute w-full h-full bg-gray-900 rotate-45"></div>
-                  <div className="absolute w-6 h-6 bg-orange-400 rotate-45 top-3 left-3"></div>
-                </div>
-              </div>
-              
-              {/* Artistic line patterns */}
-              <div className="absolute top-6 right-1/3 w-16 h-1 bg-brown-400 rotate-45"></div>
-              <div className="absolute top-8 right-1/3 w-12 h-1 bg-orange-400 rotate-45"></div>
-              <div className="absolute bottom-6 left-1/3 w-20 h-1 bg-gray-900 -rotate-45"></div>
-              
-              {/* Dot matrix pattern */}
-              <div className="absolute bottom-1/4 right-1/4 grid grid-cols-3 gap-1">
-                <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                <div className="w-2 h-2 bg-brown-400 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
-                <div className="w-2 h-2 bg-brown-400 rounded-full"></div>
-                <div className="w-2 h-2 bg-gray-900 rounded-full"></div>
-                <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-              </div>
-            </div>
-            
-            {/* Content */}
-            <div className="relative z-10 p-8 md:p-12">
-              <div className="flex items-center justify-center gap-3 mb-6">
-                <span className="text-2xl">🎧</span>
-                <span className="text-sm font-medium bg-primary/20 text-primary px-4 py-1.5 rounded-full">
-                  Customer Care Support
-                </span>
-              </div>
-              
-              <h3 className="text-2xl md:text-3xl font-bold mb-4">Need Help or Have Queries?</h3>
-              <p className="text-gray-600 mb-8">
-                Connect with us on WhatsApp for any queries, personalized requirements, and enquiries. Our team is here to help you with all your meal planning needs.
-              </p>
-              
-              <button
-                onClick={handleWhatsAppContact}
-                className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-white font-bold rounded-full shadow-lg hover:bg-primary-dark transition-all duration-300 hover:scale-103 active:scale-97"
-              >
-                <span className="text-xl">💬</span>
-                <span>Contact Support</span>
-              </button>
-            </div>
           </div>
         </div>
       </div>
