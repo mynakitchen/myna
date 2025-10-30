@@ -129,78 +129,19 @@
 
 .corp-logo-row {
   display: flex;
-  flex-wrap: wrap;
   gap: 16px;
 }
 
-.corp-logo-frame {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 126px;
-  min-height: 58px;
-  padding: 16px 22px;
-  border-radius: 16px;
-  border: 1px solid rgba(148, 163, 184, 0.22);
-  background: #ffffff;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 8px 24px rgba(15, 23, 42, 0.1);
-  transition: transform 140ms ease, box-shadow 200ms ease;
-}
-
-.corp-logo-frame:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(15, 23, 42, 0.15);
-}
-
-.corp-logo-with-text {
-  justify-content: flex-start;
-  gap: 12px;
-}
-
-.corp-logo-with-text img {
-  max-height: 34px;
-}
-
-.corp-logo-frame img {
-  max-height: 40px;
-  max-width: 140px;
-  width: auto;
-  height: auto;
-  object-fit: contain;
-  filter: none;
-}
-
-.corp-logo-text {
-  font-size: 0.85rem;
+.corp-logo-placeholder {
+  width: 82px;
+  height: 36px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  display: grid;
+  place-items: center;
+  color: rgba(148, 163, 184, 0.6);
   font-weight: 600;
-  color: #1f2937;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.corp-logo-fallback {
-  background: rgba(241, 245, 249, 0.9);
-  color: #1f2937;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-
-.corp-logo-fallback span {
-  font-size: 0.76rem;
-}
-
-@media (max-width: 640px) {
-  .corp-logo-frame {
-    flex: 1 1 calc(50% - 14px);
-    min-width: calc(50% - 14px);
-    min-height: 54px;
-    padding: 12px 18px;
-  }
-
-  .corp-logo-frame img {
-    max-height: 32px;
-  }
+  font-size: 1.4rem;
 }
 
 .corp-container {
