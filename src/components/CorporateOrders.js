@@ -40,10 +40,9 @@ const CorporateOrders = () => {
           <div className="corp-logos">
             <span>Trusted by teams at</span>
             <div className="corp-logo-row">
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
+              <div className="corp-logo-placeholder" aria-hidden="true">5k Car Care</div>
+              <div className="corp-logo-placeholder" aria-hidden="true">Amura Health</div>
+              <div className="corp-logo-placeholder" aria-hidden="true">Truvanta</div>
             </div>
           </div>
         </div>
