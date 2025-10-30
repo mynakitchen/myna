@@ -15,6 +15,22 @@ const CorporateOrders = () => {
     window.dispatchEvent(new PopStateEvent('popstate'));
   };
 
+  const trustedLogos = [
+    {
+      name: '5K Car Care',
+      src: 'https://5kcarcare.com/wp-content/uploads/2024/09/logo-3.png'
+    },
+    {
+      name: 'Amura Health',
+      src: 'https://amura.ai/wp-content/uploads/2022/11/amura-logo.svg'
+    },
+    {
+      name: 'Truvanta',
+      src: 'https://www.truvanta.com/api/media/file/truvanta-logo.jpg',
+      label: 'Truvanta'
+    }
+  ];
+
   return (
     <section id="corporate-orders" className="section-fade corporate-orders-section">
       <div className="corp-hero">
@@ -40,10 +56,28 @@ const CorporateOrders = () => {
           <div className="corp-logos">
             <span>Trusted by teams at</span>
             <div className="corp-logo-row">
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
-              <div className="corp-logo-placeholder" aria-hidden="true">●</div>
+              {trustedLogos.map((logo) => {
+                const frameClasses = [
+                  'corp-logo-frame',
+                  logo.fallbackText ? 'corp-logo-fallback' : '',
+                  logo.label ? 'corp-logo-with-text' : ''
+                ]
+                  .filter(Boolean)
+                  .join(' ');
+
+                return (
+                  <div key={logo.name} className={frameClasses}>
+                    {logo.src ? (
+                      <>
+                        <img src={logo.src} alt={`${logo.name} logo`} loading="lazy" />
+                        {logo.label && <span className="corp-logo-text">{logo.label}</span>}
+                      </>
+                    ) : (
+                      <span>{logo.fallbackText}</span>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
