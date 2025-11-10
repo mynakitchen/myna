@@ -23,6 +23,7 @@ import { createScrollObserver } from './lib/utils';
 import MealPlanConfig from './components/MealPlanConfig';
 import CorporateOrderForm from './components/CorporateOrderForm';
 import WhatsAppWidget from './components/WhatsAppWidget';
+import Gallery from './components/Gallery';
 import ProblemStatementPage from './components/pages/ProblemStatementPage';
 import MenuPage from './components/pages/MenuPage';
 import HowItWorksPage from './components/pages/HowItWorksPage';
@@ -122,6 +123,8 @@ function App() {
       setCurrentPage('browse-plans');
     } else if (path === '/corporate-orders') {
       setCurrentPage('corporate-orders');
+    } else if (path === '/gallery') {
+      setCurrentPage('gallery');
     } else if (path === '/privacy-policy') {
       setCurrentPage('privacy-policy');
     } else if (path === '/terms-and-conditions') {
@@ -147,6 +150,8 @@ function App() {
         setCurrentPage('browse-plans');
       } else if (path === '/corporate-orders') {
         setCurrentPage('corporate-orders');
+      } else if (path === '/gallery') {
+        setCurrentPage('gallery');
       } else if (path === '/privacy-policy') {
         setCurrentPage('privacy-policy');
       } else if (path === '/terms-and-conditions') {
@@ -185,7 +190,7 @@ function App() {
     if (currentPage === 'privacy-policy' || currentPage === 'terms' ||
         currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' ||
-        currentPage === 'faq') {
+        currentPage === 'faq' || currentPage === 'gallery') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [currentPage]);
@@ -194,7 +199,8 @@ function App() {
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
       {(currentPage === 'home' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' ||
         currentPage === 'terms' || currentPage === 'why-us' || currentPage === 'menu' ||
-        currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq') && (
+        currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq'
+        || currentPage === 'gallery') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -236,7 +242,7 @@ function App() {
             <ErrorBoundary>
               <DailyMealsIntro />
             </ErrorBoundary>
-            
+
             <ErrorBoundary>
               <SubscriptionPlans />
             </ErrorBoundary>
@@ -244,7 +250,7 @@ function App() {
             <ErrorBoundary>
               <TrialCallToAction />
             </ErrorBoundary>
-            
+
             <ErrorBoundary>
               <Testimonials />
             </ErrorBoundary>
@@ -268,18 +274,7 @@ function App() {
           </ErrorBoundary>
         )}
         {currentPage === 'corporate-orders' && (
-          <>
-            <ErrorBoundary>
-              <CorporateOrders />
-            </ErrorBoundary>
-            <ErrorBoundary>
-              <CorporateOrderForm showHeader={false} />
-            </ErrorBoundary>
-          </>
         <>
-          <ErrorBoundary>
-            <CorporateOrderHeader />
-          </ErrorBoundary>
           <ErrorBoundary>
             <CorporateOrders />
           </ErrorBoundary>
@@ -293,6 +288,11 @@ function App() {
           </ErrorBoundary>
         </>
         )}
+        {currentPage === 'gallery' && (
+                  <ErrorBoundary>
+                    <Gallery />
+                  </ErrorBoundary>
+                )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>
             <SEO
@@ -367,7 +367,8 @@ function App() {
       
       {(currentPage === 'home' || currentPage === 'privacy-policy' || currentPage === 'terms' ||
         currentPage === 'corporate-orders' || currentPage === 'why-us' || currentPage === 'menu' ||
-        currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq') && (
+        currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq'
+        || currentPage === 'gallery') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>

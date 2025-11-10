@@ -144,7 +144,7 @@ const Header = () => {
             >
               Why Us
             </button>
-            <button 
+            <button
               onClick={() => {
                 window.history.pushState({}, '', '/browse-plans');
                 window.dispatchEvent(new PopStateEvent('popstate'));
@@ -171,14 +171,20 @@ const Header = () => {
             >
               Menu
             </button>
-            <button 
+            <button
               onClick={() => {
-                window.history.pushState({}, '', '/corporate');
+                window.history.pushState({}, '', '/gallery');
                 window.dispatchEvent(new PopStateEvent('popstate'));
               }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
-              Corporate
+              Gallery
+            </button>
+            <button
+              onClick={() => scrollToSection('subscription-plans')}
+              className="text-black hover:text-primary font-medium transition-colors"
+            >
+              Pricing
             </button>
             <button 
               onClick={() => {
@@ -251,6 +257,16 @@ const Header = () => {
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
               Menu
+            </button>
+            <button
+              onClick={() => {
+                window.history.pushState({}, '', '/gallery');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
+            >
+              Gallery
             </button>
             <button 
               onClick={() => {
