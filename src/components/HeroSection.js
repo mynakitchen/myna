@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import './HeroSection.css';
 
 const heroStats = [
@@ -32,15 +32,59 @@ const heroHighlights = [
   }
 ];
 
-const HeroSection = () => {
-  const [imageError, setImageError] = useState(false);
+const heroImageSources = [
+  `${process.env.PUBLIC_URL}/images/hero/1208_x_1080_photos__28_.jpg`,
+  `${process.env.PUBLIC_URL}/images/hero/70bdb087c527b5287b5836552d155406.jpg`,
+  `${process.env.PUBLIC_URL}/images/hero/7217fa5a7fd8cf607f27dd8af2dd6131.jpg`,
+  `${process.env.PUBLIC_URL}/images/hero/81c67453e037b7fff40ee260956ddd2a.jpg`,
+  `${process.env.PUBLIC_URL}/images/hero/cdf63c34f8768539fb1d30f133f585dd.jpg`
+];
 
-  const heroImage = imageError
-    ? 'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80'
-    : `${process.env.PUBLIC_URL}/images/myna-kitchen-meals.jpg`;
+const FALLBACK_HERO_IMAGE =
+  'https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?auto=format&fit=crop&w=1200&q=80';
+
+const HeroSection = () => {
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const [useFallbackImage, setUseFallbackImage] = useState(false);
+
+  const totalImages = heroImageSources.length;
+  const currentImage =
+    !useFallbackImage && totalImages > 0
+      ? heroImageSources[activeImageIndex % totalImages]
+      : FALLBACK_HERO_IMAGE;
+
+  useEffect(() => {
+    if (useFallbackImage || totalImages <= 1) {
+      return undefined;
+    }
+
+    const interval = setInterval(() => {
+      setActiveImageIndex((prevIndex) => (prevIndex + 1) % totalImages);
+    }, 6000);
+
+    return () => clearInterval(interval);
+  }, [useFallbackImage, totalImages]);
 
   const handleImageError = () => {
-    setImageError(true);
+    setUseFallbackImage(true);
+  };
+
+  const isCarouselActive = !useFallbackImage && totalImages > 1;
+
+  const showPreviousImage = () => {
+    if (!isCarouselActive) {
+      return;
+    }
+
+    setActiveImageIndex((prevIndex) => (prevIndex - 1 + totalImages) % totalImages);
+  };
+
+  const showNextImage = () => {
+    if (!isCarouselActive) {
+      return;
+    }
+
+    setActiveImageIndex((prevIndex) => (prevIndex + 1) % totalImages);
   };
 
   const navigateToSubscribeNow = () => {
@@ -126,11 +170,19 @@ const HeroSection = () => {
           >
             <div className="hero-image">
               <div className="hero-image__glow" />
-              <img
-                src={heroImage}
-                alt="Assorted freshly prepared Myna Kitchen meals"
-                onError={handleImageError}
-              />
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={currentImage}
+                  src={currentImage}
+                  alt="Assorted freshly prepared Myna Kitchen meals"
+                  onError={handleImageError}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.6 }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                />
+              </AnimatePresence>
               <motion.div
                 className="hero-floating-card"
                 initial={{ opacity: 0, y: 20 }}
@@ -141,6 +193,26 @@ const HeroSection = () => {
                 <span className="hero-floating-card__desc">Choose from 100+ rotating recipes every week.</span>
               </motion.div>
               </div>
+              {isCarouselActive && (
+                <div className="hero-carousel-controls">
+                  <button
+                    type="button"
+                    className="hero-carousel-button hero-carousel-button--prev"
+                    onClick={showPreviousImage}
+                    aria-label="View previous meal"
+                  >
+                    ‹
+                  </button>
+                  <button
+                    type="button"
+                    className="hero-carousel-button hero-carousel-button--next"
+                    onClick={showNextImage}
+                    aria-label="View next meal"
+                  >
+                    ›
+                  </button>
+                </div>
+              )}
           </motion.div>
               </div>
               
