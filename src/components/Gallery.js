@@ -77,6 +77,16 @@ const galleryItems = rawGalleryItems.map(({ fallback, ...rest }) => {
   };
 });
 
+const handleImageLoad = (event) => {
+  const target = event?.target;
+
+  if (!target) {
+    return;
+  }
+
+  target.classList.add('loaded');
+};
+
 const handleImageError = (event, fallbackSrc = FALLBACK_IMAGE) => {
   const target = event?.target;
 
@@ -125,6 +135,7 @@ const Gallery = () => {
                   src={item.imageSrc}
                   alt={item.title}
                   loading="lazy"
+                  onLoad={handleImageLoad}
                   onError={(event) => handleImageError(event, FALLBACK_IMAGE)}
                 />
               </div>
