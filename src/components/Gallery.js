@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import './Gallery.css';
 
@@ -10,55 +10,64 @@ const rawGalleryItems = [
     slug: '1208_x_1080_photos__28_',
     fallback: 'images/hero/1208_x_1080_photos__28_.jpg',
     title: 'Seasonal Veg Spread',
-    description: 'Vibrant, locally sourced produce plated for weekday lunches.'
+    description: 'Vibrant, locally sourced produce plated for weekday lunches.',
+    category: 'Comfort Meals'
   },
   {
     slug: '70bdb087c527b5287b5836552d155406',
     fallback: 'images/hero/70bdb087c527b5287b5836552d155406.jpg',
     title: 'Comfort Meal Box',
-    description: 'All-time favourite dal, roti, and sabzi with chef specials.'
+    description: 'All-time favourite dal, roti, and sabzi with chef specials.',
+    category: 'Comfort Meals'
   },
   {
     slug: '7217fa5a7fd8cf607f27dd8af2dd6131',
     fallback: 'images/hero/7217fa5a7fd8cf607f27dd8af2dd6131.jpg',
     title: 'Protein Power Bowl',
-    description: 'Balanced portions with high-protein mains and seasonal greens.'
+    description: 'Balanced portions with high-protein mains and seasonal greens.',
+    category: 'Super Meals'
   },
   {
     slug: '81c67453e037b7fff40ee260956ddd2a',
     fallback: 'images/hero/81c67453e037b7fff40ee260956ddd2a.jpg',
     title: 'Tiffin Morning Combo',
-    description: 'South Indian classics delivered fresh with signature chutneys.'
+    description: 'South Indian classics delivered fresh with signature chutneys.',
+    category: 'Day Starters'
   },
   {
     slug: 'cdf63c34f8768539fb1d30f133f585dd',
     fallback: 'images/hero/cdf63c34f8768539fb1d30f133f585dd.jpg',
     title: 'Chef’s Dinner Curation',
-    description: 'Slow-cooked mains paired with hearty sides for indulgent nights.'
+    description: 'Slow-cooked mains paired with hearty sides for indulgent nights.',
+    category: 'Super Meals'
   },
   {
     slug: 'jackfruit-biriyani-babychillicorn-adaprathaman',
     fallback: 'images/hero/jackfruit biriyani+babychillicorn+adaprathaman.jpg',
     title: 'Jackfruit Biryani Feast',
-    description: 'A plant-based hero served with sides inspired by Tamil kitchens.'
+    description: 'A plant-based hero served with sides inspired by Tamil kitchens.',
+    category: 'Super Meals'
   },
   {
     slug: 'rice-fishcurry-keeraiporiyal-fishfry',
     fallback: 'images/hero/rice+fishcurry+keeraiporiyal+fishfry.jpg',
     title: 'Coastal Catch Platter',
-    description: 'Fresh fish curry with poriyal, double-fried fillets, and steamed rice.'
+    description: 'Fresh fish curry with poriyal, double-fried fillets, and steamed rice.',
+    category: 'Super Meals'
   },
   {
     slug: 'Mango-Milkshake',
     fallback: 'images/hero/Mango Milkshake.jpg',
     title: 'Mango Bliss Shake',
-    description: 'Sun-ripened mangoes churned into our house-favourite cooler.'
+    description: 'Sun-ripened mangoes churned into our house-favourite cooler.',
+    category: 'Add-ons'
   },
   {
     slug: 'garliccurry-rice-beanspodimas-papadam',
     fallback: 'images/hero/garliccurry rice+beanspodimas+papadam.jpg',
     title: 'Garlic Curry Meal',
-    description: 'Hearty garlic curry, beans podimas, and crisp papad for texture.'
+    description: 'Hearty garlic curry, beans podimas, and crisp papad for texture.',
+    category: 'Comfort Meals'
   }
 ];
 
@@ -101,6 +110,13 @@ const handleImageError = (event, fallbackSrc = FALLBACK_IMAGE) => {
 };
 
 const Gallery = () => {
+  const [selectedCategory, setSelectedCategory] = useState('All');
+
+  // Filter gallery items based on selected category
+  const filteredItems = selectedCategory === 'All'
+    ? galleryItems
+    : galleryItems.filter(item => item.category === selectedCategory);
+
   return (
     <section className="gallery-section section-fade" id="gallery">
       <div className="gallery-hero">
@@ -120,8 +136,44 @@ const Gallery = () => {
       </div>
 
       <div className="gallery-container">
+        {/* Gallery Category Toolbar */}
+        <div className="flex justify-center mb-12">
+          <div className="bg-gray-100 p-1.5 rounded-full shadow-sm flex flex-col md:flex-row gap-1.5 md:gap-0">
+            {/* All button - full width on mobile, inline on desktop */}
+            <div className="flex justify-center w-full md:w-auto md:flex-shrink-0">
+              <button
+                onClick={() => setSelectedCategory('All')}
+                className={`px-6 py-2.5 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
+                  selectedCategory === 'All'
+                    ? 'bg-white shadow-md text-gray-900 transform scale-105'
+                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                }`}
+              >
+                All
+              </button>
+            </div>
+
+            {/* Other category buttons */}
+            <div className="flex flex-wrap justify-center gap-1.5 md:gap-0 md:flex-1">
+              {['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-4 md:px-6 py-2.5 md:py-3 rounded-full text-sm md:text-base font-medium transition-all duration-200 ${
+                    selectedCategory === category
+                      ? 'bg-white shadow-md text-gray-900 transform scale-105'
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+
         <div className="gallery-grid">
-          {galleryItems.map((item) => (
+          {filteredItems.map((item) => (
             <motion.figure
               key={item.title}
               className="gallery-card"
