@@ -525,16 +525,29 @@ const DailyMenu = () => {
                   index === currentPage ? 'active' : ''
                 }`}
               >
-                <FontAwesomeIcon 
-                  icon={faCircle} 
+                <FontAwesomeIcon
+                  icon={faCircle}
                   className={`w-2 h-2 ${
                     index === currentPage ? 'text-gray-800' : 'text-gray-400'
-                  }`} 
+                  }`}
                 />
               </button>
             ))}
           </div>
         )}
+
+        {/* Explore More Button */}
+        <div className="flex justify-center mt-12">
+          <button
+            onClick={() => {
+              window.history.pushState({}, '', '/gallery');
+              window.dispatchEvent(new PopStateEvent('popstate'));
+            }}
+            className="pricing-cta-button inline-flex items-center gap-3"
+          >
+            <span>Explore More</span>
+          </button>
+        </div>
       </div>
     </section>
   );
