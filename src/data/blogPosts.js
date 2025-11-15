@@ -9,7 +9,7 @@ const blogPosts = [
     date: 'October 2025',
     readTime: '4 min read',
     category: 'Behind the Scenes',
-    heroImage: `${PUBLIC_URL}/images/gallery/seasonal-veg-spread.jpg`,
+    heroImage: `${PUBLIC_URL}/images/gallery/seasonal-veg-spread.webp`,
     sections: [
       {
         heading: 'Listening to the Fields',
@@ -47,7 +47,7 @@ const blogPosts = [
     date: 'September 2025',
     readTime: '3 min read',
     category: 'Top Picks',
-    heroImage: `${PUBLIC_URL}/images/gallery/comfort-meal-box.jpg`,
+    heroImage: `${PUBLIC_URL}/images/gallery/comfort-meal-box.webp`,
     sections: [
       {
         heading: 'Tamarind Dal with Millet Rotis',
@@ -85,7 +85,7 @@ const blogPosts = [
     date: 'August 2025',
     readTime: '5 min read',
     category: 'Sustainability',
-    heroImage: `${PUBLIC_URL}/images/gallery/chefs-dinner-curation.jpg`,
+    heroImage: `${PUBLIC_URL}/images/gallery/chefs-dinner-curation.webp`,
     sections: [
       {
         heading: 'Packaging with Purpose',
@@ -123,7 +123,7 @@ const blogPosts = [
     date: 'July 2025',
     readTime: '6 min read',
     category: 'Wellness',
-    heroImage: `${PUBLIC_URL}/images/gallery/protein-power-bowl.jpg`,
+    heroImage: `${PUBLIC_URL}/images/gallery/protein-power-bowl.webp`,
     sections: [
       {
         heading: 'Built Around Everyday Energy',

@@ -36,7 +36,7 @@ export default function HowItWorks() {
       title: "Browse Plans",
       description: "Explore our delicious meal plans and find the perfect fit for your lifestyle and dietary needs.",
       accent: "#825F45", // Primary brown
-      image: getImagePath("images/how-it-works/1.png"),
+      image: getImagePath("images/how-it-works/1.webp"),
       imageAlt: "Browse meal plans interface showing various food options",
       hasButton: true,
       buttonText: "Browse Plans",
@@ -48,7 +48,7 @@ export default function HowItWorks() {
       title: "Easy Registration",
       description: "Complete your registration using our simple form and receive your personalized user dashboard via email. Sign in takes just a few minutes and you'll get instant access to your account.",
       accent: "#D08C60", // Warm orange
-      image: getImagePath("images/how-it-works/3.png"),
+      image: getImagePath("images/how-it-works/3.webp"),
       imageAlt: "User registration form and dashboard preview",
       hasButton: true,
       buttonText: "Sign In Now",
@@ -60,7 +60,7 @@ export default function HowItWorks() {
       title: "Manage Everything",
       description: "Use your personalized dashboard to manage everything - add or cancel subscriptions, change delivery addresses, order delicious add-ons, and customize your meal preferences all in one place.",
       accent: "#797D62", // Sage green
-      image: getImagePath("images/how-it-works/4.png"),
+      image: getImagePath("images/how-it-works/4.webp"),
       imageAlt: "User dashboard showing subscription management features"
     },
     {
@@ -69,7 +69,7 @@ export default function HowItWorks() {
       title: "Stay Up to Date",
       description: "Stay up to date with our daily menu by joining the WhatsApp channel. See fresh meal options every day and never miss out on your favorites.",
       accent: "#997B66", // Muted brown
-      image: getImagePath("images/how-it-works/2.png"),
+      image: getImagePath("images/how-it-works/2.webp"),
       imageAlt: "WhatsApp channel interface showing daily menu updates",
       hasButton: true,
       buttonText: "Join WhatsApp Channel",
