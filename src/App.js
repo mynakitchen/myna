@@ -30,6 +30,7 @@ import HowItWorksPage from './components/pages/HowItWorksPage';
 import CorporatePage from './components/pages/CorporatePage';
 import FAQPage from './components/pages/FAQPage';
 import DailyMealsIntro from './components/DailyMealsIntro';
+import Blog from './components/Blog';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -125,6 +126,8 @@ function App() {
       setCurrentPage('corporate-orders');
     } else if (path === '/gallery') {
       setCurrentPage('gallery');
+    } else if (path === '/blog') {
+      setCurrentPage('blog');
     } else if (path === '/privacy-policy') {
       setCurrentPage('privacy-policy');
     } else if (path === '/terms-and-conditions') {
@@ -152,6 +155,8 @@ function App() {
         setCurrentPage('corporate-orders');
       } else if (path === '/gallery') {
         setCurrentPage('gallery');
+      } else if (path === '/blog') {
+        setCurrentPage('blog');
       } else if (path === '/privacy-policy') {
         setCurrentPage('privacy-policy');
       } else if (path === '/terms-and-conditions') {
@@ -190,7 +195,7 @@ function App() {
     if (currentPage === 'privacy-policy' || currentPage === 'terms' ||
         currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' ||
-        currentPage === 'faq' || currentPage === 'gallery') {
+        currentPage === 'faq' || currentPage === 'gallery' || currentPage === 'blog') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [currentPage]);
@@ -200,7 +205,7 @@ function App() {
       {(currentPage === 'home' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' ||
         currentPage === 'terms' || currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq'
-        || currentPage === 'gallery') && (
+        || currentPage === 'gallery' || currentPage === 'blog') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -289,10 +294,15 @@ function App() {
         </>
         )}
         {currentPage === 'gallery' && (
-                  <ErrorBoundary>
-                    <Gallery />
-                  </ErrorBoundary>
-                )}
+          <ErrorBoundary>
+            <Gallery />
+          </ErrorBoundary>
+        )}
+        {currentPage === 'blog' && (
+          <ErrorBoundary>
+            <Blog />
+          </ErrorBoundary>
+        )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>
             <SEO
@@ -368,7 +378,7 @@ function App() {
       {(currentPage === 'home' || currentPage === 'privacy-policy' || currentPage === 'terms' ||
         currentPage === 'corporate-orders' || currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq'
-        || currentPage === 'gallery') && (
+        || currentPage === 'gallery' || currentPage === 'blog') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>
