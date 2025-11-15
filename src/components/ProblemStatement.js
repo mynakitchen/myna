@@ -88,15 +88,15 @@ const ProblemStatement = () => {
               <div className="problem-icon">
                 {problem.icon}
               </div>
-              
+
               <h3 className="problem-title">
                 {problem.title}
               </h3>
-              
+
               <p className="problem-description">
                 {problem.description}
               </p>
-              
+
               <div className="problem-fact">
                 {problem.fact}
               </div>
