@@ -7,7 +7,7 @@ const ParallaxImageSection = () => {
     <div className="parallax-image-container">
       <div className="parallax-image-wrapper">
         <img 
-          src={`${process.env.PUBLIC_URL}/images/myna-kitchen-meals-optimized.webp`}
+          src={`${process.env.PUBLIC_URL}/images/branding/myna-kitchen-meals-optimized.webp`}
           alt="Myna Kitchen meal containers showcasing various South Indian dishes"
           className="parallax-image"
           loading="eager"

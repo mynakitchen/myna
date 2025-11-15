@@ -77,14 +77,14 @@ export const dietOptions = [
     name: 'Vegetarian',
     icon: 'veg',
     description: 'Pure vegetarian meals with fresh vegetables, grains, and plant-based proteins',
-    image: '/images/hero/1208_x_1080_photos__28_.jpg'
+    image: '/images/gallery/seasonal-veg-spread.jpg'
   },
   {
     id: 'non-vegetarian', 
     name: 'Non-Vegetarian',
     icon: 'non-veg',
     description: 'Balanced mix of vegetarian and non-vegetarian meals for variety and nutrition',
-    image: '/images/hero/70bdb087c527b5287b5836552d155406.jpg'
+    image: '/images/gallery/comfort-meal-box.jpg'
   }
 ];
 
@@ -95,7 +95,7 @@ export const mealOptions = [
     icon: 'sunrise',
     description: 'Start your day right with nutritious morning meals',
     time: '7:30 AM - 9:00 AM',
-    image: '/images/hero/1208_x_1080_photos__28_.jpg',
+    image: '/images/gallery/seasonal-veg-spread.jpg',
     type: 'regular'
   },
   {
@@ -104,7 +104,7 @@ export const mealOptions = [
     icon: 'sun',
     description: 'Satisfying midday meals to keep you energized',
     time: '11:30 AM - 1:00 PM',
-    image: '/images/hero/70bdb087c527b5287b5836552d155406.jpg',
+    image: '/images/gallery/comfort-meal-box.jpg',
     type: 'super'
   },
   {
@@ -113,7 +113,7 @@ export const mealOptions = [
     icon: 'moon',
     description: 'End your day with comforting home-style meals',
     time: '7:00 PM - 8:30 PM',
-    image: '/images/hero/51ho3ce412c.webp.jpeg',
+    image: '/images/gallery/meal-plan-family-pack.jpg',
     type: 'regular'
   }
 ];

@@ -3,68 +3,68 @@ import { motion } from 'framer-motion';
 import './Gallery.css';
 
 const PUBLIC_URL = process.env.PUBLIC_URL || '';
-const FALLBACK_IMAGE = `${PUBLIC_URL}/images/myna-kitchen-meals.jpg`;
+const FALLBACK_IMAGE = `${PUBLIC_URL}/images/branding/myna-kitchen-meals.jpg`;
 
 const rawGalleryItems = [
   {
     slug: '1208_x_1080_photos__28_',
-    fallback: 'images/hero/1208_x_1080_photos__28_.jpg',
+    fallback: 'images/gallery/seasonal-veg-spread.jpg',
     title: 'Seasonal Veg Spread',
     description: 'Vibrant, locally sourced produce plated for weekday lunches.',
     category: 'Comfort Meals'
   },
   {
     slug: '70bdb087c527b5287b5836552d155406',
-    fallback: 'images/hero/70bdb087c527b5287b5836552d155406.jpg',
+    fallback: 'images/gallery/comfort-meal-box.jpg',
     title: 'Comfort Meal Box',
     description: 'All-time favourite dal, roti, and sabzi with chef specials.',
     category: 'Comfort Meals'
   },
   {
     slug: '7217fa5a7fd8cf607f27dd8af2dd6131',
-    fallback: 'images/hero/7217fa5a7fd8cf607f27dd8af2dd6131.jpg',
+    fallback: 'images/gallery/protein-power-bowl.jpg',
     title: 'Protein Power Bowl',
     description: 'Balanced portions with high-protein mains and seasonal greens.',
     category: 'Super Meals'
   },
   {
     slug: '81c67453e037b7fff40ee260956ddd2a',
-    fallback: 'images/hero/81c67453e037b7fff40ee260956ddd2a.jpg',
+    fallback: 'images/gallery/tiffin-morning-combo.jpg',
     title: 'Tiffin Morning Combo',
     description: 'South Indian classics delivered fresh with signature chutneys.',
     category: 'Day Starters'
   },
   {
     slug: 'cdf63c34f8768539fb1d30f133f585dd',
-    fallback: 'images/hero/cdf63c34f8768539fb1d30f133f585dd.jpg',
+    fallback: 'images/gallery/chefs-dinner-curation.jpg',
     title: 'Chef’s Dinner Curation',
     description: 'Slow-cooked mains paired with hearty sides for indulgent nights.',
     category: 'Super Meals'
   },
   {
     slug: 'jackfruit-biriyani-babychillicorn-adaprathaman',
-    fallback: 'images/hero/jackfruit biriyani+babychillicorn+adaprathaman.jpg',
+    fallback: 'images/gallery/jackfruit-biryani-feast.jpg',
     title: 'Jackfruit Biryani Feast',
     description: 'A plant-based hero served with sides inspired by Tamil kitchens.',
     category: 'Super Meals'
   },
   {
     slug: 'rice-fishcurry-keeraiporiyal-fishfry',
-    fallback: 'images/hero/rice+fishcurry+keeraiporiyal+fishfry.jpg',
+    fallback: 'images/gallery/coastal-catch-platter.jpg',
     title: 'Coastal Catch Platter',
     description: 'Fresh fish curry with poriyal, double-fried fillets, and steamed rice.',
     category: 'Super Meals'
   },
   {
     slug: 'Mango-Milkshake',
-    fallback: 'images/hero/Mango Milkshake.jpg',
+    fallback: 'images/gallery/mango-bliss-shake.jpg',
     title: 'Mango Bliss Shake',
     description: 'Sun-ripened mangoes churned into our house-favourite cooler.',
     category: 'Add-ons'
   },
   {
     slug: 'garliccurry-rice-beanspodimas-papadam',
-    fallback: 'images/hero/garliccurry rice+beanspodimas+papadam.jpg',
+    fallback: 'images/gallery/garlic-curry-meal.jpg',
     title: 'Garlic Curry Meal',
     description: 'Hearty garlic curry, beans podimas, and crisp papad for texture.',
     category: 'Comfort Meals'

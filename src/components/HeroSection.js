@@ -33,11 +33,11 @@ const heroHighlights = [
 ];
 
 const heroImageSources = [
-  `${process.env.PUBLIC_URL}/images/hero/1208_x_1080_photos__28_.jpg`,
-  `${process.env.PUBLIC_URL}/images/hero/70bdb087c527b5287b5836552d155406.jpg`,
-  `${process.env.PUBLIC_URL}/images/hero/7217fa5a7fd8cf607f27dd8af2dd6131.jpg`,
-  `${process.env.PUBLIC_URL}/images/hero/81c67453e037b7fff40ee260956ddd2a.jpg`,
-  `${process.env.PUBLIC_URL}/images/hero/cdf63c34f8768539fb1d30f133f585dd.jpg`
+  `${process.env.PUBLIC_URL}/images/gallery/seasonal-veg-spread.jpg`,
+  `${process.env.PUBLIC_URL}/images/gallery/comfort-meal-box.jpg`,
+  `${process.env.PUBLIC_URL}/images/gallery/protein-power-bowl.jpg`,
+  `${process.env.PUBLIC_URL}/images/gallery/tiffin-morning-combo.jpg`,
+  `${process.env.PUBLIC_URL}/images/gallery/chefs-dinner-curation.jpg`
 ];
 
 const FALLBACK_HERO_IMAGE =
