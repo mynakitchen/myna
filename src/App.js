@@ -31,9 +31,11 @@ import CorporatePage from './components/pages/CorporatePage';
 import FAQPage from './components/pages/FAQPage';
 import DailyMealsIntro from './components/DailyMealsIntro';
 import Blog from './components/Blog';
+import BlogArticle from './components/BlogArticle';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [blogSlug, setBlogSlug] = useState(null);
 
   useEffect(() => {
     // Mark document as JS-enabled for CSS transitions
@@ -119,61 +121,60 @@ function App() {
     setTimeout(setupMutationObserver, 0);
 
     // Simple client-side routing
-    const path = window.location.pathname;
-    if (path === '/browse-plans') {
-      setCurrentPage('browse-plans');
-    } else if (path === '/corporate-orders') {
-      setCurrentPage('corporate-orders');
-    } else if (path === '/gallery') {
-      setCurrentPage('gallery');
-    } else if (path === '/blog') {
-      setCurrentPage('blog');
-    } else if (path === '/privacy-policy') {
-      setCurrentPage('privacy-policy');
-    } else if (path === '/terms-and-conditions') {
-      setCurrentPage('terms');
-    } else if (path === '/why-us') {
-      setCurrentPage('why-us');
-    } else if (path === '/menu') {
-      setCurrentPage('menu');
-    } else if (path === '/how-it-works') {
-      setCurrentPage('how-it-works');
-    } else if (path === '/corporate') {
-      setCurrentPage('corporate');
-    } else if (path === '/faq') {
-      setCurrentPage('faq');
-    } else {
-      setCurrentPage('home');
-    }
+    const syncRoute = (pathname) => {
+      if (pathname === '/browse-plans') {
+        setCurrentPage('browse-plans');
+        setBlogSlug(null);
+      } else if (pathname === '/corporate-orders') {
+        setCurrentPage('corporate-orders');
+        setBlogSlug(null);
+      } else if (pathname === '/gallery') {
+        setCurrentPage('gallery');
+        setBlogSlug(null);
+      } else if (pathname === '/blog') {
+        setCurrentPage('blog');
+        setBlogSlug(null);
+      } else if (pathname.startsWith('/blog/')) {
+        const [, , slug] = pathname.split('/');
+        if (slug) {
+          setCurrentPage('blog-article');
+          setBlogSlug(slug);
+        } else {
+          setCurrentPage('blog');
+          setBlogSlug(null);
+        }
+      } else if (pathname === '/privacy-policy') {
+        setCurrentPage('privacy-policy');
+        setBlogSlug(null);
+      } else if (pathname === '/terms-and-conditions') {
+        setCurrentPage('terms');
+        setBlogSlug(null);
+      } else if (path === '/why-us') {
+          setCurrentPage('why-us');
+          setBlogSlug(null);
+      } else if (path === '/menu') {
+          setCurrentPage('menu');
+          setBlogSlug(null);
+      } else if (path === '/how-it-works') {
+          setCurrentPage('how-it-works');
+          setBlogSlug(null);
+      } else if (path === '/corporate') {
+          setCurrentPage('corporate');
+          setBlogSlug(null);
+      } else if (path === '/faq') {
+          setCurrentPage('faq');
+          setBlogSlug(null);
+      } else {
+        setCurrentPage('home');
+        setBlogSlug(null);
+      }
+    };
+
+    syncRoute(window.location.pathname);
 
     // Handle browser back/forward buttons
     const handlePopState = () => {
-      const path = window.location.pathname;
-      if (path === '/browse-plans') {
-        setCurrentPage('browse-plans');
-      } else if (path === '/corporate-orders') {
-        setCurrentPage('corporate-orders');
-      } else if (path === '/gallery') {
-        setCurrentPage('gallery');
-      } else if (path === '/blog') {
-        setCurrentPage('blog');
-      } else if (path === '/privacy-policy') {
-        setCurrentPage('privacy-policy');
-      } else if (path === '/terms-and-conditions') {
-        setCurrentPage('terms');
-      } else if (path === '/why-us') {
-        setCurrentPage('why-us');
-      } else if (path === '/menu') {
-        setCurrentPage('menu');
-      } else if (path === '/how-it-works') {
-        setCurrentPage('how-it-works');
-      } else if (path === '/corporate') {
-        setCurrentPage('corporate');
-      } else if (path === '/faq') {
-        setCurrentPage('faq');
-      } else {
-        setCurrentPage('home');
-      }
+      syncRoute(window.location.pathname);
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -195,7 +196,7 @@ function App() {
     if (currentPage === 'privacy-policy' || currentPage === 'terms' ||
         currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' ||
-        currentPage === 'faq' || currentPage === 'gallery' || currentPage === 'blog') {
+        currentPage === 'faq' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'blog-article') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [currentPage]);
@@ -205,7 +206,7 @@ function App() {
       {(currentPage === 'home' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' ||
         currentPage === 'terms' || currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq'
-        || currentPage === 'gallery' || currentPage === 'blog') && (
+        || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'blog-article') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -303,6 +304,11 @@ function App() {
             <Blog />
           </ErrorBoundary>
         )}
+        {currentPage === 'blog-article' && (
+          <ErrorBoundary>
+            <BlogArticle slug={blogSlug} />
+          </ErrorBoundary>
+        )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>
             <SEO
@@ -378,7 +384,7 @@ function App() {
       {(currentPage === 'home' || currentPage === 'privacy-policy' || currentPage === 'terms' ||
         currentPage === 'corporate-orders' || currentPage === 'why-us' || currentPage === 'menu' ||
         currentPage === 'how-it-works' || currentPage === 'corporate' || currentPage === 'faq'
-        || currentPage === 'gallery' || currentPage === 'blog') && (
+        || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'blog-article') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>

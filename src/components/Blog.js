@@ -1,54 +1,19 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import './Blog.css';
-
-const PUBLIC_URL = process.env.PUBLIC_URL || '';
-
-const blogPosts = [
-  {
-    slug: 'seasonal-menu-planning',
-    title: 'How We Plan Seasonal Menus',
-    description:
-      'Explore how our chefs collaborate with local farmers to design balanced menus that celebrate seasonal produce while keeping weekday cooking effortless.',
-    date: 'October 2025',
-    readTime: '4 min read',
-    category: 'Behind the Scenes',
-    image: `${PUBLIC_URL}/images/hero/1208_x_1080_photos__28_.jpg`
-  },
-  {
-    slug: 'customer-favorites',
-    title: '5 Customer Favourites for Busy Workweeks',
-    description:
-      'From hearty dals to protein-packed bowls, discover the dishes Myna subscribers reorder the most—and the tweaks we offer to suit every palate.',
-    date: 'September 2025',
-    readTime: '3 min read',
-    category: 'Top Picks',
-    image: `${PUBLIC_URL}/images/hero/70bdb087c527b5287b5836552d155406.jpg`
-  },
-  {
-    slug: 'sustainability-at-myna',
-    title: 'Sustainability at Myna Kitchen',
-    description:
-      'A look at the packaging swaps, delivery optimisations, and sourcing choices that help us serve great food with a lighter footprint.',
-    date: 'August 2025',
-    readTime: '5 min read',
-    category: 'Sustainability',
-    image: `${PUBLIC_URL}/images/hero/cdf63c34f8768539fb1d30f133f585dd.jpg`
-  },
-  {
-    slug: 'nutrition-philosophy',
-    title: 'Our Nutrition Philosophy',
-    description:
-      'Learn how we balance comfort, nostalgia, and nutrition so weekday meals feel indulgent yet energising—and why we believe in mindful portions.',
-    date: 'July 2025',
-    readTime: '6 min read',
-    category: 'Wellness',
-    image: `${PUBLIC_URL}/images/hero/7217fa5a7fd8cf607f27dd8af2dd6131.jpg`
-  }
-];
+import blogPosts from '../data/blogPosts';
 
 const Blog = () => {
-  const [featuredPost, ...latestPosts] = blogPosts;
+  const [featuredPost, ...latestPosts] = blogPosts.length > 0 ? blogPosts : [];
+
+  if (!featuredPost) {
+    return null;
+  }
+
+  const navigateToArticle = (slug) => {
+    window.history.pushState({}, '', `/blog/${slug}`);
+    window.dispatchEvent(new PopStateEvent('popstate'));
+  };
 
   return (
     <section className="blog-page section-fade pt-28 pb-16 bg-gradient-to-b from-orange-50 via-white to-white">
@@ -82,15 +47,24 @@ const Blog = () => {
         </header>
 
         <motion.article
-          className="rounded-3xl overflow-hidden shadow-lg bg-white mb-20"
+          className="rounded-3xl overflow-hidden shadow-lg bg-white mb-20 blog-featured-card"
           initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: 'easeOut' }}
+          onClick={() => navigateToArticle(featuredPost.slug)}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              navigateToArticle(featuredPost.slug);
+            }
+          }}
         >
           <div className="grid md:grid-cols-2 gap-0">
             <div className="blog-featured__image-wrapper">
               <img
-                src={featuredPost.image}
+                src={featuredPost.heroImage}
                 alt={featuredPost.title}
                 className="blog-featured__image loaded"
                 loading="lazy"
@@ -108,6 +82,8 @@ const Blog = () => {
               <p className="text-gray-600 leading-relaxed mb-6">{featuredPost.description}</p>
               <div className="flex items-center text-sm text-gray-500">
                 <span>{featuredPost.readTime}</span>
+                <span className="mx-3 text-gray-300">•</span>
+                <span className="text-amber-600 font-medium">Read story</span>
               </div>
             </div>
           </div>
@@ -123,14 +99,23 @@ const Blog = () => {
             {latestPosts.map((post, index) => (
               <motion.article
                 key={post.slug}
-                className="rounded-2xl border border-orange-100 bg-white shadow-sm hover:shadow-lg transition-shadow"
+                className="rounded-2xl border border-orange-100 bg-white shadow-sm hover:shadow-lg transition-shadow blog-card"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.4, delay: index * 0.05 }}
+                onClick={() => navigateToArticle(post.slug)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    navigateToArticle(post.slug);
+                  }
+                }}
               >
                 <div className="aspect-[4/3] overflow-hidden rounded-t-2xl">
                   <img
-                    src={post.image}
+                    src={post.heroImage}
                     alt={post.title}
                     className="blog-card__image loaded"
                     loading="lazy"
@@ -148,12 +133,7 @@ const Blog = () => {
                   <p className="text-sm text-gray-600 leading-relaxed mb-4">{post.description}</p>
                   <div className="flex items-center justify-between text-sm text-gray-500">
                     <span>{post.readTime}</span>
-                    <button
-                      type="button"
-                      className="text-amber-600 font-medium hover:text-amber-700 transition-colors"
-                    >
-                      Coming soon
-                    </button>
+                    <span className="text-amber-600 font-medium">Read story</span>
                   </div>
                 </div>
               </motion.article>
