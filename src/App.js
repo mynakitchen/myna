@@ -158,7 +158,11 @@ function App() {
 
   // Scroll to top when visiting policy pages
   useEffect(() => {
-    if (currentPage === 'privacy-policy' || currentPage === 'terms') {
+    if (
+      currentPage === 'privacy-policy' ||
+      currentPage === 'terms' ||
+      currentPage === 'gallery'
+    ) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   }, [currentPage]);
