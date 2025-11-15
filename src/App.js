@@ -22,9 +22,11 @@ import CorporateOrderForm from './components/CorporateOrderForm';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import Gallery from './components/Gallery';
 import Blog from './components/Blog';
+import BlogArticle from './components/BlogArticle';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
+  const [blogSlug, setBlogSlug] = useState(null);
 
   useEffect(() => {
     // Mark document as JS-enabled for CSS transitions
@@ -110,41 +112,45 @@ function App() {
     setTimeout(setupMutationObserver, 0);
 
     // Simple client-side routing
-    const path = window.location.pathname;
-    if (path === '/browse-plans') {
-      setCurrentPage('browse-plans');
-    } else if (path === '/corporate-orders') {
-      setCurrentPage('corporate-orders');
-    } else if (path === '/gallery') {
-      setCurrentPage('gallery');
-    } else if (path === '/blog') {
-      setCurrentPage('blog');
-    } else if (path === '/privacy-policy') {
-      setCurrentPage('privacy-policy');
-    } else if (path === '/terms-and-conditions') {
-      setCurrentPage('terms');
-    } else {
-      setCurrentPage('home');
-    }
+    const syncRoute = (pathname) => {
+      if (pathname === '/browse-plans') {
+        setCurrentPage('browse-plans');
+        setBlogSlug(null);
+      } else if (pathname === '/corporate-orders') {
+        setCurrentPage('corporate-orders');
+        setBlogSlug(null);
+      } else if (pathname === '/gallery') {
+        setCurrentPage('gallery');
+        setBlogSlug(null);
+      } else if (pathname === '/blog') {
+        setCurrentPage('blog');
+        setBlogSlug(null);
+      } else if (pathname.startsWith('/blog/')) {
+        const [, , slug] = pathname.split('/');
+        if (slug) {
+          setCurrentPage('blog-article');
+          setBlogSlug(slug);
+        } else {
+          setCurrentPage('blog');
+          setBlogSlug(null);
+        }
+      } else if (pathname === '/privacy-policy') {
+        setCurrentPage('privacy-policy');
+        setBlogSlug(null);
+      } else if (pathname === '/terms-and-conditions') {
+        setCurrentPage('terms');
+        setBlogSlug(null);
+      } else {
+        setCurrentPage('home');
+        setBlogSlug(null);
+      }
+    };
+
+    syncRoute(window.location.pathname);
 
     // Handle browser back/forward buttons
     const handlePopState = () => {
-      const path = window.location.pathname;
-      if (path === '/browse-plans') {
-        setCurrentPage('browse-plans');
-      } else if (path === '/corporate-orders') {
-        setCurrentPage('corporate-orders');
-      } else if (path === '/gallery') {
-        setCurrentPage('gallery');
-      } else if (path === '/blog') {
-        setCurrentPage('blog');
-      } else if (path === '/privacy-policy') {
-        setCurrentPage('privacy-policy');
-      } else if (path === '/terms-and-conditions') {
-        setCurrentPage('terms');
-      } else {
-        setCurrentPage('home');
-      }
+      syncRoute(window.location.pathname);
     };
 
     window.addEventListener('popstate', handlePopState);
@@ -167,7 +173,8 @@ function App() {
       currentPage === 'privacy-policy' ||
       currentPage === 'terms' ||
       currentPage === 'gallery' ||
-      currentPage === 'blog'
+      currentPage === 'blog' ||
+      currentPage === 'blog-article'
     ) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -175,7 +182,7 @@ function App() {
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
-      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' || currentPage === 'terms') && (
+      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'blog-article' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' || currentPage === 'terms') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -250,6 +257,11 @@ function App() {
             <Blog />
           </ErrorBoundary>
         )}
+        {currentPage === 'blog-article' && (
+          <ErrorBoundary>
+            <BlogArticle slug={blogSlug} />
+          </ErrorBoundary>
+        )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>
             <PrivacyPolicy />
@@ -262,7 +274,7 @@ function App() {
         )}
       </main>
       
-      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'privacy-policy' || currentPage === 'terms' || currentPage === 'corporate-orders') && (
+      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'blog-article' || currentPage === 'privacy-policy' || currentPage === 'terms' || currentPage === 'corporate-orders') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>

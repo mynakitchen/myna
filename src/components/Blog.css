@@ -19,6 +19,30 @@
   opacity: 1;
 }
 
+.blog-featured-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blog-featured-card:focus,
+.blog-featured-card:focus-visible,
+.blog-featured-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 28px 70px rgba(31, 42, 29, 0.16);
+  outline: none;
+}
+
+.blog-card {
+  cursor: pointer;
+}
+
+.blog-card:focus,
+.blog-card:focus-visible,
+.blog-card:hover {
+  box-shadow: 0 24px 60px rgba(31, 42, 29, 0.14);
+  outline: none;
+}
+
 .blog-card__image {
   width: 100%;
   height: 100%;
