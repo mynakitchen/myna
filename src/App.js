@@ -21,6 +21,7 @@ import MealPlanConfig from './components/MealPlanConfig';
 import CorporateOrderForm from './components/CorporateOrderForm';
 import WhatsAppWidget from './components/WhatsAppWidget';
 import Gallery from './components/Gallery';
+import Blog from './components/Blog';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -116,6 +117,8 @@ function App() {
       setCurrentPage('corporate-orders');
     } else if (path === '/gallery') {
       setCurrentPage('gallery');
+    } else if (path === '/blog') {
+      setCurrentPage('blog');
     } else if (path === '/privacy-policy') {
       setCurrentPage('privacy-policy');
     } else if (path === '/terms-and-conditions') {
@@ -133,6 +136,8 @@ function App() {
         setCurrentPage('corporate-orders');
       } else if (path === '/gallery') {
         setCurrentPage('gallery');
+      } else if (path === '/blog') {
+        setCurrentPage('blog');
       } else if (path === '/privacy-policy') {
         setCurrentPage('privacy-policy');
       } else if (path === '/terms-and-conditions') {
@@ -161,7 +166,8 @@ function App() {
     if (
       currentPage === 'privacy-policy' ||
       currentPage === 'terms' ||
-      currentPage === 'gallery'
+      currentPage === 'gallery' ||
+      currentPage === 'blog'
     ) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
@@ -169,7 +175,7 @@ function App() {
 
   return (
     <div className="font-sans text-gray-800 bg-white overflow-x-hidden min-h-screen">
-      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' || currentPage === 'terms') && (
+      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'corporate-orders' || currentPage === 'privacy-policy' || currentPage === 'terms') && (
         <ErrorBoundary>
           <Header />
         </ErrorBoundary>
@@ -239,6 +245,11 @@ function App() {
             <Gallery />
           </ErrorBoundary>
         )}
+        {currentPage === 'blog' && (
+          <ErrorBoundary>
+            <Blog />
+          </ErrorBoundary>
+        )}
         {currentPage === 'privacy-policy' && (
           <ErrorBoundary>
             <PrivacyPolicy />
@@ -251,7 +262,7 @@ function App() {
         )}
       </main>
       
-      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'privacy-policy' || currentPage === 'terms' || currentPage === 'corporate-orders') && (
+      {(currentPage === 'home' || currentPage === 'gallery' || currentPage === 'blog' || currentPage === 'privacy-policy' || currentPage === 'terms' || currentPage === 'corporate-orders') && (
         <ErrorBoundary>
           <Footer />
         </ErrorBoundary>
