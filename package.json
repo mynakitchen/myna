@@ -30,7 +30,8 @@
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "optimize-images": "node scripts/optimize-images.js && cp public/images/hero-optimized/image-mapping.json src/"
+    "optimize-images": "node scripts/optimize-images.js && cp public/images/hero-optimized/image-mapping.json src/",
+    "convert-images": "node scripts/convert-to-webp.js"
   },
   "eslintConfig": {
     "extends": [

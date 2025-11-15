@@ -1,6 +1,6 @@
 import React from 'react';
 import './PreorderCard.css';
-import thaliImage from '../assets/thali.jpg';
+import thaliImage from '../assets/thali.webp';
 
 const PreorderCard = () => {
   return (
