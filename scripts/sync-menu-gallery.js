@@ -47,6 +47,23 @@ const CATEGORY_ORDER = ['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons
 const ALLOWED_IMAGE_EXTENSIONS = new Set(['.webp', '.jpg', '.jpeg', '.png', '.avif']);
 const NEW_BADGE_DURATION_DAYS = 14;
 
+function normaliseRelativePath(maybePath) {
+  if (typeof maybePath !== 'string' || maybePath.trim() === '') {
+    return null;
+  }
+  const trimmed = maybePath.trim();
+  const withoutLeadingSlash = trimmed.startsWith('/') ? trimmed.slice(1) : trimmed;
+  return withoutLeadingSlash.split(path.sep).join('/');
+}
+
+function assetExists(relativePath) {
+  if (!relativePath) {
+    return false;
+  }
+  const absolute = path.join(PUBLIC_DIR, relativePath);
+  return fs.existsSync(absolute);
+}
+
 function readJson(filepath, fallback) {
   try {
     const raw = fs.readFileSync(filepath, 'utf8');
@@ -98,6 +115,38 @@ function findLocalMeta(itemDir) {
       }
     }
   }
+  return null;
+}
+
+function resolveGalleryImage(rawValue, images) {
+  const candidates = [];
+
+  if (Array.isArray(rawValue)) {
+    for (const value of rawValue) {
+      const normalised = normaliseRelativePath(value);
+      if (normalised) {
+        candidates.push(normalised);
+      }
+    }
+  } else {
+    const normalised = normaliseRelativePath(rawValue);
+    if (normalised) {
+      candidates.push(normalised);
+    }
+  }
+
+  for (const candidate of candidates) {
+    if (assetExists(candidate)) {
+      return candidate;
+    }
+  }
+
+  for (const fallback of images) {
+    if (assetExists(fallback)) {
+      return fallback;
+    }
+  }
+
   return null;
 }
 
@@ -167,6 +216,8 @@ function ensureMetadataEntries(metadata) {
           existing.createdAt = nowIso;
         }
 
+        existing.galleryImage = resolveGalleryImage(existing.galleryImage, images);
+
         continue;
       }
 
@@ -179,6 +230,8 @@ function ensureMetadataEntries(metadata) {
         ? Number(localMeta.price)
         : CATEGORY_DEFAULT_PRICE[categoryLabel] || 0;
 
+      const resolvedGalleryImage = resolveGalleryImage(localMeta.galleryImage, images);
+
       const newEntry = {
         slug: folderSlug,
         category: categoryLabel,
@@ -189,7 +242,7 @@ function ensureMetadataEntries(metadata) {
         showInGallery: localMeta.showInGallery !== undefined ? Boolean(localMeta.showInGallery) : true,
         galleryTitle: localMeta.galleryTitle || defaultName,
         galleryDescription: localMeta.galleryDescription || defaultDescription,
-        galleryImage: localMeta.galleryImage || images[0],
+        galleryImage: resolvedGalleryImage,
         isNew: true,
         createdAt: nowIso
       };
@@ -253,10 +306,16 @@ function sortMetadataItems(metadata) {
 function buildGeneratedData(metadata) {
   const items = metadata.items.map((item) => {
     const categorySlug = CATEGORY_LABEL_TO_SLUG[item.category] || 'uncategorised';
-    const images = Array.isArray(item.images)
-      ? item.images.map((img) => img.replace(/\\/g, '/')).filter(Boolean)
-      : [];
-    const primaryImage = (item.galleryImage || images[0] || null)?.replace(/\\/g, '/');
+    const safeImages = Array.isArray(item.images) ? item.images : [];
+    const images = safeImages
+      .map((img) => (typeof img === 'string' ? img.replace(/\\/g, '/') : null))
+      .filter(Boolean);
+
+    const galleryImageCandidate = resolveGalleryImage(item.galleryImage, images);
+    const primaryImageRaw = galleryImageCandidate || images[0] || null;
+    const primaryImage =
+      typeof primaryImageRaw === 'string' ? primaryImageRaw.replace(/\\/g, '/') : null;
+
     return {
       id: `${categorySlug}:${item.slug}`,
       slug: item.slug,

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-11-18T03:26:04.587Z",
+  "generatedAt": "2025-11-18T04:02:23.509Z",
   "categories": [
     "Day Starters",
     "Super Meals",
@@ -64,6 +64,26 @@
         "title": "Uthapam, Peanut Chutney and Sakkarai Pongal",
         "description": "South Indian breakfast special with thick pancake, crunchy chutney and sweet pongal",
         "image": "images/menu/day-starters/uthappam-sakkarai-pongal.webp"
+      }
+    },
+    {
+      "id": "super-meals:fish-kolambhu-fish-fry-appadam",
+      "slug": "fish-kolambhu-fish-fry-appadam",
+      "category": "Super Meals",
+      "name": "Fish Kolambhu, Fish Fry and Appadam",
+      "description": "Layers of stone-fruit compote, vanilla custard, and house granola.",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/fish-kolambhu-fish-fry-appadam/fish-kolambhu-fish-fry-appadam.webp",
+        "images/menu/super-meals/fish-kolambhu-fish-fry-appadam/fish-kolambhu.webp"
+      ],
+      "isNew": true,
+      "createdAt": "2025-11-18T03:56:27.512Z",
+      "showInGallery": true,
+      "gallery": {
+        "title": "Fish Kolambhu, Fish Fry and Appadam",
+        "description": "Fish kolambhu, fish fry and appadam with rice and curry.",
+        "image": "images/menu/super-meals/fish-kolambhu-fish-fry-appadam/fish-kolambhu-fish-fry-appadam.webp"
       }
     },
     {

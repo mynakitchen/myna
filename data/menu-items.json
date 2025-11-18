@@ -51,6 +51,23 @@
       "createdAt": "2024-01-01T00:00:00.000Z"
     },
     {
+      "slug": "fish-kolambhu-fish-fry-appadam",
+      "category": "Super Meals",
+      "name": "Fish Kolambhu, Fish Fry and Appadam",
+      "description": "Layers of stone-fruit compote, vanilla custard, and house granola.",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/fish-kolambhu-fish-fry-appadam/fish-kolambhu-fish-fry-appadam.webp",
+        "images/menu/super-meals/fish-kolambhu-fish-fry-appadam/fish-kolambhu.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Fish Kolambhu, Fish Fry and Appadam",
+      "galleryDescription": "Fish kolambhu, fish fry and appadam with rice and curry.",
+      "galleryImage": "images/menu/super-meals/fish-kolambhu-fish-fry-appadam/fish-kolambhu-fish-fry-appadam.webp",
+      "isNew": true,
+      "createdAt": "2025-11-18T03:56:27.512Z"
+    },
+    {
       "slug": "chicken-briyani-bread-halwa-and-raita",
       "category": "Super Meals",
       "name": "Chicken Briyani, Bread Halwa and Raita",
