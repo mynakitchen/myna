@@ -1,90 +1,49 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import menuData from '../data/generatedMenuGallery.json';
 import './Gallery.css';
 
 const PUBLIC_URL = process.env.PUBLIC_URL || '';
 const FALLBACK_IMAGE = `${PUBLIC_URL}/images/branding/myna-kitchen-meals.webp`;
 
-const rawGalleryItems = [
-  {
-    slug: '1208_x_1080_photos__28_',
-    fallback: 'images/gallery/seasonal-veg-spread.webp',
-    title: 'Seasonal Veg Spread',
-    description: 'Vibrant, locally sourced produce plated for weekday lunches.',
-    category: 'Comfort Meals'
-  },
-  {
-    slug: '70bdb087c527b5287b5836552d155406',
-    fallback: 'images/gallery/comfort-meal-box.webp',
-    title: 'Comfort Meal Box',
-    description: 'All-time favourite dal, roti, and sabzi with chef specials.',
-    category: 'Comfort Meals'
-  },
-  {
-    slug: '7217fa5a7fd8cf607f27dd8af2dd6131',
-    fallback: 'images/gallery/protein-power-bowl.webp',
-    title: 'Protein Power Bowl',
-    description: 'Balanced portions with high-protein mains and seasonal greens.',
-    category: 'Super Meals'
-  },
-  {
-    slug: '81c67453e037b7fff40ee260956ddd2a',
-    fallback: 'images/gallery/tiffin-morning-combo.webp',
-    title: 'Tiffin Morning Combo',
-    description: 'South Indian classics delivered fresh with signature chutneys.',
-    category: 'Day Starters'
-  },
-  {
-    slug: 'cdf63c34f8768539fb1d30f133f585dd',
-    fallback: 'images/gallery/chefs-dinner-curation.webp',
-    title: 'Chef’s Dinner Curation',
-    description: 'Slow-cooked mains paired with hearty sides for indulgent nights.',
-    category: 'Super Meals'
-  },
-  {
-    slug: 'jackfruit-biriyani-babychillicorn-adaprathaman',
-    fallback: 'images/gallery/jackfruit-biryani-feast.webp',
-    title: 'Jackfruit Biryani Feast',
-    description: 'A plant-based hero served with sides inspired by Tamil kitchens.',
-    category: 'Super Meals'
-  },
-  {
-    slug: 'rice-fishcurry-keeraiporiyal-fishfry',
-    fallback: 'images/gallery/coastal-catch-platter.webp',
-    title: 'Coastal Catch Platter',
-    description: 'Fresh fish curry with poriyal, double-fried fillets, and steamed rice.',
-    category: 'Super Meals'
-  },
-  {
-    slug: 'Mango-Milkshake',
-    fallback: 'images/gallery/mango-bliss-shake.webp',
-    title: 'Mango Bliss Shake',
-    description: 'Sun-ripened mangoes churned into our house-favourite cooler.',
-    category: 'Add-ons'
-  },
-  {
-    slug: 'garliccurry-rice-beanspodimas-papadam',
-    fallback: 'images/gallery/garlic-curry-meal.webp',
-    title: 'Garlic Curry Meal',
-    description: 'Hearty garlic curry, beans podimas, and crisp papad for texture.',
-    category: 'Comfort Meals'
+const toPublicPath = (relativePath) => {
+  if (!relativePath) {
+    return FALLBACK_IMAGE;
   }
-];
 
-const toPublicPath = (relativePath) =>
-  `${PUBLIC_URL}/${encodeURI(relativePath).replace(/\+/g, '%2B')}`;
+  const cleanPath = relativePath.startsWith('/') ? relativePath.slice(1) : relativePath;
+  return `${PUBLIC_URL}/${encodeURI(cleanPath).replace(/\+/g, '%2B')}`;
+};
 
-const galleryItems = rawGalleryItems.map(({ fallback, ...rest }) => {
-  const normalizedFallback = fallback
-    ? toPublicPath(fallback)
-    : FALLBACK_IMAGE;
+const galleryItems = (menuData.items || [])
+  .filter((item) => item.showInGallery)
+  .map((item, index) => {
+    const imagePath = item.gallery?.image || (item.images && item.images[0]) || null;
+    const imageSrc = imagePath ? toPublicPath(imagePath) : FALLBACK_IMAGE;
 
-  return {
-    ...rest,
-    imageSrc: normalizedFallback,
-    fallbackSrc: normalizedFallback
-  };
-});
+    return {
+      id: item.id,
+      slug: item.slug,
+      title: item.gallery?.title || item.name,
+      description: item.gallery?.description || item.description,
+      category: item.category,
+      imageSrc,
+      fallbackSrc: FALLBACK_IMAGE,
+      isNew: Boolean(item.isNew),
+      order: index
+    };
+  })
+  .sort((a, b) => {
+    if (a.isNew !== b.isNew) {
+      return a.isNew ? -1 : 1;
+    }
+    return a.order - b.order;
+  })
+  .map(({ order, ...rest }) => rest);
+
+const GALLERY_CATEGORIES = (menuData.categories && menuData.categories.length > 0)
+  ? menuData.categories
+  : ['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'];
 
 const handleImageLoad = (event) => {
   const target = event?.target;
@@ -155,7 +114,7 @@ const Gallery = () => {
 
             {/* Other category buttons */}
             <div className="flex flex-wrap justify-center gap-1.5 md:gap-0 md:flex-1">
-              {['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
+              {GALLERY_CATEGORIES.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
@@ -175,7 +134,7 @@ const Gallery = () => {
         <div className="gallery-grid">
           {filteredItems.map((item) => (
             <motion.figure
-              key={item.title}
+              key={item.id || item.slug || item.title}
               className="gallery-card"
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -183,6 +142,9 @@ const Gallery = () => {
               transition={{ duration: 0.45, ease: 'easeOut' }}
             >
               <div className="gallery-card__image-wrapper">
+                {item.isNew && (
+                  <span className="gallery-card__badge">New</span>
+                )}
                 <img
                   src={item.imageSrc}
                   alt={item.title}
