@@ -5,19 +5,21 @@ import {
   faChevronRight, 
   faCircle
 } from '@fortawesome/free-solid-svg-icons';
+import menuData from '../data/generatedMenuGallery.json';
 import './DailyMenu.css';
 
 // Helper function to get correct image path for deployment
 const getImagePath = (imagePath) => {
+  if (!imagePath) {
+    return null;
+  }
+
   // Remove leading slash if present
   const cleanPath = imagePath.startsWith('/') ? imagePath.slice(1) : imagePath;
   
   // Split path into segments and encode each segment properly
   const pathSegments = cleanPath.split('/');
-  const encodedSegments = pathSegments.map(segment => {
-    // Only encode the filename part, not the path separators
-    return encodeURIComponent(segment);
-  });
+  const encodedSegments = pathSegments.map(segment => encodeURIComponent(segment));
   const encodedPath = encodedSegments.join('/');
   
   // Use PUBLIC_URL environment variable for GitHub Pages deployment
@@ -26,288 +28,21 @@ const getImagePath = (imagePath) => {
   return finalPath;
 };
 
-// Dynamic menu items based on actual folder structure - UPDATED with multiple images
-const MENU_ITEMS = [
-  // Add-ons (meals with images)
-  {
-    id: "addon-1",
-    name: "Cold Coffee",
-    description: "Refreshing cold coffee perfect for any time",
-    images: [
-      getImagePath("images/menu/add-ons/cold-coffee-ad.webp"),
-      getImagePath("images/menu/add-ons/cold-coffee-classic.webp"),
-      getImagePath("images/menu/add-ons/cold-coffee-top.webp")
-    ],
-    price: 45,
-    category: "Add-ons"
-  },
-  {
-    id: "addon-2", 
-    name: "Mango Milkshake",
-    description: "Creamy mango milkshake made with fresh mangoes",
-    images: [
-      getImagePath("images/menu/add-ons/mango-milkshake-glass.webp"),
-      getImagePath("images/menu/add-ons/mango-milkshake-bottle.webp")
-    ],
-    price: 70,
-    category: "Add-ons"
-  },
-  
-  // Super Meals (meals with images, sorted alphabetically by number)
-  {
-    id: "super-1",
-    name: "Sambhar Rice, Avial and Fish 65",
-    description: "Traditional South Indian comfort meal with authentic flavors",
-    images: [getImagePath("images/menu/super-meals/sambar-rice-avial-fish65.webp")],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-2",
-    name: "Idiyappam and Chicken Stew",
-    description: "Kerala-style string hoppers with aromatic chicken stew",
-    images: [getImagePath("images/menu/super-meals/idiyappam-chicken-stew.webp")],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-3",
-    name: "Rice, Keerai, Fish Fry and Fish Curry",
-    description: "Complete meal with rice, greens, fish fry and curry",
-    images: [
-      getImagePath("images/menu/super-meals/rice-keerai-fish-curry.webp"),
-      getImagePath("images/menu/super-meals/mango-fish-curry.webp")
-    ],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-4",
-    name: "Jackfruit Briyani with Chicken Varuthakari",
-    description: "Unique jackfruit briyani served with spicy chicken varuthakari",
-    images: [getImagePath("images/menu/super-meals/jackfruit-biryani-chicken-varutha.webp")],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-5",
-    name: "Chicken Kothu Parotta",
-    description: "Popular street food with shredded parotta and chicken",
-    images: [
-      getImagePath("images/menu/super-meals/parotta.webp"),
-      getImagePath("images/menu/super-meals/chicken-kothu-salna.webp")
-    ],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-6",
-    name: "Ghee Rice, Chettinad Chicken and Omelette",
-    description: "Aromatic ghee rice with spicy Chettinad chicken and fluffy omelette",
-    images: [getImagePath("images/menu/super-meals/ghee-rice-chettinad-chicken.webp")],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-7",
-    name: "Rice, Dal Fry and Nethili Fry",
-    description: "Comfort meal with steamed rice, dal fry and crispy anchovies",
-    images: [getImagePath("images/menu/super-meals/rice-dal-nethili.webp")],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-8",
-    name: "Chicken Rice Bowls",
-    description: "Protein-packed chicken rice bowls with aromatic spices",
-    images: [
-      getImagePath("images/menu/super-meals/peri-peri-chicken-rice-bowl.webp"),
-      getImagePath("images/menu/super-meals/butter-chicken-jeera-rice-bowl.webp")
-    ],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-9",
-    name: "Chicken Briyani, Bread Halwa and Raita",
-    description: "Classic chicken briyani with sweet bread halwa and cooling raita",
-    images: [
-      getImagePath("images/menu/super-meals/mushroom-biryani-bhindi.webp"),
-      getImagePath("images/menu/super-meals/bhai-veeru-chicken-biryani.webp"),
-      getImagePath("images/menu/super-meals/donne-chicken-biryani-roast.webp")
-    ],
-    price: 150,
-    category: "Super Meals"
-  },
-  {
-    id: "super-10",
-    name: "Rice, Malabar Chicken, Gobi 65 and Rasam",
-    description: "Traditional South Indian meal with spicy Malabar chicken and tangy rasam",
-    images: [getImagePath("images/menu/super-meals/malabar-chicken-gobi65-rasam.webp")],
-    price: 150,
-    category: "Super Meals"
-  },
-  
-  // Comfort Meals (meals with images, sorted alphabetically by number)
-  {
-    id: "comfort-1",
-    name: "Spinach Rice, Stuffed Kathirikai, Peanut Ladies Finger Fry",
-    description: "Nutritious spinach rice with stuffed brinjal and crispy ladies finger",
-    images: [getImagePath("images/menu/comfort-meals/spinach-rice-stuffed-brinjal.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-2",
-    name: "Vegetarian Rice Bowl and Mango Milkshake",
-    description: "Healthy vegetarian rice bowl served with refreshing mango milkshake",
-    images: [getImagePath("images/menu/comfort-meals/vegetarian-rice-bowl-mango-shake.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-3",
-    name: "Chole Bhature",
-    description: "North Indian favorite - spiced chickpeas with fluffy bhature",
-    images: [
-      getImagePath("images/menu/comfort-meals/chole-bhature-plate.webp"),
-      getImagePath("images/menu/comfort-meals/chole-bhature-curry.webp")
-    ],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-4",
-    name: "Jackfruit Briyani, Chilli Babycorn and Adaprathaman",
-    description: "Aromatic jackfruit briyani with spicy baby corn and traditional dessert",
-    images: [getImagePath("images/menu/comfort-meals/jackfruit-biryani-babycorn-ada.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-5",
-    name: "Rice, Ennai Kathirikai Pulikolambu, Keerai and Double Egg Omelette",
-    description: "Traditional Tamil meal with brinjal curry, greens and double omelette",
-    images: [getImagePath("images/menu/comfort-meals/ennai-kathirikai-meal.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-6",
-    name: "Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam",
-    description: "Garlic curry rice with mixed vegetable stir-fry and crispy papadam",
-    images: [
-      getImagePath("images/menu/comfort-meals/garlic-curry-meal-01.webp"),
-      getImagePath("images/menu/comfort-meals/garlic-curry-meal-02.webp")
-    ],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-7",
-    name: "Sphagetti Napoli",
-    description: "Classic Italian spaghetti with fresh tomato and basil sauce",
-    images: [getImagePath("images/menu/comfort-meals/spaghetti-napoli.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-8",
-    name: "Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice",
-    description: "Healthy combination of rice, dal spinach, potato curry and fresh juice",
-    images: [
-      getImagePath("images/menu/comfort-meals/dal-keerai-plate.webp"),
-      getImagePath("images/menu/comfort-meals/dal-keerai-plate-alt.webp")
-    ],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-9",
-    name: "Brocolli White Sauce Pasta",
-    description: "Creamy white sauce pasta with fresh broccoli",
-    images: [getImagePath("images/menu/comfort-meals/broccoli-white-sauce-pasta.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-10",
-    name: "Lemon Rice, Tamarind Rice and Ladies Finger Fry",
-    description: "Tangy variety rice with crispy ladies finger fry",
-    images: [
-      getImagePath("images/menu/comfort-meals/lemon-rice-ladies-finger.webp"),
-      getImagePath("images/menu/comfort-meals/tamarind-rice-ladies-finger.webp")
-    ],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-11",
-    name: "Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice",
-    description: "Healthy wheat parotta with creamy paneer, okra fry and cooling curd rice",
-    images: [
-      getImagePath("images/menu/comfort-meals/wheat-parotta-paneer.webp"),
-      getImagePath("images/menu/comfort-meals/wheat-parotta-paneer-alt.webp")
-    ],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-12",
-    name: "Aloo Paratha and Dal Makhani",
-    description: "North Indian stuffed potato paratha with rich dal makhani",
-    images: [getImagePath("images/menu/comfort-meals/aloo-paratha-dal-makhani.webp")],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  {
-    id: "comfort-13",
-    name: "Chapathi and Channa Masala",
-    description: "Soft chapathi with spicy chickpea curry",
-    images: [
-      getImagePath("images/menu/comfort-meals/chapati-channa-masala.webp"),
-      getImagePath("images/menu/comfort-meals/chapati-channa-masala-alt.webp")
-    ],
-    price: 130,
-    category: "Comfort Meals"
-  },
-  
-  // Day Starters (meals with images)
-  {
-    id: "starter-1",
-    name: "Bread Toast, Omelette and Sundal",
-    description: "Perfect morning combination with toasted bread, fluffy omelette and nutritious sundal",
-    images: [
-      getImagePath("images/menu/day-starters/bread-toast-omelette.webp"),
-      getImagePath("images/menu/day-starters/club-sandwich-sundal.webp")
-    ],
-    price: 80,
-    category: "Day Starters"
-  },
-  {
-    id: "starter-2",
-    name: "Idiyappam and Kadala Curry",
-    description: "Traditional Kerala breakfast with soft string hoppers and spicy black chickpea curry",
-    images: [getImagePath("images/menu/day-starters/idiyappam-kadala-curry.webp")],
-    price: 80,
-    category: "Day Starters"
-  },
-  {
-    id: "starter-3",
-    name: "Uthapam, Peanut Chutney and Sakkarai Pongal",
-    description: "South Indian breakfast special with thick pancake, crunchy chutney and sweet pongal",
-    images: [
-      getImagePath("images/menu/day-starters/uthappam-sakkarai-pongal.webp"),
-      getImagePath("images/menu/day-starters/uthappam-chutney.webp")
-    ],
-    price: 80,
-    category: "Day Starters"
-  }
-];
+const MENU_CATEGORIES = (menuData.categories && menuData.categories.length > 0)
+  ? menuData.categories
+  : ['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'];
+
+const MENU_ITEMS = (menuData.items || []).map((item) => {
+  const imagePaths = (item.images || []).map(getImagePath).filter(Boolean);
+  return {
+    ...item,
+    images: imagePaths.length > 0 ? imagePaths : item.images,
+  };
+});
 
 const DailyMenu = () => {
   const [currentPage, setCurrentPage] = useState(0);
-  const [selectedCategory, setSelectedCategory] = useState('Day Starters');
+  const [selectedCategory, setSelectedCategory] = useState(MENU_CATEGORIES[0] || '');
   const [itemsPerPage, setItemsPerPage] = useState(6);
   const [isDragging, setIsDragging] = useState(false);
   const [startX, setStartX] = useState(0);
@@ -454,7 +189,7 @@ const DailyMenu = () => {
         {/* Centered category toolbar */}
         <div className="flex justify-center mb-12">
           <div className="bg-gray-100 p-1.5 rounded-full inline-flex shadow-sm">
-            {['Day Starters', 'Super Meals', 'Comfort Meals', 'Add-ons'].map((category) => (
+            {MENU_CATEGORIES.map((category) => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
@@ -687,6 +422,9 @@ function MenuItemCard({ item }) {
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
+        {item.isNew && (
+          <span className="menu-card__badge">New</span>
+        )}
         {/* Loading state */}
         {imageLoading && (
           <div className="absolute inset-0 bg-gray-200 flex items-center justify-center z-10">

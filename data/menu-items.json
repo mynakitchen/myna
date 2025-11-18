@@ -1,0 +1,468 @@
+{
+  "items": [
+    {
+      "slug": "bread-toast-omelette-and-sundal",
+      "category": "Day Starters",
+      "name": "Bread Toast, Omelette and Sundal",
+      "description": "Perfect morning combination with toasted bread, fluffy omelette and nutritious sundal",
+      "price": 80,
+      "images": [
+        "images/menu/day-starters/bread-toast-omelette.webp",
+        "images/menu/day-starters/club-sandwich-sundal.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Tiffin Morning Combo",
+      "galleryDescription": "South Indian classics delivered fresh with signature chutneys.",
+      "galleryImage": "images/gallery/tiffin-morning-combo.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "idiyappam-and-kadala-curry",
+      "category": "Day Starters",
+      "name": "Idiyappam and Kadala Curry",
+      "description": "Traditional Kerala breakfast with soft string hoppers and spicy black chickpea curry",
+      "price": 80,
+      "images": [
+        "images/menu/day-starters/idiyappam-kadala-curry.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "uthapam-peanut-chutney-and-sakkarai-pongal",
+      "category": "Day Starters",
+      "name": "Uthapam, Peanut Chutney and Sakkarai Pongal",
+      "description": "South Indian breakfast special with thick pancake, crunchy chutney and sweet pongal",
+      "price": 80,
+      "images": [
+        "images/menu/day-starters/uthappam-sakkarai-pongal.webp",
+        "images/menu/day-starters/uthappam-chutney.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "chicken-briyani-bread-halwa-and-raita",
+      "category": "Super Meals",
+      "name": "Chicken Briyani, Bread Halwa and Raita",
+      "description": "Classic chicken briyani with sweet bread halwa and cooling raita",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/mushroom-biryani-bhindi.webp",
+        "images/menu/super-meals/bhai-veeru-chicken-biryani.webp",
+        "images/menu/super-meals/donne-chicken-biryani-roast.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "chicken-kothu-parotta",
+      "category": "Super Meals",
+      "name": "Chicken Kothu Parotta",
+      "description": "Popular street food with shredded parotta and chicken",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/parotta.webp",
+        "images/menu/super-meals/chicken-kothu-salna.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "chicken-rice-bowls",
+      "category": "Super Meals",
+      "name": "Chicken Rice Bowls",
+      "description": "Protein-packed chicken rice bowls with aromatic spices",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/peri-peri-chicken-rice-bowl.webp",
+        "images/menu/super-meals/butter-chicken-jeera-rice-bowl.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Protein Power Bowl",
+      "galleryDescription": "Balanced portions with high-protein mains and seasonal greens.",
+      "galleryImage": "images/gallery/protein-power-bowl.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "ghee-rice-chettinad-chicken-and-omelette",
+      "category": "Super Meals",
+      "name": "Ghee Rice, Chettinad Chicken and Omelette",
+      "description": "Aromatic ghee rice with spicy Chettinad chicken and fluffy omelette",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/ghee-rice-chettinad-chicken.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "idiyappam-and-chicken-stew",
+      "category": "Super Meals",
+      "name": "Idiyappam and Chicken Stew",
+      "description": "Kerala-style string hoppers with aromatic chicken stew",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/idiyappam-chicken-stew.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "jackfruit-briyani-with-chicken-varuthakari",
+      "category": "Super Meals",
+      "name": "Jackfruit Briyani with Chicken Varuthakari",
+      "description": "Unique jackfruit briyani served with spicy chicken varuthakari",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/jackfruit-biryani-chicken-varutha.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Jackfruit Biryani Feast",
+      "galleryDescription": "A plant-based hero served with sides inspired by Tamil kitchens.",
+      "galleryImage": "images/gallery/jackfruit-biryani-feast.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "rice-dal-fry-and-nethili-fry",
+      "category": "Super Meals",
+      "name": "Rice, Dal Fry and Nethili Fry",
+      "description": "Comfort meal with steamed rice, dal fry and crispy anchovies",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/rice-dal-nethili.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "rice-keerai-fish-fry-and-fish-curry",
+      "category": "Super Meals",
+      "name": "Rice, Keerai, Fish Fry and Fish Curry",
+      "description": "Complete meal with rice, greens, fish fry and curry",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/rice-keerai-fish-curry.webp",
+        "images/menu/super-meals/mango-fish-curry.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Coastal Catch Platter",
+      "galleryDescription": "Fresh fish curry with poriyal, double-fried fillets, and steamed rice.",
+      "galleryImage": "images/gallery/coastal-catch-platter.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "rice-malabar-chicken-gobi-65-and-rasam",
+      "category": "Super Meals",
+      "name": "Rice, Malabar Chicken, Gobi 65 and Rasam",
+      "description": "Traditional South Indian meal with spicy Malabar chicken and tangy rasam",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/malabar-chicken-gobi65-rasam.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "sambhar-rice-avial-and-fish-65",
+      "category": "Super Meals",
+      "name": "Sambhar Rice, Avial and Fish 65",
+      "description": "Traditional South Indian comfort meal with authentic flavors",
+      "price": 150,
+      "images": [
+        "images/menu/super-meals/sambar-rice-avial-fish65.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Chef’s Dinner Curation",
+      "galleryDescription": "Slow-cooked mains paired with hearty sides for indulgent nights.",
+      "galleryImage": "images/gallery/chefs-dinner-curation.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "aloo-paratha-and-dal-makhani",
+      "category": "Comfort Meals",
+      "name": "Aloo Paratha and Dal Makhani",
+      "description": "North Indian stuffed potato paratha with rich dal makhani",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/aloo-paratha-dal-makhani.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "broccoli-white-sauce-pasta",
+      "category": "Comfort Meals",
+      "name": "Brocolli White Sauce Pasta",
+      "description": "Creamy white sauce pasta with fresh broccoli",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/broccoli-white-sauce-pasta.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "chapathi-and-channa-masala",
+      "category": "Comfort Meals",
+      "name": "Chapathi and Channa Masala",
+      "description": "Soft chapathi with spicy chickpea curry",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/chapati-channa-masala.webp",
+        "images/menu/comfort-meals/chapati-channa-masala-alt.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "chole-bhature",
+      "category": "Comfort Meals",
+      "name": "Chole Bhature",
+      "description": "North Indian favorite - spiced chickpeas with fluffy bhature",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/chole-bhature-plate.webp",
+        "images/menu/comfort-meals/chole-bhature-curry.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "jackfruit-briyani-chilli-babycorn-and-adaprathaman",
+      "category": "Comfort Meals",
+      "name": "Jackfruit Briyani, Chilli Babycorn and Adaprathaman",
+      "description": "Aromatic jackfruit briyani with spicy baby corn and traditional dessert",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/jackfruit-biryani-babycorn-ada.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "lemon-rice-tamarind-rice-and-ladies-finger-fry",
+      "category": "Comfort Meals",
+      "name": "Lemon Rice, Tamarind Rice and Ladies Finger Fry",
+      "description": "Tangy variety rice with crispy ladies finger fry",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/lemon-rice-ladies-finger.webp",
+        "images/menu/comfort-meals/tamarind-rice-ladies-finger.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "poondukolambu-saadham-carrot-cabbage-poriyal-and-papadam",
+      "category": "Comfort Meals",
+      "name": "Poondukolambu Saadham, Carrot Cabbage Poriyal and Papadam",
+      "description": "Garlic curry rice with mixed vegetable stir-fry and crispy papadam",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/garlic-curry-meal-01.webp",
+        "images/menu/comfort-meals/garlic-curry-meal-02.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Garlic Curry Meal",
+      "galleryDescription": "Hearty garlic curry, beans podimas, and crisp papad for texture.",
+      "galleryImage": "images/gallery/garlic-curry-meal.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "rice-dal-keerai-aloo-curry-boiled-egg-and-watermelon-juice",
+      "category": "Comfort Meals",
+      "name": "Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice",
+      "description": "Healthy combination of rice, dal spinach, potato curry and fresh juice",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/dal-keerai-plate.webp",
+        "images/menu/comfort-meals/dal-keerai-plate-alt.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Seasonal Veg Spread",
+      "galleryDescription": "Vibrant, locally sourced produce plated for weekday lunches.",
+      "galleryImage": "images/gallery/seasonal-veg-spread.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "rice-ennai-kathirikai-pulikolambu-keerai-and-double-egg-omelette",
+      "category": "Comfort Meals",
+      "name": "Rice, Ennai Kathirikai Pulikolambu, Keerai and Double Egg Omelette",
+      "description": "Traditional Tamil meal with brinjal curry, greens and double omelette",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/ennai-kathirikai-meal.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "spaghetti-napoli",
+      "category": "Comfort Meals",
+      "name": "Sphagetti Napoli",
+      "description": "Classic Italian spaghetti with fresh tomato and basil sauce",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/spaghetti-napoli.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "spinach-rice-stuffed-kathirikai-and-peanut-ladies-finger-fry",
+      "category": "Comfort Meals",
+      "name": "Spinach Rice, Stuffed Kathirikai, Peanut Ladies Finger Fry",
+      "description": "Nutritious spinach rice with stuffed brinjal and crispy ladies finger",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/spinach-rice-stuffed-brinjal.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "vegetarian-rice-bowl-and-mango-milkshake",
+      "category": "Comfort Meals",
+      "name": "Vegetarian Rice Bowl and Mango Milkshake",
+      "description": "Healthy vegetarian rice bowl served with refreshing mango milkshake",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/vegetarian-rice-bowl-mango-shake.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Comfort Meal Box",
+      "galleryDescription": "All-time favourite dal, roti, and sabzi with chef specials.",
+      "galleryImage": "images/gallery/comfort-meal-box.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "wheat-parotta-dahi-paneer-bhindi-fry-and-curd-rice",
+      "category": "Comfort Meals",
+      "name": "Wheat Parotta, Dahi Paneer, Bhindi Fry and Curd Rice",
+      "description": "Healthy wheat parotta with creamy paneer, okra fry and cooling curd rice",
+      "price": 130,
+      "images": [
+        "images/menu/comfort-meals/wheat-parotta-paneer.webp",
+        "images/menu/comfort-meals/wheat-parotta-paneer-alt.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "cold-coffee",
+      "category": "Add-ons",
+      "name": "Cold Coffee",
+      "description": "Refreshing cold coffee perfect for any time",
+      "price": 45,
+      "images": [
+        "images/menu/add-ons/cold-coffee-ad.webp",
+        "images/menu/add-ons/cold-coffee-classic.webp",
+        "images/menu/add-ons/cold-coffee-top.webp"
+      ],
+      "showInGallery": false,
+      "galleryTitle": null,
+      "galleryDescription": null,
+      "galleryImage": null,
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    },
+    {
+      "slug": "mango-milkshake",
+      "category": "Add-ons",
+      "name": "Mango Milkshake",
+      "description": "Creamy mango milkshake made with fresh mangoes",
+      "price": 70,
+      "images": [
+        "images/menu/add-ons/mango-milkshake-glass.webp",
+        "images/menu/add-ons/mango-milkshake-bottle.webp"
+      ],
+      "showInGallery": true,
+      "galleryTitle": "Mango Bliss Shake",
+      "galleryDescription": "Sun-ripened mangoes churned into our house-favourite cooler.",
+      "galleryImage": "images/gallery/mango-bliss-shake.webp",
+      "isNew": false,
+      "createdAt": "2024-01-01T00:00:00.000Z"
+    }
+  ]
+}
