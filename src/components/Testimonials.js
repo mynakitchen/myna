@@ -121,7 +121,7 @@ const Testimonials = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 py-16 px-8">
             <div className="flex flex-col justify-center items-start">
-              <h2 className="text-4xl lg:text-5xl font-bold text-brown-900 mb-6 leading-tight">
+              <h2 className="text-4xl lg:text-5xl font-heading font-bold text-brown-900 mb-6 leading-tight">
                 <span ref={countRef} className="text-5xl lg:text-6xl text-primary">{count.toLocaleString()}+</span>
                 <span className="block">Meals Delivered</span>
                 <span className="block text-xl lg:text-2xl font-medium text-brown-700 mt-2">and counting...</span>
@@ -190,29 +190,29 @@ const Testimonials = () => {
         
         {/* Testimonial Cards */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-brown-900 mb-6">
             What Our Customers Say
           </h2>
         </div>
         
-        <div className="relative mb-16">
+        <div className="relative mb-16 px-4 md:px-12">
           <div className="relative">
             {/* Left/Right controls */}
             <button
               onClick={prevTestimonial}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 md:-left-5 bg-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-200"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-200"
             >
               <FontAwesomeIcon icon={faChevronLeft} className="text-gray-700" />
             </button>
             
             <button
               onClick={nextTestimonial}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 md:-right-5 bg-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-200"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white shadow-lg rounded-full w-10 h-10 flex items-center justify-center hover:scale-110 active:scale-95 transition-transform duration-200"
             >
               <FontAwesomeIcon icon={faChevronRight} className="text-gray-700" />
             </button>
             
-            <div className="overflow-hidden">
+            <div className="overflow-hidden p-4 -m-4">
               <div
                 key={activeIndex}
                 className="flex flex-col md:flex-row gap-8 transition-opacity duration-500"

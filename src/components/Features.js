@@ -64,6 +64,8 @@ const Features = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-brown-900 mb-6">Why Choose Us</h2>
+            <p className="text-lg md:text-xl text-gray-600 mb-8">We deliver more than just food - we deliver an experience.</p>
           </motion.div>
         </div>
 

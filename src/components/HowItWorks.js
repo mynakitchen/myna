@@ -188,7 +188,7 @@ export default function HowItWorks() {
       {/* Header Section */}
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-4 tracking-tight leading-none">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-black text-brown-900 mb-8 tracking-tight leading-none">
             How It Works
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto leading-relaxed font-light">

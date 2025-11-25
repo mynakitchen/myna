@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Helmet } from 'react-helmet-async';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronDown, faClock, faTruck, faMapMarkerAlt, faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 
@@ -78,6 +79,19 @@ const FAQ_ITEMS = [
 const FAQ = () => {
   const sectionRef = useRef(null);
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": FAQ_ITEMS.map(item => ({
+      "@type": "Question",
+      "name": item.question,
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": item.answer
+      }
+    }))
+  };
+
   return (
     <section 
       className="py-14 md:py-20 overflow-hidden" 
@@ -85,6 +99,11 @@ const FAQ = () => {
         backgroundColor: '#F5F1EB'
       }}
     >
+      <Helmet>
+        <script type="application/ld+json">
+          {JSON.stringify(faqSchema)}
+        </script>
+      </Helmet>
       <div ref={sectionRef} className="container mx-auto px-6">
         {/* Header */}
         <div className="text-center max-w-4xl mx-auto mb-10 md:mb-14 relative">
@@ -115,11 +134,11 @@ const FAQ = () => {
 
           {/* Mobile Layout - Stacked */}
           <div className="block md:hidden relative" style={{ zIndex: 1 }}>
-            <h2 className="text-3xl font-black text-gray-900 tracking-tight mb-2">
+            <h2 className="text-3xl font-heading font-black text-brown-900 tracking-tight mb-2">
               Questions?
             </h2>
             <div className="flex items-center justify-center gap-3 mb-4">
-              <h2 className="text-3xl font-black text-gray-900 tracking-tight">
+              <h2 className="text-3xl font-heading font-black text-brown-900 tracking-tight">
                 Look Here.
               </h2>
             </div>
@@ -127,10 +146,10 @@ const FAQ = () => {
 
           {/* Desktop Layout - Horizontal */}
           <div className="hidden md:flex items-center justify-center gap-4 lg:gap-6 mb-3 lg:mb-5 relative" style={{ zIndex: 1 }}>
-            <h2 className="text-5xl lg:text-6xl font-black text-gray-900 tracking-tight">
+            <h2 className="text-5xl lg:text-6xl font-heading font-black text-brown-900 tracking-tight">
               Questions?
             </h2>
-            <h2 className="text-5xl lg:text-6xl font-black text-gray-900 tracking-tight">
+            <h2 className="text-5xl lg:text-6xl font-heading font-black text-brown-900 tracking-tight">
               Look Here.
             </h2>
           </div>

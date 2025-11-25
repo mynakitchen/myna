@@ -12,7 +12,7 @@ const CorporateOrders = () => {
       <div className="container">
         <div className="content-wrapper">
           <div className="text-content">
-            <h2 className="section-title">Corporate & Bulk Orders</h2>
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-brown-900 mb-6">Corporate & Bulk Orders</h2>
             <p className="section-subtitle">
               Feeding your team made simple and delicious
             </p>

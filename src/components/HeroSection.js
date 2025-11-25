@@ -18,15 +18,26 @@ const HeroSection = () => {
 
   // Generate responsive image sources from optimized images
   const optimizedImages = useMemo(() => {
-    return imageMapping.map((img, index) => ({
-      index,
-      baseName: img.baseName,
-      lqip: img.lqip,
-      mobile: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-mobile.webp`,
-      tablet: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-tablet.webp`,
-      desktop: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-desktop.webp`,
-      original: img.original
-    }));
+    return imageMapping.map((img, index) => {
+      // Generate descriptive alt text from filename
+      const altText = img.originalBaseName
+        .replace(/[+_-]/g, ' ') // Replace +, _, - with space
+        .replace(/(\d{4}_x_\d{4}_photos__\d+_)/g, 'Delicious South Indian Meal') // Fix specific weird filenames
+        .replace(/(\.webp|\.jpg|\.jpeg|\.png)/g, '') // Remove extension
+        .replace(/\s+/g, ' ') // Collapse multiple spaces
+        .trim();
+
+      return {
+        index,
+        baseName: img.baseName,
+        lqip: img.lqip,
+        mobile: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-mobile.webp`,
+        tablet: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-tablet.webp`,
+        desktop: `${process.env.PUBLIC_URL}/images/hero-optimized/${img.baseName}-desktop.webp`,
+        original: img.original,
+        altText: altText || "Fresh home cooked meal"
+      };
+    });
   }, []);
 
   // Fallback Unsplash images (original ones)
@@ -206,7 +217,7 @@ const HeroSection = () => {
               />
               <img 
                 src={imageData.desktop}
-                alt={`${imageData.baseName}`}
+                alt={imageData.altText}
                 loading="eager"
                 decoding="async"
                 onLoad={() => handleImageLoad(imageIndex)}
@@ -231,6 +242,20 @@ const HeroSection = () => {
   return (
     <section id="hero" className="hero-section" ref={heroRef}>
       <div className="container mx-auto">
+        {/* Hidden H1 for SEO */}
+        <h1 style={{ 
+          position: 'absolute', 
+          width: '1px', 
+          height: '1px', 
+          padding: 0, 
+          margin: '-1px', 
+          overflow: 'hidden', 
+          clip: 'rect(0, 0, 0, 0)', 
+          whiteSpace: 'nowrap', 
+          borderWidth: 0 
+        }}>
+          Myna Kitchen: Food Sorted. Life Sorted.
+        </h1>
         <div className="hero-content-wrapper">
           {/* Image Carousel at the top */}
           <div className="hero-gallery">

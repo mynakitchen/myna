@@ -10,10 +10,10 @@
 
 /* CSS Variables for consistent colors throughout the app */
 :root {
-  --color-primary: #D4930D;
-  --color-primary-light: rgba(212, 147, 13, 0.1);
-  --color-secondary: #F5F1EB;
-  --color-accent: #8B1538;
+  --color-primary: #825F45;
+  --color-primary-light: #EBE6DF;
+  --color-secondary: #797D62;
+  --color-accent: #D08C60;
   --color-background: #FFFFFF;
   --color-text: #2D2926;
   --color-gray-600: #4A453F;

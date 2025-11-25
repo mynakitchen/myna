@@ -9,12 +9,12 @@
     <!-- Security Headers -->
     <meta http-equiv="Content-Security-Policy" content="
       default-src 'self';
-      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.jsdelivr.net https://maps.googleapis.com https://esm.sh https://www.instagram.com;
+      script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://unpkg.com https://cdn.jsdelivr.net https://maps.googleapis.com https://esm.sh https://www.instagram.com https://*.instagram.com https://*.cdninstagram.com;
       style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com https://cdn.jsdelivr.net;
       font-src 'self' https://fonts.gstatic.com data:;
       img-src 'self' data: https: blob:;
-      connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://mynakitchen.in https://yqymdsmhxsijlmrvlczo.supabase.co https://www.instagram.com https://*.cdninstagram.com https://graph.instagram.com;
-      frame-src 'self' https://www.instagram.com;
+      connect-src 'self' https://www.google-analytics.com https://analytics.google.com https://mynakitchen.in https://yqymdsmhxsijlmrvlczo.supabase.co https://www.instagram.com https://*.instagram.com https://*.cdninstagram.com https://graph.instagram.com https://unpkg.com;
+      frame-src 'self' https://www.instagram.com https://*.instagram.com https://*.cdninstagram.com;
       frame-ancestors 'none';
       object-src 'none';
       base-uri 'self';
@@ -28,15 +28,16 @@
     
     <meta
       name="description"
-      content="Myna Kitchen - Delicious Meals. Zero Hassle."
+      content="Myna Kitchen delivers fresh, home-cooked meals to your doorstep. Healthy, delicious, and hassle-free daily meal plans starting at ₹80."
     />
+    <link rel="canonical" href="https://mynakitchen.in/" />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/images/myna-logo.jpg" />
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
     
     <!-- Secure Google Fonts preconnection -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet" crossorigin="anonymous">
     
     <!-- DNS prefetch for external resources -->
     <link rel="dns-prefetch" href="https://images.unsplash.com">
@@ -62,7 +63,7 @@
             integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
             crossorigin=""></script>
     
-    <title>Myna Kitchen</title>
+    <title>Myna Kitchen - Fresh Homely Meals Delivered Daily</title>
     
     <!-- Secure Google Analytics with error handling -->
     <script>
@@ -100,6 +101,24 @@
           console.warn('Google Analytics initialization error:', error);
         }
       })();
+    </script>
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FoodService",
+        "name": "Myna Kitchen",
+        "image": "https://mynakitchen.in/images/myna-logo.jpg",
+        "description": "Fresh, home-cooked meals delivered daily to your doorstep.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Chennai",
+          "addressCountry": "IN"
+        },
+        "priceRange": "₹80 - ₹200",
+        "telephone": "+91-7418688269",
+        "url": "https://mynakitchen.in"
+      }
     </script>
   </head>
   <body>

@@ -6,7 +6,7 @@
   overflow: hidden;
   padding: 50px 0 0 0;
   margin: 0;
-  background-color: #f9f5f0;
+  background-color: #ffffff;
   display: flex;
   align-items: center;
   color: black;
@@ -265,7 +265,7 @@
   width: 100vw;
   position: relative;
   gap: 0;
-  background-color: #f9f5f0;
+  background-color: #ffffff;
   padding: 0;
   margin: 0;
 }
@@ -276,7 +276,7 @@
   position: relative;
   margin: 0;
   gap: 0;
-  background-color: #f9f5f0;
+  background-color: #ffffff;
   height: 25vh;
   /* Performance optimization for off-screen rows */
   content-visibility: auto;
@@ -319,7 +319,7 @@
   transform: translateZ(0);
   backface-visibility: hidden;
   /* Prevent layout shift */
-  background-color: #f0f0f0;
+  background-color: #ffffff;
 }
 
 .image-item:not(.text-tile) {
@@ -418,7 +418,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f9f5f0;
+  background-color: #ffffff;
   color: #222;
   font-weight: 900;
   font-size: 3.5rem;
@@ -452,7 +452,7 @@
 }
 
 .food-tile, .sorted-tile, .life-tile {
-  background-color: #f9f5f0;
+  background-color: #ffffff;
   min-width: 200px;
   flex: 1.2;
 }

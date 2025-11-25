@@ -137,6 +137,15 @@ const Header = () => {
             </button>
             <button 
               onClick={() => {
+                window.history.pushState({}, '', '/why-us');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
+              className="text-black hover:text-primary font-medium transition-colors"
+            >
+              Why Us
+            </button>
+            <button 
+              onClick={() => {
                 window.history.pushState({}, '', '/browse-plans');
                 window.dispatchEvent(new PopStateEvent('popstate'));
               }}
@@ -145,34 +154,40 @@ const Header = () => {
               Browse Plans
             </button>
             <button 
-              onClick={() => scrollToSection('how-it-works')}
+              onClick={() => {
+                window.history.pushState({}, '', '/how-it-works');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
               How It Works
             </button>
             <button 
-              onClick={() => scrollToSection('daily-menu')}
+              onClick={() => {
+                window.history.pushState({}, '', '/menu');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
               Menu
             </button>
             <button 
-              onClick={() => scrollToSection('subscription-plans')}
+              onClick={() => {
+                window.history.pushState({}, '', '/corporate');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
-              Pricing
+              Corporate
             </button>
             <button 
-              onClick={() => scrollToSection('corporate-orders')}
+              onClick={() => {
+                window.history.pushState({}, '', '/faq');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+              }}
               className="text-black hover:text-primary font-medium transition-colors"
             >
-              Corporate Orders
-            </button>
-            <button 
-              onClick={() => scrollToSection('delivery-map')}
-              className="text-black hover:text-primary font-medium transition-colors"
-            >
-              Delivery Areas
+              FAQ
             </button>
             <button 
               onClick={() => handleExternalLink('https://app.mynakitchen.in')}
@@ -199,6 +214,16 @@ const Header = () => {
             </button>
             <button 
               onClick={() => {
+                window.history.pushState({}, '', '/why-us');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
+              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
+            >
+              Why Us
+            </button>
+            <button 
+              onClick={() => {
                 window.history.pushState({}, '', '/browse-plans');
                 window.dispatchEvent(new PopStateEvent('popstate'));
                 setIsMenuOpen(false);
@@ -208,34 +233,44 @@ const Header = () => {
               Browse Plans
             </button>
             <button 
-              onClick={() => scrollToSection('corporate-orders')}
-              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
-            >
-              Corporate Orders
-            </button>
-            <button 
-              onClick={() => scrollToSection('how-it-works')}
+              onClick={() => {
+                window.history.pushState({}, '', '/how-it-works');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
               How It Works
             </button>
             <button 
-              onClick={() => scrollToSection('daily-menu')}
+              onClick={() => {
+                window.history.pushState({}, '', '/menu');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
               Menu
             </button>
             <button 
-              onClick={() => scrollToSection('subscription-plans')}
+              onClick={() => {
+                window.history.pushState({}, '', '/corporate');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
-              Pricing
+              Corporate
             </button>
             <button 
-              onClick={() => scrollToSection('delivery-map')}
+              onClick={() => {
+                window.history.pushState({}, '', '/faq');
+                window.dispatchEvent(new PopStateEvent('popstate'));
+                setIsMenuOpen(false);
+              }}
               className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-black hover:bg-sage-50 transition-colors min-h-[44px]"
             >
-              Delivery Areas
+              FAQ
             </button>
           </div>
         </div>
