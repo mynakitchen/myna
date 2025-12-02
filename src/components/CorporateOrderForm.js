@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createClient } from '@supabase/supabase-js';
 import './CorporateOrderForm.css';
 
 const CorporateOrderForm = ({ showHeader = true }) => {
@@ -30,9 +31,6 @@ const CorporateOrderForm = ({ showHeader = true }) => {
     setSubmitStatus(null);
 
     try {
-      // Import Supabase client dynamically
-      const { createClient } = await import("https://esm.sh/@supabase/supabase-js");
-      
       // Replace with your actual Supabase credentials
       const supabase = createClient(
         "https://yqymdsmhxsijlmrvlczo.supabase.co", 
