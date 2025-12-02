@@ -2,6 +2,7 @@
   background: linear-gradient(150deg, #fdf9f2 15%, #ffffff 50%, #f5fcff 90%);
   color: #0f172a;
   overflow: hidden;
+  padding: 0;
 }
 
 .corp-hero {

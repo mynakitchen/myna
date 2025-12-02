@@ -149,19 +149,19 @@ function App() {
       } else if (pathname === '/terms-and-conditions') {
         setCurrentPage('terms');
         setBlogSlug(null);
-      } else if (path === '/why-us') {
+      } else if (pathname === '/why-us') {
           setCurrentPage('why-us');
           setBlogSlug(null);
-      } else if (path === '/menu') {
+      } else if (pathname === '/menu') {
           setCurrentPage('menu');
           setBlogSlug(null);
-      } else if (path === '/how-it-works') {
+      } else if (pathname === '/how-it-works') {
           setCurrentPage('how-it-works');
           setBlogSlug(null);
-      } else if (path === '/corporate') {
+      } else if (pathname === '/corporate') {
           setCurrentPage('corporate');
           setBlogSlug(null);
-      } else if (path === '/faq') {
+      } else if (pathname === '/faq') {
           setCurrentPage('faq');
           setBlogSlug(null);
       } else {
