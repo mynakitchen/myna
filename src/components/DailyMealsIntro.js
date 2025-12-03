@@ -1,4 +1,13 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faMoneyBillWave,
+  faLocationDot,
+  faUtensils,
+  faArrowsRotate,
+  faBoxOpen,
+  faCalendarCheck
+} from '@fortawesome/free-solid-svg-icons';
 import './ProblemStatement.css';
 
 const featureContent = [
@@ -7,7 +16,7 @@ const featureContent = [
     title: 'Cancel Anytime With a Full Refund',
     description:
       "Enjoy complete flexibility with Myna Kitchen's meal plans. If your schedule changes, simply cancel your meal at any time and get an instant full refund to your wallet. No extra charges, no complications, just stress-free meal management.",
-    icon: '💸',
+    icon: faMoneyBillWave,
     iconLabel: 'Instant refund icon',
     accentClass: 'accent-refund'
   },
@@ -16,7 +25,7 @@ const featureContent = [
     title: 'Change Your Delivery Location Anytime',
     description:
       "Whether you're working from the office, staying at home, or on the move, Myna Kitchen makes meal delivery effortless. Update your delivery location anytime during the day, and we'll ensure your food reaches you wherever you are. Perfect for busy professionals and flexible routines.",
-    icon: '📍',
+    icon: faLocationDot,
     iconLabel: 'Location pin icon',
     accentClass: 'accent-location'
   },
@@ -25,7 +34,7 @@ const featureContent = [
     title: 'Customise Your Meals With Add-Ons',
     description:
       'Make your meal truly yours. Myna Kitchen lets you personalise your order with a variety of add-ons, extra portions, sides, and special items. Build a meal that matches your taste, diet preferences, and hunger level with just a tap.',
-    icon: '🍽️',
+    icon: faUtensils,
     iconLabel: 'Plated meal icon',
     accentClass: 'accent-customise'
   },
@@ -34,7 +43,7 @@ const featureContent = [
     title: 'Swap Meals With Any Available Option',
     description:
       'Craving something different today? With Myna Kitchen, you can easily swap your planned meal with any other available dish. Choose what you feel like eating and enjoy full control over your daily menu without any restrictions.',
-    icon: '🔁',
+    icon: faArrowsRotate,
     iconLabel: 'Swap arrows icon',
     accentClass: 'accent-swap'
   },
@@ -43,15 +52,16 @@ const featureContent = [
     title: 'Order Single Meals Without Subscription',
     description:
       'No commitment needed. Myna Kitchen allows you to order single meals without subscriptions or minimum balance requirements. Ideal for users who want affordable, high-quality meals on demand, whenever hunger strikes.',
-    icon: '🥡',
+    icon: faBoxOpen,
     iconLabel: 'Takeaway meal icon',
     accentClass: 'accent-single'
   },
   {
     number: '06',
     title: 'Order meals according to your preference',
-    description: 'How many ever meals you want in a day, we can allow.',
-    icon: '🗓️',
+    description:
+      'Plan your day your way. Whether you crave one hearty lunch, a trio of balanced meals, or a steady stream of mini bites, Myna Kitchen schedules as many deliveries as you need—no caps, no hassle, just total control.',
+    icon: faCalendarCheck,
     iconLabel: 'Flexible schedule icon',
     accentClass: 'accent-flexible'
   }
@@ -91,8 +101,8 @@ const DailyMealsIntro = () => {
                   <div className={`feature-card-accent ${accentClass}`} aria-hidden="true" />
                   <div className="feature-card-header">
                     <span className="feature-number">{number}</span>
-                    <span className="feature-emoji" role="img" aria-label={iconLabel}>
-                      {icon}
+                    <span className="feature-icon-wrapper" role="img" aria-label={iconLabel}>
+                      <FontAwesomeIcon icon={icon} size="2x" title={iconLabel} />
                     </span>
                   </div>
                   <div className="feature-card-body">
