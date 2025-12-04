@@ -84,3 +84,7 @@ For local development:
    ```
 
 3. Your site will be available at http://localhost:3000 for testing 
+
+
+
+deploy to sahil repo : cp -r ../myna/build/* .
