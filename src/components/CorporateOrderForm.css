@@ -1,6 +1,13 @@
 .corporate-form-page {
   min-height: 100vh;
   background: #F5F1EB;
+  padding-top: 56px;
+}
+
+@media (min-width: 768px) {
+  .corporate-form-page {
+    padding-top: 80px;
+  }
 }
 
 .form-header {
@@ -426,7 +433,7 @@
 
 @media (max-width: 768px) {
   .form-header {
-    padding: 40px 0 30px;
+    padding: 28px 0 24px;
   }
   
   .form-title {

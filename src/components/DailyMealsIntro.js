@@ -1,40 +1,74 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faMoneyBillWave,
+  faLocationDot,
+  faUtensils,
+  faArrowsRotate,
+  faBoxOpen,
+  faCalendarCheck
+} from '@fortawesome/free-solid-svg-icons';
 import './ProblemStatement.css';
 
-// Parallax Image Section Component
-const ParallaxImageSection = () => {
-  return (
-    <div className="parallax-image-container">
-      <div className="parallax-image-wrapper">
-        <img 
-          src={`${process.env.PUBLIC_URL}/images/myna-kitchen-meals-optimized.webp`}
-          alt="Myna Kitchen meal containers showcasing various South Indian dishes"
-          className="parallax-image"
-          loading="eager"
-          decoding="async"
-          onError={(e) => {
-            // Fallback to a placeholder if image not found
-            e.target.style.display = 'none';
-            e.target.nextSibling.style.display = 'flex';
-          }}
-        />
-        <div 
-          className="image-placeholder" 
-          style={{ display: 'none' }}
-        >
-          <div className="placeholder-content">
-            <div className="placeholder-icon">🍱</div>
-            <h3>Myna Kitchen Meals</h3>
-            <p>Delicious meal containers delivered fresh to your doorstep</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-};
+const featureContent = [
+  {
+    number: '01',
+    title: 'Cancel Anytime With a Full Refund',
+    description:
+      "Enjoy complete flexibility with Myna Kitchen's meal plans. If your schedule changes, simply cancel your meal at any time and get an instant full refund to your wallet. No extra charges, no complications, just stress-free meal management.",
+    icon: faMoneyBillWave,
+    iconLabel: 'Instant refund icon',
+    accentClass: 'accent-refund'
+  },
+  {
+    number: '02',
+    title: 'Change Your Delivery Location Anytime',
+    description:
+      "Whether you're working from the office, staying at home, or on the move, Myna Kitchen makes meal delivery effortless. Update your delivery location anytime during the day, and we'll ensure your food reaches you wherever you are. Perfect for busy professionals and flexible routines.",
+    icon: faLocationDot,
+    iconLabel: 'Location pin icon',
+    accentClass: 'accent-location'
+  },
+  {
+    number: '03',
+    title: 'Customise Your Meals With Add-Ons',
+    description:
+      'Make your meal truly yours. Myna Kitchen lets you personalise your order with a variety of add-ons, extra portions, sides, and special items. Build a meal that matches your taste, diet preferences, and hunger level with just a tap.',
+    icon: faUtensils,
+    iconLabel: 'Plated meal icon',
+    accentClass: 'accent-customise'
+  },
+  {
+    number: '04',
+    title: 'Swap Meals With Any Available Option',
+    description:
+      'Craving something different today? With Myna Kitchen, you can easily swap your planned meal with any other available dish. Choose what you feel like eating and enjoy full control over your daily menu without any restrictions.',
+    icon: faArrowsRotate,
+    iconLabel: 'Swap arrows icon',
+    accentClass: 'accent-swap'
+  },
+  {
+    number: '05',
+    title: 'Order Single Meals Without Subscription',
+    description:
+      'No commitment needed. Myna Kitchen allows you to order single meals without subscriptions or minimum balance requirements. Ideal for users who want affordable, high-quality meals on demand, whenever hunger strikes.',
+    icon: faBoxOpen,
+    iconLabel: 'Takeaway meal icon',
+    accentClass: 'accent-single'
+  },
+  {
+    number: '06',
+    title: 'Order meals according to your preference',
+    description:
+      'Plan your day your way. Whether you crave one hearty lunch, a trio of balanced meals, or a steady stream of mini bites, Myna Kitchen schedules as many deliveries as you need—no caps, no hassle, just total control.',
+    icon: faCalendarCheck,
+    iconLabel: 'Flexible schedule icon',
+    accentClass: 'accent-flexible'
+  }
+];
 
-const scrollToSection = (sectionId) => {
-  const section = document.getElementById(sectionId);
+const scrollToPlans = () => {
+  const section = document.getElementById('subscription-plans');
   if (section) {
     window.scrollTo({
       top: section.offsetTop - 80,
@@ -45,44 +79,49 @@ const scrollToSection = (sectionId) => {
 
 const DailyMealsIntro = () => {
   return (
-    <section id="features" className="solution-section">
-      <div className="container mx-auto px-6">
-        {/* Unified Header Section */}
-        <div className="unified-hero-section">
-          {/* Header Section - Reduced spacing */}
-          <div className="text-center mb-8">
-            <h2 className="hero-title">
-              Myna <span className="text-primary">Kitchen</span>
+    <section id="features" className="solution-section feature-showcase-section">
+      <div className="container mx-auto px-6 py-16">
+        <div className="feature-showcase-inner">
+          <header className="feature-showcase-header text-center">
+            <span className="feature-showcase-kicker">Power up your daily meals</span>
+            <h2 className="feature-showcase-title">
+              Freedom-first plans that move with your day
             </h2>
-            <h3 className="hero-subtitle">
-              Daily Meals Delivered
-            </h3>
-            <p className="hero-description">
-              With us you no longer have to run a kitchen, manage groceries or worry about your daily food.
+            <p className="feature-showcase-description">
+              Lean into homely cooking without the hassle. Every Myna Kitchen plan is
+              designed to be as flexible and comforting as your favourite home-cooked meal,
+              so you can focus on what matters most.
             </p>
-            
-            {/* Parallax Image Section */}
-            <ParallaxImageSection />
-            
-            {/* New text addition */}
-            <p className="hero-description-sub mt-8 text-lg md:text-xl text-gray-700 font-medium">
-              Fresh homely meals delivered to you day by day, meal by meal
-            </p>
+          </header>
 
-            {/* Pricing Text and Button - Reduced spacing */}
-            <div className="hero-pricing-section mt-6 mb-12">
-              <p className="pricing-text text-2xl md:text-3xl font-bold text-primary mb-6 tracking-wide"
-                style={{
-                  fontFamily: "'Inter', 'Helvetica Neue', sans-serif",
-                }}>
-                Starting at just ₹80 per day
-              </p>
-              <button 
-              onClick={() => scrollToSection('subscription-plans')}
-              className="pricing-cta-button">
-                View Our Plans
-              </button>
-            </div>
+          <div className="feature-showcase-grid">
+            {featureContent.map(
+              ({ number, title, description, icon, iconLabel, accentClass }) => (
+                <article key={title} className="feature-showcase-card">
+                  <div className={`feature-card-accent ${accentClass}`} aria-hidden="true" />
+                  <div className="feature-card-header">
+                    <span className="feature-number">{number}</span>
+                    <span className="feature-icon-wrapper" role="img" aria-label={iconLabel}>
+                      <FontAwesomeIcon icon={icon} size="2x" title={iconLabel} />
+                    </span>
+                  </div>
+                  <div className="feature-card-body">
+                    <h3 className="feature-showcase-card-title">{title}</h3>
+                    <p className="feature-showcase-card-description">{description}</p>
+                  </div>
+                </article>
+              )
+            )}
+          </div>
+
+          <div className="feature-showcase-cta">
+            <button
+              type="button"
+              className="pricing-cta-button"
+              onClick={scrollToPlans}
+            >
+              See Pricing & Plans
+            </button>
           </div>
         </div>
       </div>
@@ -91,4 +130,3 @@ const DailyMealsIntro = () => {
 };
 
 export default DailyMealsIntro;
-

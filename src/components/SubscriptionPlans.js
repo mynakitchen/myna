@@ -470,7 +470,7 @@ const SubscriptionPlans = () => {
     ];
 
     const containerClasses = isMobile
-      ? 'flex w-full max-w-sm mx-auto mb-4 gap-1'
+      ? 'flex w-full max-w-full mx-auto mb-4 gap-1'
       : 'inline-flex mb-8 gap-2';
 
     return (
@@ -483,7 +483,7 @@ const SubscriptionPlans = () => {
               currentPeriod === option.value
                 ? 'bg-gray-900 text-white shadow-sm'
                 : 'bg-transparent text-gray-600 hover:text-gray-900'
-            } ${isMobile ? 'flex-1 min-w-0 px-3 py-1.5 text-xs whitespace-nowrap' : 'px-6 py-2.5 text-sm'}`}
+            } ${isMobile ? 'flex-1 min-w-0 px-2.5 py-2 text-[11px] leading-4 tracking-tight' : 'px-6 py-2.5 text-sm'}`}
           >
             {option.label}
           </button>
