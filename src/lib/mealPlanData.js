@@ -7,7 +7,7 @@ export const pricingData = {
     dinner: 140,
     breakfastLunch: 250,
     breakfastDinner: 250,
-    lunchDinner: 280,
+    lunchDinner: 270,
     allMeals: 370
   },
   monthly: {
@@ -16,7 +16,7 @@ export const pricingData = {
     dinner: 150,
     breakfastLunch: 265,
     breakfastDinner: 265,
-    lunchDinner: 300,
+    lunchDinner: 290,
     allMeals: 390
   },
   weekly: {
@@ -25,7 +25,7 @@ export const pricingData = {
     dinner: 160,
     breakfastLunch: 280,
     breakfastDinner: 280,
-    lunchDinner: 320,
+    lunchDinner: 310,
     allMeals: 400
   }
 };

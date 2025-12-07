@@ -22,26 +22,27 @@ const SubscriptionPlans = () => {
   });
 
   // Price mapping for each billing cadence
+  // todo: centralize menu pricing to a single file
   const pricingMatrix = {
     bimonthly: {
       80: 120,
       120: 140,
       200: 250,
-      220: 280,
+      220: 270,
       250: 370
     },
     monthly: {
       80: 125,
       120: 150,
       200: 265,
-      220: 300,
+      220: 290,
       250: 390
     },
     weekly: {
       80: 130,
       120: 160,
       200: 280,
-      220: 320,
+      220: 310,
       250: 400
     }
   };
