@@ -10,7 +10,7 @@ const heroStats = [
   },
   {
     value: '93%',
-    label: 'feel less stressed at dinner time'
+    label: 'feel less stressed at meal time'
   },
   {
     value: '98%',
@@ -25,7 +25,7 @@ const heroHighlights = [
   },
   {
     title: 'Flexible subscriptions',
-    description: 'Skip, pause, or cancel anytime directly from your dashboard.'
+    description: 'Based on your preferences, You can select any meal or combo of meals for the day.'
   },
   {
     title: 'Doorstep delivery',
@@ -229,7 +229,7 @@ const HeroSection = () => {
               >
                 <span className="hero-floating-card__title">Fresh to your doorstep</span>
                 <span className="hero-floating-card__desc">
-                  Choose from 100+ rotating recipes every week.
+                 Experience mouthwatering meals delivered every day.
                 </span>
               </motion.div>
             </div>
