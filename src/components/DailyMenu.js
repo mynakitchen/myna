@@ -217,8 +217,8 @@ const MENU_ITEMS = [
     name: "Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice",
     description: "Healthy combination of rice, dal spinach, potato curry and fresh juice",
     images: [
-      getImagePath("menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeye'sspinach&aloocurry&watermelon.JPG"),
-      getImagePath("menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeye'sspinach&aloocurry&watermelon.(1).JPG")
+      getImagePath("menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeyesspinach&aloocurry&watermelon-1.JPG"),
+      getImagePath("menu/Comfort Meals/7. Rice, Dal Keerai, Aloo Curry, Boiled Egg and Watermelon Juice/Popeyesspinach&aloocurry&watermelon-2.JPG")
     ],
     price: 130,
     category: "Comfort Meals"
