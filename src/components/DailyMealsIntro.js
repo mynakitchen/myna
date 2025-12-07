@@ -60,7 +60,7 @@ const featureContent = [
     number: '06',
     title: 'Order meals according to your preference',
     description:
-      'Plan your day your way. Whether you crave one hearty lunch, a trio of balanced meals, or a steady stream of mini bites, Myna Kitchen schedules as many deliveries as you need—no caps, no hassle, just total control.',
+      'Plan your day your way. Whether you crave one hearty lunch, a trio of balanced meals, or a steady stream of mini bites, based on your preferences, Myna Kitchen lets you select any meal or combo of meals for the day.',
     icon: faCalendarCheck,
     iconLabel: 'Flexible schedule icon',
     accentClass: 'accent-flexible'
