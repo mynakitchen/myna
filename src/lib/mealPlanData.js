@@ -2,31 +2,31 @@
 
 export const pricingData = {
   bimonthly: {
-    breakfast: 80,
-    lunch: 120,
-    dinner: 120,
-    breakfastLunch: 200,
-    breakfastDinner: 200,
-    lunchDinner: 220,
-    allMeals: 250
-  },
-  monthly: {
-    breakfast: 100,
+    breakfast: 120,
     lunch: 140,
     dinner: 140,
-    breakfastLunch: 230,
-    breakfastDinner: 230,
-    lunchDinner: 250,
-    allMeals: 280
-  },
-  weekly: {
-    breakfast: 110,
-    lunch: 160,
-    dinner: 160,
     breakfastLunch: 250,
     breakfastDinner: 250,
     lunchDinner: 270,
-    allMeals: 300
+    allMeals: 370
+  },
+  monthly: {
+    breakfast: 125,
+    lunch: 150,
+    dinner: 150,
+    breakfastLunch: 265,
+    breakfastDinner: 265,
+    lunchDinner: 290,
+    allMeals: 390
+  },
+  weekly: {
+    breakfast: 130,
+    lunch: 160,
+    dinner: 160,
+    breakfastLunch: 280,
+    breakfastDinner: 280,
+    lunchDinner: 310,
+    allMeals: 400
   }
 };
 
