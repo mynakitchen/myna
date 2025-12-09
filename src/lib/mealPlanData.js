@@ -30,6 +30,9 @@ export const pricingData = {
   }
 };
 
+export const PRICING_PERIODS = Object.keys(pricingData);
+export const DEFAULT_PRICING_PERIOD = PRICING_PERIODS[0] || 'bimonthly';
+
 export const deliveryCharges = [
   { range: "0-8", charge: 0, label: "Free delivery" },
   { range: "8-12", charge: 10, label: "₹10 per delivery" },
@@ -142,9 +145,9 @@ export const getMealsKey = (meals) => {
   return 'lunch'; // default
 };
 
-export const calculatePrice = (meals, planType = 'bimonthly') => {
+export const calculatePrice = (meals, planType = DEFAULT_PRICING_PERIOD) => {
   const mealsKey = getMealsKey(meals);
-  const planPricing = pricingData[planType] || pricingData.bimonthly;
+  const planPricing = pricingData[planType] || pricingData[DEFAULT_PRICING_PERIOD];
   return planPricing[mealsKey] || 0;
 };
 

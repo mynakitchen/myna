@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import { calculatePrice as getMealPlanPrice, PRICING_PERIODS, DEFAULT_PRICING_PERIOD } from '../lib/mealPlanData';
+
+const PRICING_TOGGLE_OPTIONS = PRICING_PERIODS.map((period) => ({
+  value: period,
+  label: `${period.charAt(0).toUpperCase()}${period.slice(1)}`
+}));
 
 const SubscriptionPlans = () => {
   // New state management for individual meal selections
@@ -12,101 +18,26 @@ const SubscriptionPlans = () => {
   const [mobileSelectedMeals, setMobileSelectedMeals] = useState(['lunch', 'dinner']); // Default: 2 meals for mobile
 
   // State to track pricing period (bimonthly vs monthly vs weekly)
-  const [pricingPeriod, setPricingPeriod] = useState('bimonthly');
+  const [pricingPeriod, setPricingPeriod] = useState(DEFAULT_PRICING_PERIOD);
   
   // Individual pricing period state for mobile view
   const [mobilePricingPeriod, setMobilePricingPeriod] = useState({
-    'one-meal': 'bimonthly',
-    'two-meals': 'bimonthly', 
-    'three-meals': 'bimonthly'
+    'one-meal': DEFAULT_PRICING_PERIOD,
+    'two-meals': DEFAULT_PRICING_PERIOD, 
+    'three-meals': DEFAULT_PRICING_PERIOD
   });
 
-  // Price mapping for each billing cadence
-  // todo: centralize menu pricing to a single file
-  const pricingMatrix = {
-    bimonthly: {
-      80: 120,
-      120: 140,
-      200: 250,
-      220: 270,
-      250: 370
-    },
-    monthly: {
-      80: 125,
-      120: 150,
-      200: 265,
-      220: 290,
-      250: 390
-    },
-    weekly: {
-      80: 130,
-      120: 160,
-      200: 280,
-      220: 310,
-      250: 400
+  const resolvePricingPeriod = (planId = null, isMobile = false) => {
+    if (isMobile && planId) {
+      return mobilePricingPeriod[planId] || pricingPeriod || DEFAULT_PRICING_PERIOD;
     }
+    return pricingPeriod || DEFAULT_PRICING_PERIOD;
   };
 
-  // Function to get price based on period
-  const getPrice = (basePrice, globalPeriod, planId = null, isMobile = false) => {
-    // For mobile, use individual plan pricing period, for desktop use global period
-    const currentPeriod = isMobile && planId ? mobilePricingPeriod[planId] : globalPeriod;
-    const matrix = pricingMatrix[currentPeriod] || {};
-    return matrix[basePrice] ?? basePrice;
-  };
-
-  // Individual meal prices
-  const mealPrices = {
-    'breakfast': 80,
-    'lunch': 120,
-    'dinner': 120
-  };
-
-  // Function to calculate price based on selected meals
-  const calculatePrice = (planId) => {
-    const meals = selectedMeals[planId];
-    
-    if (planId === 'one-meal') {
-      // Single meal plan - return price of selected meal
-      return mealPrices[meals[0]];
-    } else if (planId === 'two-meals') {
-      // Double meal plan - special pricing for combinations
-      const mealSet = new Set(meals);
-      if (mealSet.has('lunch') && mealSet.has('dinner')) {
-        return 220; // Lunch + Dinner
-      } else if (mealSet.has('breakfast') && mealSet.has('lunch')) {
-        return 200; // Breakfast + Lunch  
-      } else if (mealSet.has('breakfast') && mealSet.has('dinner')) {
-        return 200; // Breakfast + Dinner
-      }
-      return 220; // Default fallback
-    } else if (planId === 'three-meals') {
-      // Triple meal plan - fixed price for all meals
-      return 250;
-    }
-    return 120; // Fallback
-  };
-
-  // Function to calculate mobile price based on selected meals
-  const calculateMobilePrice = (meals) => {
-    const mealCount = meals.length;
-    
-    if (mealCount === 1) {
-      return mealPrices[meals[0]];
-    } else if (mealCount === 2) {
-      const mealSet = new Set(meals);
-      if (mealSet.has('lunch') && mealSet.has('dinner')) {
-        return 220; // Lunch + Dinner
-      } else if (mealSet.has('breakfast') && mealSet.has('lunch')) {
-        return 200; // Breakfast + Lunch  
-      } else if (mealSet.has('breakfast') && mealSet.has('dinner')) {
-        return 200; // Breakfast + Dinner
-      }
-      return 220; // Default fallback
-    } else if (mealCount === 3) {
-      return 250; // All meals
-    }
-    return 120; // Fallback
+  const getCentralizedPrice = (meals = [], options = {}) => {
+    const { planId = null, isMobile = false, periodOverride = null } = options;
+    const effectivePeriod = periodOverride || resolvePricingPeriod(planId, isMobile);
+    return getMealPlanPrice(meals, effectivePeriod);
   };
 
   // Function to get meal description
@@ -464,11 +395,7 @@ const SubscriptionPlans = () => {
       }
     };
 
-    const options = [
-      { label: 'Bimonthly', value: 'bimonthly' },
-      { label: 'Monthly', value: 'monthly' },
-      { label: 'Weekly', value: 'weekly' }
-    ];
+    const options = PRICING_TOGGLE_OPTIONS;
 
     const containerClasses = isMobile
       ? 'flex w-full max-w-full mx-auto mb-4 gap-1'
@@ -496,8 +423,7 @@ const SubscriptionPlans = () => {
   // Render mobile pricing card
   const renderMobilePricingCard = () => {
     const mealCount = mobileSelectedMeals.length;
-    const basePrice = calculateMobilePrice(mobileSelectedMeals);
-    const displayPrice = getPrice(basePrice, pricingPeriod);
+    const displayPrice = getCentralizedPrice(mobileSelectedMeals, { isMobile: true });
     const planTitle = getMobilePlanTitle(mobileSelectedMeals);
     const description = getMobileMealDescription(mobileSelectedMeals);
     
@@ -619,9 +545,9 @@ const SubscriptionPlans = () => {
 
         {/* Desktop View - Three Cards Side by Side */}
         <div className="hidden md:flex md:justify-center md:items-stretch md:gap-4 lg:gap-6 xl:gap-8 max-w-6xl mx-auto">
-          {pricingPlans.map((plan, index) => {
-            const basePrice = calculatePrice(plan.id);
-            const displayPrice = getPrice(basePrice, pricingPeriod, plan.id, false); // Desktop uses global period
+          {pricingPlans.map((plan) => {
+            const planMeals = selectedMeals[plan.id];
+            const displayPrice = getCentralizedPrice(planMeals, { planId: plan.id }); // Desktop uses global period
             const description = getMealDescription(plan.id);
             
             return (
