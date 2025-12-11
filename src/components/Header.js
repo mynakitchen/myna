@@ -102,7 +102,14 @@ const Header = () => {
           {/* Mobile menu button */}
           <div className="flex md:hidden items-center space-x-3">
             <button 
-              onClick={() => window.open('https://app.mynakitchen.in','_blank')}
+              onClick={() => handleExternalLink('https://app.mynakitchen.in/')}
+              className="border-2 border-accent text-accent px-3 py-1.5 rounded-full text-sm font-medium shadow-sm hover:bg-accent hover:text-white transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
+              aria-label="Log in to Myna Kitchen"
+            >
+              Log In
+            </button>
+            <button 
+              onClick={() => handleExternalLink('https://app.mynakitchen.in/signup')}
               className="bg-accent text-white px-3 py-1.5 rounded-full text-sm font-medium shadow-sm hover:bg-warmOrange-600 transition-colors min-h-[44px] min-w-[44px] flex items-center justify-center"
               aria-label="Try a meal from Myna Kitchen"
             >
@@ -190,7 +197,14 @@ const Header = () => {
               FAQ
             </button>
             <button 
-              onClick={() => handleExternalLink('https://app.mynakitchen.in')}
+              onClick={() => handleExternalLink('https://app.mynakitchen.in/')}
+              className="border-2 border-accent text-accent px-6 py-2.5 rounded-full font-medium shadow-sm hover:bg-accent hover:text-white transition-colors"
+              aria-label="Log in to Myna Kitchen"
+            >
+              Log In
+            </button>
+            <button 
+              onClick={() => handleExternalLink('https://app.mynakitchen.in/signup')}
               className="bg-accent text-white px-6 py-2.5 rounded-full font-medium shadow-sm hover:bg-warmOrange-600 transition-colors"
               aria-label="Try a meal from Myna Kitchen"
             >
