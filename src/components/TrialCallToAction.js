@@ -2,7 +2,7 @@ import React from 'react';
 
 const TrialCallToAction = () => {
   const handleTrialClick = () => {
-    window.open('https://app.mynakitchen.in', '_blank');
+    window.open('https://app.mynakitchen.in/signup', '_blank');
   };
 
   return (
