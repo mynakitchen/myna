@@ -110,38 +110,9 @@ const SubscriptionPlans = () => {
     }
   ];
 
-  const scrollToSection = (sectionId) => {
-    // Try multiple methods to find the element
-    let section = document.getElementById(sectionId);
-    
-    if (!section) {
-      // Fallback: try querySelector
-      section = document.querySelector(`#${sectionId}`);
-    }
-    
-    if (!section) {
-      // Fallback: try finding by attribute
-      section = document.querySelector(`[id="${sectionId}"]`);
-    }
-    
-    if (section) {
-      const rect = section.getBoundingClientRect();
-      
-      // Check if element is already visible
-      const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight;
-      
-      if (!isVisible) {
-        const offset = 80; // Account for any fixed headers
-        const elementPosition = rect.top + window.pageYOffset - offset;
-        
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
-    } else {
-      console.warn('Element not found:', sectionId);
-    }
+  const navigateToHowItWorks = () => {
+    window.history.pushState({}, '', '/how-it-works');
+    window.dispatchEvent(new PopStateEvent('popstate'));
   };
 
   const formatPrice = (amount) => {
@@ -505,7 +476,7 @@ const SubscriptionPlans = () => {
             
             {/* CTA Button */}
             <button
-              onClick={() => scrollToSection('easy-registration')}
+              onClick={navigateToHowItWorks}
               className="w-full py-3 font-bold text-sm transition-all duration-200 border-2 border-gray-900 hover:bg-gray-900 hover:text-white mt-auto rounded-md"
               style={{
                 backgroundColor: isPopular ? accentColor : 'white',
@@ -623,7 +594,7 @@ const SubscriptionPlans = () => {
                     
                     {/* CTA Button */}
                     <button
-                      onClick={() => scrollToSection('how-it-works')}
+                      onClick={navigateToHowItWorks}
                       className="w-full py-3 lg:py-4 font-bold text-sm transition-all duration-200 border-2 border-gray-900 hover:bg-gray-900 hover:text-white mt-auto rounded-md"
                       style={{
                         backgroundColor: plan.popular ? plan.accent : 'white',
