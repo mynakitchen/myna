@@ -472,6 +472,10 @@
   background: linear-gradient(90deg, #ef4444, #dc2626);
 }
 
+.feature-card-accent.accent-guests {
+  background: linear-gradient(90deg, #ec4899, #db2777);
+}
+
 .feature-card-accent.accent-flexible {
   background: linear-gradient(90deg, #0ea5e9, #0284c7);
 }
