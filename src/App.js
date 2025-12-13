@@ -29,6 +29,7 @@ import HowItWorksPage from './components/pages/HowItWorksPage';
 import CorporatePage from './components/pages/CorporatePage';
 import FAQPage from './components/pages/FAQPage';
 import DailyMealsIntro from './components/DailyMealsIntro';
+import SingleMealHighlight from './components/SingleMealHighlight';
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home');
@@ -231,6 +232,10 @@ function App() {
             />
             <ErrorBoundary>
               <HeroSection />
+            </ErrorBoundary>
+            
+            <ErrorBoundary>
+              <SingleMealHighlight />
             </ErrorBoundary>
             
             <ErrorBoundary>

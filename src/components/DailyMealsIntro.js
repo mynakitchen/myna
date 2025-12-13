@@ -5,7 +5,6 @@ import {
   faLocationDot,
   faUtensils,
   faArrowsRotate,
-  faBoxOpen,
   faCalendarCheck,
   faUsers
 } from '@fortawesome/free-solid-svg-icons';
@@ -50,15 +49,6 @@ const featureContent = [
   },
   {
     number: '05',
-    title: 'Order Single Meals Without Subscription',
-    description:
-      'No commitment needed. Myna Kitchen allows you to order single meals without subscriptions or minimum balance requirements. Ideal for users who want affordable, high-quality meals on demand, whenever hunger strikes.',
-    icon: faBoxOpen,
-    iconLabel: 'Takeaway meal icon',
-    accentClass: 'accent-single'
-  },
-  {
-    number: '06',
     title: 'Add Extra Meals When Guests Drop By',
     description:
       "Friends joining you for lunch or dinner? Quickly add extra chef-made meals to your order so everyone's covered—no advance planning needed.",
@@ -67,7 +57,7 @@ const featureContent = [
     accentClass: 'accent-guests'
   },
   {
-    number: '07',
+    number: '06',
     title: 'Order meals according to your preference',
     description:
       'Plan your day your way. Whether you crave one hearty lunch, a trio of balanced meals, or a steady stream of mini bites, based on your preferences, Myna Kitchen lets you select any meal or combo of meals for the day.',
