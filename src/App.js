@@ -218,6 +218,7 @@ function App() {
                 "address": {
                   "@type": "PostalAddress",
                   "addressLocality": "Chennai",
+                  "addressRegion": "Tamil Nadu",
                   "addressCountry": "IN"
                 },
                 "geo": {
@@ -227,8 +228,37 @@ function App() {
                 },
                 "telephone": "+91-7418688269",
                 "priceRange": "₹80 - ₹200",
-                "servesCuisine": ["South Indian", "North Indian", "Indian"]
+                "servesCuisine": ["South Indian", "North Indian", "Indian"],
+                "areaServed": {
+                  "@type": "City",
+                  "name": "Chennai"
+                },
+                "hasOfferCatalog": {
+                  "@type": "OfferCatalog",
+                  "name": "Meal Plans",
+                  "itemListElement": [
+                    {
+                      "@type": "Offer",
+                      "itemOffered": {
+                        "@type": "Service",
+                        "name": "Daily Meal Subscription",
+                        "description": "Fresh home-cooked meals delivered daily"
+                      }
+                    }
+                  ]
+                }
               }}
+              schemas={[{
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "name": "Myna Kitchen",
+                "url": "https://mynakitchen.in",
+                "potentialAction": {
+                  "@type": "SearchAction",
+                  "target": "https://mynakitchen.in/menu",
+                  "query-input": "required name=search_term_string"
+                }
+              }]}
             />
             <ErrorBoundary>
               <HeroSection />
@@ -269,6 +299,30 @@ function App() {
               title="Meal Subscription Plans" 
               description="Customize your daily meal plan. Choose from South Indian, North Indian, and specialized diet options. Flexible subscriptions."
               canonical="/browse-plans"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "serviceType": "Meal Subscription",
+                "name": "Meal Subscription Plans",
+                "description": "Customize your daily meal plan with flexible subscription options",
+                "provider": {
+                  "@type": "FoodService",
+                  "name": "Myna Kitchen"
+                },
+                "areaServed": {
+                  "@type": "City",
+                  "name": "Chennai"
+                },
+                "offers": {
+                  "@type": "Offer",
+                  "priceRange": "₹80 - ₹200",
+                  "priceCurrency": "INR"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Browse Plans", url: "/browse-plans" }
+              ]}
             />
             <MealPlanConfig />
           </ErrorBoundary>
@@ -279,6 +333,26 @@ function App() {
               title="Corporate Catering Services" 
               description="Bulk food delivery and corporate catering services in Chennai by Myna Kitchen. Healthy, homely meals for your team."
               canonical="/corporate-orders"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "serviceType": "Corporate Catering",
+                "name": "Corporate Catering Services",
+                "description": "Bulk food delivery and corporate catering services for offices",
+                "provider": {
+                  "@type": "FoodService",
+                  "name": "Myna Kitchen"
+                },
+                "areaServed": {
+                  "@type": "City",
+                  "name": "Chennai"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Corporate", url: "/corporate" },
+                { name: "Corporate Orders", url: "/corporate-orders" }
+              ]}
             />
             <CorporateOrderForm />
           </ErrorBoundary>
@@ -289,6 +363,21 @@ function App() {
               title="Privacy Policy" 
               description="Privacy Policy for Myna Kitchen. How we handle your data and privacy."
               canonical="/privacy-policy"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Privacy Policy",
+                "description": "Privacy Policy for Myna Kitchen",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "name": "Myna Kitchen",
+                  "url": "https://mynakitchen.in"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Privacy Policy", url: "/privacy-policy" }
+              ]}
             />
             <PrivacyPolicy />
           </ErrorBoundary>
@@ -299,6 +388,21 @@ function App() {
               title="Terms and Conditions" 
               description="Terms and Conditions for Myna Kitchen services and subscriptions."
               canonical="/terms-and-conditions"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Terms and Conditions",
+                "description": "Terms and Conditions for Myna Kitchen services",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "name": "Myna Kitchen",
+                  "url": "https://mynakitchen.in"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Terms and Conditions", url: "/terms-and-conditions" }
+              ]}
             />
             <TermsAndConditions />
           </ErrorBoundary>
@@ -309,6 +413,21 @@ function App() {
               title="Why Choose Us - Healthy Daily Meals" 
               description="Why Myna Kitchen? We solve your daily food struggle with healthy, affordable, and timely home-cooked meals."
               canonical="/why-us"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "WebPage",
+                "name": "Why Choose Us",
+                "description": "Why Myna Kitchen is the best choice for daily meals",
+                "isPartOf": {
+                  "@type": "WebSite",
+                  "name": "Myna Kitchen",
+                  "url": "https://mynakitchen.in"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Why Us", url: "/why-us" }
+              ]}
             />
             <ProblemStatementPage />
           </ErrorBoundary>
@@ -319,6 +438,32 @@ function App() {
               title="Our Daily Menu - South & North Indian Meals" 
               description="Explore our daily rotating menu of South Indian and North Indian home-style meals. Over 175 dishes including diverse comfort foods."
               canonical="/menu"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "Menu",
+                "name": "Myna Kitchen Daily Menu",
+                "description": "Daily rotating menu featuring South Indian and North Indian home-style meals",
+                "hasMenuSection": [
+                  {
+                    "@type": "MenuSection",
+                    "name": "South Indian",
+                    "description": "Traditional South Indian dishes"
+                  },
+                  {
+                    "@type": "MenuSection",
+                    "name": "North Indian",
+                    "description": "Classic North Indian favorites"
+                  }
+                ],
+                "provider": {
+                  "@type": "FoodService",
+                  "name": "Myna Kitchen"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Menu", url: "/menu" }
+              ]}
             />
             <MenuPage />
           </ErrorBoundary>
@@ -329,6 +474,33 @@ function App() {
               title="How It Works - Meal Subscription" 
               description="Simple 3-step process to get fresh home-cooked meals delivered to your door. Select your plan, customize your menu, and enjoy."
               canonical="/how-it-works"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "HowTo",
+                "name": "How to Subscribe to Myna Kitchen Meals",
+                "description": "Simple 3-step process to get fresh home-cooked meals delivered",
+                "step": [
+                  {
+                    "@type": "HowToStep",
+                    "name": "Select Your Plan",
+                    "text": "Choose from our flexible meal subscription plans"
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Customize Your Menu",
+                    "text": "Customize your preferences and delivery schedule"
+                  },
+                  {
+                    "@type": "HowToStep",
+                    "name": "Enjoy Fresh Meals",
+                    "text": "Receive fresh, home-cooked meals delivered to your door"
+                  }
+                ]
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "How It Works", url: "/how-it-works" }
+              ]}
             />
             <HowItWorksPage />
           </ErrorBoundary>
@@ -339,6 +511,29 @@ function App() {
               title="Corporate Food Solutions" 
               description="Employee meal programs and corporate food solutions in Chennai. Boost productivity with healthy team lunches."
               canonical="/corporate"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "Service",
+                "serviceType": "Corporate Food Solutions",
+                "name": "Corporate Food Solutions",
+                "description": "Employee meal programs and corporate catering",
+                "provider": {
+                  "@type": "FoodService",
+                  "name": "Myna Kitchen"
+                },
+                "areaServed": {
+                  "@type": "City",
+                  "name": "Chennai"
+                },
+                "audience": {
+                  "@type": "BusinessAudience",
+                  "audienceType": "Corporate Offices"
+                }
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "Corporate", url: "/corporate" }
+              ]}
             />
             <CorporatePage />
           </ErrorBoundary>
@@ -349,6 +544,40 @@ function App() {
               title="Frequently Asked Questions" 
               description="Common questions about Myna Kitchen's delivery, pricing, subscription plans, and cancellation policies."
               canonical="/faq"
+              schema={{
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": [
+                  {
+                    "@type": "Question",
+                    "name": "Is the food home-cooked?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes, Myna Kitchen prepares meals in a hygiene-controlled home-style kitchen using fresh ingredients and no preservatives."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "Can I customize my meal plan?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Yes, you can choose specific preferences (Veg/Non-veg) and manage your delivery schedule via our web app."
+                    }
+                  },
+                  {
+                    "@type": "Question",
+                    "name": "What is the delivery time?",
+                    "acceptedAnswer": {
+                      "@type": "Answer",
+                      "text": "Lunch is typically delivered between 12:30 PM - 1:30 PM, and Dinner between 7:30 PM - 8:30 PM."
+                    }
+                  }
+                ]
+              }}
+              breadcrumbs={[
+                { name: "Home", url: "/" },
+                { name: "FAQ", url: "/faq" }
+              ]}
             />
             <FAQPage />
           </ErrorBoundary>
